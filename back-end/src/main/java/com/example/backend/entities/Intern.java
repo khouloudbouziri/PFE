@@ -1,13 +1,8 @@
 package com.example.backend.entities;
 
-
-
-
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-
 
 @Data
 @AllArgsConstructor
@@ -16,12 +11,10 @@ public class Intern extends Visitor {
 
     private University university;
     private ToDoList toDoList;
-  
 
     public Intern() {
         super();
     }
-
 
     public Intern(long id, String firstname, String lastname, String adress, String phone_number, String email,
             String password, String photo_url, University university, com.example.backend.entities.ToDoList toDoList) {
@@ -30,29 +23,24 @@ public class Intern extends Visitor {
         this.toDoList = toDoList;
     }
 
-
     public University getUniversity() {
         return university;
     }
-
 
     public void setUniversity(University university) {
         this.university = university;
     }
 
-
     public ToDoList getToDoList() {
         return toDoList;
     }
 
-
     public void setToDoList(ToDoList toDoList) {
         this.toDoList = toDoList;
     }
-    
-    public String getFirstName(){
+
+    public String getFirstName() {
         return super.getFirstname();
     }
-    
-   
+
 }

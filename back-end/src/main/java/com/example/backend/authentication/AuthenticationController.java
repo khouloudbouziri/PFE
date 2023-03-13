@@ -11,20 +11,20 @@ import com.example.backend.internRegistration.InternRegisterRequest;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/v1/auth")
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-    private final AuthenticationService service;
+  private final AuthenticationService service;
 
-    @PostMapping("/internRegister")
-    public ResponseEntity<AuthenticationResponse> internRegister( @RequestBody InternRegisterRequest request) {
+  @PostMapping("/internRegister")
+  public ResponseEntity<AuthenticationResponse> internRegister(@RequestBody InternRegisterRequest request) {
     return ResponseEntity.ok(service.internRegister(request));
   }
 
-    @PostMapping("/authenticate")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest request) {
-        return ResponseEntity.ok(service.authenticate(request));
-    }
+  @PostMapping("/authenticate")
+  public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest request) {
+    return ResponseEntity.ok(service.authenticate(request));
+  }
 
 }
