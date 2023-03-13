@@ -2,8 +2,15 @@ package com.example.backend.entities;
 
 
 
-import jakarta.persistence.Entity;
 
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+
+
+@Data
+@AllArgsConstructor
 @Entity
 public class Intern extends Visitor {
 
@@ -42,7 +49,10 @@ public class Intern extends Visitor {
     public void setToDoList(ToDoList toDoList) {
         this.toDoList = toDoList;
     }
-
+    
+    public String getFirstName(){
+        return super.getFirstname();
+    }
     
    
 }

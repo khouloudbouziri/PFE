@@ -1,7 +1,5 @@
 package com.example.backend.configuration;
 
-import org.hibernate.annotations.Bag;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
