@@ -25,6 +25,7 @@ public class Intern extends Visitor {
         this.test=test;
         super.firstname="firstname";
         super.lastname="lastname";
+        this.id=super.id;
     }
 
     public University getUniversity() {

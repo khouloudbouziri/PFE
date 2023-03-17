@@ -27,4 +27,10 @@ public class AuthenticationController {
     return ResponseEntity.ok(service.authenticate(request));
   }
 
+  
+  @PostMapping("/testRegister")
+  public ResponseEntity<Long> testRegister(@RequestBody InternRegisterRequest request) {
+    return ResponseEntity.ok(service.testRegister(request));
+  }
+
 }

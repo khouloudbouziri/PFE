@@ -27,7 +27,7 @@ import lombok.Builder;
 public class Visitor implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public  long id;
     public  String firstname;
     public  String lastname;
