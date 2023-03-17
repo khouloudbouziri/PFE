@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Entity
 public class IntershipOffre implements Serializable {
 
@@ -15,7 +17,7 @@ public class IntershipOffre implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_intership_offre;
     private String type;
-    private String description;
+    private String topic;
     private String location;
     private Date date_beging;
     private Date date_end;
@@ -25,32 +27,14 @@ public class IntershipOffre implements Serializable {
     private int interns_number ;
     private Boolean renumerete;
     private Company company;
-    private Supervisor supervisor;
+    private String companyDepartment;
+    private Employee employee;
 
 
     public IntershipOffre() {
         super();
     }
 
-   
-    public IntershipOffre(long id_intership_offre, String type, String description, String location, Date date_beging,
-            Date date_end, String required_work, String technical_environement, String required_profile,
-            int interns_number, Boolean renumerete, Company company, Supervisor supervisor) {
-        super();
-        this.id_intership_offre = id_intership_offre;
-        this.type = type;
-        this.description = description;
-        this.location = location;
-        this.date_beging = date_beging;
-        this.date_end = date_end;
-        this.required_work = required_work;
-        this.technical_environement = technical_environement;
-        this.required_profile = required_profile;
-        this.interns_number = interns_number;
-        this.renumerete = renumerete;
-        this.company = company;
-        this.supervisor = supervisor;
-    }
 
 
     public long getId_intership_offre() {
@@ -69,13 +53,24 @@ public class IntershipOffre implements Serializable {
         this.type = type;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+
+
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
+
+
+
+    public String getCompanyDepartment() {
+        return company.getCompanyDepartement();
+    }
+
+
+
 
     public String getLocation() {
         return location;
@@ -149,13 +144,25 @@ public class IntershipOffre implements Serializable {
         this.company = company;
     }
 
-    public Supervisor getSupervisor() {
-        return supervisor;
+
+
+    public void setCompanyDepartment(String companyDepartment) {
+        this.companyDepartment = companyDepartment;
     }
 
-    public void setSupervisor(Supervisor supervisor) {
-        this.supervisor = supervisor;
+
+
+    public Employee getEmployee() {
+        return employee;
     }
+
+
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+  
 
     
 }

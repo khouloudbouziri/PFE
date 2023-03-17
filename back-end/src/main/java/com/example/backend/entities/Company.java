@@ -3,8 +3,10 @@ package com.example.backend.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import lombok.AllArgsConstructor;
 
 @Entity
+@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Company extends Visitor {
 
@@ -14,22 +16,13 @@ public class Company extends Visitor {
     private String sector;
     private String domain;
     private String logo_url;
+    private String companyDepartement;
 
     public Company() {
         super();
     }
 
-    public Company(long id, String firstname, String lastname, String adress, String phone_number, String email,
-            String password, String photo_url, String company_name, String tax_registration_number, long size,
-            String sector, String domain, String logo_url) {
-        super(id, firstname, lastname, adress, phone_number, email, password, photo_url);
-        this.company_name = company_name;
-        this.tax_registration_number = tax_registration_number;
-        this.size = size;
-        this.sector = sector;
-        this.domain = domain;
-        this.logo_url = logo_url;
-    }
+    
 
     public String getCompany_name() {
         return company_name;
@@ -77,6 +70,18 @@ public class Company extends Visitor {
 
     public void setLogo_url(String logo_url) {
         this.logo_url = logo_url;
+    }
+
+
+
+    public String getCompanyDepartement() {
+        return companyDepartement;
+    }
+
+
+
+    public void setCompanyDepartement(String companyDepartement) {
+        this.companyDepartement = companyDepartement;
     }
 
 }

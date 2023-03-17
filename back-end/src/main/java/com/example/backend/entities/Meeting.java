@@ -7,7 +7,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
+@AllArgsConstructor
+@Data
 @Entity
 public class Meeting implements Serializable {
 
@@ -17,21 +21,14 @@ public class Meeting implements Serializable {
     private Date date;
     private String type;
     private String Description; 
-    private Supervisor supervisor;
+    private Employee employee;
     private Intern intern ;
 
     public Meeting() {
         super();
     }
 
-    public Meeting(long id_meeting, Date date, String type, String description, Supervisor supervisor, Intern intern) {
-        this.id_meeting = id_meeting;
-        this.date = date;
-        this.type = type;
-        Description = description;
-        this.supervisor = supervisor;
-        this.intern = intern;
-    }
+    
 
     public long getId_meeting() {
         return id_meeting;
@@ -65,13 +62,7 @@ public class Meeting implements Serializable {
         Description = description;
     }
 
-    public Supervisor getSupervisor() {
-        return supervisor;
-    }
-
-    public void setSupervisor(Supervisor supervisor) {
-        this.supervisor = supervisor;
-    }
+   
 
     public Intern getIntern() {
         return intern;

@@ -28,16 +28,16 @@ public class Visitor implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
-    private String firstname;
-    private String lastname;
-    private String adress;
-    private String phone_number;
-    private String email;
-    private String password;
-    private String photo_url;
+    public  long id;
+    public  String firstname;
+    public  String lastname;
+    public  String adress;
+    public   String phone_number;
+    public  String email;
+    public  String password;
+    public  String photo_url;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    public Role role;
 
     public Visitor() {
         super();

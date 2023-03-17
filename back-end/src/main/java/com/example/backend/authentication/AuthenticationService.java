@@ -1,5 +1,6 @@
 package com.example.backend.authentication;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,33 +9,55 @@ import org.springframework.stereotype.Service;
 import com.example.backend.configuration.JwtService;
 import com.example.backend.entities.Intern;
 import com.example.backend.entities.Role;
+import com.example.backend.entities.University;
+import com.example.backend.entities.Visitor;
 import com.example.backend.internRegistration.InternRegisterRequest;
+import com.example.backend.internRegistration.InternRepository;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+  @Autowired
+   VisitorRepository visitorRepository;
+  @Autowired
+  InternRepository internRepository;
 
-  private final VisitorRepository repository;
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
 
   public AuthenticationResponse internRegister(InternRegisterRequest request) {
-    var intern = Intern.builder()
+   /* var intern = Intern.builder()
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(Role.INTERN)
-        .build();
+        .build();*/
 
-    repository.save(intern);
-    var jwtToken = jwtService.generateToken(intern);
-    return AuthenticationResponse.builder()
-        .token(jwtToken)
-        .build();
+
+
+      Intern i =new Intern();
+      i.setTest("test");
+      i.setFirstname(null);
+      i.setLastname("test");
+      i.setUniversity(new University());
+      i.setEmail(request.getEmail());
+      i.setPassword(passwordEncoder.encode(request.getPassword()));
+       internRepository.save(i);
+
+         
+
+
+
+
+  //  var jwtToken = jwtService.generateToken(i);
+   //  return AuthenticationResponse.builder()
+    //     .token(jwtToken)
+    //     .build();
+    return null;
   }
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
@@ -42,7 +65,7 @@ public class AuthenticationService {
         new UsernamePasswordAuthenticationToken(
             request.getEmail(),
             request.getPassword()));
-    var Visitor = repository.findByEmail(request.getEmail())
+    var Visitor = visitorRepository.findByEmail(request.getEmail())
         .orElseThrow();
     var jwtToken = jwtService.generateToken(Visitor);
     return AuthenticationResponse.builder()
