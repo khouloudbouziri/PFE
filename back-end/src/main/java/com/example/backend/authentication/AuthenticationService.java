@@ -7,95 +7,78 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.configuration.JwtService;
-import com.example.backend.entities.Intern;
+import com.example.backend.entities.JobTitle;
 import com.example.backend.entities.Role;
-import com.example.backend.entities.University;
+//import com.example.backend.entities.University;
 import com.example.backend.entities.Visitor;
+import com.example.backend.internRegistration.CompanyRegisterRequest;
 import com.example.backend.internRegistration.InternRegisterRequest;
-import com.example.backend.internRegistration.InternRepository;
+import java.lang.RuntimeException;
+
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
+
   @Autowired
    VisitorRepository visitorRepository;
   @Autowired
-  InternRepository internRepository;
+ // InternRepository internRepository;
 
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
 
   
-  public Long testRegister(InternRegisterRequest request) {
-    /* var intern = Intern.builder()
-         .firstname(request.getFirstname())
-         .lastname(request.getLastname())
-         .email(request.getEmail())
-         .password(passwordEncoder.encode(request.getPassword()))
-         .role(Role.INTERN)
-         .build();*/
- 
- 
- 
-       Intern i =new Intern();
-       i.setTest("test");
-       i.setFirstname("ok");
-       i.setLastname("test");
-       i.setUniversity(new University());
-       i.setEmail(request.getEmail());
-       i.setPassword(passwordEncoder.encode(request.getPassword()));
-      i=  internRepository.save(i);
- 
-        Visitor v= new Visitor();
-        v.setId(i.getId());
-        v.setAdress("HHH");
-        v=   visitorRepository.save(v);
-        return v.getId();
- 
-          
- 
- 
- 
- 
- 
- 
-   }
+  public AuthenticationResponse CompanyRegister(CompanyRegisterRequest request) {
+    System.out.println("User already exists");
+    if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
+      System.out.println("ok");
+      throw new RuntimeException("User already exists");
+    }
+    
+    var company = Visitor.builder()
+        
+        .firstname(request.getFirstname())
+        .lastname(request.getLastname())
+        .email(request.getEmail())
+        .password(passwordEncoder.encode(request.getPassword()))
+        .role(Role.COMPANY)
+        .adress(request.getAdress())
+        .companyDepartement(request.getCompanyDepartement())
+        .company_name(request.getCompanyDepartement())
+        .domain(request.getDomain())
+        .jobTitle(JobTitle.RH)
+        .build();
 
-  public AuthenticationResponse internRegister(InternRegisterRequest request) {
-   /* var intern = Intern.builder()
+        visitorRepository.save(company);
+
+    var jwtToken = jwtService.generateToken(company);
+     return AuthenticationResponse.builder()
+         .token(jwtToken)
+       .build();
+
+  }
+  public AuthenticationResponse InternRegister(InternRegisterRequest request) {
+
+      if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
+        throw new RuntimeException("User already exists");
+      }
+    var intern = Visitor.builder()
+        .university(request.getUniversity())
+        .universityDept(request.getUniversityDepartement())
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
         .role(Role.INTERN)
-        .build();*/
+        .build();
 
-Visitor v= new Visitor();
-v.setFirstname("ffffff");
-   v=visitorRepository.save(v);
+        visitorRepository.save(intern);
 
-      Intern i =new Intern();
-      i.setId(v.getId());
-      i.setTest("test");
-      i.setFirstname("ok");
-      i.setLastname("test");
-      i.setUniversity(new University());
-      i.setEmail(request.getEmail());
-      i.setPassword(passwordEncoder.encode(request.getPassword()));
-     i=  internRepository.save(i);
-
-    
-       
-
-         
-
-
-
-
-    var jwtToken = jwtService.generateToken(i);
+    var jwtToken = jwtService.generateToken(intern);
      return AuthenticationResponse.builder()
          .token(jwtToken)
        .build();

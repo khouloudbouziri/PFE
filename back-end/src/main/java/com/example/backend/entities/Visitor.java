@@ -17,108 +17,45 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 
 @Builder
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Visitor implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public  long id;
-    public  String firstname;
-    public  String lastname;
-    public  String adress;
-    public   String phone_number;
-    public  String email;
-    public  String password;
-    public  String photo_url;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+    private  String firstname;
+    private  String lastname;
+    private  String adress;
+    private  String phone_number;
+    private  String email;
+    private  String password;
+    private  String photo_url;
+    private String university;
+    private String universityDept;
+    private ToDoList toDoList;
+    private String company_name;
+    private String tax_registration_number;
+    private long size;
+    private String sector;
+    private String domain;
+    private String logo_url;
+    private String companyDepartement;
     @Enumerated(EnumType.STRING)
-    public Role role;
+    private JobTitle jobTitle;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    public Visitor() {
-        super();
-    }
 
-    public Visitor(long id, String firstname, String lastname, String adress, String phone_number, String email,
-            String password, String photo_url) {
-        super();
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.adress = adress;
-        this.phone_number = phone_number;
-        this.email = email;
-        this.password = password;
-        this.photo_url = photo_url;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
-    public String getPhone_number() {
-        return phone_number;
-    }
-
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPhoto_url() {
-        return photo_url;
-    }
-
-    public void setPhoto_url(String photo_url) {
-        this.photo_url = photo_url;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -148,6 +85,12 @@ public class Visitor implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getPassword() {
+        
+        return password;
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.backend.internRegistration;
+/*package com.example.backend.internRegistration;
 
 import java.util.Optional;
 
@@ -10,4 +10,4 @@ public interface InternRepository extends JpaRepository<Intern,Long> {
     
     Optional<Intern> findByemail( String email);
 
-}
+}*/

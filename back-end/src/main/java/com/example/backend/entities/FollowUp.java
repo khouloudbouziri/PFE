@@ -1,4 +1,4 @@
-package com.example.backend.entities;
+/*package com.example.backend.entities;
 
 import java.io.Serializable;
 
@@ -15,7 +15,7 @@ public class FollowUp implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id_follow_up;
     private Intership intership;
-    private Employee employee;
+   // private Employee employee;
     private String note;
 
     public FollowUp() {
@@ -52,7 +52,7 @@ public class FollowUp implements Serializable {
 
 
 
-    public Employee getEmployee() {
+     public Employee getEmployee() {
         return employee;
     }
 
@@ -71,3 +71,4 @@ public class FollowUp implements Serializable {
     
 
 }
+*/

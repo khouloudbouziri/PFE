@@ -1,4 +1,4 @@
-package com.example.backend.entities;
+/*package com.example.backend.entities;
 
 import java.io.Serializable;
 
@@ -77,3 +77,4 @@ public class resume implements Serializable{
     
    
 }
+*/

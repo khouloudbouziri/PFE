@@ -1,4 +1,4 @@
-package com.example.backend.entities;
+/*package com.example.backend.entities;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -73,4 +73,4 @@ public class Meeting implements Serializable {
     }
 
     
-}
+}*/

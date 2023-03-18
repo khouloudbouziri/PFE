@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.internRegistration.CompanyRegisterRequest;
 import com.example.backend.internRegistration.InternRegisterRequest;
 
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,8 @@ public class AuthenticationController {
   private final AuthenticationService service;
 
   @PostMapping("/internRegister")
-  public ResponseEntity<AuthenticationResponse> internRegister(@RequestBody InternRegisterRequest request) {
-    return ResponseEntity.ok(service.internRegister(request));
+  public ResponseEntity<AuthenticationResponse> InternRegister(@RequestBody InternRegisterRequest request) {
+    return ResponseEntity.ok(service.InternRegister(request));
   }
 
   @PostMapping("/authenticate")
@@ -27,10 +28,12 @@ public class AuthenticationController {
     return ResponseEntity.ok(service.authenticate(request));
   }
 
-  
-  @PostMapping("/testRegister")
-  public ResponseEntity<Long> testRegister(@RequestBody InternRegisterRequest request) {
-    return ResponseEntity.ok(service.testRegister(request));
+  @PostMapping("/companyRegister")
+  public ResponseEntity<AuthenticationResponse> CompanyRegister(@RequestBody CompanyRegisterRequest request) {
+    return ResponseEntity.ok(service.CompanyRegister(request));
   }
+
+  
+  
 
 }
