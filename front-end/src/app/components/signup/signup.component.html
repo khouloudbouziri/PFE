@@ -1,0 +1,91 @@
+<div class="c1">
+    <div class="modalForm">
+        <div class="actionBtns">
+
+            <button type="button" class="actionBtn signupBtn">Se connecter</button>
+            <button type="button" class="actionBtn loginBtn">S'inscrire</button>
+            <button type="button" class="moveBtn rightBtn">Se connecter</button>
+
+        </div>
+        <form [formGroup]="frm" (ngSubmit)="OnPost()">
+            <div class="relative ">
+                <input type="text" id="Email"
+                    class=" border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer "
+                    autocomplete="off" formControlName="Email">
+                <label for="Email"
+                    class="absolute left-0 top-1 text-gray-600 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-purple-600 transition-all">Email</label>
+            </div>
+            <div class="msg error" *ngIf="f['Email'].invalid && (f['Email'].dirty || f['Email'].touched)">
+                <span *ngIf="f['Email'].errors?.['required']">
+                    Name is required
+                </span>
+            </div>
+            <div class="relative ">
+                <input type="password" id="password"
+                    class=" border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer "
+                    autocomplete="off" formControlName="password">
+                <label for="password"
+                    class="absolute left-0 top-1 text-gray-600 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-purple-600 transition-all">mot
+                    de passe</label>
+            </div>
+            <div class="msg error" *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+                <span *ngIf="f['password'].errors?.['required']">
+                    Name is required
+                </span>
+            </div>
+            <div class="relative ">
+                <input type="text" id="firstname"
+                    class=" border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer "
+                    autocomplete="off" formControlName="firstname">
+                <label for="firstname"
+                    class="absolute left-0 top-1 text-gray-600 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-purple-600 transition-all">Nom</label>
+            </div>
+            <div class="msg error" *ngIf="f['firstname'].invalid && (f['firstname'].dirty || f['firstname'].touched)">
+                <span *ngIf="f['firstname'].errors?.['required']">
+                    Name is required
+                </span>
+            </div>
+            <div class="relative ">
+                <input type="text" id="lastname"
+                    class=" border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer "
+                    autocomplete="off" formControlName="lastname">
+                <label for="lastname"
+                    class="absolute left-0 top-1 text-gray-600 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-purple-600 transition-all">prenom</label>
+            </div>
+            <div class="msg error" *ngIf="f['lastname'].invalid && (f['lastname'].dirty || f['lastname'].touched)">
+                <span *ngIf="f['lastname'].errors?.['required']">
+                    Name is required
+                </span>
+            </div>
+            <div class="relative ">
+                <input type="text" id="university"
+                    class=" border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer "
+                    autocomplete="off" formControlName="university">
+                <label for="university"
+                    class="absolute left-0 top-1 text-gray-600 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-purple-600 transition-all">faculté</label>
+            </div>
+            <div class="msg error"
+                *ngIf="f['university'].invalid && (f['university'].dirty || f['university'].touched)">
+                <span *ngIf="f['university'].errors?.['required']">
+                    Name is required
+                </span>
+            </div>
+            <div class="relative ">
+                <input type="text" id="universityDept"
+                    class=" border-b py-1 focus:outline-none focus:border-purple-600 focus:border-b-2 transition-colors peer "
+                    autocomplete="off" formControlName="universityDept">
+                <label for="universityDept"
+                    class="absolute left-0 top-1 text-gray-600 cursor-text peer-focus:text-xs peer-focus:-top-4 peer-focus:text-purple-600 transition-all">Spécialité</label>
+            </div>
+            <div class="msg error"
+                *ngIf="f['universityDept'].invalid && (f['universityDept'].dirty || f['universityDept'].touched)">
+                <span *ngIf="f['universityDept'].errors?.['required']">
+                    Name is required
+                </span>
+            </div>
+            <button type="submit" id="btnSubmit" [disabled]="frm.invalid">Signup</button>
+             <div class="msg light" *ngIf="status" >{{status.message}}</div>
+
+        </form>
+    </div>
+</div>
