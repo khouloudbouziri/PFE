@@ -8,14 +8,13 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
-  {path:'',redirectTo:'login',pathMatch:'full'},
-  {path:'login',component:LoginComponent},
-  {path:'signup',component:SignupComponent},
-  {path:'dashboard',component:DashboardComponent},
-  {path:'admin-page',component:AdminPageComponent},
-  {path:'intern-page',component:InternPageComponent},
-  {path:'company-page',component:CompanyPageComponent}
-
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'admin-page', component: AdminPageComponent },
+  { path: 'intern-page', component: InternPageComponent },
+  { path: 'company-page', component: CompanyPageComponent },
 ];
 
 @NgModule({

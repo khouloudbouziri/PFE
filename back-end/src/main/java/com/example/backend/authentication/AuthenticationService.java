@@ -15,7 +15,6 @@ import com.example.backend.internRegistration.CompanyRegisterRequest;
 import com.example.backend.internRegistration.InternRegisterRequest;
 import java.lang.RuntimeException;
 
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -23,24 +22,23 @@ import lombok.RequiredArgsConstructor;
 public class AuthenticationService {
 
   @Autowired
-   VisitorRepository visitorRepository;
+  VisitorRepository visitorRepository;
   @Autowired
- // InternRepository internRepository;
+  // InternRepository internRepository;
 
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
 
-  
   public AuthenticationResponse CompanyRegister(CompanyRegisterRequest request) {
     System.out.println("User already exists");
     if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
       System.out.println("ok");
       throw new RuntimeException("User already exists");
     }
-    
+
     var company = Visitor.builder()
-        
+
         .firstname(request.getFirstname())
         .lastname(request.getLastname())
         .email(request.getEmail())
@@ -53,19 +51,20 @@ public class AuthenticationService {
         .jobTitle(JobTitle.RH)
         .build();
 
-        visitorRepository.save(company);
+    visitorRepository.save(company);
 
     var jwtToken = jwtService.generateToken(company);
-     return AuthenticationResponse.builder()
-         .token(jwtToken)
-       .build();
+    return AuthenticationResponse.builder()
+        .token(jwtToken)
+        .build();
 
   }
+
   public AuthenticationResponse InternRegister(InternRegisterRequest request) {
 
-      if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
-        throw new RuntimeException("User already exists");
-      }
+    if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
+      throw new RuntimeException("User already exists");
+    }
     var intern = Visitor.builder()
         .university(request.getUniversity())
         .universityDept(request.getUniversityDepartement())
@@ -76,12 +75,12 @@ public class AuthenticationService {
         .role(Role.INTERN)
         .build();
 
-        visitorRepository.save(intern);
+    visitorRepository.save(intern);
 
     var jwtToken = jwtService.generateToken(intern);
-     return AuthenticationResponse.builder()
-         .token(jwtToken)
-       .build();
+    return AuthenticationResponse.builder()
+        .token(jwtToken)
+        .build();
 
   }
 

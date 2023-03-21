@@ -1,9 +1,8 @@
-export interface SignupReqModel{
-    firstname:string,
-    lastname:string,
-    Email:String,
-    password:String,
-    university:String,
-    universityDept:string
-
+export interface SignupReqModel {
+  firstname: string;
+  lastname: string;
+  email: String;
+  password: String;
+  university: String;
+  universityDepartement: string;
 }

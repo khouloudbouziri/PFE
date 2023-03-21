@@ -1,7 +1,4 @@
 export interface LoginReqModel {
-
-    Email: String,
-    password: String,
-
-
+  email: String;
+  password: String;
 }
