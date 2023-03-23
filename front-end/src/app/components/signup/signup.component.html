@@ -1,92 +1,209 @@
 <div class="flex justify-center items-center h-screen">
-  <div class="w-1/3 p-6  bg-gradient-to-b from-[#FFFFFF]  rounded-md">
-    <div class="flex mx-auto justify-between relative w-4/5 bg-white border rounded-full border-[#424A88] m-4">
-      <div class="top-0 right-0 absolute w-1/2 h-full bg-[#424A88] rounded-full duration-500"></div>
-      <button class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#424A88]" routerLink="/login">
+  <div
+    class="xl:w-1/3 lg:w-1/3 md:w-1/2 p-6 bg-gradient-to-b from-[#FFFFFF] rounded-md"
+  >
+    <div
+      class="flex mx-auto justify-between relative xl:w-4/5 lg:w-4/5 md:w-4/5 sm:w-11/12 bg-white border rounded-full border-[#424A88] m-4"
+    >
+      <div
+        class="top-0 right-0 absolute w-1/2 h-full bg-[#424A88] rounded-full duration-500"
+      ></div>
+      <button
+        class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#424A88]"
+        routerLink="/login"
+      >
         Se connecter
       </button>
-      <button class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white" routerLink="/signup">
+      <button
+        class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
+        routerLink="/signup"
+      >
         Sinscrire
       </button>
     </div>
     <form [formGroup]="frm" (ngSubmit)="onPost()">
-      <div class="flex">
-        <div class="flex flex-col mt-6 ml-3 w-11/12">
-          <label for="prenom" class="text-black opacity-40">Prénom</label>
-          <input type="text" id="prenom" class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent"
-            autocomplete="off" formControlName="firstname" required />
+      <div class="flex justify-between w-11/12">
+        <div class="flex flex-col">
+          <div class="flex flex-col mt-6 ml-3 relative">
+            <input
+              type="text"
+              id="prenom"
+              class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent peer"
+              autocomplete="off"
+              formControlName="firstname"
+              required
+            />
+            <label
+              for="prenom"
+              class="text-slate-500 absolute left-0 top-1 peer-focus:text-xs peer-focus:-top-3"
+              >Prénom <span class="text-[#E5302D]">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['firstname'].invalid &&
+              (f['firstname'].dirty || f['firstname'].touched)
+            "
+          >
+            <span *ngIf="f['firstname'].errors?.['required']"
+              >Prenom obligatoire</span
+            >
+          </div>
         </div>
-        <div class="msg error" *ngIf="
-            f['firstname'].invalid &&
-            (f['firstname'].dirty || f['firstname'].touched)
-          ">
-          <span *ngIf="f['firstname'].errors?.['required']">Prenom obligatoire</span>
-        </div>
-        <div class="flex flex-col mt-6 ml-3 w-11/12">
-          <label for="nom" class="text-black opacity-40">Nom</label>
-          <input type="text" id="nom" class="border-b w-full px-2 py-1 focus:outline-none border-black opacity-40 bg-transparent"
-            autocomplete="off" formControlName="lastname" required />
-        </div>
-        <div class="msg error" *ngIf="
-            f['lastname'].invalid &&
-            (f['lastname'].dirty || f['lastname'].touched)
-          ">
-          <span *ngIf="f['lastname'].errors?.['required']">Nom obligatoire</span>
+        <div class="flex flex-col">
+          <div class="flex flex-col mt-6 ml-3 relative">
+            <input
+              type="text"
+              id="nom"
+              class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent peer"
+              autocomplete="off"
+              formControlName="lastname"
+              required
+            />
+            <label
+              for="nom"
+              class="text-slate-500 absolute left-0 top-1 peer-focus:text-xs peer-focus:-top-3"
+              >Nom<span class="text-[#E5302D] ml-1">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['lastname'].invalid &&
+              (f['lastname'].dirty || f['lastname'].touched)
+            "
+          >
+            <span *ngIf="f['lastname'].errors?.['required']"
+              >Nom obligatoire</span
+            >
+          </div>
         </div>
       </div>
 
-      <div class="flex flex-col mt-6 ml-3 w-11/12">
-        <label for="etablissement" class="text-black opacity-40">Etablissement</label>
-        <input type="text" id="etablissement"
-          class="border-b w-full px-2 py-1 focus:outline-none border-black opacity-40 bg-transparent" autocomplete="off"
-          formControlName="university" required />
+      <div class="flex flex-col mt-6 ml-3 w-11/12 relative">
+        <input
+          type="text"
+          id="etablissement"
+          class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent peer"
+          autocomplete="off"
+          formControlName="university"
+          required
+        />
+        <label
+          for="etablissement"
+          class="text-slate-500 absolute left-0 top-1 peer-focus:text-xs peer-focus:-top-3"
+          >Etablissement<span class="text-[#E5302D] ml-1">*</span></label
+        >
       </div>
-      <div class="msg error" *ngIf="
+      <div
+        class="msg error text-xs ml-3 text-[#E5302D]"
+        *ngIf="
           f['university'].invalid &&
           (f['university'].dirty || f['university'].touched)
-        ">
-        <span *ngIf="f['university'].errors?.['required']">Etablissement obligatoire</span>
+        "
+      >
+        <span *ngIf="f['university'].errors?.['required']"
+          >Etablissement obligatoire</span
+        >
       </div>
-      <div class="flex flex-col mt-6 ml-3 w-11/12">
-        <label for="specialite" class="text-black opacity-40">Spécialité</label>
-        <input type="text" id="specialite" class="border-b w-full px-2 py-1 focus:outline-none border-black opacity-40 bg-transparent"
-          autocomplete="off" formControlName="universityDepartement" required />
+      <div class="flex flex-col mt-6 ml-3 w-11/12 relative">
+        <input
+          type="text"
+          id="specialite"
+          class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent peer"
+          autocomplete="off"
+          formControlName="universityDepartement"
+          required
+        />
+        <label
+          for="specialite"
+          class="text-slate-500 absolute left-0 top-1 peer-focus:text-xs peer-focus:-top-3"
+          >Spécialité<span class="text-[#E5302D] ml-1">*</span></label
+        >
       </div>
-      <div class="msg error" *ngIf="
+      <div
+        class="msg error text-xs ml-3 text-[#E5302D]"
+        *ngIf="
           f['universityDepartement'].invalid &&
           (f['universityDepartement'].dirty ||
             f['universityDepartement'].touched)
-        ">
-        <span *ngIf="f['universityDepartement'].errors?.['required']">Spécialité obligatoire</span>
+        "
+      >
+        <span *ngIf="f['universityDepartement'].errors?.['required']"
+          >Spécialité obligatoire</span
+        >
       </div>
-      <div class="flex flex-col mt-6 ml-3 w-11/12">
-        <label for="email" class="text-black opacity-40">Email</label>
-        <input type="email" id="email" class="border-b w-full px-2 py-1 focus:outline-none border-black opacity-40 bg-transparent"
-          autocomplete="off" formControlName="email" required />
+      <div class="flex flex-col mt-6 ml-3 w-11/12 relative">
+        <input
+          type="email"
+          id="email"
+          class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent peer"
+          autocomplete="off"
+          formControlName="email"
+          required
+        />
+        <label
+          for="email"
+          class="text-slate-500 absolute left-0 top-1 peer-focus:text-xs peer-focus:-top-3"
+          >Email<span class="text-[#E5302D] ml-1">*</span></label
+        >
       </div>
-      <div class="msg error" *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
+      <div
+        class="msg error text-xs ml-3 text-[#E5302D]"
+        *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)"
+      >
         <span *ngIf="f['email'].errors?.['required']">Email obligatoire</span>
       </div>
-      <div class="flex flex-col mt-6 ml-3 w-11/12">
-        <label for="password" class="text-black opacity-40">Mot de passe</label>
-        <input type="password" id="password"
-          class="border-b w-full px-2 py-1 focus:outline-none border-black opacity-40 bg-transparent" autocomplete="off"
-          formControlName="password" required />
+      <div class="flex flex-col mt-6 ml-3 w-11/12 relative">
+        <input
+          type="password"
+          id="password"
+          class="border-b w-full px-2 py-1 focus:outline-none border-black border-opacity-40 text-black bg-transparent peer"
+          autocomplete="off"
+          formControlName="password"
+          required
+        />
+        <label
+          for="password"
+          class="text-slate-500 absolute left-0 top-1 peer-focus:text-xs peer-focus:-top-3"
+          >Mot de passe<span class="text-[#E5302D] ml-1">*</span></label
+        >
       </div>
-      <div class="msg error" *ngIf="
+      <div
+        class="msg error text-xs ml-3 text-[#E5302D]"
+        *ngIf="
           f['password'].invalid &&
           (f['password'].dirty || f['password'].touched)
-        ">
-        <span *ngIf="f['password'].errors?.['required']">Mot de passe obligatoire</span>
-      </div>
-      <input type="checkbox" id="password" name="password" value="password" class="text-[#5F6368]  mr-2  mt-4">
-      <label for="password" class="text-[#5F6368] mt-4 ">Se souvenir de moi</label><br>
-      <div class="flex justify-around items-center my-6">
-        <button type="submit" id="btnSubmit" class="w-32 h-10 text-white bg-[#E73130] rounded-full">
-          Se connecter
-        </button>
+        "
+      >
+        <span *ngIf="f['password'].errors?.['required']"
+          >Mot de passe obligatoire</span
+        >
       </div>
 
+      <div class="ml-3 flex items-center">
+        <input
+          type="checkbox"
+          id="password"
+          name="password"
+          value="password"
+          class="mr-2 mt-4"
+        />
+        <label for="password" class="text-[#5F6368] text-xs mt-4"
+          >Se souvenir de moi</label
+        >
+      </div>
+      <div class="flex justify-around items-center my-6">
+        <button
+          mat-button
+          (click)="openSnackBar('inscri avec succes', 'fermer')"
+          class="w-32 h-10 text-white bg-[#E73130] rounded-full"
+          [disabled]="frm.invalid"
+        >
+          S'inscrire
+        </button>
+      </div>
     </form>
   </div>
 </div>
