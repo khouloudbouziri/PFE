@@ -20,14 +20,14 @@ public class CompanyRegisterRequest {
     private  String phone_number;
     private  String email;
     private  String password;
-    private  String photo_url;
+    //private  String photo_url;
     private String company_name;
     private String tax_registration_number;
     private long size;
     private String sector;
     private String domain;
-    private String logo_url;
-    private String companyDepartement;
+   // private String logo_url;
+   // private String companyDepartement;
     @Enumerated(EnumType.STRING)
     private JobTitle jobTitle;
     

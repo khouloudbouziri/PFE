@@ -23,15 +23,14 @@ public class AuthenticationService {
 
   @Autowired
   VisitorRepository visitorRepository;
-  @Autowired
-  // InternRepository internRepository;
+  
 
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
 
   public AuthenticationResponse CompanyRegister(CompanyRegisterRequest request) {
-    System.out.println("User already exists");
+  
     if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
       System.out.println("ok");
       throw new RuntimeException("User already exists");
@@ -45,9 +44,12 @@ public class AuthenticationService {
         .password(passwordEncoder.encode(request.getPassword()))
         .role(Role.COMPANY)
         .adress(request.getAdress())
-        .companyDepartement(request.getCompanyDepartement())
-        .company_name(request.getCompanyDepartement())
+        .size(request.getSize())
+        .company_name(request.getCompany_name())
         .domain(request.getDomain())
+        .tax_registration_number(request.getTax_registration_number())
+        .phone_number(request.getPhone_number())
+        .sector(request.getSector())
         .jobTitle(JobTitle.RH)
         .build();
 
