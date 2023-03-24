@@ -15,6 +15,7 @@ import { InternPageComponent } from './components/intern-page/intern-page.compon
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CompanySignUpComponent } from './components/company-sign-up/company-sign-up.component';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CompanySignUpComponent } from './components/company-sign-up/company-sig
     InternPageComponent,
     CompanyPageComponent,
     CompanySignUpComponent,
+    OfferCardComponent,
   ],
   imports: [
     BrowserModule,

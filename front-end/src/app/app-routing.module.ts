@@ -6,6 +6,7 @@ import { CompanySignUpComponent } from './components/company-sign-up/company-sig
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InternPageComponent } from './components/intern-page/intern-page.component';
 import { LoginComponent } from './components/login/login.component';
+import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { SignupComponent } from './components/signup/signup.component';
 
 const routes: Routes = [
@@ -17,8 +18,7 @@ const routes: Routes = [
   { path: 'intern-page', component: InternPageComponent },
   { path: 'company-page', component: CompanyPageComponent },
   { path: 'company-sign-up', component: CompanySignUpComponent },
-
-
+  { path: 'offerCard', component: OfferCardComponent },
 ];
 
 @NgModule({
