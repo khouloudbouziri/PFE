@@ -15,6 +15,10 @@ import { InternPageComponent } from './components/intern-page/intern-page.compon
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { CompanySignUpComponent } from './components/company-sign-up/company-sign-up.component';
+import { InternHomeComponent } from './pages/intern-home/intern-home.component';
+import { CompanyHomeComponent } from './pages/company-home/company-home.component';
+import { HomeComponent } from './pages/home/home.component';
+
 
 @NgModule({
   declarations: [
@@ -26,6 +30,9 @@ import { CompanySignUpComponent } from './components/company-sign-up/company-sig
     InternPageComponent,
     CompanyPageComponent,
     CompanySignUpComponent,
+    InternHomeComponent,
+    CompanyHomeComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
