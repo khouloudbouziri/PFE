@@ -8,6 +8,9 @@ import { InternPageComponent } from './components/intern-page/intern-page.compon
 import { LoginComponent } from './components/login/login.component';
 import { OfferCardComponent } from './components/offer-card/offer-card.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { CompanyHomeComponent } from './pages/company-home/company-home.component';
+import { HomeComponent } from './pages/home/home.component';
+import { InternHomeComponent } from './pages/intern-home/intern-home.component';
 // import { CompanyHomeComponent } from './pages/company-home/company-home.component';
 // import { HomeComponent } from './pages/home/home.component';
 // import { InternHomeComponent } from './pages/intern-home/intern-home.component';
@@ -39,9 +42,9 @@ const routes: Routes = [
   },
   { path: 'company-sign-up', component: CompanySignUpComponent },
   { path: 'company-sign-up', component: CompanySignUpComponent },
-  // { path: 'intern-home', component: InternHomeComponent },
-  // { path: 'company-home', component: CompanyHomeComponent },
-  // { path: 'home', component: HomeComponent },
+  { path: 'intern-home', component: InternHomeComponent },
+  { path: 'company-home', component: CompanyHomeComponent },
+  { path: 'home', component: HomeComponent },
 ];
 
 @NgModule({
