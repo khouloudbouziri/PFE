@@ -23,14 +23,13 @@ public class AuthenticationService {
 
   @Autowired
   VisitorRepository visitorRepository;
-  
 
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
 
   public AuthenticationResponse CompanyRegister(CompanyRegisterRequest request) {
-  
+
     if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
       System.out.println("ok");
       throw new RuntimeException("User already exists");
@@ -96,6 +95,7 @@ public class AuthenticationService {
     var jwtToken = jwtService.generateToken(Visitor);
     return AuthenticationResponse.builder()
         .token(jwtToken)
+        .Visitor(Visitor)
         .build();
   }
 

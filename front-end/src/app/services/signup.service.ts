@@ -11,6 +11,7 @@ import { Status } from '../models/status';
 export class SignupService {
   private baseUrl = environment.baseUrl;
   constructor(private htttp: HttpClient) {}
+
   login(model: LoginReqModel) {
     return this.htttp.post<loginResponseModel>(
       this.baseUrl + '/auth/authenticate',

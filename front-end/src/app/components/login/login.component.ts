@@ -29,16 +29,16 @@ export class LoginComponent implements OnInit {
     this.status = { statusCode: 0, message: 'wait...' };
     this.signupService.login(this.frm.value).subscribe({
       next: (res) => {
-        this.authService.addAccessToken(res.token);
-        this.authService.addUsername(res.email);
-        this.status.statusCode = 0;
-        this.status.message = 'Logged successfully';
-        this.router.navigate(['./dashboard']);
+        this.authService.authenticateUser(res).subscribe({
+          next: (data) => {
+            this.router.navigate(['./dashboard']);
+          },
+        });
       },
       error: (err) => {
         console.log(err);
         this.status.statusCode = 0;
-        this.status.message = 'some error on server side';
+        this.status.message = 'some error on the server side';
       },
     });
   }

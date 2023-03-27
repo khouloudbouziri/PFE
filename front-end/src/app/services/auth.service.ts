@@ -1,29 +1,36 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { loginResponseModel } from '../models/login-response';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  authenticatedUser: loginResponseModel | undefined;
+
   constructor() {}
 
-  isLoggedIn() {
-    return !!this.getAccessToken();
+  public authenticateUser(
+    authvisitor: loginResponseModel
+  ): Observable<boolean> {
+    this.authenticatedUser = authvisitor;
+    localStorage.setItem(
+      'visitor',
+      JSON.stringify({
+        token: authvisitor.token,
+        visitor: authvisitor.visitor,
+      })
+    );
+    return of(true);
   }
 
-  //mayi5dmouch mta3 il username
-  addUsername(username: string) {
-    localStorage.setItem('username', username);
+  public isAuthenticated() {
+    return this.authenticatedUser != undefined;
   }
 
-  getUsername() {
-    return localStorage.getItem('username');
-  }
-
-  addAccessToken(accessToken: string) {
-    localStorage.setItem('accessToken', accessToken);
-  }
-
-  getAccessToken() {
-    return localStorage.getItem('accessToken');
+  public logout(): Observable<boolean> {
+    this.authenticatedUser = undefined;
+    localStorage.removeItem('visitor');
+    return of(true);
   }
 }
