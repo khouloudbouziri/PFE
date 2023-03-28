@@ -11,13 +11,10 @@ import { SignupComponent } from './components/signup/signup.component';
 import { CompanyHomeComponent } from './pages/company-home/company-home.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InternHomeComponent } from './pages/intern-home/intern-home.component';
-// import { CompanyHomeComponent } from './pages/company-home/company-home.component';
-// import { HomeComponent } from './pages/home/home.component';
-// import { InternHomeComponent } from './pages/intern-home/intern-home.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   {
@@ -40,6 +37,7 @@ const routes: Routes = [
     component: CompanyPageComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'offerCard', component: OfferCardComponent },
   { path: 'company-sign-up', component: CompanySignUpComponent },
   { path: 'company-sign-up', component: CompanySignUpComponent },
   { path: 'intern-home', component: InternHomeComponent },

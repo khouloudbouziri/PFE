@@ -1,94 +1,115 @@
 <div>
-    <section class="flex justify-center">
+  <section class="flex justify-center">
+    <div class="flex flex-col mr-64 my-16 p-12 py-28">
+      <h2 class="text-[#424A88] text-2xl font-sans font-semibold">
+        Trouvez le profil idéal et faites booster<br />
+        votre entreprise !
+      </h2>
+      <div
+        class="flex mx-auto justify-between relative w-80 bg-white border rounded-full border-[#424A88] m-4"
+      >
+        <div
+          class="top-0 right-0 absolute w-1/2 h-full bg-[#424A88] rounded-full duration-500"
+        ></div>
+        <button
+          class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#424A88]"
+          routerLink="/"
+        >
+          CVthéque
+        </button>
+        <button
+          class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
+          routerLink="/company-sign-up"
+        >
+          Je m’inscris
+        </button>
+      </div>
+    </div>
 
-        <div class="flex flex-col mr-64 my-16 p-12 py-28">
-
-            <h2 class="text-[#424A88] text-2xl font-sans font-semibold "> Trouvez le profil idéal
-                et faites booster<br /> votre entreprise !
-            </h2>
-            <div class="flex mx-auto justify-between relative w-80 bg-white border rounded-full border-[#424A88] m-4">
-                <div class="top-0 right-0 absolute w-1/2 h-full bg-[#424A88] rounded-full duration-500">
-                </div>
-                <button class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#424A88]"
-                    routerLink="/">
-                    CVthéque
-                </button>
-                <button class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
-                    routerLink="/signup">
-                    Je m’inscris
-                </button>
-            </div>
-
-
-
+    <div class="flex-col">
+      <div class="img">
+        <img src="../../assets/images/home1.png" alt="pas de photo" />
+      </div>
+    </div>
+  </section>
+  <section class="flex justify-center justify-around my-56">
+    <div class="bg-[#FFFFFF] bg-opacity-30 w-3/4 h-80 pt-16 px-64">
+      <h2 class="text-[#E5302D] opacity-100 ml-96 font-semibold">
+        Chercher un profil
+      </h2>
+      <br />
+      <p class="opacity-100 justify-center text-base font-medium">
+        Recruter des talents n'a jamais été aussi simple. Confiez-nous vos
+        recrutements !
+      </p>
+      <br />
+      <div class="flex justify-center">
+        <div class="flex-col items-inline my-6">
+          <button
+            type="button"
+            id="btnSubmit"
+            class="w-60 h-12 text-white bg-[#E73130] rounded-full"
+          >
+            CVthéque
+          </button>
         </div>
-
-        <div class="flex-col">
-            <div class="img">
-                <img src="../../assets/images/home1.png" alt="pas de photo">
-            </div>
-        </div>
-
-
-    </section>
-    <section class="flex justify-center justify-around my-56">
-        <div class="bg-[#FFFFFF] bg-opacity-30 w-3/4 h-80  pt-16 px-64">
-            <h2 class="text-[#E5302D] opacity-100 ml-96 font-semibold"> Chercher un profil </h2> <br />
-            <p class="opacity-100 justify-center text-base font-medium">Recruter des talents n'a jamais été aussi
-                simple. Confiez-nous vos recrutements !</p><br />
-            <div class="flex justify-center ">
-                <div class="flex-col items-inline my-6">
-                    <button type="button" id="btnSubmit" class="w-60 h-12 text-white bg-[#E73130] rounded-full">
-                        CVthéque
-                    </button>
-                </div>
-                <div class=" flex ml-6 items-inline rounded-full h-12 w-3/5 bg-white pr-1 my-6">
-                    <div class="flex-col items-inline ml-6 my-4">
-                        <select class="outline-none" name="" id="">
-                            <option>informatique</option>
-                            <option>inforatique</option>
-                            <option>inforatique</option>
-                            <option>inforatique</option>
-                        </select>
-                    </div>
-                    <div class="flex-col items-inline mr-2 my-4 text-black ">
-                        <p class="h-36 mx-6">|</p>
-                    </div>
-                    <div class="flex-col items-inline my-4">
-                        <input type="text" class="outline-none" placeholder="developement web ">
-                    </div>
-                    <div class="flex-col items-inline">
-                        <button type="button" id="btnSubmit"
-                            class="w-28 ml-32 my-1 h-10 text-white bg-[#E73130] rounded-full">
-                            Chercher
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-
-        </div>
-
-    </section>
-    <section class="flex justify-center items-center px-72 justify-around my-56">
-        <div class="flex-col items-inline">
-            <div class="img">
-                <img src="../../assets/images/home2.png" alt="pas de photo">
-            </div>
-        </div>
-        <div class="flex-col items-inline">
-            <h2 class="text-[#E5302D] font-semibold">Envoyer un offre !</h2>
-            <p class=" text-base">Vous n’avez pas trouvé le profil qui vous <br />convient ? Envoyez-nous vos exigences.
-                <br />
-                Un sujet, quelques lignes pour l’expliquer, <br />
-                et le tour est joué !
-            </p><br />
-            <button type="button" id="btnSubmit" class="w-60 h-12 text-white bg-[#E73130] rounded-full">
-                Envoyer un offre
+        <div
+          class="flex ml-6 items-inline rounded-full h-12 w-3/5 bg-white pr-1 my-6"
+        >
+          <div class="flex-col items-inline ml-6 my-4">
+            <select class="outline-none" name="" id="">
+              <option>informatique</option>
+              <option>inforatique</option>
+              <option>inforatique</option>
+              <option>inforatique</option>
+            </select>
+          </div>
+          <div class="flex-col items-inline mr-2 my-4 text-black">
+            <p class="h-36 mx-6">|</p>
+          </div>
+          <div class="flex-col items-inline my-4">
+            <input
+              type="text"
+              class="outline-none"
+              placeholder="developement web "
+            />
+          </div>
+          <div class="flex-col items-inline">
+            <button
+              type="button"
+              id="btnSubmit"
+              class="w-28 ml-32 my-1 h-10 text-white bg-[#E73130] rounded-full"
+            >
+              Chercher
             </button>
+          </div>
         </div>
-    </section>
-
-
+      </div>
+    </div>
+  </section>
+  <section class="flex justify-center items-center px-72 justify-around my-56">
+    <div class="flex-col items-inline">
+      <div class="img">
+        <img src="../../assets/images/home2.png" alt="pas de photo" />
+      </div>
+    </div>
+    <div class="flex-col items-inline">
+      <h2 class="text-[#E5302D] font-semibold">Envoyer un offre !</h2>
+      <p class="text-base">
+        Vous n’avez pas trouvé le profil qui vous <br />convient ? Envoyez-nous
+        vos exigences.
+        <br />
+        Un sujet, quelques lignes pour l’expliquer, <br />
+        et le tour est joué !
+      </p>
+      <br />
+      <button
+        type="button"
+        id="btnSubmit"
+        class="w-60 h-12 text-white bg-[#E73130] rounded-full"
+      >
+        Envoyer un offre
+      </button>
+    </div>
+  </section>
 </div>
