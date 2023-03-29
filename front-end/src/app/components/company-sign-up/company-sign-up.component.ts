@@ -8,10 +8,13 @@ import { MustMatch } from 'src/app/helpers/must-match.validator';
 @Component({
   selector: 'app-company-sign-up',
   templateUrl: './company-sign-up.component.html',
-  styleUrls: ['./company-sign-up.component.css']
+  styleUrls: ['./company-sign-up.component.css'],
 })
 export class CompanySignUpComponent {
-  constructor(private signupService: CompanySignupServiceService, private fb: FormBuilder) {}
+  constructor(
+    private signupService: CompanySignupServiceService,
+    private fb: FormBuilder
+  ) {}
   frm!: FormGroup;
   status!: Status;
 
@@ -44,8 +47,8 @@ export class CompanySignUpComponent {
         this.frm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      'email': ['',[ Validators.required,validPattern(patternMail)]],
-      'password': ['',[ Validators.required,validPattern(patternRegex)]],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
       size:['', Validators.required],
       adress: ['', Validators.required],
       phone_number: ['', Validators.required],
@@ -55,7 +58,7 @@ export class CompanySignUpComponent {
       domain: ['', Validators.required],
     },{
       validator:MustMatch('password','Confirmpassword')
+      
     });
   }
-
 }
