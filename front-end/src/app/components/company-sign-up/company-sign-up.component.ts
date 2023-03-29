@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Status } from 'src/app/models/status';
 import { CompanySignupServiceService } from 'src/app/services/company-signup-service.service';
 
+import { validPattern } from 'src/app/helpers/patter-match.validor';
+import { MustMatch } from 'src/app/helpers/must-match.validator';
 @Component({
   selector: 'app-company-sign-up',
   templateUrl: './company-sign-up.component.html',
@@ -37,11 +39,13 @@ export class CompanySignUpComponent {
     });
   }
   ngOnInit(): void {
-    this.frm = this.fb.group({
+    const patternRegex= new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$');
+    const patternMail= new RegExp('^(.+)@(.+)$');
+        this.frm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      'email': ['',[ Validators.required,validPattern(patternMail)]],
+      'password': ['',[ Validators.required,validPattern(patternRegex)]],
       size:['', Validators.required],
       adress: ['', Validators.required],
       phone_number: ['', Validators.required],
@@ -49,6 +53,8 @@ export class CompanySignUpComponent {
       tax_registration_number: ['', Validators.required],
       sector: ['', Validators.required],
       domain: ['', Validators.required],
+    },{
+      validator:MustMatch('password','Confirmpassword')
     });
   }
 
