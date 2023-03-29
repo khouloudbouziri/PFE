@@ -42,23 +42,27 @@ export class CompanySignUpComponent {
     });
   }
   ngOnInit(): void {
-    const patternRegex= new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$');
-    const patternMail= new RegExp('^(.+)@(.+)$');
-        this.frm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      size:['', Validators.required],
-      adress: ['', Validators.required],
-      phone_number: ['', Validators.required],
-      company_name: ['', Validators.required],
-      tax_registration_number: ['', Validators.required],
-      sector: ['', Validators.required],
-      domain: ['', Validators.required],
-    },{
-      validator:MustMatch('password','Confirmpassword')
-      
-    });
+    const patternRegex = new RegExp(
+      '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$'
+    );
+    const patternMail = new RegExp('^(.+)@(.+)$');
+    this.frm = this.fb.group(
+      {
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        size: ['', Validators.required],
+        adress: ['', Validators.required],
+        phone_number: ['', Validators.required],
+        company_name: ['', Validators.required],
+        tax_registration_number: ['', Validators.required],
+        sector: ['', Validators.required],
+        domain: ['', Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'Confirmpassword'),
+      }
+    );
   }
 }
