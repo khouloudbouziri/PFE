@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Status } from 'src/app/models/status';
-import { SignupService } from 'src/app/services/signup.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Status } from 'src/app/models/status';
+import { validPattern } from 'src/app/helpers/patter-match.validor';
+import { MustMatch } from 'src/app/helpers/must-match.validator';
+import { SignupService } from 'src/app/services/signup.service';
 
 @Component({
   selector: 'app-signup',
@@ -42,14 +44,20 @@ export class SignupComponent {
     });
   }
   ngOnInit(): void {
+    const patternRegex= new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$'); 
+    const patternMail= new RegExp('^(.+)@(.+)$');
+    
     this.frm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      university: ['', Validators.required],
-      universityDepartement: ['', Validators.required],
-    });
+      'firstname': ['', Validators.required],
+      'lastname': ['', Validators.required],
+      'email': ['',[ Validators.required,validPattern(patternMail)]],
+      'password': ['',[ Validators.required,validPattern(patternRegex)]],
+      'Confirmpassword': ['', Validators.required],
+      'university': ['', Validators.required],
+      'universityDepartement': ['', Validators.required],
+    },{
+      validator:MustMatch('password','Confirmpassword')
+    })
   }
 
   openSnackBar(message: string, action: string) {

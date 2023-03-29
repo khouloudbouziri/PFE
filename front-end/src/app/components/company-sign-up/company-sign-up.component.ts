@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Status } from 'src/app/models/status';
 import { CompanySignupServiceService } from 'src/app/services/company-signup-service.service';
 
+import { validPattern } from 'src/app/helpers/patter-match.validor';
+import { MustMatch } from 'src/app/helpers/must-match.validator';
 @Component({
   selector: 'app-company-sign-up',
   templateUrl: './company-sign-up.component.html',
@@ -11,6 +13,7 @@ import { CompanySignupServiceService } from 'src/app/services/company-signup-ser
 export class CompanySignUpComponent {
   constructor(
     private signupService: CompanySignupServiceService,
+
     private fb: FormBuilder
   ) {}
   frm!: FormGroup;
@@ -52,7 +55,6 @@ export class CompanySignUpComponent {
       tax_registration_number: ['', Validators.required],
       sector: ['', Validators.required],
       domain: ['', Validators.required],
-      photo_url: ['', Validators.required],
     });
   }
 }
