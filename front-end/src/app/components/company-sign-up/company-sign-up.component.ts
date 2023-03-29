@@ -6,10 +6,13 @@ import { CompanySignupServiceService } from 'src/app/services/company-signup-ser
 @Component({
   selector: 'app-company-sign-up',
   templateUrl: './company-sign-up.component.html',
-  styleUrls: ['./company-sign-up.component.css']
+  styleUrls: ['./company-sign-up.component.css'],
 })
 export class CompanySignUpComponent {
-  constructor(private signupService: CompanySignupServiceService, private fb: FormBuilder) {}
+  constructor(
+    private signupService: CompanySignupServiceService,
+    private fb: FormBuilder
+  ) {}
   frm!: FormGroup;
   status!: Status;
 
@@ -42,14 +45,14 @@ export class CompanySignUpComponent {
       lastname: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
-      size:['', Validators.required],
+      size: ['', Validators.required],
       adress: ['', Validators.required],
       phone_number: ['', Validators.required],
       company_name: ['', Validators.required],
       tax_registration_number: ['', Validators.required],
       sector: ['', Validators.required],
       domain: ['', Validators.required],
+      photo_url: ['', Validators.required],
     });
   }
-
 }
