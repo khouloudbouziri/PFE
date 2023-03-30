@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.internRegistration.CompanyRegisterRequest;
-import com.example.backend.internRegistration.InternRegisterRequest;
+import com.example.backend.Registration.CompanyRegisterRequest;
+import com.example.backend.Registration.InternRegisterRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,7 +34,8 @@ public class AuthenticationController {
   public ResponseEntity<AuthenticationResponse> CompanyRegister(@RequestBody CompanyRegisterRequest request) {
     return ResponseEntity.ok(service.CompanyRegister(request));
   }
-
+  
+  
   
   
 

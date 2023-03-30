@@ -1,4 +1,4 @@
-package com.example.backend.internRegistration;
+package com.example.backend.Registration;
 
 import com.example.backend.entities.JobTitle;
 

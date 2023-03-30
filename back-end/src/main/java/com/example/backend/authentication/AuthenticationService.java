@@ -3,16 +3,21 @@ package com.example.backend.authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.backend.configuration.JwtService;
+import com.example.backend.Registration.CompanyRegisterRequest;
+import com.example.backend.Registration.InternRegisterRequest;
+import com.example.backend.Repositories.SupervisorRepo;
+import com.example.backend.Repositories.VisitorRepository;
+import com.example.backend.Token.JwtService;
 import com.example.backend.entities.JobTitle;
 import com.example.backend.entities.Role;
+import com.example.backend.entities.Supervisor;
 //import com.example.backend.entities.University;
 import com.example.backend.entities.Visitor;
-import com.example.backend.internRegistration.CompanyRegisterRequest;
-import com.example.backend.internRegistration.InternRegisterRequest;
+
 import java.lang.RuntimeException;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +28,8 @@ public class AuthenticationService {
 
   @Autowired
   VisitorRepository visitorRepository;
+  @Autowired
+  SupervisorRepo supervisorRepo;
 
   private final AuthenticationManager authenticationManager;
   private final JwtService jwtService;
@@ -55,6 +62,31 @@ public class AuthenticationService {
     visitorRepository.save(company);
 
     var jwtToken = jwtService.generateToken(company);
+    return AuthenticationResponse.builder()
+        .token(jwtToken)
+        .build();
+
+  }
+
+  public AuthenticationResponse SypervisorRegister(Supervisor request) {
+
+    if (supervisorRepo.findByEmail(request.getEmail()).isPresent()) {
+      System.out.println("ok");
+      throw new RuntimeException("User already exists");
+    }
+
+    var supervisor = Supervisor.builder()
+
+        .firstname(request.getFirstname())
+        .lastname(request.getLastname())
+        .email(request.getEmail())
+        .password(passwordEncoder.encode(request.getPassword()))
+        .phone_number(request.getPhone_number())
+        .build();
+
+  supervisorRepo.save(supervisor);
+
+    var jwtToken = jwtService.generateToken((UserDetails) supervisor);
     return AuthenticationResponse.builder()
         .token(jwtToken)
         .build();
