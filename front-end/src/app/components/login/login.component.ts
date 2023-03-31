@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Role } from 'src/app/models/Role';
 import { Status } from 'src/app/models/status';
 import { AuthService } from 'src/app/services/auth.service';
 import { SignupService } from 'src/app/services/signup.service';
@@ -29,9 +30,18 @@ export class LoginComponent implements OnInit {
     this.status = { statusCode: 0, message: 'wait...' };
     this.signupService.login(this.frm.value).subscribe({
       next: (res) => {
+        console.log(res);
         this.authService.authenticateUser(res).subscribe({
           next: (data) => {
-            this.router.navigate(['./dashboard']);
+            if (res.supervisor) {
+              this.router.navigate(['./dashboard']);
+            } else if (res.visitor) {
+              if (res.visitor.company_name) {
+                this.router.navigate(['./offerCard']);
+              } else {
+                this.router.navigate(['./home']);
+              }
+            }
           },
         });
       },

@@ -3,7 +3,6 @@ package com.example.backend.authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +14,10 @@ import com.example.backend.Token.JwtService;
 import com.example.backend.entities.JobTitle;
 import com.example.backend.entities.Role;
 import com.example.backend.entities.Supervisor;
-//import com.example.backend.entities.University;
 import com.example.backend.entities.Visitor;
 
 import java.lang.RuntimeException;
+import java.util.NoSuchElementException;
 
 import lombok.RequiredArgsConstructor;
 
@@ -68,31 +67,6 @@ public class AuthenticationService {
 
   }
 
-  public AuthenticationResponse SypervisorRegister(Supervisor request) {
-
-    if (supervisorRepo.findByEmail(request.getEmail()).isPresent()) {
-      System.out.println("ok");
-      throw new RuntimeException("User already exists");
-    }
-
-    var supervisor = Supervisor.builder()
-
-        .firstname(request.getFirstname())
-        .lastname(request.getLastname())
-        .email(request.getEmail())
-        .password(passwordEncoder.encode(request.getPassword()))
-        .phone_number(request.getPhone_number())
-        .build();
-
-  supervisorRepo.save(supervisor);
-
-    var jwtToken = jwtService.generateToken((UserDetails) supervisor);
-    return AuthenticationResponse.builder()
-        .token(jwtToken)
-        .build();
-
-  }
-
   public AuthenticationResponse InternRegister(InternRegisterRequest request) {
 
     if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
@@ -117,17 +91,59 @@ public class AuthenticationService {
 
   }
 
+  public AuthenticationResponse SupervisorRegister(Supervisor request) {
+
+    if (supervisorRepo.findByEmail(request.getEmail()).isPresent()) {
+      throw new RuntimeException("User already exists");
+    }
+
+    var supervisor = Supervisor.builder()
+        .firstname(request.getFirstname())
+        .lastname(request.getLastname())
+        .email(request.getEmail())
+        .password(passwordEncoder.encode(request.getPassword()))
+        .phone_number(request.getPhone_number())
+        .role(Role.SUPERVISOR)
+        .build();
+
+    supervisorRepo.save(supervisor);
+
+    var jwtToken = jwtService.generateToken(supervisor);
+    return AuthenticationResponse.builder()
+        .token(jwtToken)
+        .build();
+
+  }
+
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    Visitor visitor;
+    Supervisor supervisor;
+    try {
+      supervisor = supervisorRepo.findByEmail(request.getEmail())
+          .orElseThrow();
+    } catch (NoSuchElementException e) {
+      visitor = visitorRepository.findByEmail(request.getEmail())
+          .orElseThrow();
+
+      authenticationManager.authenticate(
+          new UsernamePasswordAuthenticationToken(
+              request.getEmail(),
+              request.getPassword()));
+      var jwtToken = jwtService.generateToken(visitor);
+      return AuthenticationResponse.builder()
+          .token(jwtToken)
+          .visitor(visitor)
+          .build();
+    }
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(
             request.getEmail(),
             request.getPassword()));
-    var Visitor = visitorRepository.findByEmail(request.getEmail())
-        .orElseThrow();
-    var jwtToken = jwtService.generateToken(Visitor);
+    var jwtToken = jwtService.generateToken(supervisor);
+
     return AuthenticationResponse.builder()
         .token(jwtToken)
-        .Visitor(Visitor)
+        .supervisor(supervisor)
         .build();
   }
 

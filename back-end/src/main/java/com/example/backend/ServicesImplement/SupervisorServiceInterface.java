@@ -6,8 +6,12 @@ import com.example.backend.entities.Supervisor;
 
 public interface SupervisorServiceInterface {
     List<Supervisor> getAllSupervisors();
+
     Supervisor findSupervisorById(Long id);
-    Supervisor addSupervisor(Supervisor supervisor);
+
+    // Supervisor addSupervisor(Supervisor supervisor);
+
     Supervisor updateSupervisor(Supervisor supervisor);
+
     void deleteSupervisor(Long id);
 }

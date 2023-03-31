@@ -7,19 +7,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.backend.entities.Supervisor;
-import com.example.backend.entities.Visitor;
 
 @Repository
-public interface SupervisorRepo  extends JpaRepository<Supervisor, Long>{
+public interface SupervisorRepo extends JpaRepository<Supervisor, Long> {
 
-    List<Supervisor> findAll();
+    public Optional<Supervisor> findByEmail(String email);
 
-    Optional<Supervisor> findById(Long id);
-
-    Supervisor save(Supervisor supervisor);
-
-    void deleteById(Long id);
-
-    Optional<Visitor> findByEmail(String email);
-    
 }

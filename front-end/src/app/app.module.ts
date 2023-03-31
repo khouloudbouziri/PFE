@@ -18,6 +18,7 @@ import { CompanySignUpComponent } from './components/company-sign-up/company-sig
 import { InternHomeComponent } from './pages/intern-home/intern-home.component';
 import { CompanyHomeComponent } from './pages/company-home/company-home.component';
 import { HomeComponent } from './pages/home/home.component';
+import { AddSupervisorComponent } from './components/add-supervisor/add-supervisor.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HomeComponent } from './pages/home/home.component';
     InternHomeComponent,
     CompanyHomeComponent,
     HomeComponent,
+    AddSupervisorComponent,
   ],
   imports: [
     BrowserModule,

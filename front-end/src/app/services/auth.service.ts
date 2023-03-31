@@ -19,6 +19,7 @@ export class AuthService {
       JSON.stringify({
         token: authvisitor.token,
         visitor: authvisitor.visitor,
+        supervisor: authvisitor.supervisor,
       })
     );
     return of(true);

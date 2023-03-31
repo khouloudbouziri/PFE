@@ -1,3 +1,5 @@
+import { Role } from './Role';
+
 export interface Visitor {
   firstname: string;
   lastname: string;
@@ -18,5 +20,5 @@ export interface Visitor {
   companyDepartement: string;
   // private JobTitle jobTitle;
 
-  // private Role role;
+  role: Role;
 }

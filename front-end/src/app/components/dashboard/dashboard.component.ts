@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+  showForm = false;
+
   constructor(public authService: AuthService, private router: Router) {}
 
   firstname: string =
