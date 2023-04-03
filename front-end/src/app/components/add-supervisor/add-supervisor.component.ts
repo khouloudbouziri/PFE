@@ -17,7 +17,6 @@ export class AddSupervisorComponent {
   ) {}
   frm!: FormGroup;
   status!: Status;
-
   get f() {
     return this.frm.controls;
   }

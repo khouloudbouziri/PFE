@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit {
         this.authService.authenticateUser(res).subscribe({
           next: (data) => {
             if (res.supervisor) {
-              this.router.navigate(['./dashboard']);
+              this.router.navigate(['./supervisor-page']);
             } else if (res.visitor) {
               if (res.visitor.company_name) {
-                this.router.navigate(['./offerCard']);
+                this.router.navigate(['./company-page']);
               } else {
                 this.router.navigate(['./home']);
               }

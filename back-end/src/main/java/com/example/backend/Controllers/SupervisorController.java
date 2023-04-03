@@ -20,7 +20,7 @@ import com.example.backend.entities.Supervisor;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/supervisor")
+@RequestMapping("api/v1/auth/supervisor")
 public class SupervisorController {
 
     private final SupervisorServiceInterface supervisorService;
