@@ -47,9 +47,7 @@ public class intershipOffreController {
 
     @PostMapping("/add")
     public ResponseEntity<IntershipOffre> addIntershipOffre(@RequestBody IntershipOffre intershipOffer) {
-        System.out.println("ok4");
         IntershipOffre newIntershipOffer = intershipOffreServiceImp.addIntershipOffre(intershipOffer);
-        System.out.println("ok5");
         return new ResponseEntity<>(newIntershipOffer, HttpStatus.CREATED);
     }
 
