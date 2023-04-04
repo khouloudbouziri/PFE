@@ -1,23 +1,35 @@
 import { Component } from '@angular/core';
-import { IntershipOffer } from '../models/IntershipOffer';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IntershipOfferService } from '../services/intership-offer.service';
 
 @Component({
   selector: 'app-description',
   templateUrl: './description.component.html',
-  styleUrls: ['./description.component.css']
+  styleUrls: ['./description.component.css'],
 })
 export class DescriptionComponent {
-  offre!: IntershipOffer;
-  constructor(private http: HttpClient,private router:Router) {
-  }
-  ngOnInit() {
-    this.http.get<IntershipOffer>('http://localhost:3333/api/v1/auth/intership/find/8 }}').subscribe(
-      data => this.offre = data,
-      error => console.error(error)
-    );
+  offer: any = {};
+  id_intership_offre: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private service: IntershipOfferService
+  ) {
+    this.id_intership_offre = this.route.snapshot.paramMap.get('id');
+    console.log(this.id_intership_offre);
   }
 
-  
+  ngOnInit() {
+    this.getIntershipOfferById();
+  }
+
+  getIntershipOfferById() {
+    console.log('okkkk');
+    this.service
+      .getIntershipOfferById(this.id_intership_offre)
+      .subscribe((res) => {
+        this.offer = res;
+      });
+    console.log('okkkkkk4');
+  }
 }

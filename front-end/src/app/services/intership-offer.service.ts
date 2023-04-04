@@ -12,8 +12,17 @@ export class IntershipOfferService {
 
   constructor(private htttp: HttpClient) {}
 
+  getAllIntershipOffers() {
+    return this.htttp.get(this.baseUrl + '/auth/intership/all');
+  }
+
+  getIntershipOfferById(id_intership_offre: any) {
+    return this.htttp.get(
+      this.baseUrl + '/auth/intership/find/' + id_intership_offre
+    );
+  }
+
   addOffer(model: IntershipOffer) {
-    console.log('ok');
     return this.htttp.post<Status>(this.baseUrl + '/auth/intership/add', model);
   }
 }
