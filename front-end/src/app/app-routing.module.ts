@@ -12,6 +12,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { InternHomeComponent } from './pages/intern-home/intern-home.component';
 import { AuthGuard } from './services/auth.guard';
 import { SupervisorPageComponent } from './pages/supervisor-page/supervisor-page.component';
+import { AddOfferComponent } from './pages/add-offer/add-offer.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   //{ path: 'agenda', component: AgendaComponent },
+  { path: 'addOffer', component: AddOfferComponent },
   {
     path: 'company-page',
     component: CompanyComponent,
