@@ -1,0 +1,7 @@
+<h1>Liste des offres de stage</h1>
+<ul>
+    <li *ngFor="let offre of offres">
+     <h1>{{offre.topic}}</h1>
+      <button routerLink="/offre/{{ offre.id_intership_offre }}">Candidater</button>
+    </li>
+  </ul>

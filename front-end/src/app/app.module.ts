@@ -31,6 +31,8 @@ import {
 } from '@syncfusion/ej2-angular-schedule';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { AddOfferComponent } from './pages/add-offer/add-offer.component';
+import { OfferDetailsComponent } from './offer-details/offer-details.component';
+import { DescriptionComponent } from './description/description.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { AddOfferComponent } from './pages/add-offer/add-offer.component';
     AddSupervisorComponent,
     SupervisorPageComponent,
     AddOfferComponent,
+    OfferDetailsComponent,
+    DescriptionComponent,
     //AgendaComponent,
   ],
   imports: [

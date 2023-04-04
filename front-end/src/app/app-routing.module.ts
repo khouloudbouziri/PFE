@@ -13,6 +13,8 @@ import { InternHomeComponent } from './pages/intern-home/intern-home.component';
 import { AuthGuard } from './services/auth.guard';
 import { SupervisorPageComponent } from './pages/supervisor-page/supervisor-page.component';
 import { AddOfferComponent } from './pages/add-offer/add-offer.component';
+import { OfferDetailsComponent } from './offer-details/offer-details.component';
+import { DescriptionComponent } from './description/description.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
 
 const routes: Routes = [
@@ -21,10 +23,16 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   //{ path: 'agenda', component: AgendaComponent },
   { path: 'addOffer', component: AddOfferComponent },
+  { path: 'offre/:id', component: DescriptionComponent },
   {
     path: 'company-page',
     component: CompanyComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'offerDetails',
+    component: OfferDetailsComponent,
+   
   },
   {
     path: 'supervisor-page',
