@@ -8,17 +8,17 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './components/login/login.component';
-import { CompanyComponent } from './pages/company-page/company.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { InternPageComponent } from './components/intern-page/intern-page.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { CompanySignUpComponent } from './components/company-sign-up/company-sign-up.component';
-import { InternHomeComponent } from './pages/intern-home/intern-home.component';
-import { CompanyHomeComponent } from './pages/company-home/company-home.component';
-import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { CompanyComponent } from './pages/profiles/company-page/company.component';
+import { AdminPageComponent } from './pages/profiles/admin-page/admin-page.component';
+import { InternPageComponent } from './pages/profiles/intern-page/intern-page.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+import { CompanySignUpComponent } from './authentication/company-sign-up/company-sign-up.component';
+import { InternHomeComponent } from './pages/homes/intern-home/intern-home.component';
+import { CompanyHomeComponent } from './pages/homes/company-home/company-home.component';
+import { HomeComponent } from './pages/homes/home/home.component';
 import { AddSupervisorComponent } from './components/add-supervisor/add-supervisor.component';
-import { SupervisorPageComponent } from './pages/supervisor-page/supervisor-page.component';
+import { SupervisorPageComponent } from './pages/profiles/supervisor-page/supervisor-page.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
 import {
   ScheduleModule,
@@ -30,9 +30,9 @@ import {
   MonthAgendaService,
 } from '@syncfusion/ej2-angular-schedule';
 import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
-import { AddOfferComponent } from './pages/add-offer/add-offer.component';
-import { OfferDetailsComponent } from './offer-details/offer-details.component';
-import { DescriptionComponent } from './description/description.component';
+import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.component';
+import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
+import { DescriptionComponent } from './intershipOffer/description/description.component';
 
 @NgModule({
   declarations: [

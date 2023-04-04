@@ -1,47 +1,45 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
-import { CompanySignUpComponent } from './components/company-sign-up/company-sign-up.component';
-import { CompanyComponent } from './pages/company-page/company.component';
-import { InternPageComponent } from './components/intern-page/intern-page.component';
-import { LoginComponent } from './components/login/login.component';
-import { OfferCardComponent } from './components/offer-card/offer-card.component';
-import { SignupComponent } from './components/signup/signup.component';
-import { CompanyHomeComponent } from './pages/company-home/company-home.component';
-import { HomeComponent } from './pages/home/home.component';
-import { InternHomeComponent } from './pages/intern-home/intern-home.component';
-import { AuthGuard } from './services/auth.guard';
-import { SupervisorPageComponent } from './pages/supervisor-page/supervisor-page.component';
-import { AddOfferComponent } from './pages/add-offer/add-offer.component';
-import { OfferDetailsComponent } from './offer-details/offer-details.component';
-import { DescriptionComponent } from './description/description.component';
+import { AdminPageComponent } from './pages/profiles/admin-page/admin-page.component';
+import { CompanySignUpComponent } from './authentication/company-sign-up/company-sign-up.component';
+import { CompanyComponent } from './pages/profiles/company-page/company.component';
+import { InternPageComponent } from './pages/profiles/intern-page/intern-page.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.component';
+import { SignupComponent } from './authentication/signup/signup.component';
+import { CompanyHomeComponent } from './pages/homes/company-home/company-home.component';
+import { HomeComponent } from './pages/homes/home/home.component';
+import { InternHomeComponent } from './pages/homes/intern-home/intern-home.component';
+import { AuthGuard } from './services/Authentication/auth.guard';
+import { SupervisorPageComponent } from './pages/profiles/supervisor-page/supervisor-page.component';
+import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.component';
+import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
+import { DescriptionComponent } from './intershipOffer/description/description.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'company-home', component: CompanyHomeComponent },
+  { path: 'intern-home', component: InternHomeComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  //{ path: 'agenda', component: AgendaComponent },
-  { path: 'addOffer', component: AddOfferComponent },
-  { path: 'offre/:id', component: DescriptionComponent },
+  { path: 'company-sign-up', component: CompanySignUpComponent },
+
+  {
+    path: 'admin-page',
+    component: AdminPageComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'company-page',
     component: CompanyComponent,
     canActivate: [AuthGuard],
   },
   {
-    path: 'offerDetails',
-    component: OfferDetailsComponent,
-   
-  },
-  {
     path: 'supervisor-page',
     component: SupervisorPageComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'admin-page',
-    component: AdminPageComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -50,12 +48,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
 
+  { path: 'addOffer', component: AddOfferComponent },
   { path: 'offerCard', component: OfferCardComponent },
-  { path: 'company-sign-up', component: CompanySignUpComponent },
-  { path: 'company-sign-up', component: CompanySignUpComponent },
-  { path: 'intern-home', component: InternHomeComponent },
-  { path: 'company-home', component: CompanyHomeComponent },
-  { path: 'home', component: HomeComponent },
+  {
+    path: 'offerDetails',
+    component: OfferDetailsComponent,
+  },
+  { path: 'offre/:id', component: DescriptionComponent },
+
+  //{ path: 'agenda', component: AgendaComponent },
 ];
 
 @NgModule({

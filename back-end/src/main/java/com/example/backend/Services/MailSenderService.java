@@ -6,15 +6,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.example.backend.Controllers.ClaimRequest;
+import com.example.backend.Email.ClaimRequest;
 
 import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
 public class MailSenderService {
-
-   
 
     @Autowired
     private JavaMailSender mailSender;
@@ -29,5 +27,5 @@ public class MailSenderService {
         mailSender.send(msg);
         System.out.println("mail sended successfully");
     }
-   
+
 }
