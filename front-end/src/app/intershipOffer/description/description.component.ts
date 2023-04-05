@@ -24,12 +24,10 @@ export class DescriptionComponent {
   }
 
   getIntershipOfferById() {
-    console.log('okkkk');
     this.service
       .getIntershipOfferById(this.id_intership_offre)
       .subscribe((res) => {
         this.offer = res;
       });
-    console.log('okkkkkk4');
   }
 }

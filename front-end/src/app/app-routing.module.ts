@@ -15,6 +15,7 @@ import { SupervisorPageComponent } from './pages/profiles/supervisor-page/superv
 import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.component';
 import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
 import { DescriptionComponent } from './intershipOffer/description/description.component';
+import { ApplyComponent } from './intern/apply/apply.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
 
 const routes: Routes = [
@@ -55,6 +56,8 @@ const routes: Routes = [
     component: OfferDetailsComponent,
   },
   { path: 'offre/:id', component: DescriptionComponent },
+
+  { path: 'apply', component: ApplyComponent },
 
   //{ path: 'agenda', component: AgendaComponent },
 ];

@@ -20,10 +20,6 @@ export class OfferDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.http.get<IntershipOffer[]>('http://localhost:3333/api/v1/auth/intership/all').subscribe(
-    //   data => this.offres = data,
-    //   error => console.error(error)
-    // );
     this.getAllIntershipOffers();
   }
 

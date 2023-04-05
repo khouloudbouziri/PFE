@@ -33,6 +33,7 @@ import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
 import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.component';
 import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
 import { DescriptionComponent } from './intershipOffer/description/description.component';
+import { ApplyComponent } from './intern/apply/apply.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { DescriptionComponent } from './intershipOffer/description/description.c
     AddOfferComponent,
     OfferDetailsComponent,
     DescriptionComponent,
+    ApplyComponent,
     //AgendaComponent,
   ],
   imports: [
