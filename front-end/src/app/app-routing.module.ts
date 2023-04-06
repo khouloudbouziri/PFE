@@ -57,7 +57,7 @@ const routes: Routes = [
   },
   { path: 'offre/:id', component: DescriptionComponent },
 
-  { path: 'apply', component: ApplyComponent },
+  { path: 'apply/offer/:id', component: ApplyComponent },
 
   //{ path: 'agenda', component: AgendaComponent },
 ];
