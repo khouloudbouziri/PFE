@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { CompanySignUpReqModel } from '../../models/CompanySignUpReqModel';
 import { Status } from '../../models/status';
 import { Supervisor } from '../../models/Supervisor';
+import { Visitor } from 'src/app/models/Visitor';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class CompanySignupServiceService {
     );
   }
 
-  supervisorRegister(model: Supervisor) {
+  supervisorRegister(model: Supervisor, visitor: Visitor) {
     return this.htttp.post<Status>(
       this.baseUrl + '/auth/supervisorRegister',
       model

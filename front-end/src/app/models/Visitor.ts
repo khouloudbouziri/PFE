@@ -1,6 +1,7 @@
 import { Role } from './Role';
 
 export interface Visitor {
+  id: bigint;
   firstname: string;
   lastname: string;
   adress: string;

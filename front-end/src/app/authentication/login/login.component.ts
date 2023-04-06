@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['./supervisor-page']);
             } else if (res.visitor) {
               if (res.visitor.company_name) {
-                this.router.navigate(['./company-page']);
+                this.router.navigate(['./company-page', res.visitor.id]);
               } else {
                 this.router.navigate(['./home']);
               }
