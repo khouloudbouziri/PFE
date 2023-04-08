@@ -38,8 +38,8 @@ public class AuthenticationController {
   }
 
   @PostMapping("/supervisorRegister")
-  public ResponseEntity<AuthenticationResponse> SupervisorRegister(@RequestBody Supervisor request, Visitor visitor) {
-    return ResponseEntity.ok(service.SupervisorRegister(request, visitor));
+  public ResponseEntity<AuthenticationResponse> SupervisorRegister(@RequestBody Supervisor request) {
+    return ResponseEntity.ok(service.SupervisorRegister(request));
   }
 
 }

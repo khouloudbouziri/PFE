@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Supervisor } from 'src/app/models/Supervisor';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
+import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 
 @Component({
   selector: 'app-company',
@@ -8,14 +10,38 @@ import { AuthService } from 'src/app/services/Authentication/auth.service';
   styleUrls: ['./company.component.css'],
 })
 export class CompanyComponent {
-  showForm = false;
+  id: any;
+  showContent0 = true;
+  showContent1 = false;
+  showContent2 = false;
+  supervisors: Supervisor[] = [];
 
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private visitorService: VisitorService
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id');
+  }
 
-  firstname: string =
-    this.authService.authenticatedUser?.visitor.firstname ?? '';
+  onClick() {
+    this.showContent0;
+  }
 
-  ngOnInit(): void {}
+  findSupervisorByIdCompany() {
+    this.visitorService
+      .findSupervisorByIdCompany(this.id)
+      .subscribe((res: any) => {
+        this.supervisors = res;
+        console.log(res);
+        console.log(this.supervisors);
+      });
+  }
+
+  ngOnInit(): void {
+    this.findSupervisorByIdCompany();
+  }
 
   logout() {
     this.authService.logout().subscribe({

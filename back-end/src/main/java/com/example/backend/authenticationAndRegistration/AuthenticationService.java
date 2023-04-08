@@ -92,7 +92,7 @@ public class AuthenticationService {
 
   }
 
-  public AuthenticationResponse SupervisorRegister(Supervisor request, Visitor visitor) {
+  public AuthenticationResponse SupervisorRegister(Supervisor request) {
 
     if (supervisorRepo.findByEmail(request.getEmail()).isPresent()) {
       throw new RuntimeException("User already exists");
@@ -105,7 +105,7 @@ public class AuthenticationService {
         .password(passwordEncoder.encode(request.getPassword()))
         .phone_number(request.getPhone_number())
         .role(Role.SUPERVISOR)
-        .visitor(visitor)
+        .visitor(request.getVisitor())
         .build();
 
     supervisorRepo.save(supervisor);

@@ -1,8 +1,8 @@
 import { Role } from './Role';
-import { Visitor } from './Visitor';
 
 export interface Supervisor {
-  visitor: Visitor;
+  id: bigint;
+  visitor: bigint;
   firstname: string;
   lastname: string;
   phone_number: string;

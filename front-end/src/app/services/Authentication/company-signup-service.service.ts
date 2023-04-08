@@ -20,7 +20,7 @@ export class CompanySignupServiceService {
     );
   }
 
-  supervisorRegister(model: Supervisor, visitor: Visitor) {
+  supervisorRegister(model: Supervisor) {
     return this.htttp.post<Status>(
       this.baseUrl + '/auth/supervisorRegister',
       model

@@ -28,6 +28,11 @@ public class SupervisorService implements SupervisorServiceInterface {
                 .orElseThrow(() -> new VisitorNotFoundException("Encadrant avec l'id" + id + "n'existe pas"));
     }
 
+    public List<Supervisor> findSupervisorByIdCompany(Long id) {
+        return supervisorRepository.findAllByVisitor(id)
+                .orElseThrow(() -> new VisitorNotFoundException("Encadrant avec l'id" + id + "n'existe pas"));
+    }
+
     public Supervisor updateSupervisor(Supervisor supervisor) {
         return supervisorRepository.save(supervisor);
     }

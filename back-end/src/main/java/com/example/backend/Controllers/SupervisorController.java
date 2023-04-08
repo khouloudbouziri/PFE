@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +40,12 @@ public class SupervisorController {
     public ResponseEntity<Supervisor> getSupervisorById(@PathVariable("id") Long id) {
         Supervisor supervisor = supervisorService.findSupervisorById(id);
         return new ResponseEntity<>(supervisor, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/bySupervisor/{id}")
+    public ResponseEntity<List<Supervisor>> findSupervisorByIdCompany(@PathVariable("id") Long id) {
+        List<Supervisor> supervisors = supervisorService.findSupervisorByIdCompany(id);
+        return new ResponseEntity<>(supervisors, HttpStatus.OK);
     }
 
     // @PostMapping("/add")

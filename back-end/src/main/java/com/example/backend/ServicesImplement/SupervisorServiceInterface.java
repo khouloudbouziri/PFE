@@ -9,6 +9,8 @@ public interface SupervisorServiceInterface {
 
     Supervisor findSupervisorById(Long id);
 
+    List<Supervisor> findSupervisorByIdCompany(Long visitor);
+
     // Supervisor addSupervisor(Supervisor supervisor);
 
     Supervisor updateSupervisor(Supervisor supervisor);

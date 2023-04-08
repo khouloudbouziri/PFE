@@ -28,7 +28,7 @@ public class Supervisor implements UserDetails {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private long id;
-   private Visitor visitor;
+   private long visitor;
    private String firstname;
    private String lastname;
    private String phone_number;

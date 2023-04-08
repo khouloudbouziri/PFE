@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -34,6 +34,7 @@ import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.componen
 import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
 import { DescriptionComponent } from './intershipOffer/description/description.component';
 import { ApplyComponent } from './intern/apply/apply.component';
+import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ApplyComponent } from './intern/apply/apply.component';
     OfferDetailsComponent,
     DescriptionComponent,
     ApplyComponent,
+    SupervisorListComponent,
     //AgendaComponent,
   ],
   imports: [
@@ -61,6 +63,7 @@ import { ApplyComponent } from './intern/apply/apply.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
     ScheduleModule,

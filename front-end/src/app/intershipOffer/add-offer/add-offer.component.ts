@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Supervisor } from 'src/app/models/Supervisor';
 import { Status } from 'src/app/models/status';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
+import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 
 @Component({
   selector: 'app-add-offer',
@@ -9,16 +12,43 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
   styleUrls: ['./add-offer.component.css'],
 })
 export class AddOfferComponent {
+  id: any;
+  supervisors: Supervisor[] = [];
+  isChecked: any = false;
+  working_from_home = 'false';
+
   constructor(
     private fb: FormBuilder,
-    private intershipOfferService: IntershipOfferService
-  ) {}
+    private route: ActivatedRoute,
+    private intershipOfferService: IntershipOfferService,
+    private visitorService: VisitorService
+  ) {
+    this.id = this.route.snapshot.paramMap.get('id');
+  }
 
   frm!: FormGroup;
   status!: Status;
 
   get f() {
     return this.frm.controls;
+  }
+
+  findSupervisorByIdCompany() {
+    this.visitorService
+      .findSupervisorByIdCompany(this.id)
+      .subscribe((res: any) => {
+        this.supervisors = res;
+        console.log(res);
+        console.log(this.supervisors);
+      });
+  }
+
+  onCheckboxChange() {
+    if (this.isChecked) {
+      this.working_from_home = 'true';
+    } else {
+      this.working_from_home = 'false';
+    }
   }
 
   onPost() {
@@ -48,15 +78,16 @@ export class AddOfferComponent {
       topic: ['', Validators.required],
       company: ['', Validators.required],
       type: ['', Validators.required],
-      //working_from_home: ['', Validators.required],
+      working_from_home: ['', Validators.required],
       address: ['', Validators.required],
       duration: ['', Validators.required],
-      supervisor: ['', Validators.required],
+      supervisor: [this.supervisors, Validators.required],
       interns_number: ['', Validators.required],
       required_work: ['', Validators.required],
       technical_environement: ['', Validators.required],
       required_profile: ['', Validators.required],
       //renumerete: ['', Validators.required],
     });
+    this.findSupervisorByIdCompany();
   }
 }

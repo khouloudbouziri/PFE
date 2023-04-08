@@ -2,10 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { validPattern } from 'src/app/helpers/patter-match.validor';
-import { Visitor } from 'src/app/models/Visitor';
 import { Status } from 'src/app/models/status';
 import { CompanySignupServiceService } from 'src/app/services/Authentication/company-signup-service.service';
-import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 
 @Component({
   selector: 'app-add-supervisor',
@@ -15,16 +13,15 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 export class AddSupervisorComponent {
   company: any;
   id: any;
-
+  data: any;
   constructor(
     private route: ActivatedRoute,
     private signupService: CompanySignupServiceService,
-    private service: VisitorService,
     private fb: FormBuilder
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
-    console.log(service.getVisitorById(this.id));
+    // console.log(this.id);
+    // console.log(service.getVisitorById(this.id));
   }
 
   frm!: FormGroup;
@@ -36,25 +33,30 @@ export class AddSupervisorComponent {
 
   onPost() {
     this.status = { statusCode: 0, message: 'wait...' };
-    this.company = this.service.getVisitorById(this.id);
-    this.signupService
-      .supervisorRegister(this.frm.value, this.company)
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-          this.status = res;
-          this.frm.reset();
-        },
-        error: (err) => {
-          this.status.statusCode = 0;
-          this.status.message = 'some error on the server side';
-          console.log(err);
-        },
-        complete: () => {
-          this.status.statusCode = 0;
-          this.status.message = '';
-        },
-      });
+
+    // this.id = this.service.getVisitorById(this.id).subscribe((t) => {
+    //   console.log(t);
+    //   this.data = t;
+    //   this.data.authorities = null;
+
+    //   this.frm.get('visitor')?.setValue(this.id);
+
+    this.signupService.supervisorRegister(this.frm.value).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.status = res;
+        this.frm.reset();
+      },
+      error: (err) => {
+        this.status.statusCode = 0;
+        this.status.message = 'some error on the server side';
+        console.log(err);
+      },
+      complete: () => {
+        this.status.statusCode = 0;
+        this.status.message = '';
+      },
+    });
   }
   ngOnInit(): void {
     const patternRegex = new RegExp(
@@ -67,6 +69,7 @@ export class AddSupervisorComponent {
       email: ['', [Validators.required, validPattern(patternMail)]],
       password: ['', [Validators.required, validPattern(patternRegex)]],
       phone_number: ['', Validators.required],
+      visitor: [this.id],
     });
   }
 }

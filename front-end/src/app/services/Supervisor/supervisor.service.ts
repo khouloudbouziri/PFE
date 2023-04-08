@@ -5,18 +5,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class VisitorService {
+export class SupervisorService {
   private baseUrl = environment.baseUrl;
 
   constructor(private htttp: HttpClient) {}
-
-  getVisitorById(id: any) {
-    return this.htttp.get(this.baseUrl + '/auth/visitor/find/' + id);
-  }
-
-  findSupervisorByIdCompany(id: any) {
-    return this.htttp.get(
-      this.baseUrl + '/auth/supervisor/find/bySupervisor/' + id
-    );
-  }
 }
