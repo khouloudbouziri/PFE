@@ -48,13 +48,6 @@ public class SupervisorController {
         return new ResponseEntity<>(supervisors, HttpStatus.OK);
     }
 
-    // @PostMapping("/add")
-    // public ResponseEntity<Supervisor> addSupervisor(@RequestBody Supervisor
-    // supervisor) {
-    // Supervisor newSupervisor = supervisorService.addSupervisor(supervisor);
-    // return new ResponseEntity<>(newSupervisor, HttpStatus.CREATED);
-    // }
-
     @PutMapping("/update")
     public ResponseEntity<Supervisor> updateSupervisor(@RequestBody Supervisor supervisor) {
         Supervisor updatedSupervisor = supervisorService.updateSupervisor(supervisor);

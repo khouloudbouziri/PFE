@@ -32,6 +32,7 @@ public class Supervisor implements UserDetails {
    private String firstname;
    private String lastname;
    private String phone_number;
+   private String address;
    private String email;
    private String password;
    private String photo_url;

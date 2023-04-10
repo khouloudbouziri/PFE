@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { validPattern } from 'src/app/helpers/patter-match.validor';
 import { Status } from 'src/app/models/status';
 import { CompanySignupServiceService } from 'src/app/services/Authentication/company-signup-service.service';
+import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 
 @Component({
   selector: 'app-add-supervisor',
@@ -14,14 +15,13 @@ export class AddSupervisorComponent {
   company: any;
   id: any;
   data: any;
+  supervisors: any = [];
   constructor(
     private route: ActivatedRoute,
     private signupService: CompanySignupServiceService,
     private fb: FormBuilder
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
-    // console.log(this.id);
-    // console.log(service.getVisitorById(this.id));
   }
 
   frm!: FormGroup;
@@ -33,13 +33,6 @@ export class AddSupervisorComponent {
 
   onPost() {
     this.status = { statusCode: 0, message: 'wait...' };
-
-    // this.id = this.service.getVisitorById(this.id).subscribe((t) => {
-    //   console.log(t);
-    //   this.data = t;
-    //   this.data.authorities = null;
-
-    //   this.frm.get('visitor')?.setValue(this.id);
 
     this.signupService.supervisorRegister(this.frm.value).subscribe({
       next: (res) => {
@@ -66,6 +59,7 @@ export class AddSupervisorComponent {
     this.frm = this.fb.group({
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
+      address: ['', Validators.required],
       email: ['', [Validators.required, validPattern(patternMail)]],
       password: ['', [Validators.required, validPattern(patternRegex)]],
       phone_number: ['', Validators.required],

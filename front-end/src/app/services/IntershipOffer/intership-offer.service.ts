@@ -12,6 +12,10 @@ export class IntershipOfferService {
 
   constructor(private htttp: HttpClient) {}
 
+  addOffer(model: IntershipOffer) {
+    return this.htttp.post<Status>(this.baseUrl + '/auth/intership/add', model);
+  }
+
   getAllIntershipOffers() {
     return this.htttp.get(this.baseUrl + '/auth/intership/all');
   }
@@ -22,7 +26,9 @@ export class IntershipOfferService {
     );
   }
 
-  addOffer(model: IntershipOffer) {
-    return this.htttp.post<Status>(this.baseUrl + '/auth/intership/add', model);
+  getCompanyIntershipOffers(idCompany: any) {
+    return this.htttp.get(
+      this.baseUrl + '/auth/visitor/find/offer/' + idCompany
+    );
   }
 }

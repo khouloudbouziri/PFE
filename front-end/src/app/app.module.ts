@@ -17,7 +17,7 @@ import { CompanySignUpComponent } from './authentication/company-sign-up/company
 import { InternHomeComponent } from './pages/homes/intern-home/intern-home.component';
 import { CompanyHomeComponent } from './pages/homes/company-home/company-home.component';
 import { HomeComponent } from './pages/homes/home/home.component';
-import { AddSupervisorComponent } from './components/add-supervisor/add-supervisor.component';
+import { AddSupervisorComponent } from './supervisor/add-supervisor/add-supervisor.component';
 import { SupervisorPageComponent } from './pages/profiles/supervisor-page/supervisor-page.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
 import {
@@ -34,7 +34,8 @@ import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.componen
 import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
 import { DescriptionComponent } from './intershipOffer/description/description.component';
 import { ApplyComponent } from './intern/apply/apply.component';
-import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
+import { SupervisorCardComponent } from './supervisor/supervisor-card/supervisor-card.component';
+import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor
     OfferDetailsComponent,
     DescriptionComponent,
     ApplyComponent,
-    SupervisorListComponent,
+    SupervisorCardComponent,
+    OfferCardComponent,
     //AgendaComponent,
   ],
   imports: [

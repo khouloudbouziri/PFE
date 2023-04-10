@@ -86,7 +86,7 @@ export class AddOfferComponent {
       required_work: ['', Validators.required],
       technical_environement: ['', Validators.required],
       required_profile: ['', Validators.required],
-      //renumerete: ['', Validators.required],
+      renumerete: ['', Validators.required],
     });
     this.findSupervisorByIdCompany();
   }

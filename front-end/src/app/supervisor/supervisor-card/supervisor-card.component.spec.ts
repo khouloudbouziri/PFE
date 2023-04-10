@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SupervisorListComponent } from './supervisor-list.component';
+import { SupervisorCardComponent } from './supervisor-card.component';
 
-describe('SupervisorListComponent', () => {
-  let component: SupervisorListComponent;
-  let fixture: ComponentFixture<SupervisorListComponent>;
+describe('SupervisorCardComponent', () => {
+  let component: SupervisorCardComponent;
+  let fixture: ComponentFixture<SupervisorCardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SupervisorListComponent ]
+      declarations: [ SupervisorCardComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SupervisorListComponent);
+    fixture = TestBed.createComponent(SupervisorCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
