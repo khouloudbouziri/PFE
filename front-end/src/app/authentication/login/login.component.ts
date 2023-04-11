@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
         this.authService.authenticateUser(res).subscribe({
           next: (data) => {
             if (res.supervisor) {
-              this.router.navigate(['./supervisor-page']);
+              this.router.navigate(['./supervisor-page', res.supervisor.id]);
             } else if (res.visitor) {
               if (res.visitor.company_name) {
                 this.router.navigate(['./company-page', res.visitor.id]);

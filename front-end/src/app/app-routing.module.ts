@@ -39,7 +39,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'supervisor-page',
+    path: 'supervisor-page/:id',
     component: SupervisorPageComponent,
     canActivate: [AuthGuard],
   },

@@ -9,4 +9,8 @@ export class SupervisorService {
   private baseUrl = environment.baseUrl;
 
   constructor(private htttp: HttpClient) {}
+
+  findSupervisorById(id: any) {
+    return this.htttp.get(this.baseUrl + '/auth/supervisor/find/' + id);
+  }
 }

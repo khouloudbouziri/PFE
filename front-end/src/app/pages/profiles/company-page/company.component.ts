@@ -19,8 +19,7 @@ export class CompanyComponent {
   constructor(
     public authService: AuthService,
     private router: Router,
-    private route: ActivatedRoute,
-    private visitorService: VisitorService
+    private route: ActivatedRoute
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }

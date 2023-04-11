@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
 
 @Component({
@@ -7,8 +8,10 @@ import { AuthService } from 'src/app/services/Authentication/auth.service';
   styleUrls: ['./supervisor-page.component.css'],
 })
 export class SupervisorPageComponent {
-  constructor(public authService: AuthService) {}
+  id: any;
+  showContent1 = false;
 
-  firstname: string =
-    this.authService.authenticatedUser?.supervisor.firstname ?? '';
+  constructor(public authService: AuthService, private route: ActivatedRoute) {
+    this.id = this.route.snapshot.paramMap.get('id');
+  }
 }

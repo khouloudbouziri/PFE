@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Supervisor } from 'src/app/models/Supervisor';
 import { Status } from 'src/app/models/status';
+import { AuthService } from 'src/app/services/Authentication/auth.service';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
+import { SupervisorService } from 'src/app/services/Supervisor/supervisor.service';
 import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 
 @Component({
@@ -13,7 +15,9 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 })
 export class AddOfferComponent {
   id: any;
+  user: any;
   supervisors: Supervisor[] = [];
+  isDisabled: boolean = true;
   isChecked: any = false;
   working_from_home = 'false';
 
@@ -21,7 +25,8 @@ export class AddOfferComponent {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private intershipOfferService: IntershipOfferService,
-    private visitorService: VisitorService
+    private visitorService: VisitorService,
+    private supervisorService: SupervisorService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -41,6 +46,14 @@ export class AddOfferComponent {
         console.log(res);
         console.log(this.supervisors);
       });
+  }
+
+  findSupervisorById() {
+    this.supervisorService.findSupervisorById(this.id).subscribe((res: any) => {
+      this.user = res;
+      console.log(this.user.role);
+      console.log(res);
+    });
   }
 
   onCheckboxChange() {
@@ -89,5 +102,6 @@ export class AddOfferComponent {
       renumerete: ['', Validators.required],
     });
     this.findSupervisorByIdCompany();
+    this.findSupervisorById();
   }
 }
