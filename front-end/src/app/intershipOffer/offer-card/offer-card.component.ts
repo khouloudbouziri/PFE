@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
+import { SupervisorService } from 'src/app/services/Supervisor/supervisor.service';
 
 @Component({
   selector: 'app-offer-card',
@@ -26,7 +27,14 @@ export class OfferCardComponent {
       });
   }
 
+  getIntershipOffers() {
+    this.intershipService.getIntershipOffers(this.id).subscribe((res: any) => {
+      this.intershipOffers = res;
+    });
+  }
+
   ngOnInit(): void {
     this.getCompanyIntershipOffers();
+    this.getIntershipOffers();
   }
 }

@@ -2,9 +2,6 @@ package com.example.backend.ServicesImplement;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.example.backend.Services.IntershipOffreService;
 import com.example.backend.entities.IntershipOffre;
 
 public interface IntershipOffreServiceImpl {

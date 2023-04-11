@@ -2,6 +2,7 @@ package com.example.backend.ServicesImplement;
 
 import java.util.List;
 
+import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.Supervisor;
 
 public interface SupervisorServiceInterface {
@@ -11,7 +12,7 @@ public interface SupervisorServiceInterface {
 
     List<Supervisor> findSupervisorByIdCompany(Long visitor);
 
-    // Supervisor addSupervisor(Supervisor supervisor);
+    List<IntershipOffre> getIntershipOffers(Long id);
 
     Supervisor updateSupervisor(Supervisor supervisor);
 

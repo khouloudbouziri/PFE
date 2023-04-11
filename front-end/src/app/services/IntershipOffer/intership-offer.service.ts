@@ -31,4 +31,8 @@ export class IntershipOfferService {
       this.baseUrl + '/auth/visitor/find/offer/' + idCompany
     );
   }
+
+  getIntershipOffers(id: any) {
+    return this.htttp.get(this.baseUrl + '/auth/supervisor/find/offer/' + id);
+  }
 }

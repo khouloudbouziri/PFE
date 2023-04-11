@@ -92,19 +92,24 @@
         <span class="ml-3">Encadrants</span>
       </li>
       <li class="flex items-center mt-10">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
+        <button
+          class="flex"
+          (click)="showContent1 = false; showContent2 = true"
         >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4zm2 8H4v6h16v-6h-5v3H9v-3zm11-6H4v4h5V9h6v2h5V7zm-9 4v3h2v-3h-2zM9 3v2h6V3H9z"
-            fill="rgba(66,74,136,1)"
-          />
-        </svg>
-        <span class="ml-3">Annonces</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path
+              d="M7 5V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v3h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4zm2 8H4v6h16v-6h-5v3H9v-3zm11-6H4v4h5V9h6v2h5V7zm-9 4v3h2v-3h-2zM9 3v2h6V3H9z"
+              fill="rgba(66,74,136,1)"
+            />
+          </svg>
+          <span class="ml-3">Annonces</span>
+        </button>
       </li>
     </div>
   </section>
@@ -121,6 +126,11 @@
     <ng-container *ngIf="showContent1">
       <div class="mt-5">
         <app-add-offer></app-add-offer>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="showContent2">
+      <div class="mt-5">
+        <app-offer-card></app-offer-card>
       </div>
     </ng-container>
   </section>

@@ -13,6 +13,8 @@ public interface SupervisorRepo extends JpaRepository<Supervisor, Long> {
 
     public Optional<Supervisor> findByEmail(String email);
 
+    public Optional<Supervisor> findByFirstname(String firstname);
+
     public Optional<List<Supervisor>> findAllByVisitor(long visitor);
 
 }

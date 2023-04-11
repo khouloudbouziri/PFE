@@ -17,6 +17,7 @@ export class AddOfferComponent {
   id: any;
   user: any;
   supervisors: Supervisor[] = [];
+  isRH: boolean = true;
   isDisabled: boolean = true;
   isChecked: any = false;
   working_from_home = 'false';
@@ -51,6 +52,7 @@ export class AddOfferComponent {
   findSupervisorById() {
     this.supervisorService.findSupervisorById(this.id).subscribe((res: any) => {
       this.user = res;
+      this.isRH = false;
       console.log(this.user.role);
       console.log(res);
     });
@@ -65,9 +67,7 @@ export class AddOfferComponent {
   }
 
   onPost() {
-    console.log('ok2');
     this.status = { statusCode: 0, message: 'wait...' };
-    console.log('ok3');
     this.intershipOfferService.addOffer(this.frm.value).subscribe({
       next: (res) => {
         console.log(res);

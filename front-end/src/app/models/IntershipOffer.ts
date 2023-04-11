@@ -1,6 +1,3 @@
-import { Supervisor } from './Supervisor';
-import { Visitor } from './Visitor';
-
 export interface IntershipOffer {
   id_intership_offre: bigint;
   topic: string;

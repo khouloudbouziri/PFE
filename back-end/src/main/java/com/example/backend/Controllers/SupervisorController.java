@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.ServicesImplement.SupervisorServiceInterface;
+import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.Supervisor;
 
 @RestController
@@ -46,6 +47,12 @@ public class SupervisorController {
     public ResponseEntity<List<Supervisor>> findSupervisorByIdCompany(@PathVariable("id") Long id) {
         List<Supervisor> supervisors = supervisorService.findSupervisorByIdCompany(id);
         return new ResponseEntity<>(supervisors, HttpStatus.OK);
+    }
+
+    @GetMapping("/find/offer/{id}")
+    public ResponseEntity<List<IntershipOffre>> getIntershipOffers(@PathVariable("id") Long id) {
+        List<IntershipOffre> supervisorOffers = supervisorService.getIntershipOffers(id);
+        return new ResponseEntity<>(supervisorOffers, HttpStatus.OK);
     }
 
     @PutMapping("/update")

@@ -44,7 +44,8 @@ public class VisitorService implements VisitorServiceImp {
         allSupervisors.ifPresent(supervisors -> {
             for (IntershipOffre offer : allIntershipOffers) {
                 for (Supervisor supervisor : supervisors) {
-                    if (offer.getSupervisor().equals(supervisor.getFirstname())) {
+                    long l = Long.parseLong(offer.getSupervisor());
+                    if (l == supervisor.getId()) {
                         companyIntershipOffers.add(offer);
                         break;
                     }

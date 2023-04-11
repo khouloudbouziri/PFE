@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/Authentication/auth.service';
 export class SupervisorPageComponent {
   id: any;
   showContent1 = false;
+  showContent2 = false;
 
   constructor(public authService: AuthService, private route: ActivatedRoute) {
     this.id = this.route.snapshot.paramMap.get('id');
