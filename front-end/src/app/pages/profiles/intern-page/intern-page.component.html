@@ -1,1 +1,112 @@
-<p>intern-page works!</p>
+<!-- <button (click)="logout()" class="bg-slate-500">Logout</button> -->
+
+<div class="flex m-10 mt-20">
+  <section
+    class="flex flex-col p-10 w-80 bg-gradient-to-b from-[#FFFFFF] rounded-2xl"
+  >
+    <img
+      class="mx-auto h-20 w-40"
+      src="../../../assets/images/ST2i.png"
+      alt=""
+    />
+    <div class="">
+      <li class="flex items-center mt-10">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+            fill="rgba(66,74,136,1)"
+          ></path>
+        </svg>
+        <span class="ml-3"
+          >{{ (authService.authenticatedUser?.visitor)!.firstname }}
+          {{ (authService.authenticatedUser?.visitor)!.lastname }}</span
+        >
+      </li>
+      <li class="flex items-center mt-10">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M21 19H23V21H1V19H3V4C3 3.44772 3.44772 3 4 3H14C14.5523 3 15 3.44772 15 4V19H19V11H17V9H20C20.5523 9 21 9.44772 21 10V19ZM5 5V19H13V5H5ZM7 11H11V13H7V11ZM7 7H11V9H7V7Z"
+            fill="rgba(66,74,136,1)"
+          ></path>
+        </svg>
+        <span class="ml-3">{{
+          (authService.authenticatedUser?.visitor)!.university
+        }}</span>
+      </li>
+      <li class="flex items-center mt-10">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M14.8287 7.7574L9.1718 13.4143C8.78127 13.8048 8.78127 14.4379 9.1718 14.8285C9.56232 15.219 10.1955 15.219 10.586 14.8285L16.2429 9.17161C17.4144 8.00004 17.4144 6.10055 16.2429 4.92897C15.0713 3.7574 13.1718 3.7574 12.0002 4.92897L6.34337 10.5858C4.39075 12.5384 4.39075 15.7043 6.34337 17.6569C8.29599 19.6095 11.4618 19.6095 13.4144 17.6569L19.0713 12L20.4855 13.4143L14.8287 19.0711C12.095 21.8048 7.66283 21.8048 4.92916 19.0711C2.19549 16.3374 2.19549 11.9053 4.92916 9.17161L10.586 3.51476C12.5386 1.56214 15.7045 1.56214 17.6571 3.51476C19.6097 5.46738 19.6097 8.63321 17.6571 10.5858L12.0002 16.2427C10.8287 17.4143 8.92916 17.4143 7.75759 16.2427C6.58601 15.0711 6.58601 13.1716 7.75759 12L13.4144 6.34319L14.8287 7.7574Z"
+            fill="rgba(66,74,136,1)"
+          ></path>
+        </svg>
+        <span class="ml-3">CV</span>
+      </li>
+    </div>
+    <div class="border mt-20"></div>
+    <div class="mt-12">
+      <ul>
+        <li class="flex items-center mt-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path
+              d="M9 1V3H15V1H17V3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H7V1H9ZM20 11H4V19H20V11ZM8 13V15H6V13H8ZM13 13V15H11V13H13ZM18 13V15H16V13H18ZM7 5H4V9H20V5H17V7H15V5H9V7H7V5Z"
+              fill="rgba(66,74,136,1)"
+            ></path>
+          </svg>
+          <span class="ml-3 pt-1">Agenda</span>
+        </li>
+        <li class="flex items-center mt-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path
+              d="M6.9998 6V3C6.9998 2.44772 7.44752 2 7.9998 2H19.9998C20.5521 2 20.9998 2.44772 20.9998 3V17C20.9998 17.5523 20.5521 18 19.9998 18H16.9998V20.9991C16.9998 21.5519 16.5499 22 15.993 22H4.00666C3.45059 22 3 21.5554 3 20.9991L3.0026 7.00087C3.0027 6.44811 3.45264 6 4.00942 6H6.9998ZM5.00242 8L5.00019 20H14.9998V8H5.00242ZM8.9998 6H16.9998V16H18.9998V4H8.9998V6Z"
+              fill="rgba(66,74,136,1)"
+            ></path>
+          </svg>
+          <span class="ml-3 pt-1">En attente</span>
+        </li>
+        <li class="flex items-center mt-10">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            width="24"
+            height="24"
+          >
+            <path
+              d="M5 2H19C19.5523 2 20 2.44772 20 3V22.1433C20 22.4194 19.7761 22.6434 19.5 22.6434C19.4061 22.6434 19.314 22.6168 19.2344 22.5669L12 18.0313L4.76559 22.5669C4.53163 22.7136 4.22306 22.6429 4.07637 22.4089C4.02647 22.3293 4 22.2373 4 22.1433V3C4 2.44772 4.44772 2 5 2ZM18 4H6V19.4324L12 15.6707L18 19.4324V4Z"
+              fill="rgba(66,74,136,1)"
+            ></path>
+          </svg>
+          <span class="ml-3 pt-1">Offres favoris</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <section
+    class="w-3/4 ml-10 bg-gradient-to-b from-[#FFFFFF] rounded-2xl relative"
+  ></section>
+</div>

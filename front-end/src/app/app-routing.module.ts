@@ -44,7 +44,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'intern-page',
+    path: 'intern-page/:id',
     component: InternPageComponent,
     canActivate: [AuthGuard],
   },

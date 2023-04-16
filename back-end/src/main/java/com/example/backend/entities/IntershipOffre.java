@@ -1,6 +1,7 @@
 package com.example.backend.entities;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,6 +30,9 @@ public class IntershipOffre implements Serializable {
     private Boolean renumerete;
     private String company;
     private String supervisor;
+    private Long candidacy_number;
+    private boolean saved;
+    private Date creation_date;
 
     public IntershipOffre() {
         super();

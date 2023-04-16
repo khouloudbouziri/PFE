@@ -12,4 +12,7 @@ export interface IntershipOffer {
   interns_number: number;
   renumerete: boolean;
   working_from_home: boolean;
+  candidacy_number: bigint;
+  saved: boolean;
+  creation_date: Date;
 }

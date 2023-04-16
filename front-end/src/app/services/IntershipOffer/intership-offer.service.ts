@@ -35,4 +35,8 @@ export class IntershipOfferService {
   getIntershipOffers(id: any) {
     return this.htttp.get(this.baseUrl + '/auth/supervisor/find/offer/' + id);
   }
+
+  deleteIntershipById(id: any) {
+    return this.htttp.delete(this.baseUrl + '/auth/intership/delete' + id);
+  }
 }

@@ -1,6 +1,7 @@
 package com.example.backend.Services;
 
 import java.util.List;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ public class IntershipOffreService implements IntershipOffreServiceImpl {
     }
 
     public IntershipOffre addIntershipOffre(IntershipOffre IntershipOffre) {
+        IntershipOffre.setCreation_date(new Date(System.currentTimeMillis()));
         return intershipOfferRepository.save(IntershipOffre);
     }
 
