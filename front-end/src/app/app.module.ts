@@ -36,6 +36,7 @@ import { DescriptionComponent } from './intershipOffer/description/description.c
 import { ApplyComponent } from './intern/apply/apply.component';
 import { SupervisorCardComponent } from './supervisor/supervisor-card/supervisor-card.component';
 import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.component';
+import { PhotoComponent } from './photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.compo
     ApplyComponent,
     SupervisorCardComponent,
     OfferCardComponent,
+    PhotoComponent,
     //AgendaComponent,
   ],
   imports: [

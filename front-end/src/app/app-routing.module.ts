@@ -16,7 +16,7 @@ import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.componen
 import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
 import { DescriptionComponent } from './intershipOffer/description/description.component';
 import { ApplyComponent } from './intern/apply/apply.component';
-//import { AgendaComponent } from './components/agenda/agenda.component';
+import { PhotoComponent } from './photo/photo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -59,7 +59,7 @@ const routes: Routes = [
 
   { path: 'apply/offer/:id', component: ApplyComponent },
 
-  //{ path: 'agenda', component: AgendaComponent },
+  { path: 'photo', component: PhotoComponent },
 ];
 
 @NgModule({
