@@ -3,9 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Status } from 'src/app/models/status';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { EmailSenderService } from 'src/app/services/Emails/email-sender.service';
+import { IntershipOffer } from 'src/app/models/IntershipOffer';
+import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -15,9 +18,11 @@ import { EmailSenderService } from 'src/app/services/Emails/email-sender.service
 export class HomeComponent {
   frm!: FormGroup;
   status!: Status;
+  offers: IntershipOffer[] = [];
 
   constructor(
     private EmailSender: EmailSenderService,
+    private IntershipOfferService: IntershipOfferService,
     private fb: FormBuilder,
     private snackBar: MatSnackBar
   ) {}

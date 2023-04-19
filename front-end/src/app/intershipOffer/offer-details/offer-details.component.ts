@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IntershipOffer } from '../../models/IntershipOffer';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IntershipOfferService } from '../../services/IntershipOffer/intership-offer.service';
 
@@ -19,15 +19,14 @@ export class OfferDetailsComponent implements OnInit {
     private service: IntershipOfferService
   ) {}
 
-  ngOnInit() {
-    this.getAllIntershipOffers();
-  }
-
   getAllIntershipOffers() {
     this.service.getAllIntershipOffers().subscribe((res: any) => {
       this.offers = res;
-      console.log(res);
     });
+  }
+
+  ngOnInit() {
+    this.getAllIntershipOffers();
   }
 
   candidater(id_intership_offre: bigint) {
