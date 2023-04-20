@@ -37,6 +37,7 @@ export class PhotoComponent {
       this.httpClient.post('http://localhost:3333/api/v1/auth/image/upload/'+ this.idE , uploadImageData, { observe: 'response' })
         .subscribe((response) => {
           if (response.status === 200) {
+            console.log(this.idE);
             this.message = 'Image uploaded successfully';
           } else {
             this.message = 'Image not uploaded successfully';
@@ -44,12 +45,12 @@ export class PhotoComponent {
         }
         );
   
-  
     }
+    
   
       //Gets called when the user clicks on retieve image button to get the image from back end
       getImage() {//Make a call to Sprinf Boot to get the Image Bytes.
-        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/' + this.imageName)
+        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/'+ this.idE )
           .subscribe(
             res => {
               this.retrieveResonse = res;

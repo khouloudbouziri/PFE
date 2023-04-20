@@ -37,6 +37,7 @@ import { ApplyComponent } from './intern/apply/apply.component';
 import { SupervisorCardComponent } from './supervisor/supervisor-card/supervisor-card.component';
 import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.component';
 import { PhotoComponent } from './photo/photo.component';
+import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { PhotoComponent } from './photo/photo.component';
     SupervisorCardComponent,
     OfferCardComponent,
     PhotoComponent,
+    TextSimilarityComponent,
     //AgendaComponent,
   ],
   imports: [
