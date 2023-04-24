@@ -20,6 +20,8 @@ import { HomeComponent } from './pages/homes/home/home.component';
 import { AddSupervisorComponent } from './supervisor/add-supervisor/add-supervisor.component';
 import { SupervisorPageComponent } from './pages/profiles/supervisor-page/supervisor-page.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
+import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import {
   ScheduleModule,
   RecurrenceEditorModule,
@@ -84,5 +86,6 @@ import { TextSimilarityComponent } from './text-similarity/text-similarity.compo
     MonthAgendaService,
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

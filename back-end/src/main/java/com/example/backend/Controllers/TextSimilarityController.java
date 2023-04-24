@@ -1,17 +1,12 @@
 package com.example.backend.Controllers;
 
-import java.util.Optional;
-
 import org.apache.commons.text.similarity.CosineDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.Repositories.VisitorRepository;
-import com.example.backend.Services.VisitorService;
 import com.example.backend.ServicesImplement.VisitorServiceImp;
 import com.example.backend.entities.Visitor;
 
@@ -32,7 +27,7 @@ public class TextSimilarityController {
         System.out.println(text1);
         System.out.println(text2);
         CosineDistance cosineDistance = new CosineDistance();
-        double cosineSimilarity = 1 - cosineDistance.apply(text1, text2);
+        double cosineSimilarity = 1 - cosineDistance.apply(text1.toLowerCase(), text2.toLowerCase());
         System.out.println(cosineSimilarity);
         return cosineSimilarity;
     }

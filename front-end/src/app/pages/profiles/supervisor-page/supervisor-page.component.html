@@ -2,11 +2,7 @@
   <section
     class="flex flex-col p-10 w-80 bg-gradient-to-b from-[#FFFFFF] rounded-2xl"
   >
-    <img
-      class="mx-auto h-20 w-40"
-      src="../../../assets/images/ST2i.png"
-      alt=""
-    />
+  <app-photo></app-photo>
     <div class="">
       <li class="flex items-center mt-10">
         <svg
@@ -132,6 +128,17 @@
       <div class="mt-5">
         <app-offer-card></app-offer-card>
       </div>
+      <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
+        <swiper-slide>Slide 1</swiper-slide>
+        <swiper-slide>Slide 2</swiper-slide>
+        <swiper-slide>Slide 3 </swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        <swiper-slide>Slide 3</swiper-slide>
+        ...
+      </swiper-container>
     </ng-container>
   </section>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
+

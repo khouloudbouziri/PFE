@@ -46,9 +46,8 @@ public class ImageUploadController {
 
 	@GetMapping(path = { "/get/{idE}" })
 	public ImageModel getImage(@PathVariable Long idE) throws IOException {
-        
-		final Optional<ImageModel> retrievedImage = imageRepository.findByidE(idE);
-		ImageModel img = new ImageModel(decompressBytes(retrievedImage.get().getPicByte()));
+		final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(idE);
+		ImageModel img = new ImageModel(retrievedImage.get().getName() , retrievedImage.get().getType() ,decompressBytes(retrievedImage.get().getPicByte()),retrievedImage.get().getIdE());
 		return img;
 	}
     // compress the image bytes before storing it in the database

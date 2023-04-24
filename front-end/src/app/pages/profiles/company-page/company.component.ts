@@ -6,7 +6,7 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.css'],
+  styleUrls: [ './company.component.css'],
 })
 export class CompanyComponent {
   id: any;
