@@ -38,6 +38,7 @@ import { SupervisorCardComponent } from './supervisor/supervisor-card/supervisor
 import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.component';
 import { PhotoComponent } from './photo/photo.component';
 import { SearchBarComponent } from './shared/search-bar/search-bar.component';
+import { ApplicationFormComponent } from './shared/application-form/application-form.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { SearchBarComponent } from './shared/search-bar/search-bar.component';
     OfferCardComponent,
     PhotoComponent,
     SearchBarComponent,
+    ApplicationFormComponent,
     //AgendaComponent,
   ],
   imports: [

@@ -1,8 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
-import { SupervisorService } from 'src/app/services/Supervisor/supervisor.service';
-import { EventEmitter } from 'stream';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-offer-card',
@@ -10,44 +6,9 @@ import { EventEmitter } from 'stream';
   styleUrls: ['./offer-card.component.css'],
 })
 export class OfferCardComponent {
-  id: any;
-  intershipOffers: any = [];
-  user: any;
-  isSupervisor: boolean = false;
+  @Input() public intershipOffers: any;
 
-  constructor(
-    private route: ActivatedRoute,
-    private intershipService: IntershipOfferService,
-    private supervisorService: SupervisorService
-  ) {
-    this.id = this.route.snapshot.paramMap.get('id');
-  }
+  constructor() {}
 
-  findSupervisorById() {
-    this.supervisorService.findSupervisorById(this.id).subscribe((res: any) => {
-      this.user = res;
-      this.isSupervisor = true;
-      console.log(this.user);
-    });
-  }
-
-  getCompanyIntershipOffers() {
-    this.intershipService
-      .getCompanyIntershipOffers(this.id)
-      .subscribe((res: any) => {
-        this.intershipOffers = res;
-      });
-  }
-
-  getIntershipOffers() {
-    this.intershipService.getIntershipOffers(this.id).subscribe((res: any) => {
-      this.intershipOffers = res;
-    });
-  }
-
-  ngOnInit(): void {
-    this.findSupervisorById();
-    this.getCompanyIntershipOffers();
-    this.getIntershipOffers();
-  }
+  ngOnInit(): void {}
 }

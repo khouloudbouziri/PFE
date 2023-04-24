@@ -10,33 +10,33 @@ import { Status } from '../../models/status';
 export class IntershipOfferService {
   private baseUrl = environment.baseUrl;
 
-  constructor(private htttp: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   addOffer(model: IntershipOffer) {
-    return this.htttp.post<Status>(this.baseUrl + '/auth/intership/add', model);
+    return this.http.post<Status>(this.baseUrl + '/auth/intership/add', model);
   }
 
   getAllIntershipOffers() {
-    return this.htttp.get(this.baseUrl + '/auth/intership/all');
+    return this.http.get(this.baseUrl + '/auth/intership/all');
   }
 
   getIntershipOfferById(id_intership_offre: any) {
-    return this.htttp.get(
+    return this.http.get(
       this.baseUrl + '/auth/intership/find/' + id_intership_offre
     );
   }
 
   getCompanyIntershipOffers(idCompany: any) {
-    return this.htttp.get(
+    return this.http.get(
       this.baseUrl + '/auth/visitor/find/offer/' + idCompany
     );
   }
 
   getIntershipOffers(id: any) {
-    return this.htttp.get(this.baseUrl + '/auth/supervisor/find/offer/' + id);
+    return this.http.get(this.baseUrl + '/auth/supervisor/find/offer/' + id);
   }
 
   deleteIntershipById(id: any) {
-    return this.htttp.delete(this.baseUrl + '/auth/intership/delete' + id);
+    return this.http.delete(this.baseUrl + '/auth/intership/delete' + id);
   }
 }

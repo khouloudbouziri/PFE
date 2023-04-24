@@ -77,24 +77,13 @@
         <span class="ml-3">Agenda</span>
       </li>
       <li class="flex items-center mt-10">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="24"
-          height="24"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            d="M4 22a8 8 0 1 1 16 0H4zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6z"
-            fill="rgba(66,74,136,1)"
-          />
-        </svg>
-        <span class="ml-3">Encadrants</span>
-      </li>
-      <li class="flex items-center mt-10">
         <button
           class="flex"
-          (click)="showContent1 = false; showContent2 = true"
+          (click)="
+            showContent1 = false;
+            showContent2 = true;
+            getSupervisorIntershipOffers()
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -130,7 +119,7 @@
     </ng-container>
     <ng-container *ngIf="showContent2">
       <div class="mt-5">
-        <app-offer-card></app-offer-card>
+        <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
       </div>
     </ng-container>
   </section>

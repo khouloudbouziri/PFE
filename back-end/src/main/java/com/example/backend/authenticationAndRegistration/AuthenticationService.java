@@ -1,12 +1,10 @@
 package com.example.backend.authenticationAndRegistration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.backend.Repositories.SupervisorRepo;
 import com.example.backend.Repositories.VisitorRepository;
@@ -18,7 +16,6 @@ import com.example.backend.entities.Visitor;
 
 import java.lang.RuntimeException;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import lombok.RequiredArgsConstructor;
 

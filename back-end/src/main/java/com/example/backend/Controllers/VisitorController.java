@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend.Services.VisitorService;
 import com.example.backend.ServicesImplement.VisitorServiceImp;
 import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.Visitor;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
-import { VisitorService } from 'src/app/services/Visitor/visitor.service';
+import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
 
 @Component({
   selector: 'app-company',
@@ -15,9 +15,11 @@ export class CompanyComponent {
   showContent2 = false;
   showContent3 = false;
   supervisors: any = [];
+  public intershipOffers: any = [];
 
   constructor(
     public authService: AuthService,
+    public intershipService: IntershipOfferService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -28,7 +30,14 @@ export class CompanyComponent {
     this.showContent0;
   }
 
-  ngOnInit(): void {}
+  getCompanyIntershipOffers() {
+    this.intershipService
+      .getCompanyIntershipOffers(this.id)
+      .subscribe((res: any) => {
+        this.intershipOffers = res;
+        console.log(this.intershipOffers);
+      });
+  }
 
   logout() {
     this.authService.logout().subscribe({
@@ -37,4 +46,6 @@ export class CompanyComponent {
       },
     });
   }
+
+  ngOnInit(): void {}
 }

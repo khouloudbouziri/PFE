@@ -11,8 +11,7 @@ import { IntershipOfferService } from '../../services/IntershipOffer/intership-o
   styleUrls: ['./offer-details.component.css'],
 })
 export class OfferDetailsComponent implements OnInit {
-  offers: IntershipOffer[] = [];
-
+  public intershipOffers: any = [];
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -21,11 +20,17 @@ export class OfferDetailsComponent implements OnInit {
 
   getAllIntershipOffers() {
     this.service.getAllIntershipOffers().subscribe((res: any) => {
-      this.offers = res;
+      this.intershipOffers = res;
     });
   }
 
+  test() {
+    const token = localStorage.getItem('token');
+    console.log(token);
+  }
+
   ngOnInit() {
+    this.test();
     this.getAllIntershipOffers();
   }
 

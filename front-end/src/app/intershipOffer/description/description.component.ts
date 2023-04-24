@@ -10,6 +10,7 @@ import { IntershipOfferService } from '../../services/IntershipOffer/intership-o
 export class DescriptionComponent {
   offer: any = {};
   id_intership_offre: any;
+  user: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -21,6 +22,20 @@ export class DescriptionComponent {
 
   ngOnInit() {
     this.getIntershipOfferById();
+    this.getAuthenticatedUser();
+  }
+
+  getAuthenticatedUser() {
+    if (localStorage.getItem('token')) {
+      this.user = true;
+    }
+    if (localStorage.getItem('visitor')) {
+      const visitor = localStorage.getItem('visitor');
+      if (visitor) {
+        const visitorData = JSON.parse(visitor);
+        console.log(visitorData.visitor.id);
+      }
+    }
   }
 
   getIntershipOfferById() {

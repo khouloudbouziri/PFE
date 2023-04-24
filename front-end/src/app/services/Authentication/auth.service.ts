@@ -17,11 +17,11 @@ export class AuthService {
     localStorage.setItem(
       'visitor',
       JSON.stringify({
-        token: authvisitor.token,
         visitor: authvisitor.visitor,
         supervisor: authvisitor.supervisor,
       })
     );
+    localStorage.setItem('token', JSON.stringify({ token: authvisitor.token }));
     return of(true);
   }
 
@@ -32,6 +32,7 @@ export class AuthService {
   public logout(): Observable<boolean> {
     this.authenticatedUser = undefined;
     localStorage.removeItem('visitor');
+    localStorage.removeItem('token');
     return of(true);
   }
 }

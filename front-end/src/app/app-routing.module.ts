@@ -17,6 +17,7 @@ import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-deta
 import { DescriptionComponent } from './intershipOffer/description/description.component';
 import { ApplyComponent } from './intern/apply/apply.component';
 import { PhotoComponent } from './photo/photo.component';
+import { ApplicationFormComponent } from './shared/application-form/application-form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -56,6 +57,7 @@ const routes: Routes = [
     component: OfferDetailsComponent,
   },
   { path: 'offre/:id', component: DescriptionComponent },
+  { path: 'spontaneousCandidacy', component: ApplicationFormComponent },
 
   { path: 'apply/offer/:id', component: ApplyComponent },
 

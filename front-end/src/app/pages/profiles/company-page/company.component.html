@@ -190,7 +190,8 @@
               showContent2 = false;
               showContent0 = false;
               showContent1 = false;
-              showContent3 = true
+              showContent3 = true;
+              getCompanyIntershipOffers()
             "
             class="flex text-[#424A88]"
             [class.text-red-500]="showContent3"
@@ -273,8 +274,9 @@
         >
           Nos offres
         </h1>
-        <app-offer-card></app-offer-card>
+        <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
       </div>
     </ng-container>
   </section>
 </div>
+<app-photo></app-photo>

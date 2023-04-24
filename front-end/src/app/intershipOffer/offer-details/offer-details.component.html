@@ -1,56 +1,7 @@
-<app-search-bar (search)="offers = $event"></app-search-bar>
+<app-search-bar (search)="intershipOffers = $event"></app-search-bar>
 <div class="px-24 mt-32">
   <h1 class="text-4xl font-extrabold text-[#424A88]">
     Offres pour "développement web"
   </h1>
-  <div class="flex flex-wrap lg:justify-between md:justify-around gap-8 pt-8">
-    <div *ngFor="let offer of offers">
-      <div
-        class="w-96 shrink-0 px-8 py-3 rounded-2xl flex flex-col bg-gradient-to-b from-[#FFFFFF]"
-      >
-        <div class="flex items-center justify-between">
-          <img src="../../../assets/images/logo.png" alt="" class="h-20" />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-          >
-            <path fill="none" d="M0 0h24v24H0z" />
-            <path
-              d="M5 2h14a1 1 0 0 1 1 1v19.143a.5.5 0 0 1-.766.424L12 18.03l-7.234 4.536A.5.5 0 0 1 4 22.143V3a1 1 0 0 1 1-1zm13 2H6v15.432l6-3.761 6 3.761V4z"
-              fill="rgba(229,48,45,1)"
-            />
-          </svg>
-        </div>
-        <h3 class="text-sm mt-6 text-slate-500">{{ offer.company }}</h3>
-        <p class="font-semibold flex-1">
-          <span class="text-[#E5302D]">{{ offer.company }}</span
-          ><br />{{ offer.topic }}
-        </p>
-        <div class="flex items-end mt-6">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            width="24"
-            height="24"
-            class="mr-3"
-          >
-            <path fill="none" d="M0 0h24v24H0z" />
-            <path
-              d="M12 20.9l4.95-4.95a7 7 0 1 0-9.9 0L12 20.9zm0 2.828l-6.364-6.364a9 9 0 1 1 12.728 0L12 23.728zM12 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 2a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"
-              fill="rgba(66,74,136,1)"
-            />
-          </svg>
-          <span class="text-[#424A88]">{{ offer.address }}</span>
-        </div>
-        <button
-          class="bg-[#E5302D] text-white rounded-full py-1 text-sm block mt-6 ml-48 w-32 h-10"
-          routerLink="/offre/{{ offer.id_intership_offre }}"
-        >
-          Détails
-        </button>
-      </div>
-    </div>
-  </div>
+  <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
 </div>

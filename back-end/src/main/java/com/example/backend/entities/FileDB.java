@@ -1,7 +1,5 @@
 package com.example.backend.entities;
 
-import java.util.Date;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,11 +15,10 @@ public class FileDB {
     private String id;
     private String name;
     private String type;
-    
-    
+
     @Lob
     private byte[] data;
-    
+
     public FileDB() {
     }
 
@@ -29,7 +26,7 @@ public class FileDB {
         this.name = name;
         this.type = type;
         this.data = data;
-      }
+    }
 
     public String getId() {
         return null;

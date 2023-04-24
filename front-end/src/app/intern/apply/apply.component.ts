@@ -8,19 +8,15 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
   styleUrls: ['./apply.component.css'],
 })
 export class ApplyComponent {
-  offer: any = {};
+  public offer: any = {};
   id_intership_offre: any;
+  public user: any = {};
 
   constructor(
     private route: ActivatedRoute,
     private service: IntershipOfferService
   ) {
     this.id_intership_offre = this.route.snapshot.paramMap.get('id');
-    console.log(this.id_intership_offre);
-  }
-
-  ngOnInit() {
-    this.getIntershipOfferById();
   }
 
   getIntershipOfferById() {
@@ -29,5 +25,20 @@ export class ApplyComponent {
       .subscribe((res) => {
         this.offer = res;
       });
+  }
+
+  getAuthenticatedUser() {
+    if (localStorage.getItem('visitor')) {
+      const visitor = localStorage.getItem('visitor');
+      if (visitor) {
+        const visitorData = JSON.parse(visitor);
+        this.user = visitorData.visitor.id;
+      }
+    }
+  }
+
+  ngOnInit(): void {
+    this.getAuthenticatedUser();
+    this.getIntershipOfferById();
   }
 }
