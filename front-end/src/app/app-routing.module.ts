@@ -18,6 +18,9 @@ import { DescriptionComponent } from './intershipOffer/description/description.c
 import { ApplyComponent } from './intern/apply/apply.component';
 import { PhotoComponent } from './photo/photo.component';
 import { ApplicationFormComponent } from './shared/application-form/application-form.component';
+import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -62,6 +65,7 @@ const routes: Routes = [
   { path: 'apply/offer/:id', component: ApplyComponent },
 
   { path: 'photo', component: PhotoComponent },
+  {path :'ml',component:TextSimilarityComponent}
 ];
 
 @NgModule({

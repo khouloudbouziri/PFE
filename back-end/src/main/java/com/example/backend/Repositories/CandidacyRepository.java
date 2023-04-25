@@ -10,6 +10,8 @@ import com.example.backend.entities.Candidacy;
 @Repository
 public interface CandidacyRepository extends JpaRepository<Candidacy, Long> {
 
+    List<Candidacy> findByIdIntershipOffer(Long idIntershipOffer);
+
     List<Candidacy> findAllByIdIntern(Long idIntern);
 
 }

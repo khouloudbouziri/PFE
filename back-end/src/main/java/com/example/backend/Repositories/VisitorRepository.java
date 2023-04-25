@@ -11,7 +11,7 @@ import com.example.backend.entities.Visitor;
 public interface VisitorRepository extends JpaRepository<Visitor, Long> {
 
   public  Optional<Visitor> findByEmail(String email);
-
+  //public Optional<Visitor> findByCompany_name(String company_name);
 
 
 }

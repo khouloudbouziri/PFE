@@ -1,0 +1,14 @@
+<!--<div>
+    <label for="text1">Text 1:</label>
+    <input type="text" [(ngModel)]="text1" name="text1">
+  </div>
+  <div>
+    <label for="text2">Text 2:</label>
+    <input type="text" [(ngModel)]="text2" name="text2">
+  </div>-->
+  <button (click)="calculateSimilarity()">Calculate Similarity</button>
+  
+  <h2> is {{ similarity }}</h2>
+
+  <app-text-similarity *ngIf="similarity"></app-text-similarity>
+  

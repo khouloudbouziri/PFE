@@ -18,8 +18,8 @@ public class Candidacy implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id_candidacy;
-    private Long id_intershipOffer;
+    private Long idCandidacy;
+    private Long idIntershipOffer;
     private Long idIntern;
     private String firstname;
     private String lastname;
@@ -35,4 +35,6 @@ public class Candidacy implements Serializable {
     private boolean did_intership;
     private byte[] resume;
     private String linkedIn_url;
+    private double score;
+    
 }

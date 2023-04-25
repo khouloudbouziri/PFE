@@ -33,7 +33,7 @@ public class CandidacyService implements CandidacyServiceImpl {
     }
 
     public Candidacy addCandidacy(Candidacy candidacy, Long id_intershipOffer, Long id_intern) {
-        candidacy.setId_intershipOffer(id_intershipOffer);
+        candidacy.setIdIntershipOffer(id_intershipOffer);
         candidacy.setIdIntern(id_intern);
         return candidacyRepository.save(candidacy);
     }
@@ -50,21 +50,21 @@ public class CandidacyService implements CandidacyServiceImpl {
         intern.ifPresent(i -> {
             for (Candidacy candidacy : allCandidacies) {
                 Optional<IntershipOffre> allIntershipOffers = intershipOfferRepository
-                        .findById(candidacy.getId_intershipOffer());
+                        .findById(candidacy.getIdIntershipOffer());
                 allIntershipOffers.ifPresent(internCandidacies::add);
             }
         });
         return internCandidacies;
     }
 
-    public List<Visitor> getInterns(Long id_intershipOffer) {
+    public List<Visitor> getInterns(Long idIntershipOffer) {
         List<Candidacy> allCandidacies = candidacyRepository.findAll();
         List<Visitor> allInterns = visitorRepository.findAll();
-        Optional<IntershipOffre> offer = intershipOfferRepository.findById(id_intershipOffer);
+        Optional<IntershipOffre> offer = intershipOfferRepository.findById(idIntershipOffer);
         List<Visitor> interns = new ArrayList<>();
         offer.ifPresent(o -> {
             for (Candidacy candidacy : allCandidacies) {
-                if (candidacy.getId_intershipOffer() == o.getId_intership_offre()) {
+                if (candidacy.getIdIntershipOffer() == o.getId_intership_offre()) {
                     for (Visitor intern : allInterns) {
                         if (candidacy.getIdIntern() == intern.getId()) {
                             interns.add(intern);
@@ -75,6 +75,20 @@ public class CandidacyService implements CandidacyServiceImpl {
 
         });
         return interns;
+    }
+
+    
+    public List<Candidacy> getCByIntershipOfferId( Long id) {
+      List<Candidacy> Cs= candidacyRepository.findByIdIntershipOffer(id);
+      
+      return Cs;
+    }
+
+   
+    public Optional<Candidacy> getCandidacyById(Long idC) {
+       Optional<Candidacy> c=candidacyRepository.findById(idC);
+      
+       return c ;
     }
 
 }

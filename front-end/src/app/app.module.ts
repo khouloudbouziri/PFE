@@ -20,6 +20,8 @@ import { HomeComponent } from './pages/homes/home/home.component';
 import { AddSupervisorComponent } from './supervisor/add-supervisor/add-supervisor.component';
 import { SupervisorPageComponent } from './pages/profiles/supervisor-page/supervisor-page.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
+import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
 import {
   ScheduleModule,
   RecurrenceEditorModule,
@@ -39,6 +41,7 @@ import { OfferCardComponent } from './intershipOffer/offer-card/offer-card.compo
 import { PhotoComponent } from './photo/photo.component';
 import { SearchBarComponent } from './shared/search-bar/search-bar.component';
 import { ApplicationFormComponent } from './shared/application-form/application-form.component';
+import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,7 @@ import { ApplicationFormComponent } from './shared/application-form/application-
     PhotoComponent,
     SearchBarComponent,
     ApplicationFormComponent,
+    TextSimilarityComponent,
     //AgendaComponent,
   ],
   imports: [
@@ -86,5 +90,6 @@ import { ApplicationFormComponent } from './shared/application-form/application-
     MonthAgendaService,
   ],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

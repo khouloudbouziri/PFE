@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Status } from 'src/app/models/status';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
+import { TextSimilarityServiceService } from 'src/app/services/text-similarity-service.service';
 
 @Component({
   selector: 'app-application-form',
@@ -12,9 +13,12 @@ export class ApplicationFormComponent {
   @Input() public offer: any;
   @Input() public user: any;
   id: any;
+  iC:any;
   constructor(
     private fb: FormBuilder,
-    private candidacyService: CandidacyService
+    private candidacyService: CandidacyService,
+    private textSimilarityService: TextSimilarityServiceService
+
   ) {}
 
   frm!: FormGroup;
@@ -37,6 +41,9 @@ export class ApplicationFormComponent {
         .addCandidacy(this.frm.value, this.offer.id_intership_offre, this.user)
         .subscribe({
           next: (res) => {
+            if( res.statusCode===200){
+             this.iC= this.textSimilarityService.getCosineSimilarity(this.offer.id_intership_offre, res.id_candidacy);
+            }
             this.status = res;
             this.frm.reset();
           },

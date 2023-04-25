@@ -31,22 +31,21 @@ public class ImageUploadController {
 	@Autowired
 	VisitorRepository visitorRepository;
 
-	@PostMapping("/upload/{idE}")
-	public ResponseEntity<ImageModel> uplaodImage(@RequestParam("imageFile") MultipartFile file, @PathVariable Long idE)
-			throws IOException {
-
+	@PostMapping("/upload")
+	public ResponseEntity<ImageModel> uplaodImage(@RequestParam("imageFile") MultipartFile file ,Long id) throws IOException {
+      
 		System.out.println("Original Image Byte Size - " + file.getBytes().length);
 		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
-				compressBytes(file.getBytes()), idE);
+				compressBytes(file.getBytes()), id );
+
 		imageRepository.save(img);
 		return ResponseEntity.ok(img);
 	}
 
 	@GetMapping(path = { "/get/{idE}" })
 	public ImageModel getImage(@PathVariable Long idE) throws IOException {
-
-		final Optional<ImageModel> retrievedImage = imageRepository.findByidE(idE);
-		ImageModel img = new ImageModel(decompressBytes(retrievedImage.get().getPicByte()));
+		final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(idE);
+		ImageModel img = new ImageModel(retrievedImage.get().getName() , retrievedImage.get().getType() ,decompressBytes(retrievedImage.get().getPicByte()),retrievedImage.get().getIdE());
 		return img;
 	}
 

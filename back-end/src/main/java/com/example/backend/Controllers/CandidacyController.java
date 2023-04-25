@@ -1,6 +1,7 @@
 package com.example.backend.Controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +52,11 @@ public class CandidacyController {
     @GetMapping("/offer/{id_intershipOffer}")
     public ResponseEntity<List<Visitor>> getInterns(@PathVariable("id_intershipOffer") Long id_intershipOffer) {
         return ResponseEntity.ok(candidacyServiceImpl.getInterns(id_intershipOffer));
+    }
+
+    @GetMapping("/offer/get")
+    public ResponseEntity<Optional<Candidacy>> getById(Long id_candidacy) {
+        return ResponseEntity.ok(candidacyServiceImpl.getCandidacyById(id_candidacy));
     }
 
 }

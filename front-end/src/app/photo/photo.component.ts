@@ -17,14 +17,24 @@ export class PhotoComponent {
   retrieveResonse: any;
   message!: string;
   imageName: any;
-  idE:any;
+  imageUrl!: string;
+  idE: any;
+  showContent = true;
+
+  toggleContent() {
+    this.showContent = !this.showContent;
+  }
+
   //Gets called when the user selects an image
   public onFileChanged(event:any) {
      //Select File
      this.selectedFile = event.target.files[0];
+     this.imageUrl = URL.createObjectURL(this.selectedFile);
+     this.onUpload();
+     this.getImage();
     }
-  
-  
+    
+    
     //Gets called when the user clicks on submit to upload the image
     onUpload() {
       console.log(this.selectedFile);
@@ -32,11 +42,12 @@ export class PhotoComponent {
       //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
       const uploadImageData = new FormData();
       uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
-      
+      uploadImageData.append('id', this.idE);
       //Make a call to the Spring Boot Application to save the image
-      this.httpClient.post('http://localhost:3333/api/v1/auth/image/upload/'+ this.idE , uploadImageData, { observe: 'response' })
+      this.httpClient.post('http://localhost:3333/api/v1/auth/image/upload' , uploadImageData, { observe: 'response' })
         .subscribe((response) => {
           if (response.status === 200) {
+            console.log(this.idE);
             this.message = 'Image uploaded successfully';
           } else {
             this.message = 'Image not uploaded successfully';
@@ -44,12 +55,12 @@ export class PhotoComponent {
         }
         );
   
-  
     }
+    
   
       //Gets called when the user clicks on retieve image button to get the image from back end
       getImage() {//Make a call to Sprinf Boot to get the Image Bytes.
-        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/' + this.imageName)
+        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/'+ this.idE )
           .subscribe(
             res => {
               this.retrieveResonse = res;
@@ -58,4 +69,10 @@ export class PhotoComponent {
             }
           );
       }
+
+      ngOnInit() {
+       // const inputElement: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
+       // inputElement.addEventListener('change', this.onFileChanged.bind(this));
+      }
+      
 }

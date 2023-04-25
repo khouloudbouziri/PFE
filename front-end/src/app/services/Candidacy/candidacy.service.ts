@@ -34,4 +34,9 @@ export class CandidacyService {
       model
     );
   }
+  getById(id :number){
+    return this.http.get(
+      this.baseUrl + '/auth/candidacy/offer/get' 
+    );
+  }
 }
