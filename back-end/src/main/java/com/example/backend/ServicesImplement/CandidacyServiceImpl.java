@@ -19,4 +19,6 @@ public interface CandidacyServiceImpl {
     public Candidacy spontaneousCandidacy(Candidacy candidacy);
 
     public Optional<Candidacy> getCandidacyById(Long idC);
+
+    public void save(Candidacy c);
 }

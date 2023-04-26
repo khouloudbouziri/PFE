@@ -6,10 +6,12 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 @Component({
   selector: 'app-supervisor-card',
   templateUrl: './supervisor-card.component.html',
-  styleUrls: ['./supervisor-card.component.css'],
+  styleUrls: [ './supervisor-card.component.css'],
 })
 export class SupervisorCardComponent {
   id: any;
+  public ids:any;
+  public idc: any = [];
   supervisors: any = [];
   constructor(
     private route: ActivatedRoute,
@@ -24,8 +26,10 @@ export class SupervisorCardComponent {
       .findSupervisorByIdCompany(this.id)
       .subscribe((res: any) => {
         this.supervisors = res;
-        console.log(res);
-        console.log(this.supervisors);
+        for (let i = 0; i < res.length; i++) {
+          this.idc.push(res[i].id);
+          this.ids=res[i].id;
+        }
       });
   }
 
@@ -38,10 +42,6 @@ export class SupervisorCardComponent {
     );
   }
   ngOnInit(): void {
-    this.visitorService
-      .findSupervisorByIdCompany(this.id)
-      .subscribe((supervisors) => {
-        this.supervisors = supervisors;
-      });
+    this.findSupervisorByIdCompany();
   }
 }

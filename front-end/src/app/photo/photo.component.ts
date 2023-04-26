@@ -1,6 +1,7 @@
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-photo',
@@ -8,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent {
+  @Input() public ids :any;
   constructor(private httpClient: HttpClient,private route: ActivatedRoute
     ) { this.idE = this.route.snapshot.paramMap.get('id');}
 
@@ -66,13 +68,32 @@ export class PhotoComponent {
               this.retrieveResonse = res;
               this.base64Data = this.retrieveResonse.picByte;
               this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+              if(this.retrievedImage!=null){
+                this.toggleContent() ;
+              }
             }
           );
       }
-
-      ngOnInit() {
-       // const inputElement: HTMLInputElement = document.getElementById('fileInput') as HTMLInputElement;
-       // inputElement.addEventListener('change', this.onFileChanged.bind(this));
+       //Gets called when the user clicks on retieve image button to get the image from back end
+       getImageCart() {//Make a call to Sprinf Boot to get the Image Bytes.
+        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/'+ this.ids )
+          .subscribe(
+            res => {
+              this.retrieveResonse = res;
+              this.base64Data = this.retrieveResonse.picByte;
+              this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+              if(this.retrievedImage!=null){
+                this.showContent = false;
+                console.log("hhhhhhhhhh");
+              }
+            }
+          );
       }
+     
+     
+      ngOnInit() {
+        this.getImage(); 
+        this.getImageCart(); 
+       }
       
 }

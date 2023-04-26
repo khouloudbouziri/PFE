@@ -13,7 +13,6 @@ export class ApplicationFormComponent {
   @Input() public offer: any;
   @Input() public user: any;
   id: any;
-  iC:any;
   constructor(
     private fb: FormBuilder,
     private candidacyService: CandidacyService,
@@ -23,7 +22,7 @@ export class ApplicationFormComponent {
 
   frm!: FormGroup;
   status!: Status;
-
+  ham!:any;
   getAuthenticatedUser() {
     if (localStorage.getItem('visitor')) {
       const visitor = localStorage.getItem('visitor');
@@ -33,7 +32,7 @@ export class ApplicationFormComponent {
       }
     }
   }
-
+ 
   onPost() {
     this.status = { statusCode: 0, message: 'wait...' };
     if (this.offer) {
@@ -41,10 +40,22 @@ export class ApplicationFormComponent {
         .addCandidacy(this.frm.value, this.offer.id_intership_offre, this.user)
         .subscribe({
           next: (res) => {
-            if( res.statusCode===200){
-             this.iC= this.textSimilarityService.getCosineSimilarity(this.offer.id_intership_offre, res.id_candidacy);
-            }
             this.status = res;
+            console.log("res ba3d il add");
+            console.log(res)
+            this.candidacyService.getById(res.idCandidacy).subscribe(candidacy => {
+              console.log("l get mil base")
+              console.log(candidacy)
+              //console.log(res.idCandidacy);
+                //this.ham=res.idCandidacy;
+              this.textSimilarityService.cosineSimilarity(this.offer.id_intership_offre ,  res.idCandidacy).subscribe(score =>{
+                console.log("score");
+              });
+              
+              
+            });
+             //this.iC= this.textSimilarityService.getCosineSimilarity(this.offer.id_intership_offre, res.id_candidacy);
+             //console.log(this.iC);
             this.frm.reset();
           },
           error: (err) => {
@@ -78,7 +89,6 @@ export class ApplicationFormComponent {
   }
 
   ngOnInit() {
-    this.getAuthenticatedUser();
     if (this.offer) {
       this.frm = this.fb.group({
         firstname: ['', Validators.required],

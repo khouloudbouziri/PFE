@@ -55,7 +55,7 @@ public class CandidacyController {
     }
 
     @GetMapping("/offer/get")
-    public ResponseEntity<Optional<Candidacy>> getById(Long id_candidacy) {
+    public ResponseEntity<Optional<Candidacy>> getById(@RequestParam Long id_candidacy) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidacyById(id_candidacy));
     }
 

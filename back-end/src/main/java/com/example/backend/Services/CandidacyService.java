@@ -91,4 +91,8 @@ public class CandidacyService implements CandidacyServiceImpl {
        return c ;
     }
 
+    public void save(Candidacy c) {
+        candidacyRepository.save(c);
+    }
+
 }

@@ -1,21 +1,25 @@
 package com.example.backend.Controllers;
 
 
+import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.text.similarity.CosineDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.Repositories.CandidacyRepository;
 import com.example.backend.ServicesImplement.CandidacyServiceImpl;
 import com.example.backend.ServicesImplement.IntershipOffreServiceImpl;
 import com.example.backend.ServicesImplement.VisitorServiceImp;
 import com.example.backend.entities.Candidacy;
 import com.example.backend.entities.IntershipOffre;
-import com.example.backend.entities.Visitor;
+
+import jakarta.transaction.Transactional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -25,18 +29,20 @@ public class TextSimilarityController {
     private CandidacyServiceImpl csi;
     @Autowired
     private IntershipOffreServiceImpl iosi;
-    @Autowired
-    private VisitorServiceImp vsi;
     
+     
+     @Transactional
      @PostMapping("/similarity/cosine")
-    public void cosineSimilarity(Long id ,Long idC) {
-        IntershipOffre iO = iosi.getIntershipOfferById(id);
-        Optional<Candidacy> C = csi.getCandidacyById(idC);
+    public double cosineSimilarity(@RequestBody Map<String, Object> payload) {
+        Long idIntershipOffer = Long.parseLong(payload.get("idIntershipOffer").toString());
+        Long idCandidacy = Long.parseLong(payload.get("idCandidacy").toString());
+        System.out.println(idIntershipOffer);
+        System.out.println(idCandidacy);
+        IntershipOffre iO = iosi.getIntershipOfferById(idIntershipOffer);
+        Optional<Candidacy> C = csi.getCandidacyById(idCandidacy);
         String text1 = iO.getRequired_profile();
         String text3 = iO.getTechnical_environement();
         String text2 = iO.getCompany();
-       // Optional<Visitor> v =vsi.getCompanyDeptByCompanyName(text2);
-       // String dep = v.get().getCompanyDepartement();
         String text7 = C.get().getSkills();
         String text6 = C.get().getLevel();
         String text5 = C.get().getUniversity_department();
@@ -46,15 +52,19 @@ public class TextSimilarityController {
         double cosineSimilarity3 = 1 - cosineDistance.apply(text2.toLowerCase(), text5.toLowerCase());
         double cosineSimilarity = (cosineSimilarity1 + cosineSimilarity2 +cosineSimilarity3)/3;
         if (C.get().getMention()=="Très bien"){
-            cosineSimilarity+=0.1;
+            cosineSimilarity+= 0.01;
         }
         else if(C.get().getMention()=="Bien"){
-            cosineSimilarity+=0.05;
+            cosineSimilarity+=0.005;
         }
         else if(C.get().isDid_intership()==true){
-            cosineSimilarity+=0.075;
+            cosineSimilarity+=0.0075;
         }
-        C.get().setScore(cosineSimilarity);
+        System.out.println(cosineSimilarity);
+        Candidacy candidacy = C.get();
+        candidacy.setScore(cosineSimilarity);
+        csi.save(candidacy);
+        return cosineSimilarity;
     }
     
     }

@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.backend.Repositories.ImageRepository;
 import com.example.backend.Repositories.VisitorRepository;
 import com.example.backend.entities.ImageModel;
+import com.example.backend.entities.Visitor;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -39,6 +40,7 @@ public class ImageUploadController {
 				compressBytes(file.getBytes()), id );
 
 		imageRepository.save(img);
+
 		return ResponseEntity.ok(img);
 	}
 

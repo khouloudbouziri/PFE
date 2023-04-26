@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  ,Renderer2} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
@@ -22,10 +22,16 @@ export class CompanyComponent {
     public intershipService: IntershipOfferService,
     private router: Router,
     private route: ActivatedRoute
+    ,private renderer: Renderer2
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
-
+  ngAfterContentInit() {
+    this.renderer.listen(window, 'load', () => {
+       
+      console.log("La page est chargée");
+    });
+  }
   onClick() {
     this.showContent0;
   }
