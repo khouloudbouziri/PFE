@@ -43,6 +43,8 @@ import { SearchBarComponent } from './shared/search-bar/search-bar.component';
 import { ApplicationFormComponent } from './shared/application-form/application-form.component';
 import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
 
+import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +69,8 @@ import { TextSimilarityComponent } from './text-similarity/text-similarity.compo
     SearchBarComponent,
     ApplicationFormComponent,
     TextSimilarityComponent,
+    
+    LoginSupervisorComponent,
     //AgendaComponent,
   ],
   imports: [

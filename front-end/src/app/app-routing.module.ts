@@ -19,6 +19,7 @@ import { ApplyComponent } from './intern/apply/apply.component';
 import { PhotoComponent } from './photo/photo.component';
 import { ApplicationFormComponent } from './shared/application-form/application-form.component';
 import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
+import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
 
 
 
@@ -65,7 +66,8 @@ const routes: Routes = [
   { path: 'apply/offer/:id', component: ApplyComponent },
 
   { path: 'photo', component: PhotoComponent },
-  {path :'ml',component:TextSimilarityComponent}
+  {path :'ml',component:TextSimilarityComponent},
+  {path :'espace',component:LoginSupervisorComponent}
 ];
 
 @NgModule({

@@ -19,7 +19,8 @@
             ></path>
           </svg>
         </button>
-        <app-photo [ids]="ids"></app-photo>
+        <div *ngFor="let id of ids">
+        <app-photo [ids]="id"></app-photo></div>
         <span class="mx-auto mt-3 text-[#424A88] text-lg"
           >{{ supervisor.firstname }} {{ supervisor.lastname }}</span
         >

@@ -7,11 +7,11 @@ import { AuthService } from 'src/app/services/Authentication/auth.service';
 import { SignupService } from 'src/app/services/Authentication/signup.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-login-supervisor',
+  templateUrl: './login-supervisor.component.html',
+  styleUrls: ['./login-supervisor.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginSupervisorComponent implements OnInit {
   frm!: FormGroup;
   status!: Status;
 
