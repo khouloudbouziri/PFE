@@ -12,12 +12,12 @@ register();
 @Component({
   selector: 'app-supervisor-page',
   templateUrl: './supervisor-page.component.html',
-  styleUrls: [ './supervisor-page.component.css'],
-
+  styleUrls: ['./supervisor-page.component.css'],
 })
 export class SupervisorPageComponent {
   id: any;
   public intershipOffers: any = [];
+  showContent0 = true;
   showContent1 = false;
   showContent2 = false;
 

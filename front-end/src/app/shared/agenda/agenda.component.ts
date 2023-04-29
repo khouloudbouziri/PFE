@@ -1,55 +1,92 @@
-// import { HttpClient } from '@angular/common/http';
-// import { Component, ViewChild } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { CalendarComponent } from '@syncfusion/ej2-angular-calendars';
-// import { EventSettingsModel } from '@syncfusion/ej2-angular-schedule';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import * as moment from 'moment';
+import { Status } from 'src/app/models/status';
+import { AgendaService } from 'src/app/services/Agenda/agenda.service';
 
-// @Component({
-//   selector: 'app-agenda',
-//   // template:
-//   //   '<ejs-schedule height="500" width="650" [currentView]="setView"></ejs-schedule>',
-//   templateUrl: './agenda.component.html',
-//   styleUrls: ['./agenda.component.css'],
-// })
-// export class AgendaComponent {
-//   meetingForm!: FormGroup;
+@Component({
+  selector: 'app-agenda',
+  templateUrl: './agenda.component.html',
+  styleUrls: ['./agenda.component.css'],
+})
+export class AgendaComponent {
+  public showForm = false;
+  events: any = [];
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    public agendaService: AgendaService
+  ) {}
 
-//   constructor(private http: HttpClient, private fb: FormBuilder) {
-//     this.meetingForm = this.fb.group({
-//       title: ['', Validators.required],
-//       startTime: ['', Validators.required],
-//       endTime: ['', Validators.required],
-//     });
-//   }
+  frm!: FormGroup;
+  status!: Status;
 
-//   @ViewChild('calendar', { static: true })
-//   public calendar!: CalendarComponent;
+  get f() {
+    return this.frm.controls;
+  }
 
-//   public eventSettings: EventSettingsModel = {
-//     dataSource: [],
-//   };
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    timeZone: 'America/New_York',
+    plugins: [dayGridPlugin, interactionPlugin, timeGridPlugin],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek',
+    },
+    selectable: true,
+    dateClick: () => {
+      this.showForm = true;
+    },
+  };
 
-//   ngOnInit() {}
+  getAllEvents() {
+    this.agendaService.getAllEvents().subscribe((res: any) => {
+      console.log(res);
+      const events = res.map((res: any) => {
+        return {
+          title: res.title,
+          start: res.startDateTime,
+          end: res.endDateTime,
+          id: res.id,
+        };
+      });
+      this.events = events;
+    });
+  }
 
-//   onSubmit() {
-//     const appointment = this.meetingForm.value;
-//     appointment.startTime = new Date(appointment.startTime).toISOString();
-//     appointment.endTime = new Date(appointment.endTime).toISOString();
+  addEvent() {
+    this.agendaService.addEvent(this.frm.value).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.status = res;
+        this.frm.reset();
+      },
+      error: (err) => {
+        this.status.statusCode = 0;
+        this.status.message = 'some error on the server side';
+        console.log(err);
+      },
+      complete: () => {
+        this.status.statusCode = 0;
+        this.status.message = '';
+      },
+    });
+  }
 
-//     this.http
-//       .post('/meetings', appointment)
-//       .subscribe((createdAppointment: any) => {
-//         if (this.eventSettings.dataSource) {
-//           this.eventSettings.dataSource.push({
-//             Id: createdAppointment.id,
-//             Subject: createdAppointment.title,
-//             StartTime: new Date(createdAppointment.startTime),
-//             EndTime: new Date(createdAppointment.endTime),
-//           });
-
-//           this.calendar.refresh();
-//           this.meetingForm.reset();
-//         }
-//       });
-//   }
-// }
+  ngOnInit(): void {
+    this.getAllEvents();
+    this.frm = this.fb.group({
+      idSupervisor: ['', Validators.required],
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      startDateTime: ['', Validators.required],
+      endDateTime: ['', Validators.required],
+    });
+  }
+}

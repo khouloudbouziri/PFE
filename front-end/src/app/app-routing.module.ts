@@ -20,8 +20,7 @@ import { PhotoComponent } from './photo/photo.component';
 import { ApplicationFormComponent } from './shared/application-form/application-form.component';
 import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
 import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
-
-
+import { AgendaComponent } from './shared/agenda/agenda.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -66,8 +65,9 @@ const routes: Routes = [
   { path: 'apply/offer/:id', component: ApplyComponent },
 
   { path: 'photo', component: PhotoComponent },
-  {path :'ml',component:TextSimilarityComponent},
-  {path :'espace',component:LoginSupervisorComponent}
+  { path: 'ml', component: TextSimilarityComponent },
+  { path: 'espace', component: LoginSupervisorComponent },
+  { path: 'agenda', component: AgendaComponent },
 ];
 
 @NgModule({

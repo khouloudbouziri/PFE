@@ -62,4 +62,55 @@ export class HomeComponent {
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, { duration: 2000 });
   }
+
+  url = 'https://example.com/my-page';
+  title = 'My Page Title';
+  description = 'My Page Description';
+  image = 'https://example.com/my-image.jpg';
+
+  shareOnFacebook() {
+    const params = {
+      href: this.url,
+      quote: this.title,
+      description: this.description,
+      hashtag: '#myhashtag',
+      redirect_uri: 'https://example.com/redirect-page',
+    };
+    const shareUrl =
+      'https://www.facebook.com/sharer/sharer.php?' +
+      this.serializeParams(params);
+    window.open(shareUrl, '_blank');
+  }
+
+  shareOnTwitter() {
+    const params = {
+      text: this.title,
+      url: this.url,
+      via: 'mytwitterhandle',
+      hashtags: 'myhashtag1,myhashtag2',
+    };
+    const shareUrl =
+      'https://twitter.com/intent/tweet?' + this.serializeParams(params);
+    window.open(shareUrl, '_blank');
+  }
+
+  shareOnLinkedIn() {
+    const params = {
+      mini: 'true',
+      url: this.url,
+      title: this.title,
+      summary: this.description,
+    };
+    const shareUrl =
+      'https://www.linkedin.com/shareArticle?' + this.serializeParams(params);
+    window.open(shareUrl, '_blank');
+  }
+
+  private serializeParams(params: { [key: string]: any }) {
+    return Object.keys(params)
+      .map(
+        (key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+      )
+      .join('&');
+  }
 }

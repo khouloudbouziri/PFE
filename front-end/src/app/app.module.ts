@@ -20,18 +20,7 @@ import { HomeComponent } from './pages/homes/home/home.component';
 import { AddSupervisorComponent } from './supervisor/add-supervisor/add-supervisor.component';
 import { SupervisorPageComponent } from './pages/profiles/supervisor-page/supervisor-page.component';
 //import { AgendaComponent } from './components/agenda/agenda.component';
-import {  CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
-import {
-  ScheduleModule,
-  RecurrenceEditorModule,
-  DayService,
-  WeekService,
-  WorkWeekService,
-  MonthService,
-  MonthAgendaService,
-} from '@syncfusion/ej2-angular-schedule';
-import { CalendarModule } from '@syncfusion/ej2-angular-calendars';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AddOfferComponent } from './intershipOffer/add-offer/add-offer.component';
 import { OfferDetailsComponent } from './intershipOffer/offer-details/offer-details.component';
 import { DescriptionComponent } from './intershipOffer/description/description.component';
@@ -44,6 +33,8 @@ import { ApplicationFormComponent } from './shared/application-form/application-
 import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
 
 import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
+import { AgendaComponent } from './shared/agenda/agenda.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -69,9 +60,8 @@ import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.co
     SearchBarComponent,
     ApplicationFormComponent,
     TextSimilarityComponent,
-    
     LoginSupervisorComponent,
-    //AgendaComponent,
+    AgendaComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,18 +72,10 @@ import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.co
     FormsModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    ScheduleModule,
-    RecurrenceEditorModule,
-    CalendarModule,
+    FullCalendarModule,
   ],
-  providers: [
-    DayService,
-    WeekService,
-    WorkWeekService,
-    MonthService,
-    MonthAgendaService,
-  ],
+  providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

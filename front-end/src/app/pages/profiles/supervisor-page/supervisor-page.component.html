@@ -2,7 +2,7 @@
   <section
     class="flex flex-col p-10 w-80 bg-gradient-to-b from-[#FFFFFF] rounded-2xl"
   >
-  <app-photo></app-photo>
+    <app-photo></app-photo>
     <div class="">
       <li class="flex items-center mt-10">
         <svg
@@ -76,6 +76,7 @@
         <button
           class="flex"
           (click)="
+            showContent0 = false;
             showContent1 = false;
             showContent2 = true;
             getSupervisorIntershipOffers()
@@ -103,10 +104,16 @@
   >
     <button
       class="border border-[#E5302D] text-[#E5302D] rounded-full p-2 absolute right-16 -top-12"
-      (click)="showContent1 = true"
+      (click)="showContent0 = false; showContent1 = true"
     >
       Ajouter une annonce
     </button>
+
+    <ng-container *ngIf="showContent0">
+      <div class="m-6">
+        <app-agenda></app-agenda>
+      </div>
+    </ng-container>
 
     <ng-container *ngIf="showContent1">
       <div class="mt-5">
@@ -117,7 +124,12 @@
       <div class="mt-5">
         <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
       </div>
-      <swiper-container slides-per-view="3" speed="500" loop="true" css-mode="true">
+      <!-- <swiper-container
+        slides-per-view="3"
+        speed="500"
+        loop="true"
+        css-mode="true"
+      >
         <swiper-slide>Slide 1</swiper-slide>
         <swiper-slide>Slide 2</swiper-slide>
         <swiper-slide>Slide 3 </swiper-slide>
@@ -125,9 +137,8 @@
         <swiper-slide>Slide 3</swiper-slide>
         <swiper-slide>Slide 3</swiper-slide>
         ...
-      </swiper-container>
+      </swiper-container> -->
     </ng-container>
   </section>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>
-
