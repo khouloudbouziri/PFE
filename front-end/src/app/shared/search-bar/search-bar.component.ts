@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IntershipOffer } from 'src/app/models/IntershipOffer';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
 
@@ -12,7 +13,7 @@ export class SearchBarComponent {
   @Output() public search = new EventEmitter();
   public offers: IntershipOffer[] = [];
 
-  constructor(private IntershipOfferService: IntershipOfferService) {}
+  constructor(private IntershipOfferService: IntershipOfferService) { }
 
   public getAllIntershipOffers(): void {
     this.IntershipOfferService.getAllIntershipOffers().subscribe(
@@ -25,8 +26,9 @@ export class SearchBarComponent {
     );
   }
 
-  public searchIntershipOffer(key: string): void {
+  public searchIntershipOffer(key: string, key2: string): void {
     console.log(key);
+    console.log(key2);
     const results: IntershipOffer[] = [];
     console.log(this.offers);
     for (const offer of this.offers) {
@@ -36,7 +38,8 @@ export class SearchBarComponent {
         offer.technical_environement
           .toLowerCase()
           .indexOf(key.toLowerCase()) !== -1 ||
-        offer.address.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        offer.address.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        offer.company.toLowerCase().indexOf(key2.toLowerCase()) !== -1
       ) {
         results.push(offer);
       }

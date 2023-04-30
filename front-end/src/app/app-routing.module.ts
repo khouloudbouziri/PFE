@@ -21,6 +21,7 @@ import { ApplicationFormComponent } from './shared/application-form/application-
 import { TextSimilarityComponent } from './text-similarity/text-similarity.component';
 import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
 import { AgendaComponent } from './shared/agenda/agenda.component';
+import { FileComponent } from './file/file.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'ml', component: TextSimilarityComponent },
   { path: 'espace', component: LoginSupervisorComponent },
   { path: 'agenda', component: AgendaComponent },
+  { path: 'file', component: FileComponent },
 ];
 
 @NgModule({

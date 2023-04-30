@@ -1,11 +1,9 @@
 <form class="w-1/4 mx-auto">
   <div class="flex items-inline rounded-full h-12 w-auto bg-white pr-1 my-6">
     <div class="flex-col items-inline ml-6 my-4">
-      <select class="outline-none" name="" id="">
-        <option>informatique</option>
-        <option>inforatique</option>
-        <option>inforatique</option>
-        <option>inforatique</option>
+      <select class="outline-none" name=""  #key2="ngModel" ngModel id="Specialité">
+        
+        <option  ngFor #offer [ngForOf]="offers" ></option>
       </select>
     </div>
     <div class="flex-col items-inline mr-2 my-4 text-black">
@@ -14,7 +12,7 @@
     <div class="flex-col items-inline my-4">
       <input
         type="search"
-        (ngModelChange)="searchIntershipOffer(key.value)"
+        (ngModelChange)="searchIntershipOffer(key.value,key2.value)"
         #key="ngModel"
         ngModel
         name="key"

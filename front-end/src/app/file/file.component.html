@@ -1,0 +1,36 @@
+<div>
+    <input type="file" (change)="onFileSelected($event)">
+    <button (click)="onUpload()">Upload</button>
+  </div>
+  
+  <div *ngIf="fileInfos && fileInfos.length">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let file of fileInfos">
+          <td>{{ file.name }}</td>
+          <td><a href="#" (click)="onDownload(file.id)">Download</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>Envoyer un fichier</h2>
+
+  <input type="file" (change)="onFileSelected($event)">
+  <button type="button" (click)="onUpload()">Télécharger</button>
+  
+  <p>{{ message }}</p>
+  
+  <hr>
+  
+  <h2>Liste des fichiers</h2>
+  
+  <div *ngFor="let file of files">
+    <p>{{ file.name }}</p>
+    <a href="{{ file.url }}" target="_blank">Télécharger</a>
+  </div>  

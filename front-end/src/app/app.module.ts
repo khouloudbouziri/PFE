@@ -35,6 +35,7 @@ import { TextSimilarityComponent } from './text-similarity/text-similarity.compo
 import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
 import { AgendaComponent } from './shared/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { FileComponent } from './file/file.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     TextSimilarityComponent,
     LoginSupervisorComponent,
     AgendaComponent,
+    FileComponent,
   ],
   imports: [
     BrowserModule,
