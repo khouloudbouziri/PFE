@@ -55,11 +55,11 @@ public class VisitorService implements VisitorServiceImp {
         return companyIntershipOffers;
     }
 
-    
-   /*  public Optional<Visitor> getCompanyDeptByCompanyName(String text2) {
-        Optional<Visitor> v  = visitorRepository.findByCompany_name(text2);
-        return  v;
-       
-    }
-  */
+    /*
+     * public Optional<Visitor> getCompanyDeptByCompanyName(String text2) {
+     * Optional<Visitor> v = visitorRepository.findByCompany_name(text2);
+     * return v;
+     * 
+     * }
+     */
 }

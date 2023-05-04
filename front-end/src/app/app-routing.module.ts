@@ -22,6 +22,7 @@ import { TextSimilarityComponent } from './text-similarity/text-similarity.compo
 import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.component';
 import { AgendaComponent } from './shared/agenda/agenda.component';
 import { FileComponent } from './file/file.component';
+import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -70,6 +71,7 @@ const routes: Routes = [
   { path: 'espace', component: LoginSupervisorComponent },
   { path: 'agenda', component: AgendaComponent },
   { path: 'file', component: FileComponent },
+  { path: 'supervisorOffer/:id', component: SupervisorOfferDetailsComponent },
 ];
 
 @NgModule({

@@ -15,4 +15,9 @@ public interface IntershipOffreServiceImpl {
     public IntershipOffre updateIntershipOffer(IntershipOffre IntershipOffre);
 
     public void deleteIntershipById(Long id);
+
+    public IntershipOffre addFavoriteOffer(Long idIntern, Long idIntershipOffer);
+
+    public List<IntershipOffre> getInternFavoriteOffers(Long idIntern);
+
 }

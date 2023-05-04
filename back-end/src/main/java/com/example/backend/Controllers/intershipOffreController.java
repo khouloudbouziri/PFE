@@ -1,6 +1,7 @@
 package com.example.backend.Controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.Services.IntershipOffreService;
@@ -61,6 +63,21 @@ public class intershipOffreController {
     public ResponseEntity<?> deleteEintershipById(@PathVariable("id") Long id) {
         intershipOffreServiceImp.deleteIntershipById(id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/addFavoriteOffer")
+    public ResponseEntity<IntershipOffre> addFavoriteOffer(@RequestBody Map<String, Object> payload) {
+        Long idIntern = Long.parseLong(payload.get("idIntern").toString());
+        Long idIntershipOffer = Long.parseLong(payload.get("idIntershipOffer").toString());
+        IntershipOffre newIntershipOffer = intershipOffreServiceImp.addFavoriteOffer(idIntern, idIntershipOffer);
+        return new ResponseEntity<>(newIntershipOffer, HttpStatus.OK);
+    }
+
+    @GetMapping("favoriteOffers/{id}")
+    public ResponseEntity<List<IntershipOffre>> getInternFavoriteOffers(@PathVariable("id") Long id) {
+        List<IntershipOffre> internFavoriteOffers = intershipOffreServiceImp.getInternFavoriteOffers(id);
+        return new ResponseEntity<>(internFavoriteOffers, HttpStatus.OK);
+
     }
 
 }

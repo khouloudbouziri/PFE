@@ -38,6 +38,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { FileComponent } from './file/file.component';
 import { StepperComponent } from './stepper/stepper.component';
 import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
+import { SupervisorOfferCardComponent } from './intershipOffer/supervisor-offer-card/supervisor-offer-card.component';
+import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
+import { InternCardComponent } from './intern/intern-card/intern-card.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +70,9 @@ import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
     AgendaComponent,
     FileComponent,
     StepperComponent,
+    SupervisorOfferCardComponent,
+    SupervisorOfferDetailsComponent,
+    InternCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,9 +85,8 @@ import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
     MatSnackBarModule,
     FullCalendarModule,
     MatStepperModule,
-    
   ],
-  providers: [{provide: MatStepperIntl}],
+  providers: [{ provide: MatStepperIntl }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

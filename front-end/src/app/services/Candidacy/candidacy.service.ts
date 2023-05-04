@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CandidacyService {
   private baseUrl = environment.baseUrl;
+  public idCandidacy: any;
 
   constructor(private http: HttpClient) {}
 
@@ -34,9 +35,23 @@ export class CandidacyService {
       model
     );
   }
-  getById(idCandidacy :number){
+  getById(idCandidacy: number) {
     return this.http.get(
       `${this.baseUrl}/auth/candidacy/offer/get?id_candidacy=${idCandidacy}`
     );
+  }
+
+  getIntershipOfferCandidacies(id_intershipOffer: number) {
+    return this.http.get(
+      `${this.baseUrl}/auth/candidacy/offerCandidacies?id_offer=${id_intershipOffer}`
+    );
+  }
+
+  public setSelectedCandidacy(candidacy: any): void {
+    this.idCandidacy = candidacy;
+  }
+
+  public getSelectedOffer(): any {
+    return this.idCandidacy;
   }
 }

@@ -16,10 +16,23 @@ register();
 })
 export class SupervisorPageComponent {
   id: any;
-  public intershipOffers: any = [];
+  public SupervisorIntershipOffers: any = [];
   showContent0 = true;
   showContent1 = false;
   showContent2 = false;
+  afficherDetailsAnnonce = false;
+
+  public onSelectedOffer(event: {
+    idOffer: number;
+    showOfferDetails: boolean;
+  }): void {
+    console.log('Selected offer ID:', event.idOffer);
+    console.log('Show offer details:', event.showOfferDetails);
+    this.afficherDetailsAnnonce = event.showOfferDetails;
+    this.showContent0 = false;
+    this.showContent1 = false;
+    this.showContent2 = false;
+  }
 
   constructor(
     public authService: AuthService,
@@ -31,8 +44,7 @@ export class SupervisorPageComponent {
 
   getSupervisorIntershipOffers() {
     this.intershipService.getIntershipOffers(this.id).subscribe((res: any) => {
-      this.intershipOffers = res;
-      console.log(this.intershipOffers);
+      this.SupervisorIntershipOffers = res;
     });
   }
 

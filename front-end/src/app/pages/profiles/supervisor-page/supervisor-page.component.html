@@ -79,6 +79,7 @@
             showContent0 = false;
             showContent1 = false;
             showContent2 = true;
+            afficherDetailsAnnonce = false;
             getSupervisorIntershipOffers()
           "
         >
@@ -104,7 +105,11 @@
   >
     <button
       class="border border-[#E5302D] text-[#E5302D] rounded-full p-2 absolute right-16 -top-12"
-      (click)="showContent0 = false; showContent1 = true"
+      (click)="
+        showContent0 = false;
+        showContent1 = true;
+        afficherDetailsAnnonce = false
+      "
     >
       Ajouter une annonce
     </button>
@@ -122,27 +127,15 @@
     </ng-container>
     <ng-container *ngIf="showContent2">
       <div class="mt-5">
-        <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
+        <app-supervisor-offer-card
+          [SupervisorIntershipOffers]="SupervisorIntershipOffers"
+          (selectedOffer)="onSelectedOffer($event)"
+        ></app-supervisor-offer-card>
       </div>
-      <br/>
-      <br/>
-      <br/>
-      <swiper-container
-        slides-per-view="3"
-        speed="500"
-        loop="true"
-        css-mode="true"
-      >
-        <swiper-slide>Slide 1</swiper-slide>
-        <swiper-slide>Slide 2</swiper-slide>
-        <swiper-slide>Slide 3 </swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        <swiper-slide>Slide 3</swiper-slide>
-        ...
-      </swiper-container> 
+    </ng-container>
+    <ng-container *ngIf="afficherDetailsAnnonce">
+      <app-supervisor-offer-details></app-supervisor-offer-details>
     </ng-container>
     <app-stepper></app-stepper>
   </section>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-element-bundle.min.js"></script>

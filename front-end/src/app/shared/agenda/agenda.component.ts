@@ -8,7 +8,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import * as moment from 'moment';
 import { Status } from 'src/app/models/status';
-import { AgendaService } from 'src/app/services/Agenda/agenda.service';
+import { AgendaService } from '../../services/Agenda/agenda.service';
 
 @Component({
   selector: 'app-agenda',

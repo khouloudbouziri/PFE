@@ -12,6 +12,6 @@ public interface VisitorServiceImp {
 
     List<IntershipOffre> getIntershipOffers(Long id);
 
-   // Optional<Visitor> getCompanyDeptByCompanyName(String text2);
+    // Optional<Visitor> getCompanyDeptByCompanyName(String text2);
 
 }

@@ -1,0 +1,122 @@
+<section class="p-8 pt-10">
+  <div class="flex items-center relative">
+    <h2 class="text-xl text-[#E5302D]">{{ offer.company }} |</h2>
+    <div class="flex absolute right-2">
+      <button
+        class="flex items-center p-3 h-10 text-xs text-[#E5302D] rounded-full border border-[#E5302D]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+        >
+          <path
+            d="M15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89H6.41421L15.7279 9.57629ZM17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786L17.1421 8.16207ZM7.24264 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L7.24264 20.89Z"
+            fill="rgba(229,48,45,1)"
+          ></path>
+        </svg>
+        Modifier
+      </button>
+      <button
+        class="flex items-center p-3 h-10 ml-4 text-xs text-[#E5302D] rounded-full border border-[#E5302D]"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="22"
+          height="22"
+        >
+          <path
+            d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"
+            fill="rgba(229,48,45,1)"
+          ></path>
+        </svg>
+        Supprimer
+      </button>
+    </div>
+  </div>
+  <div class="flex-col">
+    <span class="flex items-center text-lg font-medium">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        class="mr-3"
+      >
+        <path
+          d="M13 21V23.5L10 21.5L7 23.5V21H6.5C4.567 21 3 19.433 3 17.5V5C3 3.34315 4.34315 2 6 2H20C20.5523 2 21 2.44772 21 3V20C21 20.5523 20.5523 21 20 21H13ZM13 19H19V16H6.5C5.67157 16 5 16.6716 5 17.5C5 18.3284 5.67157 19 6.5 19H7V17H13V19ZM19 14V4H6V14.0354C6.1633 14.0121 6.33024 14 6.5 14H19ZM7 5H9V7H7V5ZM7 8H9V10H7V8ZM7 11H9V13H7V11Z"
+          fill="rgba(66,74,136,1)"
+        ></path>
+      </svg>
+      sujet :
+    </span>
+    <p class="pt-3 text-base">
+      {{ offer.topic }}
+    </p>
+  </div>
+  <div class="flex-col">
+    <span class="flex items-center text-lg font-medium">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        class="mr-3"
+      >
+        <path
+          d="M7 5V2C7 1.44772 7.44772 1 8 1H16C16.5523 1 17 1.44772 17 2V5H21C21.5523 5 22 5.44772 22 6V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V6C2 5.44772 2.44772 5 3 5H7ZM4 16V19H20V16H4ZM4 14H20V7H4V14ZM9 3V5H15V3H9ZM11 11H13V13H11V11Z"
+          fill="rgba(66,74,136,1)"
+        ></path>
+      </svg>
+      travail demandé :
+    </span>
+    <p class="pt-3 text-lg">
+      {{ offer.required_work }}
+    </p>
+  </div>
+  <div class="flex-col">
+    <span class="flex items-center text-lg font-medium">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        class="mr-3"
+      >
+        <path
+          d="M5.32894 3.27158C6.56203 2.8332 7.99181 3.10749 8.97878 4.09446C9.96603 5.08171 10.2402 6.51202 9.80129 7.74535L20.646 18.5902L18.5247 20.7115L7.67887 9.86709C6.44578 10.3055 5.016 10.0312 4.02903 9.04421C3.04178 8.05696 2.76761 6.62665 3.20652 5.39332L5.44325 7.63C6.02903 8.21578 6.97878 8.21578 7.56457 7.63C8.15035 7.04421 8.15035 6.09446 7.56457 5.50868L5.32894 3.27158ZM15.6963 5.15512L18.8783 3.38736L20.2925 4.80157L18.5247 7.98355L16.757 8.3371L14.6356 10.4584L13.2214 9.04421L15.3427 6.92289L15.6963 5.15512ZM8.62523 12.9333L10.7465 15.0546L5.7968 20.0044C5.21101 20.5902 4.26127 20.5902 3.67548 20.0044C3.12415 19.453 3.09172 18.5793 3.57819 17.99L3.67548 17.883L8.62523 12.9333Z"
+          fill="rgba(66,74,136,1)"
+        ></path>
+      </svg>
+      Environnement technique / Outils utilisés :
+    </span>
+    <p class="pt-3 text-lg">{{ offer.technical_environement }}</p>
+  </div>
+  <div class="flex-col">
+    <span class="flex items-center text-lg font-medium">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="24"
+        height="24"
+        class="mr-3"
+      >
+        <path
+          d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z"
+          fill="rgba(66,74,136,1)"
+        ></path>
+      </svg>
+      Profil recherché :
+    </span>
+    <p class="pt-3 text-lg">​​​​​​{{ offer.required_profile }}</p>
+  </div>
+</section>
+<section>
+  <h2 class="pl-12 text-[#455A64]">Les candidats</h2>
+  <app-intern-card
+    [candidacies]="candidacies"
+    (selectedCandidacy)="onSelectedCandidacy($event)"
+  ></app-intern-card>
+</section>

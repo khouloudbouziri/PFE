@@ -30,7 +30,7 @@ public class IntershipOffre implements Serializable {
     private Boolean renumerete;
     private String company;
     private String supervisor;
-    private Long candidacy_number;
+    private int candidacy_number;
     private boolean saved;
     private Date creation_date;
     private String status;

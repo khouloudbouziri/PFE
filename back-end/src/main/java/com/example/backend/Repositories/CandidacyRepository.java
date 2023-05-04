@@ -14,4 +14,6 @@ public interface CandidacyRepository extends JpaRepository<Candidacy, Long> {
 
     List<Candidacy> findAllByIdIntern(Long idIntern);
 
+    List<Candidacy> findAllByIdIntershipOffer(Long idIntershipOffer);
+
 }

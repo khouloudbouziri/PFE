@@ -7,18 +7,19 @@ import { PhotoComponent } from 'src/app/photo/photo.component';
 @Component({
   selector: 'app-supervisor-card',
   templateUrl: './supervisor-card.component.html',
-  styleUrls: [ './supervisor-card.component.css'],
+  styleUrls: ['./supervisor-card.component.css'],
 })
 export class SupervisorCardComponent {
   id: any;
   images!: any[];
-  public ids:any;
+  public ids: any;
   public idc: any = [];
   supervisors: any = [];
   constructor(
     private route: ActivatedRoute,
     private visitorService: VisitorService,
-    private SupervisorService: SupervisorService,private photoComponent: PhotoComponent
+    private SupervisorService: SupervisorService,
+    private photoComponent: PhotoComponent
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -28,10 +29,10 @@ export class SupervisorCardComponent {
       .findSupervisorByIdCompany(this.id)
       .subscribe((res: any) => {
         this.supervisors = res;
-        for (let i = 0; i < res.length; i++) {
-          this.idc.push(res[i].id);
-          this.ids=res[i].id;
-        }
+        // for (let i = 0; i < res.length; i++) {
+        //   this.idc.push(res[i].id);
+        //   this.ids=res[i].id;
+        // }
       });
   }
 
@@ -43,12 +44,12 @@ export class SupervisorCardComponent {
       }
     );
   }
-   fusionnerListes(images: any[], superviseurs: any[]): any[] {
+  fusionnerListes(images: any[], superviseurs: any[]): any[] {
     const result: any[] = [];
     this.images = this.photoComponent.images;
-    superviseurs=this.supervisors;
+    superviseurs = this.supervisors;
     for (const image of images) {
-      const superviseur = superviseurs.find(s => s.id === image.idE);
+      const superviseur = superviseurs.find((s) => s.id === image.idE);
       if (superviseur) {
         result.push({ idE: image.idE, url: image.url, nom: superviseur.nom });
         console.log(result);
@@ -56,10 +57,10 @@ export class SupervisorCardComponent {
     }
     return result;
   }
-  ngOnInit(): void {this.images = this.photoComponent.images;
-    this.fusionnerListes(this.images,this.supervisors);
-      
-    
+  ngOnInit(): void {
+    this.images = this.photoComponent.images;
+    this.fusionnerListes(this.images, this.supervisors);
+
     this.findSupervisorByIdCompany();
   }
 }

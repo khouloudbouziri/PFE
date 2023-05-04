@@ -1,4 +1,3 @@
-<!-- lista mta3 les encadrant -->
 <div class="px-24 mt-32">
   <div class="flex flex-wrap lg:justify-between md:justify-around gap-8 pt-8">
     <div *ngFor="let supervisor of supervisors">
@@ -19,7 +18,7 @@
             ></path>
           </svg>
         </button>
-       <app-photo [images]="images"></app-photo>
+        <app-photo [images]="images"></app-photo>
         <span class="mx-auto mt-3 text-[#424A88] text-lg"
           >{{ supervisor.firstname }} {{ supervisor.lastname }}</span
         >

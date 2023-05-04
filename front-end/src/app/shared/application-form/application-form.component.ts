@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Status } from 'src/app/models/status';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
+import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 import { TextSimilarityServiceService } from 'src/app/services/text-similarity-service.service';
 
 @Component({
@@ -12,27 +13,25 @@ import { TextSimilarityServiceService } from 'src/app/services/text-similarity-s
 export class ApplicationFormComponent {
   @Input() public offer: any;
   @Input() public user: any;
-  id: any;
+  intern: any;
   constructor(
     private fb: FormBuilder,
     private candidacyService: CandidacyService,
-    private textSimilarityService: TextSimilarityServiceService
-
-  ) {}
+    private textSimilarityService: TextSimilarityServiceService,
+    private visitorService: VisitorService
+  ) {
+    this.intern = {};
+  }
 
   frm!: FormGroup;
   status!: Status;
-  ham!:any;
-  getAuthenticatedUser() {
-    if (localStorage.getItem('visitor')) {
-      const visitor = localStorage.getItem('visitor');
-      if (visitor) {
-        const visitorData = JSON.parse(visitor);
-        this.id = visitorData.visitor.id;
-      }
-    }
+
+  getInternById() {
+    this.visitorService.getVisitorById(this.user).subscribe((res: any) => {
+      this.intern = res;
+    });
   }
- 
+
   onPost() {
     this.status = { statusCode: 0, message: 'wait...' };
     if (this.offer) {
@@ -41,27 +40,22 @@ export class ApplicationFormComponent {
         .subscribe({
           next: (res) => {
             this.status = res;
-            console.log("res ba3d il add");
-            console.log(res)
-            this.candidacyService.getById(res.idCandidacy).subscribe(candidacy => {
-              console.log("l get mil base")
-              console.log(candidacy)
-              //console.log(res.idCandidacy);
-                //this.ham=res.idCandidacy;
-              this.textSimilarityService.cosineSimilarity(this.offer.id_intership_offre ,  res.idCandidacy).subscribe(score =>{
-                console.log("score");
+            this.candidacyService
+              .getById(res.idCandidacy)
+              .subscribe((candidacy) => {
+                this.textSimilarityService
+                  .cosineSimilarity(
+                    this.offer.id_intership_offre,
+                    res.idCandidacy
+                  )
+                  .subscribe((score) => {});
               });
-              
-              
-            });
-             //this.iC= this.textSimilarityService.getCosineSimilarity(this.offer.id_intership_offre, res.id_candidacy);
-             //console.log(this.iC);
+
             this.frm.reset();
           },
           error: (err) => {
             this.status.statusCode = 0;
             this.status.message = 'some error on the server side';
-            console.log(err);
           },
           complete: () => {
             this.status.statusCode = 0;
@@ -72,13 +66,11 @@ export class ApplicationFormComponent {
       this.candidacyService.spontaneousCandidacy(this.frm.value).subscribe({
         next: (res) => {
           this.status = res;
-          console.log(res);
           this.frm.reset();
         },
         error: (err) => {
           this.status.statusCode = 0;
           this.status.message = 'some error on the server side';
-          console.log(err);
         },
         complete: () => {
           this.status.statusCode = 0;
