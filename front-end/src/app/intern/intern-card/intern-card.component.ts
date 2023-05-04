@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 
 @Component({
@@ -26,6 +25,15 @@ export class InternCardComponent {
   SelectedCandidacy() {
     const idCandidacy = this.idCandidacy;
     this.candidacyService.setSelectedCandidacy(idCandidacy);
+  }
+
+  public eventChild(idCandidacy: number, showCandidacy: boolean) {
+    idCandidacy = this.idCandidacy;
+    showCandidacy = this.showCandidacy;
+    this.selectedCandidacy.emit({
+      idCandidacy: idCandidacy,
+      showCandidacy: showCandidacy,
+    });
   }
 
   decode(byte: any): any {

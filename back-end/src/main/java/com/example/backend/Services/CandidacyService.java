@@ -101,6 +101,22 @@ public class CandidacyService implements CandidacyServiceImpl {
         return listCandidat;
     }
 
+    // public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor) {
+    // // Optional<IntershipOffre> supervisorOffers =
+    // // intershipOfferRepository.findBySupervisor(idSupervisor);
+    // List<Candidacy> offerCandidacies = candidacyRepository.findAll();
+    // List<Candidacy> candidacies = new ArrayList<>();
+    // supervisorOffers.ifPresent(o -> {
+    // for (Candidacy candidacy : offerCandidacies) {
+    // if (o.getId_intership_offre() == candidacy.getIdIntershipOffer()) {
+    // candidacies.add(candidacy);
+    // }
+    // }
+    // });
+    // return candidacies;
+
+    // }
+
     public List<Visitor> getInterns(Long idIntershipOffer) {
         List<Candidacy> allCandidacies = candidacyRepository.findAll();
         List<Visitor> allInterns = visitorRepository.findAll();

@@ -18,8 +18,7 @@ export class SupervisorCardComponent {
   constructor(
     private route: ActivatedRoute,
     private visitorService: VisitorService,
-    private SupervisorService: SupervisorService,
-    private photoComponent: PhotoComponent
+    private SupervisorService: SupervisorService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -44,22 +43,22 @@ export class SupervisorCardComponent {
       }
     );
   }
-  fusionnerListes(images: any[], superviseurs: any[]): any[] {
-    const result: any[] = [];
-    this.images = this.photoComponent.images;
-    superviseurs = this.supervisors;
-    for (const image of images) {
-      const superviseur = superviseurs.find((s) => s.id === image.idE);
-      if (superviseur) {
-        result.push({ idE: image.idE, url: image.url, nom: superviseur.nom });
-        console.log(result);
-      }
-    }
-    return result;
-  }
+  // fusionnerListes(images: any[], superviseurs: any[]): any[] {
+  //   const result: any[] = [];
+  //   this.images = this.photoComponent.images;
+  //   superviseurs = this.supervisors;
+  //   for (const image of images) {
+  //     const superviseur = superviseurs.find((s) => s.id === image.idE);
+  //     if (superviseur) {
+  //       result.push({ idE: image.idE, url: image.url, nom: superviseur.nom });
+  //       console.log(result);
+  //     }
+  //   }
+  //   return result;
+  // }
   ngOnInit(): void {
-    this.images = this.photoComponent.images;
-    this.fusionnerListes(this.images, this.supervisors);
+    //this.images = this.photoComponent.images;
+    //this.fusionnerListes(this.images, this.supervisors);
 
     this.findSupervisorByIdCompany();
   }

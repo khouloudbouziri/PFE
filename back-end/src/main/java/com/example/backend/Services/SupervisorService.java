@@ -40,7 +40,7 @@ public class SupervisorService implements SupervisorServiceInterface {
         List<IntershipOffre> supervisorOffers = new ArrayList<>();
         supervisor.ifPresent(s -> {
             for (IntershipOffre offer : allIntershipOffers) {
-                long l = Long.parseLong(offer.getSupervisor());
+                long l = offer.getSupervisor();
                 if (l == s.getId()) {
                     supervisorOffers.add(offer);
                 }

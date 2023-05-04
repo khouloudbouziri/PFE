@@ -29,7 +29,7 @@ public class IntershipOffre implements Serializable {
     private int interns_number;
     private Boolean renumerete;
     private String company;
-    private String supervisor;
+    private Long supervisor;
     private int candidacy_number;
     private boolean saved;
     private Date creation_date;
@@ -38,8 +38,9 @@ public class IntershipOffre implements Serializable {
     public IntershipOffre() {
         super();
     }
-    public void setStatus(){
-         this.status="En cours";
+
+    public void setStatus() {
+        this.status = "En cours";
     }
 
 }

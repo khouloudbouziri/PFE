@@ -23,4 +23,6 @@ public interface CandidacyServiceImpl {
     public void save(Candidacy c);
 
     public List<CandidacyHelper> getIntershipOfferCandidacies(Long id_offer);
+
+    // public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor);
 }

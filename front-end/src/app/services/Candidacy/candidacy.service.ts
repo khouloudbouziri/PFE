@@ -51,7 +51,7 @@ export class CandidacyService {
     this.idCandidacy = candidacy;
   }
 
-  public getSelectedOffer(): any {
+  public getSelectedCandidacy(): any {
     return this.idCandidacy;
   }
 }
