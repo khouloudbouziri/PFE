@@ -14,4 +14,6 @@ public interface EventServiceImplementation {
     public Event updateEvent(Long id, Event event);
 
     public void deleteEvent(Long id);
+
+   // public Event getByIntership(Long idSupervisor);
 }

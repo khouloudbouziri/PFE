@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { imageModel } from '../models/imageModel';
 
 
 @Component({
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent {
-  @Input() public ids :any;
+  @Input() images: any[] = [];
   constructor(private httpClient: HttpClient,private route: ActivatedRoute
     ) { this.idE = this.route.snapshot.paramMap.get('id');}
 
@@ -22,6 +23,9 @@ export class PhotoComponent {
   imageUrl!: string;
   idE: any;
   showContent = true;
+  imagesf!: any;
+
+
 
   toggleContent() {
     this.showContent = !this.showContent;
@@ -74,7 +78,7 @@ export class PhotoComponent {
             }
           );
       }
-       //Gets called when the user clicks on retieve image button to get the image from back end
+     /*  //Gets called when the user clicks on retieve image button to get the image from back end
        getImageCart() {//Make a call to Sprinf Boot to get the Image Bytes.
         this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/'+ this.ids )
           .subscribe(
@@ -88,12 +92,32 @@ export class PhotoComponent {
               }
             }
           );
+      }*/
+      getImages(){
+        this.httpClient.get<imageModel[]>('http://localhost:3333/api/v1/auth/image/get/all')
+        .subscribe(
+          images => {
+            this.imagesf = images.map(image => ({
+              
+              name: image.name,
+              type: image.type,
+              retrievedImage: 'data:image/jpeg;base64,' + image.picByte
+            }));
+            console.log(this.imagesf);
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      
       }
-     
+      
+
      
       ngOnInit() {
+         this.getImages();
         this.getImage(); 
-        this.getImageCart(); 
+        //this.getImageCart(); 
        }
       
 }

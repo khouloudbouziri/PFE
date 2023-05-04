@@ -33,9 +33,13 @@ public class IntershipOffre implements Serializable {
     private Long candidacy_number;
     private boolean saved;
     private Date creation_date;
+    private String status;
 
     public IntershipOffre() {
         super();
+    }
+    public void setStatus(){
+         this.status="En cours";
     }
 
 }

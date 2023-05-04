@@ -36,6 +36,8 @@ import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.co
 import { AgendaComponent } from './shared/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FileComponent } from './file/file.component';
+import { StepperComponent } from './stepper/stepper.component';
+import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,7 @@ import { FileComponent } from './file/file.component';
     LoginSupervisorComponent,
     AgendaComponent,
     FileComponent,
+    StepperComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,8 +78,10 @@ import { FileComponent } from './file/file.component';
     BrowserAnimationsModule,
     MatSnackBarModule,
     FullCalendarModule,
+    MatStepperModule,
+    
   ],
-  providers: [],
+  providers: [{provide: MatStepperIntl}],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

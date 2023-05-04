@@ -17,7 +17,7 @@ export class FileService {
 
     formData.append('file', file);
 
-    const req = new HttpRequest('POST', `${this.baseUrl}/auth/upload`, formData, {
+    const req = new HttpRequest('POST', `${this.baseUrl}/auth/uploadFile`, formData, {
       reportProgress: true,
       responseType: 'json'
     });
@@ -26,10 +26,12 @@ export class FileService {
   }
 
   getFiles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/auth/files`);
+    return this.http.get(`${this.baseUrl}/auth/files/GetFile`);
   }
 
   downloadFile(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/auth/files/${id}`, { responseType: 'blob' });
   }
+ 
 }
+

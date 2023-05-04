@@ -3,9 +3,31 @@
   [options]="calendarOptions"
   [events]="events"
 ></full-calendar>
-<form [formGroup]="frm" (ngSubmit)="addEvent()" [hidden]="!showForm">
-  <div class="flex-col justify-between w-11/12">
-    <div class="flex flex-col mt-6 ml-3 relative">
+
+<form [formGroup]="frm" (ngSubmit)="addEvent()" class="popup-overlay" *ngIf="isPopupVisible">
+  <div class="flex-col  popup-container justify-between w-11/12">
+  <div
+      class="flex mx-auto justify-between relative xl:w-4/5 lg:w-4/5 md:w-4/5 sm:w-11/12 bg-white border rounded-full border-[#424A88] m-8"
+    >
+      <div
+        class="top-0 left-0 absolute w-1/2 h-full bg-[#424A88] rounded-full duration-500"
+      ></div>
+      <button
+        class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
+        (click)="this.showContent0 =true;
+        this.showContent1=false;">
+        Entretien
+             </button>
+      <button
+        class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#424A88]"
+        (click)="this.showContent0 =false;
+               this.showContent1=true;"
+      >
+        Réunion
+      </button>
+    </div>
+    <div *ngIf="showContent0">
+    <div class="  flex flex-col mt-10 ml-3 relative" >
       <input
         type="text"
         id="title"
@@ -69,14 +91,103 @@
         >Description<span class="text-[#E5302D] ml-1">*</span></label
       >
     </div>
-  </div>
-  <div class="flex justify-around items-center my-20">
-    <button
-      type="submit"
-      id="btnSubmit"
-      class="w-40 h-10 text-white bg-[#E73130] rounded-full"
+    <div class="flex flex-col mt-6 ml-3 relative">
+      <select
+      
+        id="offreid"
+        
+        class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
+        autocomplete="off"
+        formControlName="offre"
+        required
+      ><!--<option *ngFor="let offre of offers">{{offer.name}}</option>--></select>
+      <label
+        for="offre"
+        class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
+        >offre<span class="text-[#E5302D] ml-1">*</span></label
+      >
+    </div>
+ 
+  
+</div>
+<div *ngIf="showContent1">
+  <div class="  flex flex-col mt-10 ml-3 relative" >
+    <input
+      type="text"
+      id="title"
+      placeholder="title"
+      class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
+      autocomplete="off"
+      formControlName="title"
+      required
+    />
+    <label
+      for="title"
+      class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
+      >Titre <span class="text-[#E5302D]">*</span></label
     >
-      Ajouter
-    </button>
+  </div>
+  <div class="flex flex-col mt-6 ml-3 relative">
+    <input
+      type="datetime-local"
+      id="startDateTime"
+      placeholder="startDateTime"
+      class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
+      autocomplete="off"
+      formControlName="startDateTime"
+      required
+    />
+    <label
+      for="startDateTime"
+      class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
+      >Début <span class="text-[#E5302D]">*</span></label
+    >
+  </div>
+  <div class="flex flex-col mt-6 ml-3 relative">
+    <input
+      type="datetime-local"
+      id="endDateTime"
+      placeholder="endDateTime"
+      class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
+      autocomplete="off"
+      formControlName="endDateTime"
+      required
+    />
+    <label
+      for="endDateTime"
+      class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
+      >Fin<span class="text-[#E5302D] ml-1">*</span></label
+    >
+  </div>
+  <div class="flex flex-col mt-6 ml-3 relative">
+    <input
+      type="text"
+      id="description"
+      placeholder="description"
+      class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
+      autocomplete="off"
+      formControlName="description"
+      required
+    />
+    <label
+      for="description"
+      class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
+      >Description<span class="text-[#E5302D] ml-1">*</span></label
+    >
+    
+  </div>
+ <p>589632147</p>
+
+</div>
+<div class="flex justify-around items-center my-20">
+  <button
+    type="submit"
+    id="btnSubmit"
+    class="w-40 h-10 text-white bg-[#E73130] rounded-full"
+  >
+    Ajouter
+  </button>
+  <button class="w-40 h-10 text-white bg-[#E73130] rounded-full" (click)="closePopup()">Fermer</button>
+</div>
   </div>
 </form>

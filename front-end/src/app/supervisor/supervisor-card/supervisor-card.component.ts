@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SupervisorService } from 'src/app/services/Supervisor/supervisor.service';
 import { VisitorService } from 'src/app/services/Visitor/visitor.service';
+import { PhotoComponent } from 'src/app/photo/photo.component';
 
 @Component({
   selector: 'app-supervisor-card',
@@ -10,13 +11,14 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 })
 export class SupervisorCardComponent {
   id: any;
+  images!: any[];
   public ids:any;
   public idc: any = [];
   supervisors: any = [];
   constructor(
     private route: ActivatedRoute,
     private visitorService: VisitorService,
-    private SupervisorService: SupervisorService
+    private SupervisorService: SupervisorService,private photoComponent: PhotoComponent
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -41,7 +43,23 @@ export class SupervisorCardComponent {
       }
     );
   }
-  ngOnInit(): void {
+   fusionnerListes(images: any[], superviseurs: any[]): any[] {
+    const result: any[] = [];
+    this.images = this.photoComponent.images;
+    superviseurs=this.supervisors;
+    for (const image of images) {
+      const superviseur = superviseurs.find(s => s.id === image.idE);
+      if (superviseur) {
+        result.push({ idE: image.idE, url: image.url, nom: superviseur.nom });
+        console.log(result);
+      }
+    }
+    return result;
+  }
+  ngOnInit(): void {this.images = this.photoComponent.images;
+    this.fusionnerListes(this.images,this.supervisors);
+      
+    
     this.findSupervisorByIdCompany();
   }
 }

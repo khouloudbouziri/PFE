@@ -20,13 +20,13 @@ import com.example.backend.entities.Event;
 @RequestMapping("/api/v1/auth/events")
 @CrossOrigin(origins = "*")
 public class EventController {
-
-    private final EventServiceImplementation eventServiceImplementation;
-
     @Autowired
-    public EventController(EventServiceImplementation eventServiceImplementation) {
-        this.eventServiceImplementation = eventServiceImplementation;
-    }
+    private EventServiceImplementation eventServiceImplementation;
+
+    // @Autowired
+    // public EventController(EventServiceImplementation eventServiceImplementation) {
+    //     this.eventServiceImplementation = eventServiceImplementation;
+    // }
 
     @GetMapping("/all")
     public ResponseEntity<List<Event>> getAllEvents() {
@@ -42,5 +42,9 @@ public class EventController {
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {
         return ResponseEntity.ok(eventServiceImplementation.addEvent(event));
     }
+  /*  @GetMapping("/getByIntership/{idSupervisor}")
+    public ResponseEntity<Object> getByIntership(@PathVariable Long idSupervisor){
+        return ResponseEntity.ok(eventServiceImplementation.getByIntership(idSupervisor));
+    }*/
 
 }

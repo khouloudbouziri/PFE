@@ -16,4 +16,5 @@ export interface Candidacy {
   did_intership: boolean;
   resume: Blob;
   linkedIn_url: string;
+  status:String;
 }

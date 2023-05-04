@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -17,14 +18,21 @@ import { AgendaService } from 'src/app/services/Agenda/agenda.service';
 export class AgendaComponent {
   public showForm = false;
   events: any = [];
+  idE: any;
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    public agendaService: AgendaService
-  ) {}
+    public agendaService: AgendaService,
+   private route: ActivatedRoute
+      ) { this.idE = this.route.snapshot.paramMap.get('id');}
 
   frm!: FormGroup;
   status!: Status;
+  isPopupVisible = false;
+  showContent0=true;
+  showContent1=false;
+  title!: string;
+  message!: string;
 
   get f() {
     return this.frm.controls;
@@ -41,10 +49,18 @@ export class AgendaComponent {
     },
     selectable: true,
     dateClick: () => {
-      this.showForm = true;
+      this.openPopup();
     },
   };
-
+  
+  openPopup() {
+    
+    this.isPopupVisible = true;
+  }
+  closePopup() {
+    this.isPopupVisible = false;
+    
+  }
   getAllEvents() {
     this.agendaService.getAllEvents().subscribe((res: any) => {
       console.log(res);
@@ -54,6 +70,7 @@ export class AgendaComponent {
           start: res.startDateTime,
           end: res.endDateTime,
           id: res.id,
+          
         };
       });
       this.events = events;
@@ -66,6 +83,7 @@ export class AgendaComponent {
         console.log(res);
         this.status = res;
         this.frm.reset();
+        this.getAllEvents();
       },
       error: (err) => {
         this.status.statusCode = 0;
@@ -82,7 +100,7 @@ export class AgendaComponent {
   ngOnInit(): void {
     this.getAllEvents();
     this.frm = this.fb.group({
-      idSupervisor: ['', Validators.required],
+      idSupervisor: [this.idE, Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
       startDateTime: ['', Validators.required],

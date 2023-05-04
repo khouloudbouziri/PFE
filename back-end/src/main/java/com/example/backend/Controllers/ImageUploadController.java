@@ -2,6 +2,8 @@ package com.example.backend.Controllers;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
@@ -49,6 +51,16 @@ public class ImageUploadController {
 		final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(idE);
 		ImageModel img = new ImageModel(retrievedImage.get().getName() , retrievedImage.get().getType() ,decompressBytes(retrievedImage.get().getPicByte()),retrievedImage.get().getIdE());
 		return img;
+	}
+	@GetMapping(path = { "/get/all" })
+	public List<ImageModel> getAllImages() throws IOException {
+		final List<ImageModel> retrievedImage = imageRepository.findAll();
+		final List<ImageModel> retrievedImages=new  ArrayList<>();
+		for(int i=0 ; i<retrievedImage.size();i++){
+		ImageModel img = new ImageModel(retrievedImage.get(i).getName() , retrievedImage.get(i).getType() ,decompressBytes(retrievedImage.get(i).getPicByte()),retrievedImage.get(i).getIdE());
+		retrievedImages.add(img);
+	}
+		return retrievedImages;
 	}
 
 	// compress the image bytes before storing it in the database

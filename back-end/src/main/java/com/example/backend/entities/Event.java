@@ -31,5 +31,6 @@ public class Event {
     private Date endDateTime;
 
     private String description;
+    private Long idSupervisor;
 
 }
