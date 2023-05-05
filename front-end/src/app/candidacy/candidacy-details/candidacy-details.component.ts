@@ -12,7 +12,9 @@ export class CandidacyDetailsComponent {
   intern: any;
   candidacy: any = {};
   intershipOffers: any = [];
-  isRed = false;
+  isRed = true;
+  showInternDeails = true;
+  showInternFollowUp = false;
 
   constructor(
     private candidacyService: CandidacyService,
