@@ -63,19 +63,35 @@ export class AgendaComponent {
   closePopup() {
     this.isPopupVisible = false;
   }
-  getAllEvents() {
-    this.agendaService.getAllEvents().subscribe((res: any) => {
-      console.log(res);
-      const events = res.map((res: any) => {
-        return {
-          title: res.title,
-          start: res.startDateTime,
-          end: res.endDateTime,
-          id: res.id,
-        };
-      });
-      this.events = events;
-    });
+ 
+  getEventsBySupervisor(){
+console.log("tyy fok");
+this.agendaService.getEventsBySupervisor(this.idE).subscribe((res:any)=>{
+  console.log(res);
+  const events = res.map((res: any) => {
+    return {
+      title: res.title,
+      start: res.startDateTime,
+      end: res.endDateTime,
+      id: res.id,
+    };
+  });
+  console.log(events);
+  this.events = events;
+});
+  }
+  getEventsByIntern(){
+this.agendaService.getEventsByIntern(this.idE).subscribe((res:any)=>{
+  const events = res.map((res: any) => {
+    return {
+      title: res.title,
+      start: res.startDateTime,
+      end: res.endDateTime,
+      id: res.id,
+    };
+  });
+  this.events = events;
+});
   }
 
   getCandidaciesBySupervisor() {
@@ -93,7 +109,7 @@ export class AgendaComponent {
         console.log(res);
         this.status = res;
         this.frm.reset();
-        this.getAllEvents();
+        this.getEventsBySupervisor();
       },
       error: (err) => {
         this.status.statusCode = 0;
@@ -108,8 +124,9 @@ export class AgendaComponent {
   }
 
   ngOnInit(): void {
-    this.getAllEvents();
+    this.getEventsBySupervisor();
     this.getCandidaciesBySupervisor();
+    this.getEventsByIntern();
     this.frm = this.fb.group({
       idSupervisor: [this.idE, Validators.required],
       idIntern: ['', Validators.required],

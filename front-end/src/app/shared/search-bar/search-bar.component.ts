@@ -26,29 +26,7 @@ export class SearchBarComponent {
     );
   }
 
-  // public searchIntershipOffer(key: string, key2: string): void {
-  //   console.log(key);
-  //   console.log(key2);
-  //   const results: IntershipOffer[] = [];
-  //   console.log(this.offers);
-  //   for (const offer of this.offers) {
-  //     if (
-  //       offer.type.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-  //       offer.supervisor.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-  //       offer.technical_environement
-  //         .toLowerCase()
-  //         .indexOf(key.toLowerCase()) !== -1 ||
-  //       offer.address.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-  //       offer.company.toLowerCase().indexOf(key2.toLowerCase()) !== -1
-  //     ) {
-  //       results.push(offer);
-  //     }
-  //   }
-  //   this.offers = results;
-  //   if (results.length === 0 || !key) {
-  //     this.getAllIntershipOffers();
-  //   }
-  // }
+  
   public searchIntershipOffer(key: string): void {
     console.log(key);
     const results: IntershipOffer[] = [];
@@ -56,7 +34,8 @@ export class SearchBarComponent {
     for (const offer of this.offers) {
       if (
         offer.type.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        offer.supervisor.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        offer.required_profile.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
+        offer.company.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
         offer.technical_environement
           .toLowerCase()
           .indexOf(key.toLowerCase()) !== -1 ||

@@ -16,7 +16,7 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 export class AddOfferComponent {
   id: any;
   user: any;
-  supervisors: Supervisor[] = [];
+  supervisors: any=[];
   isRH: boolean = true;
   isDisabled: boolean = true;
   isChecked: any = false;
@@ -44,7 +44,7 @@ export class AddOfferComponent {
       .findSupervisorByIdCompany(this.id)
       .subscribe((res: any) => {
         this.supervisors = res;
-        console.log(res);
+        console.log("res"+res);
         console.log(this.supervisors);
       });
   }

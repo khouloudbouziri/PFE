@@ -111,9 +111,16 @@
       </button>
     </div>
   </section>
+  
   <section
     class="w-3/4 ml-10 bg-gradient-to-b from-[#FFFFFF] rounded-2xl relative"
   >
+  <ng-container *ngIf="showContent0">
+    <div class="m-6">
+      <app-agenda></app-agenda>
+    </div>
+  </ng-container>
+
     <ng-container *ngIf="showContent1">
       <div class="mt-5">
         <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>

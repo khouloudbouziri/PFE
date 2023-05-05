@@ -19,6 +19,7 @@ import com.example.backend.entities.IntershipOffre;
 
 @Service
 public class EventService implements EventServiceImplementation {
+    private static final Event Event = null;
     @Autowired
      EventRepository eventRepository;
     @Autowired
@@ -58,18 +59,19 @@ public class EventService implements EventServiceImplementation {
         eventRepository.deleteById(id);
     }
 
+  
+    public List<Event> getEventsBySupervisor(Long id) {
+        return eventRepository.findByIdSupervisor(id);
+    }
+
+   
+    public List<Event> getEventsByIntern(Long id) {
+        return eventRepository.findByIdIntern(id);
+        
+    }
+
     
 
-    /*@Query(" select e   from Event e , Candidacy c ,IntershipOffre i where e.idSupervisor=i.CAST(supervisor AS bigint ) AS  AND c.idIntershipOffer=i.id_intership_offre")
-   */
-  /*  public Event getByIntership(Long id){
-    List<Event> l= eventRepository.getByIntership(id);
-      List<Candidacy> allCandidacies=candidacyRepository.findAllById(null);
-      String s= id.toString();
-      List<IntershipOffre> allIntershipOffres=(List<IntershipOffre>) intershipOfferRepository.findBySupervisor(s);
-      
-     
-      
-    }*/
+   
 
 }

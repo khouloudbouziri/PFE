@@ -12,6 +12,7 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 export class InternPageComponent {
   id: any;
   public intershipOffers: any = [];
+  showContent0=true;
   showContent1 = false;
   showContent2 = false;
 

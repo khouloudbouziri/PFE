@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend.ServicesImplement.SupervisorServiceInterface;
 import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.Supervisor;
+import com.example.backend.entities.SupervisorHelper;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -44,8 +45,8 @@ public class SupervisorController {
     }
 
     @GetMapping("/find/bySupervisor/{id}")
-    public ResponseEntity<List<Supervisor>> findSupervisorByIdCompany(@PathVariable("id") Long id) {
-        List<Supervisor> supervisors = supervisorService.findSupervisorByIdCompany(id);
+    public ResponseEntity<List<SupervisorHelper>> findSupervisorByIdCompany(@PathVariable("id") Long id) {
+        List<SupervisorHelper> supervisors = supervisorService.findSupervisorByIdCompany(id);
         return new ResponseEntity<>(supervisors, HttpStatus.OK);
     }
 

@@ -31,13 +31,14 @@ export class PhotoComponent {
     this.showContent = !this.showContent;
   }
 
-  //Gets called when the user selects an image
+  
   public onFileChanged(event:any) {
      //Select File
      this.selectedFile = event.target.files[0];
      this.imageUrl = URL.createObjectURL(this.selectedFile);
      this.onUpload();
      this.getImage();
+     this.toggleContent();
     }
     
     
@@ -60,6 +61,7 @@ export class PhotoComponent {
           }
         }
         );
+      
   
     }
     
@@ -78,46 +80,12 @@ export class PhotoComponent {
             }
           );
       }
-     /*  //Gets called when the user clicks on retieve image button to get the image from back end
-       getImageCart() {//Make a call to Sprinf Boot to get the Image Bytes.
-        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/'+ this.ids )
-          .subscribe(
-            res => {
-              this.retrieveResonse = res;
-              this.base64Data = this.retrieveResonse.picByte;
-              this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
-              if(this.retrievedImage!=null){
-                this.showContent = false;
-                console.log("hhhhhhhhhh");
-              }
-            }
-          );
-      }*/
-      getImages(){
-        this.httpClient.get<imageModel[]>('http://localhost:3333/api/v1/auth/image/get/all')
-        .subscribe(
-          images => {
-            this.imagesf = images.map(image => ({
-              
-              name: image.name,
-              type: image.type,
-              retrievedImage: 'data:image/jpeg;base64,' + image.picByte
-            }));
-            console.log(this.imagesf);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      
-      }
+    
       
 
      
       ngOnInit() {
-         this.getImages();
-        this.getImage(); 
-        //this.getImageCart(); 
+       this.getImage(); 
        }
       
 }

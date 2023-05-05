@@ -12,6 +12,7 @@ export class SupervisorService {
 
   findSupervisorById(id: any) {
     return this.htttp.get(this.baseUrl + '/auth/supervisor/find/' + id);
+    
   }
 
   deleteSupervisor(supervisor: any) {

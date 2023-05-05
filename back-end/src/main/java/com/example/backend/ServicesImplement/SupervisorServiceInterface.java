@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.Supervisor;
+import com.example.backend.entities.SupervisorHelper;
 
 public interface SupervisorServiceInterface {
     List<Supervisor> getAllSupervisors();
 
     Supervisor findSupervisorById(Long id);
 
-    List<Supervisor> findSupervisorByIdCompany(Long visitor);
+    List<SupervisorHelper> findSupervisorByIdCompany(Long visitor);
 
     List<IntershipOffre> getIntershipOffers(Long id);
 

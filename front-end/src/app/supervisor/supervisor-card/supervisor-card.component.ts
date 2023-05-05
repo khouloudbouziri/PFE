@@ -28,6 +28,7 @@ export class SupervisorCardComponent {
       .findSupervisorByIdCompany(this.id)
       .subscribe((res: any) => {
         this.supervisors = res;
+        console.log(this.supervisors)
         // for (let i = 0; i < res.length; i++) {
         //   this.idc.push(res[i].id);
         //   this.ids=res[i].id;
@@ -43,23 +44,10 @@ export class SupervisorCardComponent {
       }
     );
   }
-  // fusionnerListes(images: any[], superviseurs: any[]): any[] {
-  //   const result: any[] = [];
-  //   this.images = this.photoComponent.images;
-  //   superviseurs = this.supervisors;
-  //   for (const image of images) {
-  //     const superviseur = superviseurs.find((s) => s.id === image.idE);
-  //     if (superviseur) {
-  //       result.push({ idE: image.idE, url: image.url, nom: superviseur.nom });
-  //       console.log(result);
-  //     }
-  //   }
-  //   return result;
-  // }
+ decode(byte: any): any {
+    if (byte) return 'data:image/jpg;base64,' + byte;
+  }
   ngOnInit(): void {
-    //this.images = this.photoComponent.images;
-    //this.fusionnerListes(this.images, this.supervisors);
-
     this.findSupervisorByIdCompany();
   }
 }

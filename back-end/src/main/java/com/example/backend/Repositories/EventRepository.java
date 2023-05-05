@@ -10,7 +10,10 @@ import com.example.backend.entities.Event;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
+
     
 
-  // public  List<Event> getByIntership( Long idSupervisor );
+    List<Event> findByIdIntern(Long id);
+    List<Event> findByIdSupervisor(Long idSupervisor);
+    
 }

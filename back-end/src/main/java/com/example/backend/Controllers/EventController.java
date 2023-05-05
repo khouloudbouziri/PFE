@@ -3,7 +3,6 @@ package com.example.backend.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +22,7 @@ public class EventController {
     @Autowired
     private EventServiceImplementation eventServiceImplementation;
 
-    // @Autowired
-    // public EventController(EventServiceImplementation eventServiceImplementation) {
-    //     this.eventServiceImplementation = eventServiceImplementation;
-    // }
+   
 
     @GetMapping("/all")
     public ResponseEntity<List<Event>> getAllEvents() {
@@ -42,9 +38,13 @@ public class EventController {
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {
         return ResponseEntity.ok(eventServiceImplementation.addEvent(event));
     }
-  /*  @GetMapping("/getByIntership/{idSupervisor}")
-    public ResponseEntity<Object> getByIntership(@PathVariable Long idSupervisor){
-        return ResponseEntity.ok(eventServiceImplementation.getByIntership(idSupervisor));
-    }*/
-
+    @GetMapping("/supervisor/{id}")
+    public ResponseEntity<List<Event>> getEventsBySupervisor(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(eventServiceImplementation.getEventsBySupervisor(id));
+    }
+    @GetMapping("/intern/{id}")
+    public ResponseEntity<List<Event>> getEventsByIntern(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(eventServiceImplementation.getEventsByIntern(id));
+    }
+ 
 }

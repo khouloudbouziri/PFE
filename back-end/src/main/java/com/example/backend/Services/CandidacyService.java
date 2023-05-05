@@ -136,6 +136,11 @@ public class CandidacyService implements CandidacyServiceImpl {
 
         return c;
     }
+   /*  public List<Candidacy> getintershipofferBySupervisor(String Supervisor){
+         
+        List<IntershipOffre> allCandidacies =intershipOfferRepository.findBySupervisor(null);
+
+    }*/
 
     public void save(Candidacy c) {
         candidacyRepository.save(c);

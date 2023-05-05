@@ -36,6 +36,7 @@ export class IntershipOfferService {
 
   getIntershipOffers(id: any) {
     return this.http.get(this.baseUrl + '/auth/supervisor/find/offer/' + id);
+    console.log("fffff");
   }
 
   deleteIntershipById(id: any) {

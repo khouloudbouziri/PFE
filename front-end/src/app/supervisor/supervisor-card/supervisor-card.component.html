@@ -18,9 +18,14 @@
             ></path>
           </svg>
         </button>
-        <app-photo [images]="images"></app-photo>
+        
+        <img
+        [src]="decode(supervisor.image.picByte)"
+        alt=""
+        class="h-20 w-20 object-cover rounded-full mx-auto"
+      />
         <span class="mx-auto mt-3 text-[#424A88] text-lg"
-          >{{ supervisor.firstname }} {{ supervisor.lastname }}</span
+          >{{ supervisor.supervisor.firstname }} {{ supervisor.supervisor.lastname }}</span
         >
         <div class="flex mt-4">
           <svg
@@ -36,7 +41,7 @@
           </svg>
           <span class="ml-3"
             ><span class="text-[#424A88] opacity-40">Email : </span>
-            {{ supervisor.email }}</span
+            {{ supervisor.supervisor.email }}</span
           >
         </div>
         <div class="flex mt-4">
@@ -53,7 +58,7 @@
           </svg>
           <span class="ml-3"
             ><span class="text-[#424A88] opacity-40">Téléphone : </span
-            >{{ supervisor.phone_number }}</span
+            >{{ supervisor.supervisor.phone_number }}</span
           >
         </div>
         <div class="flex mt-4">
@@ -70,7 +75,7 @@
           </svg>
           <span class="ml-3"
             ><span class="text-[#424A88] opacity-40">Adresse : </span
-            >{{ supervisor.address }}</span
+            >{{ supervisor.supervisor.address }}</span
           >
         </div>
       </div>
