@@ -134,8 +134,15 @@
       </div>
     </ng-container>
     <ng-container *ngIf="afficherDetailsAnnonce">
-      <app-supervisor-offer-details></app-supervisor-offer-details>
+      <app-supervisor-offer-details
+        (selectedCandidacy)="onSelectedCandidacy($event)"
+      ></app-supervisor-offer-details>
     </ng-container>
+
+    <ng-container *ngIf="showCandidacyDetails">
+      <app-candidacy-details></app-candidacy-details>
+    </ng-container>
+
     <!-- <app-stepper></app-stepper> -->
   </section>
 </div>

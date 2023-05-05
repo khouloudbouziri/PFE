@@ -41,6 +41,7 @@ import { MatStepperIntl, MatStepperModule } from '@angular/material/stepper';
 import { SupervisorOfferCardComponent } from './intershipOffer/supervisor-offer-card/supervisor-offer-card.component';
 import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
 import { InternCardComponent } from './intern/intern-card/intern-card.component';
+import { CandidacyDetailsComponent } from './candidacy/candidacy-details/candidacy-details.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { InternCardComponent } from './intern/intern-card/intern-card.component'
     SupervisorOfferCardComponent,
     SupervisorOfferDetailsComponent,
     InternCardComponent,
+    CandidacyDetailsComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,9 +22,11 @@ export class InternCardComponent {
     console.log(this.idCandidacy);
   }
 
-  SelectedCandidacy() {
+  SelectedCandidacy(): void {
+    console.log('okk');
     const idCandidacy = this.idCandidacy;
     this.candidacyService.setSelectedCandidacy(idCandidacy);
+    console.log(idCandidacy);
   }
 
   public eventChild(idCandidacy: number, showCandidacy: boolean) {

@@ -47,6 +47,12 @@ export class CandidacyService {
     );
   }
 
+  getCandidaciesBySupervisor(idSupervisor: number) {
+    return this.http.get(
+      this.baseUrl + '/auth/candidacy/supervisorCandidacies/' + idSupervisor
+    );
+  }
+
   public setSelectedCandidacy(candidacy: any): void {
     this.idCandidacy = candidacy;
   }

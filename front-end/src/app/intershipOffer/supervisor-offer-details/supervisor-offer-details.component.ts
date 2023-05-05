@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
 
@@ -8,9 +8,11 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
   styleUrls: ['./supervisor-offer-details.component.css'],
 })
 export class SupervisorOfferDetailsComponent {
-  public idOffer: any;
+  idOffer: any;
   offer: any = {};
   candidacies: any = [];
+  candidacy: any;
+  @Output() selectedCandidacy = new EventEmitter();
 
   constructor(
     private intershipOfferService: IntershipOfferService,
@@ -33,7 +35,6 @@ export class SupervisorOfferDetailsComponent {
       .getIntershipOfferCandidacies(this.idOffer)
       .subscribe((res: any) => {
         this.candidacies = res;
-        console.log(this.candidacies);
       });
   }
 
@@ -43,6 +44,12 @@ export class SupervisorOfferDetailsComponent {
   }): void {
     console.log('Selected candidacy id:', event.idCandidacy);
     console.log('Show candidacy details:', event.showCandidacy);
+    this.candidacy = event;
+    console.log(this.candidacy);
+  }
+
+  public eventChild() {
+    this.selectedCandidacy.emit(this.candidacy);
   }
 
   ngOnInit() {

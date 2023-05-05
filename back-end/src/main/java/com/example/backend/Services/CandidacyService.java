@@ -74,7 +74,6 @@ public class CandidacyService implements CandidacyServiceImpl {
 
     public List<CandidacyHelper> getIntershipOfferCandidacies(Long id_offer) {
         List<Candidacy> candidacies = candidacyRepository.findAllByIdIntershipOffer(id_offer);
-        List<Visitor> candidates = new ArrayList<>();
         List<CandidacyHelper> listCandidat = new ArrayList<>();
         for (Candidacy candidacy : candidacies) {
             System.out.println("d5alt");
@@ -86,36 +85,25 @@ public class CandidacyService implements CandidacyServiceImpl {
             candidacyHelper.setImage(retrievedImage.get().getPicByte());
             System.out.println(candidacyHelper.getImage());
             listCandidat.add(candidacyHelper);
-            // candidacy.getIdIntern();
-            System.out.println(listCandidat);
-            // Optional<Visitor> intern =
-            // visitorRepository.findById(candidacy.getIdIntern());
-            System.out.println("ok");
-            // intern.ifPresent(i -> {
-
-            // candidates.add(i);
-            // });
         }
-        System.out.println("ok2");
-        System.out.println(listCandidat);
+
         return listCandidat;
     }
 
-    // public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor) {
-    // // Optional<IntershipOffre> supervisorOffers =
-    // // intershipOfferRepository.findBySupervisor(idSupervisor);
-    // List<Candidacy> offerCandidacies = candidacyRepository.findAll();
-    // List<Candidacy> candidacies = new ArrayList<>();
-    // supervisorOffers.ifPresent(o -> {
-    // for (Candidacy candidacy : offerCandidacies) {
-    // if (o.getId_intership_offre() == candidacy.getIdIntershipOffer()) {
-    // candidacies.add(candidacy);
-    // }
-    // }
-    // });
-    // return candidacies;
+    public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor) {
+        List<IntershipOffre> supervisorOffers = intershipOfferRepository.findBySupervisor(idSupervisor);
+        List<Candidacy> offerCandidacies = candidacyRepository.findAll();
+        List<Candidacy> candidacies = new ArrayList<>();
+        for (IntershipOffre offer : supervisorOffers) {
+            for (Candidacy candidacy : offerCandidacies) {
+                if (offer.getId_intership_offre() == candidacy.getIdIntershipOffer()) {
+                    candidacies.add(candidacy);
+                }
+            }
+        }
+        return candidacies;
 
-    // }
+    }
 
     public List<Visitor> getInterns(Long idIntershipOffer) {
         List<Candidacy> allCandidacies = candidacyRepository.findAll();

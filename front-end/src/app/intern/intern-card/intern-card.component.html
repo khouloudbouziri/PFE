@@ -106,7 +106,9 @@
           </div>
           <button
             (click)="
-              getCandidacy(candidacie.candidacy.idIntern); SelectedCandidacy()
+              getCandidacy(candidacie.candidacy.idCandidacy);
+              SelectedCandidacy();
+              eventChild(candidacie.candidacy.idCandidacy, showCandidacy)
             "
           >
             <svg

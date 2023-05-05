@@ -118,5 +118,6 @@
   <app-intern-card
     [candidacies]="candidacies"
     (selectedCandidacy)="onSelectedCandidacy($event)"
+    (click)="eventChild()"
   ></app-intern-card>
 </section>

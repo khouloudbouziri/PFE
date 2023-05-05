@@ -24,5 +24,5 @@ public interface CandidacyServiceImpl {
 
     public List<CandidacyHelper> getIntershipOfferCandidacies(Long id_offer);
 
-    // public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor);
+    public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor);
 }

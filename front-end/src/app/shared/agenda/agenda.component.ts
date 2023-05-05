@@ -6,9 +6,9 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import * as moment from 'moment';
 import { Status } from 'src/app/models/status';
 import { AgendaService } from '../../services/Agenda/agenda.service';
+import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 
 @Component({
   selector: 'app-agenda',
@@ -19,18 +19,22 @@ export class AgendaComponent {
   public showForm = false;
   events: any = [];
   idE: any;
+  candidacies: any = [];
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     public agendaService: AgendaService,
-   private route: ActivatedRoute
-      ) { this.idE = this.route.snapshot.paramMap.get('id');}
+    public candidacyService: CandidacyService,
+    private route: ActivatedRoute
+  ) {
+    this.idE = this.route.snapshot.paramMap.get('id');
+  }
 
   frm!: FormGroup;
   status!: Status;
   isPopupVisible = false;
-  showContent0=true;
-  showContent1=false;
+  showContent0 = true;
+  showContent1 = false;
   title!: string;
   message!: string;
 
@@ -52,14 +56,12 @@ export class AgendaComponent {
       this.openPopup();
     },
   };
-  
+
   openPopup() {
-    
     this.isPopupVisible = true;
   }
   closePopup() {
     this.isPopupVisible = false;
-    
   }
   getAllEvents() {
     this.agendaService.getAllEvents().subscribe((res: any) => {
@@ -70,11 +72,19 @@ export class AgendaComponent {
           start: res.startDateTime,
           end: res.endDateTime,
           id: res.id,
-          
         };
       });
       this.events = events;
     });
+  }
+
+  getCandidaciesBySupervisor() {
+    this.candidacyService
+      .getCandidaciesBySupervisor(this.idE)
+      .subscribe((res: any) => {
+        this.candidacies = res;
+        console.log(this.candidacies);
+      });
   }
 
   addEvent() {
@@ -99,8 +109,10 @@ export class AgendaComponent {
 
   ngOnInit(): void {
     this.getAllEvents();
+    this.getCandidaciesBySupervisor();
     this.frm = this.fb.group({
       idSupervisor: [this.idE, Validators.required],
+      idIntern: ['', Validators.required],
       title: ['', Validators.required],
       description: ['', Validators.required],
       startDateTime: ['', Validators.required],
