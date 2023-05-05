@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
+import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 
 @Component({
   selector: 'app-candidacy-details',
@@ -8,17 +9,36 @@ import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 })
 export class CandidacyDetailsComponent {
   idCandidacy: any;
+  intern: any;
   candidacy: any = {};
+  intershipOffers: any = [];
+  isRed = false;
 
-  constructor(private candidacyService: CandidacyService) {
+  constructor(
+    private candidacyService: CandidacyService,
+    private visitorService: VisitorService
+  ) {
     this.idCandidacy = this.candidacyService.getSelectedCandidacy();
     console.log(this.idCandidacy);
+  }
+
+  toggleColor() {
+    this.isRed = !this.isRed;
   }
 
   getCandidacyById() {
     this.candidacyService.getById(this.idCandidacy).subscribe((res: any) => {
       this.candidacy = res;
-      console.log(this.candidacy);
+      this.visitorService
+        .getVisitorById(res.idIntern)
+        .subscribe((intern: any) => {
+          this.intern = intern;
+          this.candidacyService
+            .getInternCandidacy(intern.id)
+            .subscribe((candidacy: any) => {
+              this.intershipOffers = candidacy;
+            });
+        });
     });
   }
 

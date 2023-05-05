@@ -35,6 +35,7 @@ export class SupervisorPageComponent {
     this.showContent0 = false;
     this.showContent1 = false;
     this.showContent2 = false;
+    this.showCandidacyDetails = false;
   }
 
   public onSelectedCandidacy(event: {
