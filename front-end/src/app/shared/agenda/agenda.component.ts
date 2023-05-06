@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/core';
@@ -9,6 +9,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Status } from 'src/app/models/status';
 import { AgendaService } from '../../services/Agenda/agenda.service';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
+import { SupervisorPageComponent } from 'src/app/pages/profiles/supervisor-page/supervisor-page.component';
 
 @Component({
   selector: 'app-agenda',
@@ -17,14 +18,15 @@ import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 })
 export class AgendaComponent {
   public showForm = false;
-  events: any = [];
+  @Input() public events: any = [];
   idE: any;
-  candidacies: any = [];
+  @Input() public candidacies: any = [];
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     public agendaService: AgendaService,
     public candidacyService: CandidacyService,
+    public supervisorComponent: SupervisorPageComponent,
     private route: ActivatedRoute
   ) {
     this.idE = this.route.snapshot.paramMap.get('id');
@@ -63,45 +65,6 @@ export class AgendaComponent {
   closePopup() {
     this.isPopupVisible = false;
   }
- 
-  getEventsBySupervisor(){
-console.log("tyy fok");
-this.agendaService.getEventsBySupervisor(this.idE).subscribe((res:any)=>{
-  console.log(res);
-  const events = res.map((res: any) => {
-    return {
-      title: res.title,
-      start: res.startDateTime,
-      end: res.endDateTime,
-      id: res.id,
-    };
-  });
-  console.log(events);
-  this.events = events;
-});
-  }
-  getEventsByIntern(){
-this.agendaService.getEventsByIntern(this.idE).subscribe((res:any)=>{
-  const events = res.map((res: any) => {
-    return {
-      title: res.title,
-      start: res.startDateTime,
-      end: res.endDateTime,
-      id: res.id,
-    };
-  });
-  this.events = events;
-});
-  }
-
-  getCandidaciesBySupervisor() {
-    this.candidacyService
-      .getCandidaciesBySupervisor(this.idE)
-      .subscribe((res: any) => {
-        this.candidacies = res;
-        console.log(this.candidacies);
-      });
-  }
 
   addEvent() {
     this.agendaService.addEvent(this.frm.value).subscribe({
@@ -109,7 +72,7 @@ this.agendaService.getEventsByIntern(this.idE).subscribe((res:any)=>{
         console.log(res);
         this.status = res;
         this.frm.reset();
-        this.getEventsBySupervisor();
+        this.supervisorComponent.getEventsBySupervisor();
       },
       error: (err) => {
         this.status.statusCode = 0;
@@ -124,9 +87,6 @@ this.agendaService.getEventsByIntern(this.idE).subscribe((res:any)=>{
   }
 
   ngOnInit(): void {
-    this.getEventsBySupervisor();
-    this.getCandidaciesBySupervisor();
-    this.getEventsByIntern();
     this.frm = this.fb.group({
       idSupervisor: [this.idE, Validators.required],
       idIntern: ['', Validators.required],

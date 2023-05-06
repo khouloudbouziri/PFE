@@ -57,7 +57,12 @@
     </div>
     <div class="border mt-20"></div>
     <div class="mt-12 flex-col">
-      <button class="flex items-center mt-10">
+      <button
+        class="flex items-center mt-10"
+        (click)="
+          showContent0 = true; showContent1 = false; showContent2 = false
+        "
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
@@ -74,7 +79,10 @@
       <button
         class="flex items-center mt-10"
         (click)="
-          showContent1 = true; showContent2 = false; getInternCandidacy()
+          showContent1 = true;
+          showContent2 = false;
+          showContent0 = false;
+          getInternCandidacy()
         "
       >
         <svg
@@ -93,7 +101,10 @@
       <button
         class="flex items-center mt-10"
         (click)="
-          showContent1 = false; showContent2 = true; getInternFavoriteOffers()
+          showContent1 = false;
+          showContent2 = true;
+          showContent0 = false;
+          getInternFavoriteOffers()
         "
       >
         <svg
@@ -111,15 +122,15 @@
       </button>
     </div>
   </section>
-  
+
   <section
     class="w-3/4 ml-10 bg-gradient-to-b from-[#FFFFFF] rounded-2xl relative"
   >
-  <ng-container *ngIf="showContent0">
-    <div class="m-6">
-      <app-agenda></app-agenda>
-    </div>
-  </ng-container>
+    <ng-container *ngIf="showContent0">
+      <div class="m-6">
+        <app-agenda [events]="events"></app-agenda>
+      </div>
+    </ng-container>
 
     <ng-container *ngIf="showContent1">
       <div class="mt-5">

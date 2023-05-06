@@ -1,9 +1,10 @@
-<full-calendar
-  #calendar
-  [options]="calendarOptions"
-  [events]="events"
-></full-calendar>
-
+<ng-container *ngIf="events">
+  <full-calendar
+    #calendar
+    [options]="calendarOptions"
+    [events]="events"
+  ></full-calendar>
+</ng-container>
 <form
   [formGroup]="frm"
   (ngSubmit)="addEvent()"

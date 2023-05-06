@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AgendaService } from 'src/app/services/Agenda/agenda.service';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
@@ -11,8 +12,9 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 })
 export class InternPageComponent {
   id: any;
+  events: any = [];
   public intershipOffers: any = [];
-  showContent0=true;
+  showContent0 = true;
   showContent1 = false;
   showContent2 = false;
 
@@ -20,6 +22,7 @@ export class InternPageComponent {
     public authService: AuthService,
     public candidacyService: CandidacyService,
     public intershipOfferService: IntershipOfferService,
+    public agendaService: AgendaService,
     private route: ActivatedRoute
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -40,5 +43,21 @@ export class InternPageComponent {
       });
   }
 
-  ngOnInit(): void {}
+  getEventsByIntern() {
+    this.agendaService.getEventsByIntern(this.id).subscribe((res: any) => {
+      const events = res.map((res: any) => {
+        return {
+          title: res.title,
+          start: res.startDateTime,
+          end: res.endDateTime,
+          id: res.id,
+        };
+      });
+      this.events = events;
+    });
+  }
+
+  ngOnInit(): void {
+    this.getEventsByIntern();
+  }
 }

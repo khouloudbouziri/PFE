@@ -7,6 +7,7 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 // import function to register Swiper custom elements
 import { register } from 'swiper/element/bundle';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
+import { AgendaService } from 'src/app/services/Agenda/agenda.service';
 // register Swiper custom elements
 register();
 
@@ -19,6 +20,8 @@ export class SupervisorPageComponent {
   id: any;
   candidacy: any;
   public SupervisorIntershipOffers: any = [];
+  events: any = [];
+  candidacies: any = [];
   showContent0 = true;
   showContent1 = false;
   showContent2 = false;
@@ -54,7 +57,9 @@ export class SupervisorPageComponent {
   constructor(
     public authService: AuthService,
     private route: ActivatedRoute,
-    private intershipService: IntershipOfferService
+    private intershipService: IntershipOfferService,
+    private agendaService: AgendaService,
+    private candidacyService: CandidacyService
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -65,5 +70,33 @@ export class SupervisorPageComponent {
     });
   }
 
-  ngOnInit() {}
+  getEventsBySupervisor() {
+    this.agendaService.getEventsBySupervisor(this.id).subscribe((res: any) => {
+      console.log(res);
+      const events = res.map((res: any) => {
+        return {
+          title: res.title,
+          start: res.startDateTime,
+          end: res.endDateTime,
+          id: res.id,
+        };
+      });
+      console.log(events);
+      this.events = events;
+      this.getCandidaciesBySupervisor();
+    });
+  }
+
+  getCandidaciesBySupervisor() {
+    this.candidacyService
+      .getCandidaciesBySupervisor(this.id)
+      .subscribe((res: any) => {
+        this.candidacies = res;
+        console.log(this.candidacies);
+      });
+  }
+
+  ngOnInit() {
+    this.getEventsBySupervisor();
+  }
 }
