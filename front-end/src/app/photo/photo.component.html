@@ -10,19 +10,15 @@
             </label>
         </div>
         <input id="file" class="peer w-full bg-transparent  focus:outline-none  hidden" type="file"
-            (change)="onFileChanged($event) ; getImage(); toggleContent(); ">
+            (change)="onFileChanged($event) ;getImage(); toggleContent(); ">
 
 
         <div class="container row">
             <div class="flex justifyCenter ">
                 <div *ngIf=retrievedImage>
                     <img [src]="retrievedImage">
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--<div *ngFor="let image of imagesf">
-    <img [src]="image.retrievedImage" alt="image">
-  </div>-->

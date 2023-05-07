@@ -12,7 +12,7 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 })
 export class InternPageComponent {
   id: any;
-  events: any = [];
+
   public intershipOffers: any = [];
   showContent0 = true;
   showContent1 = false;
@@ -43,21 +43,7 @@ export class InternPageComponent {
       });
   }
 
-  getEventsByIntern() {
-    this.agendaService.getEventsByIntern(this.id).subscribe((res: any) => {
-      const events = res.map((res: any) => {
-        return {
-          title: res.title,
-          start: res.startDateTime,
-          end: res.endDateTime,
-          id: res.id,
-        };
-      });
-      this.events = events;
-    });
-  }
+ 
 
-  ngOnInit(): void {
-    this.getEventsByIntern();
-  }
+  
 }

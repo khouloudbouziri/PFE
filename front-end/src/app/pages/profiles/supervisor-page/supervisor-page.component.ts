@@ -22,6 +22,7 @@ export class SupervisorPageComponent {
   public SupervisorIntershipOffers: any = [];
   events: any = [];
   candidacies: any = [];
+  candidaciesStatus: any = [];
   showContent0 = true;
   showContent1 = false;
   showContent2 = false;
@@ -70,33 +71,25 @@ export class SupervisorPageComponent {
     });
   }
 
-  getEventsBySupervisor() {
-    this.agendaService.getEventsBySupervisor(this.id).subscribe((res: any) => {
-      console.log(res);
-      const events = res.map((res: any) => {
-        return {
-          title: res.title,
-          start: res.startDateTime,
-          end: res.endDateTime,
-          id: res.id,
-        };
-      });
-      console.log(events);
-      this.events = events;
-      this.getCandidaciesBySupervisor();
-    });
-  }
+ 
+  // getCandidaciesBySupervisor() {
+  //   this.candidacyService
+  //     .getCandidaciesBySupervisor(this.id)
+  //     .subscribe((res: any) => {
+  //       this.candidacies = res;
+  //       console.log(this.candidacies);
+  //     });
+  // }
+  // getCandidaciesBySupervisorAndStatus() {
 
-  getCandidaciesBySupervisor() {
-    this.candidacyService
-      .getCandidaciesBySupervisor(this.id)
-      .subscribe((res: any) => {
-        this.candidacies = res;
-        console.log(this.candidacies);
-      });
-  }
-
+  //   this.candidacyService.getCandidacyBySupervisorAndStatus(this.id)
+  //   .subscribe((res: any) => {
+  //     this.candidaciesStatus = res;
+  //     console.log(res);
+  //     console.log("candidaciesStatus"+this.candidaciesStatus);
+  //   });
+  // }
   ngOnInit() {
-    this.getEventsBySupervisor();
+    
   }
 }

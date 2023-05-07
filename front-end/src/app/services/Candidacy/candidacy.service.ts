@@ -52,6 +52,12 @@ export class CandidacyService {
       this.baseUrl + '/auth/candidacy/supervisorCandidacies/' + idSupervisor
     );
   }
+  getCandidacyBySupervisorAndStatus(idSupervisor: number){
+    return this.http.get(
+      this.baseUrl + '/auth/candidacy/supervisorCandidacies/status/' + idSupervisor
+    );
+    console.log("d5al");
+  }
 
   public setSelectedCandidacy(candidacy: any): void {
     this.idCandidacy = candidacy;

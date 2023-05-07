@@ -18,15 +18,17 @@ import { SupervisorPageComponent } from 'src/app/pages/profiles/supervisor-page/
 })
 export class AgendaComponent {
   public showForm = false;
-  @Input() public events: any = [];
+  events: any = [];
   idE: any;
-  @Input() public candidacies: any = [];
+  candidacies: any = [];
+  candidaciesStatus: any = [];
+
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     public agendaService: AgendaService,
     public candidacyService: CandidacyService,
-    public supervisorComponent: SupervisorPageComponent,
+  //  public supervisor :SupervisorPageComponent,
     private route: ActivatedRoute
   ) {
     this.idE = this.route.snapshot.paramMap.get('id');
@@ -72,7 +74,9 @@ export class AgendaComponent {
         console.log(res);
         this.status = res;
         this.frm.reset();
-        this.supervisorComponent.getEventsBySupervisor();
+        this.getEventsByIntern();
+        this.getCandidaciesBySupervisor();
+        this.getCandidaciesBySupervisorAndStatus();
       },
       error: (err) => {
         this.status.statusCode = 0;
@@ -85,8 +89,52 @@ export class AgendaComponent {
       },
     });
   }
+  getEventsByIntern() {
+    this.events=this.agendaService.getEventsByIntern(this.idE);
+    this.events.subscribe((res: any) => {
+      const events = res.map((res: any) => {
+        return {
+          title: res.title,
+          start: res.startDateTime,
+          end: res.endDateTime,
+          id: res.id,
+        };
+      });
+      this.events = events;
+      console.log(this.events.length == 0); 
+  if (this.events.length == 0) {
+ this.events= this.agendaService.getEventsBySupervisor(this.idE);
+ this.events.subscribe((res: any) => {
+  const events = res.map((res: any) => {
+    return {
+      title: res.title,
+      start: res.startDateTime,
+      end: res.endDateTime,
+      id: res.id,
+    };
+  });
+  this.events = events;
+  console.log("le5ra"+this.events);
+});}});}
+getCandidaciesBySupervisor() {
+  this.candidacyService
+    .getCandidaciesBySupervisor(this.idE)
+    .subscribe((res: any) => {
+      this.candidacies = res;
+      console.log("heyyyy"+this.candidacies);
+    });
+}
+getCandidaciesBySupervisorAndStatus() {
 
+  this.candidacyService.getCandidacyBySupervisorAndStatus(this.idE)
+  .subscribe((res: any) => {
+    this.candidaciesStatus = res;
+    console.log(res);
+    console.log("candidaciesStatus"+this.candidaciesStatus);
+  });
+}
   ngOnInit(): void {
+    this.getEventsByIntern();
     this.frm = this.fb.group({
       idSupervisor: [this.idE, Validators.required],
       idIntern: ['', Validators.required],

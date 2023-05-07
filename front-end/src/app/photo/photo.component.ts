@@ -10,7 +10,7 @@ import { imageModel } from '../models/imageModel';
   styleUrls: ['./photo.component.css']
 })
 export class PhotoComponent {
-  @Input() images: any[] = [];
+  @Input() idIntern:any;
   constructor(private httpClient: HttpClient,private route: ActivatedRoute
     ) { this.idE = this.route.snapshot.paramMap.get('id');}
 
@@ -37,11 +37,10 @@ export class PhotoComponent {
      this.selectedFile = event.target.files[0];
      this.imageUrl = URL.createObjectURL(this.selectedFile);
      this.onUpload();
-     this.getImage();
+   
      this.toggleContent();
     }
-    
-    
+
     //Gets called when the user clicks on submit to upload the image
     onUpload() {
       console.log(this.selectedFile);
@@ -55,6 +54,7 @@ export class PhotoComponent {
         .subscribe((response) => {
           if (response.status === 200) {
             console.log(this.idE);
+            this.getImage();
             this.message = 'Image uploaded successfully';
           } else {
             this.message = 'Image not uploaded successfully';
@@ -80,9 +80,22 @@ export class PhotoComponent {
             }
           );
       }
+      getImageCandidat() {//Make a call to Sprinf Boot to get the Image Bytes.
+        this.httpClient.get('http://localhost:3333/api/v1/auth/image/get/'+ this.idIntern )
+          .subscribe(
+            res => {
+              this.retrieveResonse = res;
+              this.base64Data = this.retrieveResonse.picByte;
+              this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+             this.toggleContent;
+            }
+          );
+      }
     
       
-
+      ngAfterViewInit(){
+        this.getImageCandidat();
+      }
      
       ngOnInit() {
        this.getImage(); 

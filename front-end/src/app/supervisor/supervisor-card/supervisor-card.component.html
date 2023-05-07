@@ -19,11 +19,14 @@
           </svg>
         </button>
         
-        <img
-        [src]="decode(supervisor.image.picByte)"
-        alt=""
-        class="h-20 w-20 object-cover rounded-full mx-auto"
-      />
+        <img *ngIf="supervisor.image && supervisor.image.picByte"
+     [src]="decode(supervisor.image.picByte)"
+     alt=""
+     class="h-20 w-20 object-cover rounded-full mx-auto">
+      <img *ngIf="!supervisor.image || !supervisor.image.picByte"
+     src="assets/images/logo.png"
+     alt=""
+     class="h-20 w-20 object-cover rounded-full mx-auto">
         <span class="mx-auto mt-3 text-[#424A88] text-lg"
           >{{ supervisor.supervisor.firstname }} {{ supervisor.supervisor.lastname }}</span
         >

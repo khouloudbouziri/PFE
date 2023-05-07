@@ -36,5 +36,10 @@ public class Candidacy implements Serializable {
     private byte[] resume;
     private String linkedIn_url;
     private double score;
+    private String status;
+    
+    public void setStatus() {
+        this.status = "En cours";
+    }
 
 }

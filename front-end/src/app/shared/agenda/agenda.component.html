@@ -1,10 +1,10 @@
-<ng-container *ngIf="events">
+
   <full-calendar
     #calendar
     [options]="calendarOptions"
     [events]="events"
-  ></full-calendar>
-</ng-container>
+    ></full-calendar>
+
 <form
   [formGroup]="frm"
   (ngSubmit)="addEvent()"
@@ -98,7 +98,7 @@
       </div>
       <div class="flex flex-col mt-6 ml-3 relative">
         <select
-          id="offreid"
+          id="idIntern"
           class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
           autocomplete="off"
           formControlName="idIntern"
@@ -114,7 +114,7 @@
         <label
           for="idIntern"
           class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
-          >offre<span class="text-[#E5302D] ml-1">*</span></label
+          >Stagiaire<span class="text-[#E5302D] ml-1">*</span></label
         >
       </div>
     </div>
@@ -183,7 +183,29 @@
           >Description<span class="text-[#E5302D] ml-1">*</span></label
         >
       </div>
-      <p>589632147</p>
+      <div class="flex flex-col mt-6 ml-3 relative">
+        <select
+          id="idIntern"
+          class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
+          autocomplete="off"
+          formControlName="idIntern"
+          required
+        
+        >
+        <option hidden>          </option>
+          <option
+            value="{{ candidacies.idIntern }}"
+            *ngFor="let candidacies of candidaciesStatus"
+          >
+            {{ candidacies.firstname }} {{ candidacies.lastname }}
+          </option>
+        </select>
+        <label
+          for="idIntern"
+          class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
+          >Stagiaire<span class="text-[#E5302D] ml-1">*</span></label
+        >
+      </div>
     </div>
     <div class="flex justify-around items-center my-20">
       <button

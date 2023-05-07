@@ -1,6 +1,28 @@
 <section class="p-10 flex-col">
   <div class="flex pl-20">
-    <app-photo></app-photo>
+    <div class="relative rounded-full">
+      <svg height="150" width="150" class="mr-6">
+        <circle
+          cx="88"
+          cy="88"
+          r="45"
+          class="fill-transparent"
+          [attr.stroke-dasharray]="283"
+          [attr.stroke-dashoffset]="
+            283 * (1 - candidacy.score)
+          "
+stroke-width="5"
+          [style.stroke]="
+            candidacy.score <= 0.5
+              ? 'red'
+              : candidacy.score <= 0.7
+              ? 'orange'
+              : 'green'
+          "
+        />
+      </svg>
+  <div  class="h-20 w-20 object-cover rounded-full absolute top-12 left-12 mx-auto">
+    <app-photo [idIntern]="idIntern"></app-photo></div></div>
     <div class="flex flex-col justify-center ml-24">
       <span class="text-lg mb-2 text-[#455A64]"
         >{{ candidacy.firstname }} {{ candidacy.lastname }}</span

@@ -42,7 +42,7 @@ public class SupervisorService implements SupervisorServiceInterface {
         return supervisorRepository.findById(id)
                 .orElseThrow(() -> new VisitorNotFoundException("Encadrant avec l'id" + id + "n'existe pas"));
     }
-    
+
     public List<IntershipOffre> getIntershipOffers(Long id) {
         List<IntershipOffre> allIntershipOffers = intershipOfferRepository.findAll();
         Optional<Supervisor> supervisor = supervisorRepository.findById(id);
@@ -59,24 +59,33 @@ public class SupervisorService implements SupervisorServiceInterface {
     }
 
     public List<SupervisorHelper> findSupervisorByIdCompany(Long id) {
-        System.out.println("jjjjjjjjjjjjjjjjjjjjjjjj");
         Optional<List<Supervisor>> s= supervisorRepository.findAllByVisitor(id);
         List<SupervisorHelper> listSup = new ArrayList<>();
         s.ifPresent(sup->{
-              System.out.println("1");
-              for (int i=0;i<sup.size();i++){
-            SupervisorHelper sh=new SupervisorHelper();
-
-            sh.setSupervisor(sup.get(i));
-            System.out.println(sh.getSupervisor());
-            final Optional<ImageModel> retrievedImage = imageRepository.findByIdE((sup.get(i)).getId());
-                retrievedImage.get().setPicByte(decompressBytes(retrievedImage.get().getPicByte()));
-                System.out.println("ret1"+retrievedImage);
-                sh.setImage(retrievedImage);
-                System.out.println("ret"+retrievedImage);
+            for (int i=0; i<sup.size(); i++) {
+                System.out.println("d5alt");
+                SupervisorHelper sh = new SupervisorHelper();
+                sh.setSupervisor(sup.get(i));
+                
+                final Optional<ImageModel> retrievedImage = imageRepository.findByIdE((sup.get(i)).getId());
+                if(retrievedImage.isPresent()) {
+                    ImageModel image = retrievedImage.get();
+                    if(image.getIdE() != null) {
+                        System.out.println("loul" + image.getName());
+                        image.setPicByte(decompressBytes(image.getPicByte()));
+                        sh.setImage(Optional.of(image));
+                        System.out.println("setted");
+                    } 
+                } else {
+                    
+                    sh.setImage(imageRepository.findById((long) 22));
+                    System.out.println("thenya" + imageRepository.findById((long) 22).get().getName());
+                }
+                
                 listSup.add(sh);
-                System.out.println("list"+listSup);
-     } });
+                System.out.println("added");
+            }
+             });
                 return listSup;}
 
     public Supervisor updateSupervisor(Supervisor supervisor) {
@@ -86,6 +95,7 @@ public class SupervisorService implements SupervisorServiceInterface {
     public void deleteSupervisor(Long id) {
         supervisorRepository.deleteById(id);
     }
+
     public static byte[] decompressBytes(byte[] data) {
         Inflater inflater = new Inflater();
         inflater.setInput(data);

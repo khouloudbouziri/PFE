@@ -69,5 +69,9 @@ public class CandidacyController {
     public ResponseEntity<List<Candidacy>> getCandidaciesBySupervisor(@PathVariable("id") Long idSupervisor) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidaciesBySupervisor(idSupervisor));
     }
+    @GetMapping("/supervisorCandidacies/status/{id}")
+    public ResponseEntity<List<Candidacy>> getCandidaciesBySupervisorAndStatus(@PathVariable("id") Long idSupervisor) {
+        return ResponseEntity.ok(candidacyServiceImpl.getCandidaciesBySupervisorAndStatus(idSupervisor));
+    }
 
 }

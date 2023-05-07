@@ -10,12 +10,14 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 export class CandidacyDetailsComponent {
   idCandidacy: any;
   intern: any;
+  idIntern: any;
   candidacy: any = {};
   intershipOffers: any = [];
   isRed = true;
   showInternDeails = true;
   showInternFollowUp = false;
-
+  
+ 
   constructor(
     private candidacyService: CandidacyService,
     private visitorService: VisitorService
@@ -35,6 +37,8 @@ export class CandidacyDetailsComponent {
         .getVisitorById(res.idIntern)
         .subscribe((intern: any) => {
           this.intern = intern;
+          console.log(this.intern);
+          this.idIntern=intern.id;
           this.candidacyService
             .getInternCandidacy(intern.id)
             .subscribe((candidacy: any) => {
