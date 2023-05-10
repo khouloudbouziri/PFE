@@ -76,22 +76,32 @@ public class CandidacyService implements CandidacyServiceImpl {
         List<Candidacy> candidacies = candidacyRepository.findAllByIdIntershipOffer(id_offer);
         List<CandidacyHelper> listCandidat = new ArrayList<>();
         for (Candidacy candidacy : candidacies) {
-            System.out.println("d5alt");
             CandidacyHelper candidacyHelper = new CandidacyHelper();
             candidacyHelper.setCandidacy(candidacy);
-            final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
-            if(retrievedImage!=null){
-                System.out.println(retrievedImage.get().getName());
-            retrievedImage.get().setPicByte(decompressBytes(retrievedImage.get().getPicByte()));
-            candidacyHelper.setImage(retrievedImage.get().getPicByte());}
-           // System.out.println(candidacyHelper.getImage());}
-            else{  candidacyHelper.setImage(imageRepository.findById((long) 22));
-            System.out.println(imageRepository.findById((long) 22).get().getName());}
+            System.out.println(candidacyHelper.getCandidacy());
+               final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
+            if(retrievedImage.isPresent()) {
+              byte[] image = retrievedImage.get().getPicByte();
+        
+                   // System.out.println("loul" + image.getName());
+                    //image.setPicByte(decompressBytes(image.getPicByte()));
+                    candidacyHelper.setImage(decompressBytes(image));
+                    System.out.println("setted");
+                } 
+             
+             else {
+             
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
+                System.out.println(candidacyHelper.getImage());
+             }
             listCandidat.add(candidacyHelper);
         }
 
         return listCandidat;
     }
+    
+    
+    
 
     public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor) {
         List<IntershipOffre> supervisorOffers = intershipOfferRepository.findBySupervisor(idSupervisor);

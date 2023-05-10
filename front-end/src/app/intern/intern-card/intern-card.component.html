@@ -36,7 +36,7 @@
                 [style.stroke]="
                   candidacie.candidacy.score <= 0.5
                     ? 'red'
-                    : candidacie.score <= 0.7
+                    : candidacie.candidacy.score <= 0.7
                     ? 'orange'
                     : 'green'
                 "
@@ -51,7 +51,8 @@
           </div>
           <span class="mx-auto text-[#424A88] text-lg"
             >{{ candidacie.candidacy.firstname }}
-            {{ candidacie.candidacy.lastname }}</span
+            {{ candidacie.candidacy.lastname }}<br/>
+            </span
           >
           <div class="flex mt-4">
             <svg

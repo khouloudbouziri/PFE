@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CandidacyHelper {
     private Candidacy candidacy;
-    private Object image;
+    private byte[] image;
 }

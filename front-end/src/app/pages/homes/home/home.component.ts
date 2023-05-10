@@ -10,6 +10,7 @@ import { IntershipOffer } from 'src/app/models/IntershipOffer';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
 import { Console } from 'console';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -26,7 +27,7 @@ export class HomeComponent {
     private fb: FormBuilder,
     private snackBar: MatSnackBar
   ) {}
-
+  
   get f() {
     return this.frm.controls;
   }

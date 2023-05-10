@@ -43,6 +43,8 @@ import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-off
 import { InternCardComponent } from './intern/intern-card/intern-card.component';
 import { CandidacyDetailsComponent } from './candidacy/candidacy-details/candidacy-details.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +77,7 @@ import { CandidacyDetailsComponent } from './candidacy/candidacy-details/candida
     SupervisorOfferDetailsComponent,
     InternCardComponent,
     CandidacyDetailsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -87,6 +90,8 @@ import { CandidacyDetailsComponent } from './candidacy/candidacy-details/candida
     MatSnackBarModule,
     FullCalendarModule,
     MatStepperModule,
+   
+    
   ],
   providers: [{ provide: MatStepperIntl }],
   bootstrap: [AppComponent],

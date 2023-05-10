@@ -28,6 +28,7 @@
     "@syncfusion/ej2-angular-calendars": "^21.1.37",
     "@syncfusion/ej2-angular-schedule": "^21.1.37",
     "@syncfusion/ej2-material-theme": "~21.1.37",
+    "angular-star-rating": "^6.0.0",
     "googleapis": "^114.0.0",
     "mime-types": "^2.1.35",
     "moment": "^2.29.4",
