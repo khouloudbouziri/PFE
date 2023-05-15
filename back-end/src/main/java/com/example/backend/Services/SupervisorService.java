@@ -59,34 +59,35 @@ public class SupervisorService implements SupervisorServiceInterface {
     }
 
     public List<SupervisorHelper> findSupervisorByIdCompany(Long id) {
-        Optional<List<Supervisor>> s= supervisorRepository.findAllByVisitor(id);
+        Optional<List<Supervisor>> s = supervisorRepository.findAllByVisitor(id);
         List<SupervisorHelper> listSup = new ArrayList<>();
-        s.ifPresent(sup->{
-            for (int i=0; i<sup.size(); i++) {
+        s.ifPresent(sup -> {
+            for (int i = 0; i < sup.size(); i++) {
                 System.out.println("d5alt");
                 SupervisorHelper sh = new SupervisorHelper();
                 sh.setSupervisor(sup.get(i));
-                
+
                 final Optional<ImageModel> retrievedImage = imageRepository.findByIdE((sup.get(i)).getId());
-                if(retrievedImage.isPresent()) {
+                if (retrievedImage.isPresent()) {
                     ImageModel image = retrievedImage.get();
-                    if(image.getIdE() != null) {
+                    if (image.getIdE() != null) {
                         System.out.println("loul" + image.getName());
                         image.setPicByte(decompressBytes(image.getPicByte()));
                         sh.setImage(Optional.of(image));
                         System.out.println("setted");
-                    } 
+                    }
                 } else {
-                    
-                    sh.setImage(imageRepository.findById((long) 77));
-                    System.out.println("thenya" + imageRepository.findById((long) 77).get().getName());
+
+                    sh.setImage(imageRepository.findById((long) 1));
+                    System.out.println("thenya" + imageRepository.findById((long) 1).get().getName());
                 }
-                
+
                 listSup.add(sh);
                 System.out.println("added");
             }
-             });
-                return listSup;}
+        });
+        return listSup;
+    }
 
     public Supervisor updateSupervisor(Supervisor supervisor) {
         return supervisorRepository.save(supervisor);

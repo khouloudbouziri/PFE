@@ -22,16 +22,18 @@ export class AgendaComponent {
   idE: any;
   candidacies: any = [];
   candidaciesStatus: any = [];
+  type: string = 'Entretien';
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     public agendaService: AgendaService,
     public candidacyService: CandidacyService,
-  //  public supervisor :SupervisorPageComponent,
+    //  public supervisor :SupervisorPageComponent,
     private route: ActivatedRoute
   ) {
     this.idE = this.route.snapshot.paramMap.get('id');
+    console.log(this.idE);
   }
 
   frm!: FormGroup;
@@ -58,6 +60,8 @@ export class AgendaComponent {
     selectable: true,
     dateClick: () => {
       this.openPopup();
+      this.getCandidaciesBySupervisor();
+      this.getCandidaciesBySupervisorAndStatus();
     },
   };
 
@@ -68,6 +72,11 @@ export class AgendaComponent {
     this.isPopupVisible = false;
   }
 
+  seType() {
+    this.type = 'Reunion';
+    this.frm.get('type')?.setValue(this.type);
+  }
+
   addEvent() {
     this.agendaService.addEvent(this.frm.value).subscribe({
       next: (res) => {
@@ -75,8 +84,8 @@ export class AgendaComponent {
         this.status = res;
         this.frm.reset();
         this.getEventsByIntern();
-        this.getCandidaciesBySupervisor();
-        this.getCandidaciesBySupervisorAndStatus();
+        //this.getCandidaciesBySupervisor();
+        //this.getCandidaciesBySupervisorAndStatus();
       },
       error: (err) => {
         this.status.statusCode = 0;
@@ -90,7 +99,7 @@ export class AgendaComponent {
     });
   }
   getEventsByIntern() {
-    this.events=this.agendaService.getEventsByIntern(this.idE);
+    this.events = this.agendaService.getEventsByIntern(this.idE);
     this.events.subscribe((res: any) => {
       const events = res.map((res: any) => {
         return {
@@ -101,38 +110,44 @@ export class AgendaComponent {
         };
       });
       this.events = events;
-      console.log(this.events.length == 0); 
-  if (this.events.length == 0) {
- this.events= this.agendaService.getEventsBySupervisor(this.idE);
- this.events.subscribe((res: any) => {
-  const events = res.map((res: any) => {
-    return {
-      title: res.title,
-      start: res.startDateTime,
-      end: res.endDateTime,
-      id: res.id,
-    };
-  });
-  this.events = events;
-  console.log("le5ra"+this.events);
-});}});}
-getCandidaciesBySupervisor() {
-  this.candidacyService
-    .getCandidaciesBySupervisor(this.idE)
-    .subscribe((res: any) => {
-      this.candidacies = res;
-      console.log("heyyyy"+this.candidacies);
+      console.log(this.events.length == 0);
+      if (this.events.length == 0) {
+        this.events = this.agendaService.getEventsBySupervisor(this.idE);
+        this.events.subscribe((res: any) => {
+          const events = res.map((res: any) => {
+            return {
+              title: res.title,
+              start: res.startDateTime,
+              end: res.endDateTime,
+              id: res.id,
+            };
+          });
+          this.events = events;
+          console.log('le5ra' + this.events);
+        });
+      }
     });
-}
-getCandidaciesBySupervisorAndStatus() {
+  }
 
-  this.candidacyService.getCandidacyBySupervisorAndStatus(this.idE)
-  .subscribe((res: any) => {
-    this.candidaciesStatus = res;
-    console.log(res);
-    console.log("candidaciesStatus"+this.candidaciesStatus);
-  });
-}
+  getCandidaciesBySupervisor() {
+    this.candidacyService
+      .getCandidaciesBySupervisor(this.idE)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.candidacies = res;
+        console.log('heyyyy' + this.candidacies);
+      });
+  }
+  getCandidaciesBySupervisorAndStatus() {
+    this.candidacyService
+      .getCandidacyBySupervisorAndStatus(this.idE)
+      .subscribe((res: any) => {
+        this.candidaciesStatus = res;
+        console.log(res);
+        console.log('candidaciesStatus' + this.candidaciesStatus);
+      });
+  }
+
   ngOnInit(): void {
     this.getEventsByIntern();
     this.frm = this.fb.group({
@@ -142,6 +157,8 @@ getCandidaciesBySupervisorAndStatus() {
       description: ['', Validators.required],
       startDateTime: ['', Validators.required],
       endDateTime: ['', Validators.required],
+
+      type: [this.type, Validators.required],
     });
   }
 }

@@ -45,6 +45,7 @@ public class CandidacyService implements CandidacyServiceImpl {
     public Candidacy addCandidacy(Candidacy candidacy, Long id_intershipOffer, Long id_intern) {
         candidacy.setIdIntershipOffer(id_intershipOffer);
         candidacy.setIdIntern(id_intern);
+        candidacy.setStatus("En cours");
         Optional<IntershipOffre> intershipOffer = intershipOfferRepository.findById(id_intershipOffer);
         intershipOffer.ifPresent(i -> {
             i.setCandidacy_number(i.getCandidacy_number() + 1);
@@ -79,29 +80,26 @@ public class CandidacyService implements CandidacyServiceImpl {
             CandidacyHelper candidacyHelper = new CandidacyHelper();
             candidacyHelper.setCandidacy(candidacy);
             System.out.println(candidacyHelper.getCandidacy());
-               final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
-            if(retrievedImage.isPresent()) {
-              byte[] image = retrievedImage.get().getPicByte();
-        
-                   // System.out.println("loul" + image.getName());
-                    //image.setPicByte(decompressBytes(image.getPicByte()));
-                    candidacyHelper.setImage(decompressBytes(image));
-                    System.out.println("setted");
-                } 
-             
-             else {
-             
+            final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
+            if (retrievedImage.isPresent()) {
+                byte[] image = retrievedImage.get().getPicByte();
+
+                // System.out.println("loul" + image.getName());
+                // image.setPicByte(decompressBytes(image.getPicByte()));
+                candidacyHelper.setImage(decompressBytes(image));
+                System.out.println("setted");
+            }
+
+            else {
+
                 candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
                 System.out.println(candidacyHelper.getImage());
-             }
+            }
             listCandidat.add(candidacyHelper);
         }
 
         return listCandidat;
     }
-    
-    
-    
 
     public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor) {
         List<IntershipOffre> supervisorOffers = intershipOfferRepository.findBySupervisor(idSupervisor);
@@ -114,7 +112,6 @@ public class CandidacyService implements CandidacyServiceImpl {
                     String m = "En cours";
                     if ((offer.getId_intership_offre() == candidacy.getIdIntershipOffer()) && (s.equals(m))) {
                         candidacies.add(candidacy);
-
                     }
                 }
             }
@@ -134,6 +131,7 @@ public class CandidacyService implements CandidacyServiceImpl {
                     String m = "Accepted";
                     if ((offer.getId_intership_offre() == candidacy.getIdIntershipOffer()) && (s.equals(m))) {
                         candidacies.add(candidacy);
+                        System.out.println(candidacies);
 
                     }
                 }
@@ -177,6 +175,16 @@ public class CandidacyService implements CandidacyServiceImpl {
 
     public void save(Candidacy c) {
         candidacyRepository.save(c);
+    }
+
+    public Optional<Candidacy> changeCandidacyState(Long idCandidacy) {
+        System.out.println("ok5");
+        Optional<Candidacy> candidacy = candidacyRepository.findById(idCandidacy);
+        candidacy.ifPresent(c -> {
+            c.setStatus("Accepted");
+            candidacyRepository.save(c);
+        });
+        return candidacy;
     }
 
     public static byte[] decompressBytes(byte[] data) {

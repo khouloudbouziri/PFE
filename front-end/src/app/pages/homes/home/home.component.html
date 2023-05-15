@@ -1,3 +1,8 @@
+<button
+  class="h-14 w-14 rounded-full bg-red-300"
+  (click)="getAuthenticatedUser()"
+></button>
+
 <div>
   <section class="flex justify-center">
     <div class="flex flex-col mr-64 my-16 mt-24 p-12 py-28">
@@ -6,27 +11,26 @@
         Contactez-nous !
       </h1>
       <div
-      class="flex mx-auto justify-between relative w-80 bg-white border rounded-full border-[#E5302D] m-4"
-    >
-      <div
-        class="top-0 right-0 absolute w-1/2 h-full bg-[#E5302D] rounded-full duration-500"
-      ></div>
-      <button
-        class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#E5302D]"
-        routerLink="/offerDetails"
+        class="flex mx-auto justify-between relative w-80 bg-white border rounded-full border-[#E5302D] m-4"
       >
-        Nos offres
-      </button>
-      <button
-        class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
-        routerLink="/signup"
-      >
-        CVthéque
-      </button>
+        <div
+          class="top-0 right-0 absolute w-1/2 h-full bg-[#E5302D] rounded-full duration-500"
+        ></div>
+        <button
+          class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#E5302D]"
+          routerLink="/offerDetails"
+        >
+          Nos offres
+        </button>
+        <button
+          class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
+          routerLink="/signup"
+        >
+          CVthéque
+        </button>
+      </div>
     </div>
-  </div>
-      
-    
+
     <div class="flex-col">
       <div class="img">
         <img src="../../assets/images/home1.png" alt="pas de photo" />
@@ -211,7 +215,4 @@
       </a>
     </li>
   </ul>
-
-
-
 </div>

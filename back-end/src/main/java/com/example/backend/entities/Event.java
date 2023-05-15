@@ -33,5 +33,6 @@ public class Event {
     private String description;
     private Long idSupervisor;
     private Long idIntern;
+    private String type;
 
 }

@@ -1,9 +1,8 @@
 package com.example.backend.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.naming.event.EventDirContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,19 +14,15 @@ import com.example.backend.Repositories.IntershipOfferRepository;
 import com.example.backend.ServicesImplement.EventServiceImplementation;
 import com.example.backend.entities.Candidacy;
 import com.example.backend.entities.Event;
-import com.example.backend.entities.IntershipOffre;
 
 @Service
 public class EventService implements EventServiceImplementation {
-    private static final Event Event = null;
     @Autowired
-     EventRepository eventRepository;
+    EventRepository eventRepository;
     @Autowired
     CandidacyRepository candidacyRepository;
     @Autowired
-     IntershipOfferRepository intershipOfferRepository;
-
-   
+    IntershipOfferRepository intershipOfferRepository;
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
@@ -59,19 +54,39 @@ public class EventService implements EventServiceImplementation {
         eventRepository.deleteById(id);
     }
 
-  
     public List<Event> getEventsBySupervisor(Long id) {
         return eventRepository.findByIdSupervisor(id);
     }
 
-   
     public List<Event> getEventsByIntern(Long id) {
         return eventRepository.findByIdIntern(id);
-        
+
     }
 
-    
+    public List<Event> getInternMeetingsSupervisor(Long idIntern, Long idCandidacy) {
+        Optional<Candidacy> candidacy = candidacyRepository.findById(idCandidacy);
+        List<Event> allEvents = eventRepository.findAll();
+        List<Event> internMeetings = new ArrayList<>();
+        candidacy.ifPresent(c -> {
+            for (Event event : allEvents) {
+                String type = (event.getType()).toString();
+                String m = "Reunion";
+                if ((event.getIdIntern().equals(c.getIdIntern())) && (type.equals(m))) {
+                    internMeetings.add(event);
+                }
+            }
+        });
+        return internMeetings;
+    }
 
-   
+    public List<Event> getInterEvents(Long idIntern) {
+        List<Event> allEvents = eventRepository.findByIdIntern(idIntern);
+        List<Event> events = new ArrayList<>();
+        for (Event event : allEvents) {
+            if ((event.getType()).equals("Reunion"))
+                events.add(event);
+        }
+        return events;
+    }
 
 }

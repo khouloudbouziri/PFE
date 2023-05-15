@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,9 +70,15 @@ public class CandidacyController {
     public ResponseEntity<List<Candidacy>> getCandidaciesBySupervisor(@PathVariable("id") Long idSupervisor) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidaciesBySupervisor(idSupervisor));
     }
+
     @GetMapping("/supervisorCandidacies/status/{id}")
     public ResponseEntity<List<Candidacy>> getCandidaciesBySupervisorAndStatus(@PathVariable("id") Long idSupervisor) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidaciesBySupervisorAndStatus(idSupervisor));
     }
 
+    @PutMapping("/candidacyState")
+    public ResponseEntity<Optional<Candidacy>> changeCandidacyState(@RequestParam Long idCandidacy) {
+        System.out.println("ok4");
+        return ResponseEntity.ok(candidacyServiceImpl.changeCandidacyState(idCandidacy));
+    }
 }

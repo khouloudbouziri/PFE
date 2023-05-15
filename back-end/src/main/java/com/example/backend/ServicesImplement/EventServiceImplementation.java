@@ -19,4 +19,8 @@ public interface EventServiceImplementation {
 
     public List<Event> getEventsByIntern(Long id);
 
+    public List<Event> getInternMeetingsSupervisor(Long idIntern, Long idCandidacy);
+
+    public List<Event> getInterEvents(Long idIntern);
+
 }

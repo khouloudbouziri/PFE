@@ -2,6 +2,7 @@
   class="bg-transparent mt-8 w-1/3 flex justify-around ml-96 p-10"
   orientation="vertical"
   [linear]="isLinear"
+  *ngIf="mettings"
   #stepper
 >
   <mat-step [stepControl]="firstFormGroup">
@@ -16,30 +17,66 @@
       </mat-form-field>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
+  <mat-step [stepControl]="secondFormGroup" *ngFor="let meeting of mettings">
+    <ng-template matStepLabel>
+      <button mat-button matStepperNext>
+        {{ meeting.title }}
+      </button></ng-template
+    >
+    <mat-form-field appearance="fill">
+      <mat-label>{{ meeting.description }}</mat-label>
+    </mat-form-field>
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>
+        <button mat-button matStepperNext>Valider</button></ng-template
+      >
       <mat-form-field appearance="fill">
-        <mat-label>Address</mat-label>
-        <input
-          matInput
-          formControlName="secondCtrl"
-          placeholder="Ex. 1 Main St, New York, NY"
-          required
-        />
+        <mat-label *ngIf="Accepted">Stage achevé avec succés</mat-label>
       </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
-      </div>
     </form>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <!-- <button mat-button (click)="stepper.reset();">Reset</button>-->
-    </div>
+</mat-stepper>
+
+<mat-stepper
+  class="bg-transparent mt-8 w-1/3 flex justify-around ml-96 p-10"
+  orientation="vertical"
+  [linear]="isLinear"
+  *ngIf="internMeetings"
+  #stepper
+>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>
+        <button mat-button matStepperNext disabled>Accepté</button></ng-template
+      >
+      <mat-form-field appearance="fill">
+        <mat-label *ngIf="Accepted">Entretien bien passée</mat-label>
+      </mat-form-field>
+    </form>
+  </mat-step>
+  <mat-step
+    [stepControl]="secondFormGroup"
+    *ngFor="let internMeeting of internMeetings"
+  >
+    <ng-template matStepLabel>
+      <button mat-button matStepperNext>
+        {{ internMeeting.title }}
+      </button></ng-template
+    >
+    <mat-form-field appearance="fill">
+      <mat-label>{{ internMeeting.description }}</mat-label>
+    </mat-form-field>
+  </mat-step>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>
+        <button mat-button matStepperNext disabled>Validé</button></ng-template
+      >
+      <mat-form-field appearance="fill">
+        <mat-label *ngIf="Accepted">Stage achevé avec succés</mat-label>
+      </mat-form-field>
+    </form>
   </mat-step>
 </mat-stepper>

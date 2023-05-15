@@ -6,4 +6,5 @@ export interface Event {
   description: string;
   startDateTime: Date;
   endDateTime: Date;
+  type: string;
 }

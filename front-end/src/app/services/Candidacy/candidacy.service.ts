@@ -52,11 +52,13 @@ export class CandidacyService {
       this.baseUrl + '/auth/candidacy/supervisorCandidacies/' + idSupervisor
     );
   }
-  getCandidacyBySupervisorAndStatus(idSupervisor: number){
+  getCandidacyBySupervisorAndStatus(idSupervisor: number) {
     return this.http.get(
-      this.baseUrl + '/auth/candidacy/supervisorCandidacies/status/' + idSupervisor
+      this.baseUrl +
+        '/auth/candidacy/supervisorCandidacies/status/' +
+        idSupervisor
     );
-    console.log("d5al");
+    console.log('d5al');
   }
 
   public setSelectedCandidacy(candidacy: any): void {
@@ -65,5 +67,10 @@ export class CandidacyService {
 
   public getSelectedCandidacy(): any {
     return this.idCandidacy;
+  }
+
+  public changeCandidacyState(idCandidacy: number): Observable<Candidacy> {
+    const url = `${this.baseUrl}/auth/candidacy/candidacyState?idCandidacy=${idCandidacy}`;
+    return this.http.put<Candidacy>(url, null);
   }
 }

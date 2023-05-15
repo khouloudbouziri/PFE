@@ -60,7 +60,10 @@
       <button
         class="flex items-center mt-10"
         (click)="
-          showContent0 = true; showContent1 = false; showContent2 = false
+          showContent0 = true;
+          showContent1 = false;
+          showContent2 = false;
+          showContent3 = false
         "
       >
         <svg
@@ -82,6 +85,7 @@
           showContent1 = true;
           showContent2 = false;
           showContent0 = false;
+          showContent3 = false;
           getInternCandidacy()
         "
       >
@@ -101,9 +105,33 @@
       <button
         class="flex items-center mt-10"
         (click)="
+          showContent3 = true;
+          showContent1 = false;
+          showContent2 = false;
+          showContent0 = false;
+          getInterEvents()
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          height="24"
+          width="24"
+        >
+          <path
+            d="M13 21V23H11V21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H9C10.1947 3 11.2671 3.52375 12 4.35418C12.7329 3.52375 13.8053 3 15 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H13ZM20 19V5H15C13.8954 5 13 5.89543 13 7V19H20ZM11 19V7C11 5.89543 10.1046 5 9 5H4V19H11Z"
+            fill="rgba(66,74,136,1)"
+          ></path>
+        </svg>
+        <span class="ml-3 pt-1">Etat actuel</span>
+      </button>
+      <button
+        class="flex items-center mt-10"
+        (click)="
           showContent1 = false;
           showContent2 = true;
           showContent0 = false;
+          showContent3 = false;
           getInternFavoriteOffers()
         "
       >
@@ -125,7 +153,7 @@
 
   <section
     class="w-3/4 ml-10 bg-gradient-to-b from-[#FFFFFF] rounded-2xl relative"
-  > 
+  >
     <ng-container *ngIf="showContent0">
       <div class="m-6">
         <app-agenda></app-agenda>
@@ -140,6 +168,11 @@
     <ng-container *ngIf="showContent2">
       <div class="mt-5">
         <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="showContent3">
+      <div class="mx-auto">
+        <app-stepper [internMeetings]="internMeetings"></app-stepper>
       </div>
     </ng-container>
   </section>

@@ -8,10 +8,8 @@
           r="45"
           class="fill-transparent"
           [attr.stroke-dasharray]="283"
-          [attr.stroke-dashoffset]="
-            283 * (1 - candidacy.score)
-          "
-stroke-width="5"
+          [attr.stroke-dashoffset]="283 * (1 - candidacy.score)"
+          stroke-width="5"
           [style.stroke]="
             candidacy.score <= 0.5
               ? 'red'
@@ -21,14 +19,18 @@ stroke-width="5"
           "
         />
       </svg>
-  <div  class="h-20 w-20 object-cover rounded-full absolute top-12 left-12 mx-auto">
-    <app-photo [idIntern]="idIntern"></app-photo></div></div>
+      <div
+        class="h-20 w-20 object-cover rounded-full absolute top-12 left-12 mx-auto"
+      >
+        <app-photo [idIntern]="idIntern"></app-photo>
+      </div>
+    </div>
     <div class="flex flex-col justify-center ml-24">
       <span class="text-lg mb-2 text-[#455A64]"
-        >{{ candidacy.firstname }} {{ candidacy.lastname }}</span
+        >{{ candidacy?.firstname }} {{ candidacy?.lastname }}</span
       >
       <span class="mb-2 text-[#455A64] opacity-70">{{
-        intern.universityDept
+        intern?.universityDept
       }}</span>
       <span class="flex items-center text-[#455A64]">
         <svg
@@ -43,7 +45,7 @@ stroke-width="5"
             fill="rgba(66,74,136,1)"
           ></path>
         </svg>
-        {{ candidacy.address }}</span
+        {{ candidacy?.address }}</span
       >
     </div>
   </div>
@@ -64,7 +66,10 @@ stroke-width="5"
       [ngClass]="{ 'text-[#E5302D]': !isRed, 'text-[#424A88]': isRed }"
       class="text-[#424A88] ml-16"
       (click)="
-        showInternFollowUp = true; showInternDeails = false; toggleColor()
+        showInternFollowUp = true;
+        showInternDeails = false;
+        toggleColor();
+        getInternMeetings()
       "
     >
       Suivi
@@ -156,18 +161,20 @@ stroke-width="5"
         </li>
       </ul>
       <ul class="mt-8">
-        <li class="flex">{{ candidacy.firstname }} {{ candidacy.lastname }}</li>
-        <li class="flex mt-8">
-          {{ intern.email }}
+        <li class="flex">
+          {{ candidacy?.firstname }} {{ candidacy?.lastname }}
         </li>
         <li class="flex mt-8">
-          {{ candidacy.phone_number }}
+          {{ intern?.email }}
         </li>
         <li class="flex mt-8">
-          {{ intern.university }}
+          {{ candidacy?.phone_number }}
         </li>
         <li class="flex mt-8">
-          {{ candidacy.address }}
+          {{ intern?.university }}
+        </li>
+        <li class="flex mt-8">
+          {{ candidacy?.address }}
         </li>
       </ul>
     </div>
@@ -177,6 +184,9 @@ stroke-width="5"
     <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
   </section>
   <section *ngIf="showInternFollowUp">
-    <app-stepper></app-stepper>
+    <app-stepper
+      [idCandidacy]="idCandidacy"
+      [mettings]="mettings"
+    ></app-stepper>
   </section>
 </section>

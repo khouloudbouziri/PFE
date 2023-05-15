@@ -26,5 +26,7 @@ public interface CandidacyServiceImpl {
 
     public List<Candidacy> getCandidaciesBySupervisor(Long idSupervisor);
 
-    public List<Candidacy>  getCandidaciesBySupervisorAndStatus(Long idSupervisor);
+    public List<Candidacy> getCandidaciesBySupervisorAndStatus(Long idSupervisor);
+
+    public Optional<Candidacy> changeCandidacyState(Long idCandidacy);
 }

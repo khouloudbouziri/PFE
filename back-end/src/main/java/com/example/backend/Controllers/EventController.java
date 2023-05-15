@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +22,6 @@ import com.example.backend.entities.Event;
 public class EventController {
     @Autowired
     private EventServiceImplementation eventServiceImplementation;
-
-   
 
     @GetMapping("/all")
     public ResponseEntity<List<Event>> getAllEvents() {
@@ -38,13 +37,26 @@ public class EventController {
     public ResponseEntity<Event> addEvent(@RequestBody Event event) {
         return ResponseEntity.ok(eventServiceImplementation.addEvent(event));
     }
+
     @GetMapping("/supervisor/{id}")
     public ResponseEntity<List<Event>> getEventsBySupervisor(@PathVariable("id") Long id) {
         return ResponseEntity.ok(eventServiceImplementation.getEventsBySupervisor(id));
     }
+
     @GetMapping("/intern/{id}")
     public ResponseEntity<List<Event>> getEventsByIntern(@PathVariable("id") Long id) {
         return ResponseEntity.ok(eventServiceImplementation.getEventsByIntern(id));
     }
- 
+
+    @GetMapping("/internMetingsSupervisor")
+    public ResponseEntity<List<Event>> getInternMeetingsSupervisor(@RequestParam Long idIntern,
+            @RequestParam Long idCandidacy) {
+        return ResponseEntity.ok(eventServiceImplementation.getInternMeetingsSupervisor(idIntern, idCandidacy));
+    }
+
+    @GetMapping("/internMeetings/{idIntern}")
+    public ResponseEntity<List<Event>> getInterEvents(@PathVariable("idIntern") Long idIntern) {
+        return ResponseEntity.ok(eventServiceImplementation.getInterEvents(idIntern));
+    }
+
 }

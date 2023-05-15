@@ -144,8 +144,12 @@
         *ngIf="isRH; else supervisorSelect"
         required
       >
-        <option *ngFor="let supervisor of supervisors" [value]="supervisor.supervisor.id">
-          Mme/ M.{{ supervisor.supervisor.firstname }} {{ supervisor.supervisor.lastname }}
+        <option
+          *ngFor="let supervisor of supervisors"
+          [value]="supervisor.supervisor.id"
+        >
+          Mme/ M.{{ supervisor.supervisor.firstname }}
+          {{ supervisor.supervisor.lastname }}
         </option>
       </select>
       <ng-template #supervisorSelect>
