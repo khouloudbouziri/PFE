@@ -150,7 +150,7 @@ public class CandidacyService implements CandidacyServiceImpl {
     }
     public List<CandidacyHelper> getAll() {
        
-        List<Candidacy> AllCandidacies = candidacyRepository.findAllDistinct();
+        List<Candidacy> AllCandidacies = candidacyRepository.findAll();
         List<CandidacyHelper> candidacies = new ArrayList<>();
       
         for (Candidacy candidacy : AllCandidacies) {
@@ -209,8 +209,10 @@ public class CandidacyService implements CandidacyServiceImpl {
         List<CandidacyHelper> list= this.getAll();
         CandidacyHelper i=new CandidacyHelper();
         for (int index = 0; index < list.size(); index++) {
-            if (list.get(index).getCandidacy().getIdCandidacy() == idC) {
-                System.out.println("hhhhhhhhhhhhhhhhhhhhhhh"+list.get(index));
+            System.out.println(list.get(index).getCandidacy().getIdCandidacy() == idC);
+            System.out.println(list.get(index).getCandidacy().getIdCandidacy().longValue() +"hhhhhhhhhhhhh"+ idC.longValue());
+            if (list.get(index).getCandidacy().getIdCandidacy().longValue() == idC.longValue()) {
+                System.out.println("hhhhhhhhhhhhhhhhhhhhhhh");
                 i=  list.get(index);
             }
              

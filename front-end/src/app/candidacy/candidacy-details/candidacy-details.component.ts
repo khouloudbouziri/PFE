@@ -38,7 +38,7 @@ export class CandidacyDetailsComponent {
       this.candidacy = res;
       console.log(res)
       this.visitorService
-        .getVisitorById(res.idIntern)
+        .getVisitorById(res.candidacy.idIntern)
         .subscribe((intern: any) => {
           this.intern = intern;
           console.log(this.intern);
