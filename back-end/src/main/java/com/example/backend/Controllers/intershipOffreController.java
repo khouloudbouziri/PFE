@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend.Services.IntershipOffreService;
 import com.example.backend.ServicesImplement.IntershipOffreServiceImpl;
 import com.example.backend.entities.IntershipOffre;
+import com.example.backend.entities.IntershipOffreHelper;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -36,14 +37,14 @@ public class intershipOffreController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<IntershipOffre>> getAllIntershipOffers() {
-        List<IntershipOffre> intershipOffres = intershipOffreServiceImp.getAllIntershipOffers();
+    public ResponseEntity<List<IntershipOffreHelper>> getAllIntershipOffers() {
+        List<IntershipOffreHelper> intershipOffres = intershipOffreServiceImp.getAllIntershipOffers();
         return new ResponseEntity<>(intershipOffres, HttpStatus.OK);
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<IntershipOffre> getIntershipOfferById(@PathVariable("id") Long id) {
-        IntershipOffre intershipOffer = intershipOffreServiceImp.getIntershipOfferById(id);
+    public ResponseEntity<IntershipOffreHelper> getIntershipOfferById(@PathVariable("id") Long id) {
+        IntershipOffreHelper intershipOffer = intershipOffreServiceImp.getIntershipOfferById(id);
         return new ResponseEntity<>(intershipOffer, HttpStatus.OK);
     }
 
@@ -74,8 +75,8 @@ public class intershipOffreController {
     }
 
     @GetMapping("favoriteOffers/{id}")
-    public ResponseEntity<List<IntershipOffre>> getInternFavoriteOffers(@PathVariable("id") Long id) {
-        List<IntershipOffre> internFavoriteOffers = intershipOffreServiceImp.getInternFavoriteOffers(id);
+    public ResponseEntity<List<IntershipOffreHelper>> getInternFavoriteOffers(@PathVariable("id") Long id) {
+        List<IntershipOffreHelper> internFavoriteOffers = intershipOffreServiceImp.getInternFavoriteOffers(id);
         return new ResponseEntity<>(internFavoriteOffers, HttpStatus.OK);
 
     }

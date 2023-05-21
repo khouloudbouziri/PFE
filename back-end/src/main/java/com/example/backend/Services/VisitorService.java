@@ -18,9 +18,11 @@ import com.example.backend.entities.Visitor;
 
 @Service
 public class VisitorService implements VisitorServiceImp {
-
+    @Autowired
     private final VisitorRepository visitorRepository;
+    @Autowired
     private final IntershipOfferRepository intershipOfferRepository;
+    @Autowired
     private final SupervisorRepo supervisorRepository;
 
     @Autowired

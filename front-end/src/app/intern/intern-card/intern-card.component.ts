@@ -19,7 +19,7 @@ export class InternCardComponent {
 
   getCandidacy(id: number) {
     this.idCandidacy = id;
-    console.log(this.idCandidacy);
+    console.log("hhhhhhhhhhhhhhhhhhh"+this.idCandidacy);
   }
 
   SelectedCandidacy(): void {

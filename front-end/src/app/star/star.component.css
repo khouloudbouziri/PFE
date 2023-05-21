@@ -1,0 +1,14 @@
+.rating {
+  font-size: 50px;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star:hover,
+.star.checked::before,
+.star.checked ~ .star::after {
+  content: "\2605";
+  color: gold;
+}

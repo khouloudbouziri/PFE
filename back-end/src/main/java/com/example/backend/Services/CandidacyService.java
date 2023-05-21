@@ -20,18 +20,24 @@ import com.example.backend.entities.Candidacy;
 import com.example.backend.entities.CandidacyHelper;
 import com.example.backend.entities.ImageModel;
 import com.example.backend.entities.IntershipOffre;
+import com.example.backend.entities.IntershipOffreHelper;
 import com.example.backend.entities.Visitor;
-
+import com.example.backend.Services.IntershipOffreService;
 @Service
 public class CandidacyService implements CandidacyServiceImpl {
 
     @Autowired
     private final CandidacyRepository candidacyRepository;
+    @Autowired
     private final VisitorRepository visitorRepository;
+    @Autowired
     private final IntershipOfferRepository intershipOfferRepository;
-
+    @Autowired
+    private IntershipOffreService intershipOffreService;
     @Autowired
     ImageRepository imageRepository;
+
+   
 
     @Autowired
     public CandidacyService(CandidacyRepository candidacyRepository, VisitorRepository visitorRepository,
@@ -58,19 +64,21 @@ public class CandidacyService implements CandidacyServiceImpl {
         return candidacyRepository.save(candidacy);
     }
 
-    public List<IntershipOffre> getInternCandidacy(Long id_intern) {
+    public List<IntershipOffreHelper> getInternCandidacy(Long id_intern) {
         List<Candidacy> allCandidacies = candidacyRepository.findAllByIdIntern(id_intern);
-
+          
         Optional<Visitor> intern = visitorRepository.findById(id_intern);
-        List<IntershipOffre> internCandidacies = new ArrayList<>();
+        List<IntershipOffreHelper> internCandidacies = new ArrayList<>();
         intern.ifPresent(i -> {
+            IntershipOffreHelper allIntershipOffers =new IntershipOffreHelper();
             for (Candidacy candidacy : allCandidacies) {
-                Optional<IntershipOffre> allIntershipOffers = intershipOfferRepository
-                        .findById(candidacy.getIdIntershipOffer());
-                allIntershipOffers.ifPresent(internCandidacies::add);
+                 allIntershipOffers = intershipOffreService.getIntershipOfferById(candidacy.getIdIntershipOffer());
             }
+            internCandidacies.add(allIntershipOffers);
         });
+        System.out.println(internCandidacies);
         return internCandidacies;
+       
     }
 
     public List<CandidacyHelper> getIntershipOfferCandidacies(Long id_offer) {
@@ -140,6 +148,36 @@ public class CandidacyService implements CandidacyServiceImpl {
         return candidacies;
 
     }
+    public List<CandidacyHelper> getAll() {
+       
+        List<Candidacy> AllCandidacies = candidacyRepository.findAllDistinct();
+        List<CandidacyHelper> candidacies = new ArrayList<>();
+      
+        for (Candidacy candidacy : AllCandidacies) {
+            CandidacyHelper candidacyHelper = new CandidacyHelper();
+            candidacyHelper.setCandidacy(candidacy);
+            System.out.println(candidacyHelper.getCandidacy());
+            final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
+            if (retrievedImage.isPresent()) {
+                byte[] image = retrievedImage.get().getPicByte();
+                //  System.out.println("loul" + image.getName());
+                //  image.setPicByte(decompressBytes(image.getPicByte()));
+                candidacyHelper.setImage(decompressBytes(image));
+                System.out.println("setted");
+            }
+
+            else {
+
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
+                System.out.println(candidacyHelper.getImage());
+            }
+            candidacies.add(candidacyHelper);
+        }
+
+        return candidacies;
+    }
+
+    
 
     public List<Visitor> getInterns(Long idIntershipOffer) {
         List<Candidacy> allCandidacies = candidacyRepository.findAll();
@@ -167,10 +205,18 @@ public class CandidacyService implements CandidacyServiceImpl {
         return Cs;
     }
 
-    public Optional<Candidacy> getCandidacyById(Long idC) {
-        Optional<Candidacy> c = candidacyRepository.findById(idC);
-
-        return c;
+    public CandidacyHelper getCandidacyById(Long idC) {
+        List<CandidacyHelper> list= this.getAll();
+        CandidacyHelper i=new CandidacyHelper();
+        for (int index = 0; index < list.size(); index++) {
+            if (list.get(index).getCandidacy().getIdCandidacy() == idC) {
+                System.out.println("hhhhhhhhhhhhhhhhhhhhhhh"+list.get(index));
+                i=  list.get(index);
+            }
+             
+        }
+        return i;
+       
     }
 
     public void save(Candidacy c) {

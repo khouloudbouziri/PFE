@@ -23,12 +23,13 @@ import { LoginSupervisorComponent } from './login-supervisor/login-supervisor.co
 import { AgendaComponent } from './shared/agenda/agenda.component';
 import { FileComponent } from './file/file.component';
 import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
-
+import { CVthequeComponent } from './cvtheque/cvtheque.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'company-home', component: CompanyHomeComponent },
   { path: 'intern-home', component: InternHomeComponent },
+  { path:'cvtheque',component:CVthequeComponent}, 
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },

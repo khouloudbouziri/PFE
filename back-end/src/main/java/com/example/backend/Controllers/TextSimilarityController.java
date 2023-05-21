@@ -17,7 +17,9 @@ import com.example.backend.ServicesImplement.CandidacyServiceImpl;
 import com.example.backend.ServicesImplement.IntershipOffreServiceImpl;
 import com.example.backend.ServicesImplement.VisitorServiceImp;
 import com.example.backend.entities.Candidacy;
+import com.example.backend.entities.CandidacyHelper;
 import com.example.backend.entities.IntershipOffre;
+import com.example.backend.entities.IntershipOffreHelper;
 
 import jakarta.transaction.Transactional;
 
@@ -38,30 +40,30 @@ public class TextSimilarityController {
         Long idCandidacy = Long.parseLong(payload.get("idCandidacy").toString());
         System.out.println(idIntershipOffer);
         System.out.println(idCandidacy);
-        IntershipOffre iO = iosi.getIntershipOfferById(idIntershipOffer);
-        Optional<Candidacy> C = csi.getCandidacyById(idCandidacy);
-        String text1 = iO.getRequired_profile();
-        String text3 = iO.getTechnical_environement();
-        String text2 = iO.getCompany();
-        String text7 = C.get().getSkills();
-        String text6 = C.get().getLevel();
-        String text5 = C.get().getUniversity_department();
+        IntershipOffreHelper  iO = iosi.getIntershipOfferById(idIntershipOffer);
+        CandidacyHelper C = csi.getCandidacyById(idCandidacy);
+        String text1 = iO.getIntershipOffre().getRequired_profile();
+        String text3 = iO.getIntershipOffre().getTechnical_environement();
+        String text2 = iO.getIntershipOffre().getCompany();
+        String text7 = C.getCandidacy().getSkills();
+        String text6 = C.getCandidacy().getLevel();
+        String text5 = C.getCandidacy().getUniversity_department();
         CosineDistance cosineDistance = new CosineDistance();
         double cosineSimilarity1 = 1 - cosineDistance.apply(text1.toLowerCase(), text6.toLowerCase());
         double cosineSimilarity2 = 1 - cosineDistance.apply(text3.toLowerCase(), text7.toLowerCase());
         double cosineSimilarity3 = 1 - cosineDistance.apply(text2.toLowerCase(), text5.toLowerCase());
         double cosineSimilarity = (cosineSimilarity1 + cosineSimilarity2 +cosineSimilarity3)/3;
-        if (C.get().getMention()=="Très bien"){
+        if (C.getCandidacy().getMention()=="Très bien"){
             cosineSimilarity+= 0.01;
         }
-        else if(C.get().getMention()=="Bien"){
+        else if(C.getCandidacy().getMention()=="Bien"){
             cosineSimilarity+=0.005;
         }
-        else if(C.get().isDid_intership()==true){
+        else if(C.getCandidacy().isDid_intership()==true){
             cosineSimilarity+=0.0075;
         }
         System.out.println(cosineSimilarity);
-        Candidacy candidacy = C.get();
+        Candidacy candidacy = C.getCandidacy();
         candidacy.setScore(cosineSimilarity);
         csi.save(candidacy);
         return cosineSimilarity;

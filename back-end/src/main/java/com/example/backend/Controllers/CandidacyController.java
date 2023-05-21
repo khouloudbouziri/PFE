@@ -18,6 +18,7 @@ import com.example.backend.ServicesImplement.CandidacyServiceImpl;
 import com.example.backend.entities.Candidacy;
 import com.example.backend.entities.CandidacyHelper;
 import com.example.backend.entities.IntershipOffre;
+import com.example.backend.entities.IntershipOffreHelper;
 import com.example.backend.entities.Visitor;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,7 +48,7 @@ public class CandidacyController {
     }
 
     @GetMapping("/internCandidacy/{id_intern}")
-    public ResponseEntity<List<IntershipOffre>> getInternCandidacy(@PathVariable("id_intern") Long id_intern) {
+    public ResponseEntity<List<IntershipOffreHelper>> getInternCandidacy(@PathVariable("id_intern") Long id_intern) {
         return ResponseEntity.ok(candidacyServiceImpl.getInternCandidacy(id_intern));
     }
 
@@ -57,13 +58,18 @@ public class CandidacyController {
     }
 
     @GetMapping("/offer/get")
-    public ResponseEntity<Optional<Candidacy>> getById(@RequestParam Long id_candidacy) {
+    public ResponseEntity <CandidacyHelper> getById(@RequestParam Long id_candidacy) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidacyById(id_candidacy));
     }
 
     @GetMapping("/offerCandidacies")
     public ResponseEntity<List<CandidacyHelper>> getIntershipOfferCandidacies(@RequestParam Long id_offer) {
         return ResponseEntity.ok(candidacyServiceImpl.getIntershipOfferCandidacies(id_offer));
+    }
+    
+    @GetMapping("/all")
+    public ResponseEntity<List<CandidacyHelper>> getAll() {
+        return ResponseEntity.ok(candidacyServiceImpl.getAll());
     }
 
     @GetMapping("/supervisorCandidacies/{id}")

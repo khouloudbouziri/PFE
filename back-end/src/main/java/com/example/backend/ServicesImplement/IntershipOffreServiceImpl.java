@@ -3,14 +3,15 @@ package com.example.backend.ServicesImplement;
 import java.util.List;
 
 import com.example.backend.entities.IntershipOffre;
+import com.example.backend.entities.IntershipOffreHelper;
 
 public interface IntershipOffreServiceImpl {
 
     public IntershipOffre addIntershipOffre(IntershipOffre IntershipOffre);
 
-    public List<IntershipOffre> getAllIntershipOffers();
+    public List<IntershipOffreHelper> getAllIntershipOffers();
 
-    public IntershipOffre getIntershipOfferById(Long id);
+    public IntershipOffreHelper getIntershipOfferById(Long id);
 
     public IntershipOffre updateIntershipOffer(IntershipOffre IntershipOffre);
 
@@ -18,6 +19,6 @@ public interface IntershipOffreServiceImpl {
 
     public IntershipOffre addFavoriteOffer(Long idIntern, Long idIntershipOffer);
 
-    public List<IntershipOffre> getInternFavoriteOffers(Long idIntern);
+    public List<IntershipOffreHelper> getInternFavoriteOffers(Long idIntern);
 
 }

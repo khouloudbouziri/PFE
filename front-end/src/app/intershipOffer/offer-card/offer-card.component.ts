@@ -32,5 +32,11 @@ export class OfferCardComponent {
       });
   }
 
-  ngOnInit(): void {}
+  decode(byte: any): any {
+    if (byte) return 'data:image/jpg;base64,' + byte;
+  }
+
+  ngOnInit(): void {      
+  }
+
 }

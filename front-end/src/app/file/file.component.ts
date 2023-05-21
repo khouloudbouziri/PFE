@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
   import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
   import { Observable } from 'rxjs';
 import { FileService } from '../services/file.service';
-
+import {  Sanitizer } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-file',
@@ -18,18 +19,21 @@ export class FileComponent implements OnInit{
   file!: File;
   convert!: Promise<string>;
   fileData!: BlobPart;
- 
+  retrieveResonse!: any;
+  base64Data: any;
+  retrievedPDF!:any;
+  safeDecodedContent!:any;
   
-    constructor(private http: HttpClient, private fileService:FileService) {}
+    constructor(private http: HttpClient, private fileService:FileService,private sanitizer: DomSanitizer) {}
   ngOnInit() {
     this.getFiles();
     console.log(this.getFiles());
     
   }
   
-    onFileSelected(event:any) {
-      this.selectedFile = event.target.files[0];
-    }
+    // onFileSelected(event:any) {
+    //   this.selectedFile = event.target.files[0];
+    // }
   
     onUpload() {
       this.progress = 0;
@@ -55,18 +59,35 @@ export class FileComponent implements OnInit{
       for (let index = 0; index < this.files.length; index++) {
         
         const blob = new Blob([this.files[index].file], { type: 'application/pdf' }); 
+       
         const url = window.URL.createObjectURL(blob);
         window.open(url);
         this.files[index].fileName=url;
         console.log(url);
+        // const decodedString = atob(this.files[index].fileData);
+        // console.log(decodedString);
+        // return decodedString;
         
       }
      
     })
 
     }
-    
-    
-  
+    fileContent!: string;
+    decodedContent!: string;
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const arrayBuffer = reader.result as ArrayBuffer;
+      const uint8Array = new Uint8Array(arrayBuffer);
+      const decoder = new TextDecoder('utf-8');
+      const decodedContent = decoder.decode(uint8Array);
+      this.decodedContent = decodedContent;
+      this.safeDecodedContent = this.sanitizer.bypassSecurityTrustResourceUrl('data:application/pdf;base64,' + decodedContent);
+    };
+
+    reader.readAsArrayBuffer(file);
   }
-  
+}

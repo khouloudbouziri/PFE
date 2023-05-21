@@ -27,6 +27,7 @@ export class SupervisorOfferDetailsComponent {
       .getIntershipOfferById(this.idOffer)
       .subscribe((res: any) => {
         this.offer = res;
+        console.log(this.offer)
       });
   }
 

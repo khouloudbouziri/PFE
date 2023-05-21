@@ -1,8 +1,27 @@
-<div>
+<!-- <div>
   <input type="file" (change)="onFileSelected($event)" />
   <button (click)="onUpload()">Upload</button>
 </div>
 <div *ngFor="let file of files">
 {{file.fileName}}
 
-</div>
+</div> -->
+<!-- <input type="file" (change)="onFileSelected($event)" />
+    <div *ngIf="fileContent">
+      <h2>File Contents:</h2>
+     
+    </div> -->
+    <!-- <input type="file" (change)="onFileSelected($event)" />
+    <div *ngIf="decodedContent">
+      <h2>Contenu du fichier :</h2>
+      <embed [src]="'data:application/pdf;base64,' + decodedContent" type="application/pdf" width="100%" height="600px">
+    </div> -->
+    <!-- <div *ngIf="retrievedPDF">
+      <h2>Contenu du fichier PDF :</h2>
+      <iframe [src]="retrievedPDF" width="100%" height="500px"></iframe>
+    </div> -->
+    <input type="file" (change)="onFileSelected($event)" />
+    <div *ngIf="safeDecodedContent">
+      <h2>Contenu du fichier :</h2>
+      <embed [src]="safeDecodedContent" type="application/pdf" width="100%" height="600px">
+    </div>

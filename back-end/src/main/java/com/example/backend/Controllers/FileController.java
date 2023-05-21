@@ -1,9 +1,11 @@
 package com.example.backend.Controllers;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import org.apache.commons.io.FileUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -42,11 +44,17 @@ public class FileController {
   
     }
 
+    
     @GetMapping("/GetFile")
     public List<FileEntity> getFiles() {
-       
-       List< FileEntity> files=fileRepository.findAll();
-       return files;
-             
+        List<FileEntity> files = fileRepository.findAll();
+        for (int i = 0; i < files.size(); i++) {
+            try {
+                FileUtils.writeByteArrayToFile(new File(files.get(i).getFileName()), files.get(i).getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return files;
     }
 }

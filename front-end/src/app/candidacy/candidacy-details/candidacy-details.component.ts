@@ -26,6 +26,7 @@ export class CandidacyDetailsComponent {
   ) {
     this.idCandidacy = this.candidacyService.getSelectedCandidacy();
     console.log(this.idCandidacy);
+   
   }
 
   toggleColor() {
@@ -35,16 +36,20 @@ export class CandidacyDetailsComponent {
   getCandidacyById() {
     this.candidacyService.getById(this.idCandidacy).subscribe((res: any) => {
       this.candidacy = res;
+      console.log(res)
       this.visitorService
         .getVisitorById(res.idIntern)
         .subscribe((intern: any) => {
           this.intern = intern;
           console.log(this.intern);
           this.idIntern = intern.id;
+          console.log(intern.id)
           this.candidacyService
             .getInternCandidacy(intern.id)
-            .subscribe((candidacy: any) => {
-              this.intershipOffers = candidacy;
+            .subscribe((candidacy1: any) => {
+              console.log(candidacy1)
+              this.intershipOffers=candidacy1;
+              console.log(this.intershipOffers)
             });
         });
     });

@@ -5,8 +5,8 @@
         class="w-96 shrink-0 px-8 py-3 rounded-2xl flex flex-col bg-gradient-to-b from-[#FFFFFF]"
       >
         <div class="flex items-center justify-between">
-          <img src="../../../assets/images/logo.png" alt="" class="h-20" />
-          <button (click)="addToFavorites(intershipOffer.id_intership_offre)">
+          <img [src]="decode(intershipOffer.image)" alt="" class="h-20" />
+          <button (click)="addToFavorites(intershipOffer.intershipOffre?.id_intership_offre)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -22,8 +22,8 @@
           </button>
         </div>
         <p class="font-semibold flex-1">
-          <span class="text-[#E5302D]">{{ intershipOffer.company }} |</span
-          ><br />{{ intershipOffer.topic }}
+          <span class="text-[#E5302D]">{{ intershipOffer.intershipOffre?.company }} |</span
+          ><br />{{ intershipOffer.intershipOffre?.topic }}
         </p>
         <div class="flex items-end mt-3">
           <svg
@@ -39,10 +39,10 @@
               fill="rgba(66,74,136,1)"
             />
           </svg>
-          <span class="text-[#424A88]">{{ intershipOffer.address }}</span>
+          <span class="text-[#424A88]">{{ intershipOffer.intershipOffre?.address }}</span>
         </div>
         <span class="ml-2 mt-4 text-slate-500"
-          >publié le {{ intershipOffer.creation_date }}</span
+          >publié le {{ intershipOffer.intershipOffre?.creation_date }}</span
         >
         <button
           class="bg-[#E5302D] text-white rounded-full py-1 text-sm block mt-6 ml-48 w-32 h-10"

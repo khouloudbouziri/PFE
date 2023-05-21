@@ -83,7 +83,9 @@ public class EventService implements EventServiceImplementation {
         List<Event> allEvents = eventRepository.findByIdIntern(idIntern);
         List<Event> events = new ArrayList<>();
         for (Event event : allEvents) {
+            System.out.println(event.getType());
             if ((event.getType()).equals("Reunion"))
+            System.out.println(event.getType());
                 events.add(event);
         }
         return events;

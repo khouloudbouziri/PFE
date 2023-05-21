@@ -46,7 +46,9 @@ export class SupervisorPageComponent {
     idCandidacy: number;
     showCandidacy: boolean;
   }): void {
+    
     this.candidacy = event.idCandidacy;
+    console.log(event?.idCandidacy);
     console.log(this.candidacy);
     this.showCandidacyDetails = true;
     this.afficherDetailsAnnonce = false;

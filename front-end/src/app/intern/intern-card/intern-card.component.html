@@ -50,8 +50,8 @@
             />
           </div>
           <span class="mx-auto text-[#424A88] text-lg"
-            >{{ candidacie.candidacy.firstname }}
-            {{ candidacie.candidacy.lastname }}<br/>
+            >{{ candidacie.candidacy?.firstname }}
+            {{ candidacie.candidacy?.lastname }}<br/>
             </span
           >
           <div class="flex mt-4">
@@ -68,7 +68,7 @@
             </svg>
             <span class="ml-3"
               ><span class="text-[#424A88] opacity-40">Email : </span>
-              {{ candidacie.candidacy.email }}</span
+              {{ candidacie.candidacy?.email }}</span
             >
           </div>
           <div class="flex mt-4">
@@ -85,7 +85,7 @@
             </svg>
             <span class="ml-3"
               ><span class="text-[#424A88] opacity-40">Téléphone : </span
-              >{{ candidacie.candidacy.phone_number }}</span
+              >{{ candidacie.candidacy?.phone_number }}</span
             >
           </div>
           <div class="flex mt-4">
@@ -102,15 +102,15 @@
             </svg>
             <span class="ml-3"
               ><span class="text-[#424A88] opacity-40">Adresse : </span
-              >{{ candidacie.candidacy.address }}</span
+              >{{ candidacie.candidacy?.address }}</span
             >
           </div>
           <button
             class="absolute right-4 bottom-0"
             (click)="
-              getCandidacy(candidacie.candidacy.idCandidacy);
+              getCandidacy(candidacie.candidacy?.idCandidacy);
               SelectedCandidacy();
-              eventChild(candidacie.candidacy.idCandidacy, showCandidacy)
+              eventChild(candidacie.candidacy?.idCandidacy, showCandidacy)
             "
           >
             <svg

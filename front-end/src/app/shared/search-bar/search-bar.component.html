@@ -14,13 +14,13 @@
       
       <input
         type="search"
-        (ngModelChange)="searchIntershipOffer(key.value)"
+        (ngModelChange)="searchIntershipOffer(key.value);searchCandidacy(key.value)"
         #key="ngModel"
         ngModel
         name="key"
         id="searchName"
         class="form-control mr-sm-2 outline-none"
-        placeholder="Search intershipOffers..."
+        placeholder="Search ..."
         required
       />
     </div>
@@ -28,9 +28,9 @@
       <button
         type="button"
         id="btnSubmit"
-        class="w-28 my-1 h-10 text-white bg-[#E73130] rounded-full"
-        (click)="sendSearchResults();searchIntershipOffer(key.value)"
-        routerLink="/offerDetails"
+        class="w-28 my-1  h-10 text-white bg-[#E73130] rounded-full"
+        (click)="sendSearchResults();searchIntershipOffer(key.value);searchCandidacy(key.value);"
+       
       >
         Chercher
       </button>

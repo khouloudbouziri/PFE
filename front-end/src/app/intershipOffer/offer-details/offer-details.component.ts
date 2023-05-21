@@ -21,6 +21,7 @@ export class OfferDetailsComponent implements OnInit {
   getAllIntershipOffers() {
     this.service.getAllIntershipOffers().subscribe((res: any) => {
       this.intershipOffers = res;
+      console.log(res)
     });
   }
 
@@ -37,4 +38,5 @@ export class OfferDetailsComponent implements OnInit {
   candidater(id_intership_offre: bigint) {
     this.router.navigate(['/description', id_intership_offre]);
   }
+ 
 }

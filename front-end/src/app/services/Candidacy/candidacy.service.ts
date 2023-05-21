@@ -73,4 +73,9 @@ export class CandidacyService {
     const url = `${this.baseUrl}/auth/candidacy/candidacyState?idCandidacy=${idCandidacy}`;
     return this.http.put<Candidacy>(url, null);
   }
+  getCvtheque() {
+    return this.http.get(
+      this.baseUrl + '/auth/candidacy/all' 
+    );
+  }
 }

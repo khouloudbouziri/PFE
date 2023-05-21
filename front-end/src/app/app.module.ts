@@ -42,6 +42,9 @@ import { SupervisorOfferCardComponent } from './intershipOffer/supervisor-offer-
 import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
 import { InternCardComponent } from './intern/intern-card/intern-card.component';
 import { CandidacyDetailsComponent } from './candidacy/candidacy-details/candidacy-details.component';
+import { CVthequeComponent } from './cvtheque/cvtheque.component';
+import { CVcardComponent } from './cvcard/cvcard.component';
+import { StarComponent } from './star/star.component';
 
 
 
@@ -77,6 +80,9 @@ import { CandidacyDetailsComponent } from './candidacy/candidacy-details/candida
     SupervisorOfferDetailsComponent,
     InternCardComponent,
     CandidacyDetailsComponent,
+    CVthequeComponent,
+    CVcardComponent,
+    StarComponent,
 
   ],
   imports: [
