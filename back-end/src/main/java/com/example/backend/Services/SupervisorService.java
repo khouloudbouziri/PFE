@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.backend.Exceptions.VisitorNotFoundException;
+import com.example.backend.Repositories.CandidacyRepository;
 import com.example.backend.Repositories.ImageRepository;
 import com.example.backend.Repositories.IntershipOfferRepository;
 import com.example.backend.Repositories.SupervisorRepo;
 import com.example.backend.ServicesImplement.SupervisorServiceInterface;
+import com.example.backend.entities.Candidacy;
 import com.example.backend.entities.ImageModel;
 import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.Supervisor;
@@ -24,9 +26,12 @@ import com.example.backend.entities.SupervisorHelper;
 @Service
 public class SupervisorService implements SupervisorServiceInterface {
     private final SupervisorRepo supervisorRepository;
+    @Autowired
     private final IntershipOfferRepository intershipOfferRepository;
     @Autowired
     ImageRepository imageRepository;
+    @Autowired
+    CandidacyRepository candidacyRepository;
 
     @Autowired
     public SupervisorService(SupervisorRepo supervisorRepository, IntershipOfferRepository intershipOfferRepository) {
@@ -71,15 +76,13 @@ public class SupervisorService implements SupervisorServiceInterface {
                 if (retrievedImage.isPresent()) {
                     ImageModel image = retrievedImage.get();
                     if (image.getIdE() != null) {
-                        System.out.println("loul" + image.getName());
                         image.setPicByte(decompressBytes(image.getPicByte()));
                         sh.setImage(Optional.of(image));
                         System.out.println("setted");
                     }
                 } else {
 
-                    sh.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
-                    System.out.println("thenya" + imageRepository.findById((long)66).get().getName());
+                    sh.setImage(decompressBytes(imageRepository.findById((long) 1).get().getPicByte()));
                 }
 
                 listSup.add(sh);
@@ -94,6 +97,12 @@ public class SupervisorService implements SupervisorServiceInterface {
     }
 
     public void deleteSupervisor(Long id) {
+        List<IntershipOffre> intershipOffres = intershipOfferRepository.findBySupervisor(id);
+        for (IntershipOffre offer : intershipOffres) {
+            List<Candidacy> candidacies = candidacyRepository.findAllByIdIntershipOffer(offer.getId_intership_offre());
+            candidacyRepository.deleteAll(candidacies);
+        }
+        intershipOfferRepository.deleteAll(intershipOffres);
         supervisorRepository.deleteById(id);
     }
 

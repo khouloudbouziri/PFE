@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,16 +9,15 @@ import { environment } from 'src/environments/environment';
 export class SupervisorService {
   private baseUrl = environment.baseUrl;
 
-  constructor(private htttp: HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   findSupervisorById(id: any) {
-    return this.htttp.get(this.baseUrl + '/auth/supervisor/find/' + id);
-    
+    return this.http.get(this.baseUrl + '/auth/supervisor/find/' + id);
   }
 
-  deleteSupervisor(supervisor: any) {
-    return this.htttp.delete(
-      this.baseUrl + '/auth/supervisor/delete/' + supervisor
+  deleteSupervisor(supervisor: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.baseUrl}/auth/supervisor/delete?idSupervisor=${supervisor}`
     );
   }
 }

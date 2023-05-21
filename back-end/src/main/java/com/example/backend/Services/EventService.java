@@ -50,6 +50,10 @@ public class EventService implements EventServiceImplementation {
         }
     }
 
+    // public Event updateEvent(Long id, Event event) {
+    // return eventRepository.save(event);
+    // }
+
     public void deleteEvent(Long id) {
         eventRepository.deleteById(id);
     }
@@ -83,9 +87,7 @@ public class EventService implements EventServiceImplementation {
         List<Event> allEvents = eventRepository.findByIdIntern(idIntern);
         List<Event> events = new ArrayList<>();
         for (Event event : allEvents) {
-            System.out.println(event.getType());
             if ((event.getType()).equals("Reunion"))
-            System.out.println(event.getType());
                 events.add(event);
         }
         return events;

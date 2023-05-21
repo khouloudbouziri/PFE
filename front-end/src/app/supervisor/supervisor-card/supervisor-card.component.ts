@@ -28,25 +28,22 @@ export class SupervisorCardComponent {
       .findSupervisorByIdCompany(this.id)
       .subscribe((res: any) => {
         this.supervisors = res;
-        console.log(this.supervisors)
-        // for (let i = 0; i < res.length; i++) {
-        //   this.idc.push(res[i].id);
-        //   this.ids=res[i].id;
-        // }
+        console.log(this.supervisors);
       });
   }
 
   deleteSupervisor(supervisor: number) {
     this.SupervisorService.deleteSupervisor(supervisor).subscribe(
       (res: any) => {
-        //this.supervisors.splice(supervisor, 1);
-        this.supervisors = res;
+        this.findSupervisorByIdCompany();
       }
     );
   }
- decode(byte: any): any {
+
+  decode(byte: any): any {
     if (byte) return 'data:image/jpg;base64,' + byte;
   }
+
   ngOnInit(): void {
     this.findSupervisorByIdCompany();
   }

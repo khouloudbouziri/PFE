@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Supervisor } from 'src/app/models/Supervisor';
 import { Status } from 'src/app/models/status';
@@ -16,7 +17,7 @@ import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 export class AddOfferComponent {
   id: any;
   user: any;
-  supervisors: any=[];
+  supervisors: any = [];
   isRH: boolean = true;
   isDisabled: boolean = true;
   isChecked: any = false;
@@ -27,7 +28,8 @@ export class AddOfferComponent {
     private route: ActivatedRoute,
     private intershipOfferService: IntershipOfferService,
     private visitorService: VisitorService,
-    private supervisorService: SupervisorService
+    private supervisorService: SupervisorService,
+    private snackBar: MatSnackBar
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -44,7 +46,7 @@ export class AddOfferComponent {
       .findSupervisorByIdCompany(this.id)
       .subscribe((res: any) => {
         this.supervisors = res;
-        console.log("res"+res);
+        console.log('res' + res);
         console.log(this.supervisors);
       });
   }
@@ -78,6 +80,7 @@ export class AddOfferComponent {
         this.status.statusCode = 0;
         this.status.message = 'some error on the server side';
         console.log(err);
+        this.openSnackBar('Vérifier vos données', 'Fermer');
       },
       complete: () => {
         this.status.statusCode = 0;
@@ -103,5 +106,9 @@ export class AddOfferComponent {
     });
     this.findSupervisorByIdCompany();
     this.findSupervisorById();
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000 });
   }
 }

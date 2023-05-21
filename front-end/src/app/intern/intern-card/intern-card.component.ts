@@ -29,6 +29,13 @@ export class InternCardComponent {
     console.log(idCandidacy);
   }
 
+  deleteCandidacy(idCandidacy: number) {
+    this.candidacyService.deleteCandidacy(idCandidacy).subscribe((res: any) => {
+      console.log(res);
+      this.candidacies;
+    });
+  }
+
   public eventChild(idCandidacy: number, showCandidacy: boolean) {
     idCandidacy = this.idCandidacy;
     showCandidacy = this.showCandidacy;

@@ -77,6 +77,7 @@
           type="submit"
           id="btnSubmit"
           class="w-32 h-10 text-white bg-[#E73130] rounded-full"
+          (click)="openSnackBar('Connecté avec succes', 'fermer')"
           [disabled]="frm.invalid"
         >
           Se connecter

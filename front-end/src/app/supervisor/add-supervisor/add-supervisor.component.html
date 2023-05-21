@@ -181,6 +181,8 @@
         <button
           mat-button
           class="w-32 h-10 text-white bg-[#E73130] rounded-full"
+          (click)="openSnackBar('Encadrant ajouté avec succes', 'Fermer')"
+          [disabled]="frm.invalid"
         >
           Ajouter
         </button>

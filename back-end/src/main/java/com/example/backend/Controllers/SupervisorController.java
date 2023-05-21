@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend.ServicesImplement.SupervisorServiceInterface;
@@ -62,9 +63,9 @@ public class SupervisorController {
         return new ResponseEntity<>(updatedSupervisor, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteSupervisorById(@PathVariable("id") Long id) {
-        supervisorService.deleteSupervisor(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteSupervisorById(@RequestParam Long idSupervisor) {
+        supervisorService.deleteSupervisor(idSupervisor);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

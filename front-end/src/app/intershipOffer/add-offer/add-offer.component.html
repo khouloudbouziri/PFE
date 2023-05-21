@@ -1,7 +1,7 @@
 <section
   class="flex flex-col mx-auto mt-32 p-20 w-3/4 bg-gradient-to-b from-[#FFFFFF] rounded-3xl"
 >
-  <h1 class="text-[#424A88] font-extrabold">Ajouter une annonce</h1>
+  <h1 class="text-[#424A88] font-extrabold">Ajouter une offre</h1>
   <form [formGroup]="frm" (ngSubmit)="onPost()">
     <div class="flex flex-col mt-10 ml-3 relative">
       <input
@@ -315,6 +315,7 @@
         type="submit"
         id="btnSubmit"
         class="w-40 h-10 text-white bg-[#E73130] rounded-full"
+        (click)="openSnackBar('Offre ajouté avec succés', 'fermer')"
       >
         Ajouter
       </button>

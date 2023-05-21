@@ -1,6 +1,7 @@
 package com.example.backend.Repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,5 +20,7 @@ public interface CandidacyRepository extends JpaRepository<Candidacy, Long> {
 
     @Query("SELECT c FROM Candidacy c WHERE c.idCandidacy IN ( SELECT DISTINCT c.idIntern FROM Candidacy c)")
     List<Candidacy> findAllDistinct();
+
+    Optional<Candidacy> findByIdInternAndIdIntershipOffer(Long idIntern, Long idIntershipOffer);
 
 }

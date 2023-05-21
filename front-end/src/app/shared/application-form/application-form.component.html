@@ -3,12 +3,11 @@
 >
   <form [formGroup]="frm" (ngSubmit)="onPost()">
     <section class="flex">
-     
       <div class="mt-14 text-lg">
         <span class="font-bold">Informations personnelles</span><br />
         Qui vous etes et comment vous contacter ?
       </div>
-    
+
       <div class="flex w-3/4 ml-48">
         <div>
           <div class="flex flex-col mt-14 ml-3 relative">
@@ -18,6 +17,7 @@
               placeholder="firstname"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.firstname }}"
               formControlName="firstname"
               required
             />
@@ -27,6 +27,17 @@
               >Nom<span class="text-[#E5302D] ml-1">*</span></label
             >
           </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['firstname'].invalid &&
+              (f['firstname'].dirty || f['firstname'].touched)
+            "
+          >
+            <span *ngIf="f['firstname'].errors?.['required']"
+              >Le nom est obligatoire</span
+            >
+          </div>
           <div class="flex flex-col mt-14 ml-3 relative">
             <input
               type="email"
@@ -34,6 +45,7 @@
               placeholder="email"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.email }}"
               formControlName="email"
               required
             />
@@ -43,6 +55,16 @@
               >Email<span class="text-[#E5302D] ml-1">*</span></label
             >
           </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['email'].invalid && (f['email'].dirty || f['email'].touched)
+            "
+          >
+            <span *ngIf="f['email'].errors?.['required']"
+              >L'email est obligatoire</span
+            >
+          </div>
           <div class="flex flex-col mt-14 ml-3 relative">
             <input
               type="text"
@@ -50,6 +72,7 @@
               placeholder="adress"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.address }}"
               formControlName="address"
               required
             />
@@ -57,6 +80,17 @@
               for="adress"
               class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
               >Ville<span class="text-[#E5302D] ml-1">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['address'].invalid &&
+              (f['address'].dirty || f['address'].touched)
+            "
+          >
+            <span *ngIf="f['address'].errors?.['required']"
+              >L'adresse est obligatoire</span
             >
           </div>
         </div>
@@ -68,6 +102,7 @@
               placeholder="lastname"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.lastname }}"
               formControlName="lastname"
               required
             />
@@ -77,6 +112,17 @@
               >Prénom<span class="text-[#E5302D] ml-1">*</span></label
             >
           </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['lastname'].invalid &&
+              (f['lastname'].dirty || f['lastname'].touched)
+            "
+          >
+            <span *ngIf="f['lastname'].errors?.['required']"
+              >Le prénom est obligatoire</span
+            >
+          </div>
           <div class="flex flex-col mt-14 ml-3 relative">
             <input
               type="tel"
@@ -84,6 +130,7 @@
               placeholder="telephone"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.phone_number }}"
               formControlName="phone_number"
               required
             />
@@ -91,6 +138,17 @@
               for="tel"
               class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
               >Téléphone<span class="text-[#E5302D] ml-1">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['phone_number'].invalid &&
+              (f['phone_number'].dirty || f['phone_number'].touched)
+            "
+          >
+            <span *ngIf="f['phone_number'].errors?.['required']"
+              >Le téléphone est obligatoire</span
             >
           </div>
           <div class="flex flex-col mt-14 ml-3 relative">
@@ -107,6 +165,17 @@
               for="code"
               class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
               >Code postale<span class="text-[#E5302D] ml-1">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['address_code'].invalid &&
+              (f['address_code'].dirty || f['address_code'].touched)
+            "
+          >
+            <span *ngIf="f['address_code'].errors?.['required']"
+              >Le code postale est obligatoire</span
             >
           </div>
         </div>
@@ -127,6 +196,7 @@
               placeholder="university"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.university }}"
               formControlName="university"
               required
             />
@@ -136,6 +206,17 @@
               >Faculté<span class="text-[#E5302D] ml-1">*</span></label
             >
           </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['university'].invalid &&
+              (f['university'].dirty || f['university'].touched)
+            "
+          >
+            <span *ngIf="f['university'].errors?.['required']"
+              >L'université est obligatoire</span
+            >
+          </div>
           <div class="flex flex-col mt-14 ml-3 relative">
             <input
               type="text"
@@ -143,6 +224,7 @@
               placeholder="university_department"
               class="peer w-full bg-transparent border-b border-black border-opacity-40 focus:outline-none text-black placeholder-transparent"
               autocomplete="off"
+              ngModel="{{ intern?.universityDept }}"
               formControlName="university_department"
               required
             />
@@ -150,6 +232,18 @@
               for="university_department"
               class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-2 peer-focus:-top-1 peer-focus:text-xs transition-all"
               >Spécialité<span class="text-[#E5302D] ml-1">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['university_department'].invalid &&
+              (f['university_department'].dirty ||
+                f['university_department'].touched)
+            "
+          >
+            <span *ngIf="f['university_department'].errors?.['required']"
+              >La spécialité est obligatoire</span
             >
           </div>
           <div class="flex flex-col mt-14 ml-3 relative">
@@ -178,6 +272,16 @@
               for="niveau"
               class="absolute left-0 -mt-3.5 text-slate-500 peer-placeholder-shown:top-3 peer-focus:-top-1 peer-focus:text-xs transition-all"
               >Niveau <span class="text-[#E5302D]">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['level'].invalid && (f['level'].dirty || f['level'].touched)
+            "
+          >
+            <span *ngIf="f['level'].errors?.['required']"
+              >Le niveau est obligatoire</span
             >
           </div>
           <div class="flex items-center ml-3 mt-14">
@@ -216,6 +320,17 @@
               >Mention<span class="text-[#E5302D] ml-1">*</span></label
             >
           </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['mention'].invalid &&
+              (f['mention'].dirty || f['mention'].touched)
+            "
+          >
+            <span *ngIf="f['mention'].errors?.['required']"
+              >La mention est obligatoire</span
+            >
+          </div>
           <div class="flex flex-col mt-16 ml-3 relative">
             <textarea
               id="skills"
@@ -226,7 +341,17 @@
               required
             ></textarea>
             <label for="skills" class="absolute left-0 -mt-4 text-slate-500"
-              >Compétances<span class="text-[#E5302D] ml-1">*</span></label
+              >Compétences<span class="text-[#E5302D] ml-1">*</span></label
+            >
+          </div>
+          <div
+            class="msg error text-xs ml-3 text-[#E5302D]"
+            *ngIf="
+              f['skills'].invalid && (f['skills'].dirty || f['skills'].touched)
+            "
+          >
+            <span *ngIf="f['skills'].errors?.['required']"
+              >Les compétences est obligatoire</span
             >
           </div>
         </div>
@@ -247,7 +372,7 @@
           autocomplete="off"
         />
         <label for="resume" class="absolute left-0 -mt-7 text-slate-500"
-          >CV<span class="text-[#E5302D] ml-1">*</span></label
+          >CV</label
         >
         <label
           for="resume"
@@ -296,6 +421,7 @@
         type="submit"
         id="btnSubmit"
         class="w-40 h-10 text-white bg-[#E73130] rounded-full"
+        (click)="openSnackBar('Candidature achevée avec succés', 'fermer')"
       >
         Je postule !
       </button>

@@ -32,4 +32,6 @@ public interface CandidacyServiceImpl {
     public Optional<Candidacy> changeCandidacyState(Long idCandidacy);
 
     public List<CandidacyHelper> getAll();
+
+    public void deleteCandidacy(Long idCandidacy);
 }

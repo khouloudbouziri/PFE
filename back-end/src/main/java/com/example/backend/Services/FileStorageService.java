@@ -30,60 +30,55 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class FileStorageService {
 
-
     @Autowired
     private FileRepository fileRepository;
 
-//     @Autowired
-//     public FileStorageService(FileStorageProperties fileStorageProperties) {
-//     this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
-//             .toAbsolutePath().normalize();
+    // @Autowired
+    // public FileStorageService(FileStorageProperties fileStorageProperties) {
+    // this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir())
+    // .toAbsolutePath().normalize();
 
-//     try {
-//         Files.createDirectories(this.fileStorageLocation);
-//         if (!Files.isWritable(this.fileStorageLocation)) {
-//             throw new FileStorageException("The directory " + this.fileStorageLocation.toString() + " is not writable.");
-//         }
-//     } catch (Exception ex) {
-//         throw new FileStorageException("Could not create the directory where the uploaded files will be stored.", ex);
-//     }
-// }
+    // try {
+    // Files.createDirectories(this.fileStorageLocation);
+    // if (!Files.isWritable(this.fileStorageLocation)) {
+    // throw new FileStorageException("The directory " +
+    // this.fileStorageLocation.toString() + " is not writable.");
+    // }
+    // } catch (Exception ex) {
+    // throw new FileStorageException("Could not create the directory where the
+    // uploaded files will be stored.", ex);
+    // }
+    // }
     public String storeFile(MultipartFile file) throws SerialException, SQLException, IOException {
         // Normalize file name
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-    
-    
+        // Copy file to the target location (Replacing existing file with the same name)
 
-            // Copy file to the target location (Replacing existing file with the same name)
+        // Save file information to database
+        FileEntity fileEntity = new FileEntity();
+        fileEntity.setFileName(fileName);
+        fileEntity.setFileType(file.getContentType());
+        fileEntity.setSize(file.getSize());
+        fileEntity.setFile(file.getBytes());
+        fileRepository.save(fileEntity);
 
-            // Save file information to database
-            FileEntity fileEntity = new FileEntity();
-            fileEntity.setFileName(fileName);
-            fileEntity.setFileType(file.getContentType());
-            fileEntity.setSize(file.getSize());
-            fileEntity.setFile(file.getBytes());
-            System.out.println(file.getBytes());
-            fileRepository.save(fileEntity);
+        return "saved";
 
-            return "saved";
-     
     }
-//     public Resource loadFileAsResource(String fileName) throws FileNotFoundException {
-//       try {
-//           Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
-//           Resource resource = new UrlResource(filePath.toUri());
-//           if (resource.exists() && resource.isReadable()) {
-//               return resource;
-//           } else {
-//               throw new FileNotFoundException("File not found " + fileName);
-//           }
-//       } catch (MalformedURLException ex) {
-//           throw new FileNotFoundException("File not found " + fileName);
-//       }
-//   }
-  
-   
+    // public Resource loadFileAsResource(String fileName) throws
+    // FileNotFoundException {
+    // try {
+    // Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+    // Resource resource = new UrlResource(filePath.toUri());
+    // if (resource.exists() && resource.isReadable()) {
+    // return resource;
+    // } else {
+    // throw new FileNotFoundException("File not found " + fileName);
+    // }
+    // } catch (MalformedURLException ex) {
+    // throw new FileNotFoundException("File not found " + fileName);
+    // }
+    // }
 
-    
 }

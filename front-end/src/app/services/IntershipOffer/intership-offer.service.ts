@@ -36,11 +36,17 @@ export class IntershipOfferService {
 
   getIntershipOffers(id: any) {
     return this.http.get(this.baseUrl + '/auth/supervisor/find/offer/' + id);
-    console.log("fffff");
   }
 
-  deleteIntershipById(id: any) {
-    return this.http.delete(this.baseUrl + '/auth/intership/delete' + id);
+  updateIntershipOffer(id: number, offer: IntershipOffer) {
+    const url = `${this.baseUrl}/auth/intership/update?id=${id}`;
+    return this.http.put(url, offer);
+  }
+
+  deleteIntershipById(idOffer: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.baseUrl}/auth/intership/delete?idIntershipOffer=${idOffer}`
+    );
   }
 
   addFavoriteOffer(

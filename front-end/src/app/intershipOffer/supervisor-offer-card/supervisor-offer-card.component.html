@@ -15,7 +15,7 @@
           {{ SupervisorIntershipOffer.candidacy_number }}</span
         >
         <div class="flex relative mt-4">
-          <button>
+          <button (click)="showModifyOffer = true">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -28,7 +28,12 @@
               ></path>
             </svg>
           </button>
-          <button class="ml-4">
+          <button
+            class="ml-4"
+            (click)="
+              deleteIntershipOffer(SupervisorIntershipOffer.id_intership_offre)
+            "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -66,6 +71,11 @@
           </button>
         </div>
       </div>
+      <ng-container *ngIf="showModifyOffer">
+        <app-modify-intership-offer
+          [offer]="SupervisorIntershipOffer"
+        ></app-modify-intership-offer>
+      </ng-container>
     </div>
   </div>
 </div>

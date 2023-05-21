@@ -55,14 +55,14 @@ public class intershipOffreController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<IntershipOffre> updateintershipOffer(@RequestBody IntershipOffre intership) {
-        IntershipOffre updatedintership = intershipOffreServiceImp.updateIntershipOffer(intership);
-        return new ResponseEntity<>(updatedintership, HttpStatus.OK);
+    public ResponseEntity<IntershipOffre> updateIntershipOffer(@RequestParam Long id,
+            @RequestBody IntershipOffre offer) {
+        return ResponseEntity.ok(intershipOffreServiceImp.updatIntershipOffre(id, offer));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteEintershipById(@PathVariable("id") Long id) {
-        intershipOffreServiceImp.deleteIntershipById(id);
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteEintershipById(@RequestParam Long idIntershipOffer) {
+        intershipOffreServiceImp.deleteIntershipById(idIntershipOffer);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

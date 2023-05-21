@@ -13,9 +13,9 @@ public interface IntershipOffreServiceImpl {
 
     public IntershipOffreHelper getIntershipOfferById(Long id);
 
-    public IntershipOffre updateIntershipOffer(IntershipOffre IntershipOffre);
+    public IntershipOffre updatIntershipOffre(Long id, IntershipOffre offer);
 
-    public void deleteIntershipById(Long id);
+    public void deleteIntershipById(Long idIntershipOffer);
 
     public IntershipOffre addFavoriteOffer(Long idIntern, Long idIntershipOffer);
 

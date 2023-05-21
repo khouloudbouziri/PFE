@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
 
 @Component({
@@ -7,15 +8,20 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
   styleUrls: ['./supervisor-offer-card.component.css'],
 })
 export class SupervisorOfferCardComponent {
+  id: any;
   idOffer: any;
   showOfferDetails = true;
+  showModifyOffer = false;
   @Input() public SupervisorIntershipOffers: any;
   @Output() public selectedOffer = new EventEmitter<{
     idOffer: number;
     showOfferDetails: boolean;
   }>();
 
-  constructor(private intershipOfferService: IntershipOfferService) {}
+  constructor(
+    private intershipOfferService: IntershipOfferService,
+    private router: Router
+  ) {}
 
   getOffer(id: number) {
     this.idOffer = id;
@@ -29,6 +35,14 @@ export class SupervisorOfferCardComponent {
       idOffer: idOffer,
       showOfferDetails: showOfferDetails,
     });
+  }
+
+  deleteIntershipOffer(intershipOfferId: number) {
+    this.intershipOfferService
+      .deleteIntershipById(intershipOfferId)
+      .subscribe((res: any) => {
+        console.log(res);
+      });
   }
 
   SelectOffer(): void {

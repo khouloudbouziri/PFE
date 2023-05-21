@@ -5,6 +5,7 @@ import { Status } from 'src/app/models/status';
 import { validPattern } from 'src/app/helpers/patter-match.validor';
 import { MustMatch } from 'src/app/helpers/must-match.validator';
 import { SignupService } from 'src/app/services/Authentication/signup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,8 @@ export class SignupComponent {
   constructor(
     private signupService: SignupService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
   frm!: FormGroup;
   status!: Status;
@@ -31,11 +33,13 @@ export class SignupComponent {
         console.log(res);
         this.status = res;
         this.frm.reset();
+        this.router.navigate(['./login']);
       },
       error: (err) => {
         this.status.statusCode = 0;
         this.status.message = 'some error on the server side';
         console.log(err);
+        this.openSnackBar('Stagiaire existe déja', 'Fermer');
       },
       complete: () => {
         this.status.statusCode = 0;

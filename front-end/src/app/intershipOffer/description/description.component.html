@@ -4,7 +4,8 @@
 >
   <div class="flex">
     <div class="flex items-center">
-      <img class="w-40" src="../../../assets/images/logo.png" alt="" />
+      <!-- <img class="w-40" src="../../../assets/images/logo.png" alt="" /> -->
+      <img [src]="decode(offer.image)" alt="" class="h-20" />
       <div class="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,7 +18,7 @@
             fill="rgba(66,74,136,1)"
           ></path>
         </svg>
-        <span> &nbsp;Lac2, Tunis</span>
+        <span> &nbsp;{{ offer.intershipOffre.address }}</span>
       </div>
     </div>
     <div class="flex flex-col ml-64">
@@ -25,6 +26,7 @@
       <div class="flex mt-4">
         <button
           class="h-10 w-10 rounded-full bg-[#424A88] p-2 mr-4 flex items-center"
+          (click)="shareOnLinkedIn()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -41,6 +43,7 @@
         </button>
         <button
           class="h-10 w-10 rounded-full bg-[#424A88] p-2 mr-4 flex items-center"
+          (click)="shareOnTwitter()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +59,7 @@
         </button>
         <button
           class="h-10 w-10 rounded-full bg-[#424A88] p-2 mr-4 flex items-center"
+          (click)="shareOnFacebook()"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -105,8 +109,8 @@
   <div class="mt-10">
     <p class="text-lg">
       <span class="text-xl font-semibold text-[#E5302D]"
-        >{{ offer.company }} |</span
-      ><span>&nbsp;{{ offer.type }}</span>
+        >{{ offer.intershipOffre.company }} |</span
+      ><span>&nbsp;{{ offer.intershipOffre.type }}</span>
     </p>
     <br />
     <h1 class="flex items-center">
@@ -119,9 +123,11 @@
         <path
           d="M13 21V23.5L10 21.5L7 23.5V21H6.5C4.567 21 3 19.433 3 17.5V5C3 3.34315 4.34315 2 6 2H20C20.5523 2 21 2.44772 21 3V20C21 20.5523 20.5523 21 20 21H13ZM13 19H19V16H6.5C5.67157 16 5 16.6716 5 17.5C5 18.3284 5.67157 19 6.5 19H7V17H13V19ZM19 14V4H6V14.0354C6.1633 14.0121 6.33024 14 6.5 14H19ZM7 5H9V7H7V5ZM7 8H9V10H7V8ZM7 11H9V13H7V11Z"
           fill="rgba(66,74,136,1)"
-        ></path></svg> <span>&nbsp;sujet :</span>
+        ></path>
+      </svg>
+      <span>&nbsp;sujet :</span>
     </h1>
-    <p class="text-lg">{{ offer.topic }}</p>
+    <p class="text-lg">{{ offer.intershipOffre.topic }}</p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -138,7 +144,7 @@
       <span>&nbsp;travil demandé :</span>
     </h1>
     <p class="mb-1 text-lg">vous serez amené à :</p>
-    <p class="my-2 text-lg">✓&nbsp; {{ offer.required_work }}</p>
+    <p class="my-2 text-lg">✓&nbsp; {{ offer.intershipOffre.required_work }}</p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -155,7 +161,9 @@
       <span>&nbsp;Environnement technique / Outils utilisés :</span>
     </h1>
 
-    <p class="my-2 text-lg">{{ offer.technical_environement }}</p>
+    <p class="my-2 text-lg">
+      {{ offer.intershipOffre.technical_environement }}
+    </p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -171,7 +179,7 @@
       </svg>
       <span>&nbsp;Profil recherché :</span> <br />
     </h1>
-    <p class="my-2 text-lg">• {{ offer.required_profile }}</p>
+    <p class="my-2 text-lg">• {{ offer.intershipOffre.required_profile }}</p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -189,17 +197,19 @@
     </h1>
     <p class="text-lg">
       • <span class="font-semibold">Localisation du poste :</span>
-      {{ offer.address }}
+      {{ offer.intershipOffre.address }}
     </p>
     <p class="text-lg">
-      • <span class="font-semibold">Rémunération :</span> {{ offer.renumerete }}
+      • <span class="font-semibold">Rémunération :</span>
+      {{ offer.intershipOffre.renumerete }}
     </p>
     <p class="text-lg">
       •<span class="font-semibold"> Télétravail :</span>
-      {{ offer.working_from_home }}
+      {{ offer.intershipOffre.working_from_home }}
     </p>
     <p class="text-lg">
-      •<span class="font-semibold"> Durée : </span>{{ offer.duration }} mois
+      •<span class="font-semibold"> Durée : </span
+      >{{ offer.intershipOffre.duration }} mois
     </p>
     <div class="flex flex-col mt-20 justify-center">
       <p class="mt-2 text-base flex justify-center">
@@ -231,7 +241,7 @@
         type="submit"
         id="btnSubmit"
         class="w-40 h-10 bg-white text-[#E73130] font-semibold border-2 border-[#E73130] rounded-full"
-        routerLink="/apply/offer/{{ offer.id_intership_offre }}"
+        routerLink="/apply/offer/{{ offer.intershipOffre.id_intership_offre }}"
       >
         Candidater
       </button>

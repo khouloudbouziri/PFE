@@ -24,12 +24,14 @@ import { AgendaComponent } from './shared/agenda/agenda.component';
 import { FileComponent } from './file/file.component';
 import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
 import { CVthequeComponent } from './cvtheque/cvtheque.component';
+import { ModifyIntershipOfferComponent } from './intershipOffer/modify-intership-offer/modify-intership-offer.component';
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'company-home', component: CompanyHomeComponent },
   { path: 'intern-home', component: InternHomeComponent },
-  { path:'cvtheque',component:CVthequeComponent}, 
+  { path: 'cvtheque', component: CVthequeComponent },
 
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
@@ -73,6 +75,7 @@ const routes: Routes = [
   { path: 'agenda', component: AgendaComponent },
   { path: 'file', component: FileComponent },
   { path: 'supervisorOffer/:id', component: SupervisorOfferDetailsComponent },
+  { path: 'modifyOffer', component: ModifyIntershipOfferComponent },
 ];
 
 @NgModule({

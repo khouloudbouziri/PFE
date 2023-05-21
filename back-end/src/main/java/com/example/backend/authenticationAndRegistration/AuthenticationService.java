@@ -35,7 +35,6 @@ public class AuthenticationService {
   public AuthenticationResponse CompanyRegister(CompanyRegisterRequest request) {
 
     if (visitorRepository.findByEmail(request.getEmail()).isPresent()) {
-      System.out.println("ok");
       throw new RuntimeException("User already exists");
     }
 

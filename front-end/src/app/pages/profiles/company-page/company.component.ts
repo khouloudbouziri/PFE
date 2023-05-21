@@ -1,4 +1,4 @@
-import { Component  ,Renderer2} from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/Authentication/auth.service';
 import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership-offer.service';
@@ -6,7 +6,7 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: [ './company.component.css'],
+  styleUrls: ['./company.component.css'],
 })
 export class CompanyComponent {
   id: any;
@@ -15,21 +15,20 @@ export class CompanyComponent {
   showContent2 = false;
   showContent3 = false;
   supervisors: any = [];
-  public intershipOffers: any = [];
+  public SupervisorIntershipOffers: any = [];
 
   constructor(
     public authService: AuthService,
     public intershipService: IntershipOfferService,
     private router: Router,
-    private route: ActivatedRoute
-    ,private renderer: Renderer2
+    private route: ActivatedRoute,
+    private renderer: Renderer2
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
   ngAfterContentInit() {
     this.renderer.listen(window, 'load', () => {
-       
-      console.log("La page est chargée");
+      console.log('La page est chargée');
     });
   }
   onClick() {
@@ -40,8 +39,8 @@ export class CompanyComponent {
     this.intershipService
       .getCompanyIntershipOffers(this.id)
       .subscribe((res: any) => {
-        this.intershipOffers = res;
-        console.log(this.intershipOffers);
+        this.SupervisorIntershipOffers = res;
+        console.log(this.SupervisorIntershipOffers);
       });
   }
 

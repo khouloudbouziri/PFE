@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { validPattern } from 'src/app/helpers/patter-match.validor';
 import { Status } from 'src/app/models/status';
 import { CompanySignupServiceService } from 'src/app/services/Authentication/company-signup-service.service';
-import { VisitorService } from 'src/app/services/Visitor/visitor.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-supervisor',
@@ -19,7 +19,8 @@ export class AddSupervisorComponent {
   constructor(
     private route: ActivatedRoute,
     private signupService: CompanySignupServiceService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -44,12 +45,17 @@ export class AddSupervisorComponent {
         this.status.statusCode = 0;
         this.status.message = 'some error on the server side';
         console.log(err);
+        this.openSnackBar('Encadrant existe déja', 'Fermer');
       },
       complete: () => {
         this.status.statusCode = 0;
         this.status.message = '';
       },
     });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000 });
   }
   ngOnInit(): void {
     const patternRegex = new RegExp(

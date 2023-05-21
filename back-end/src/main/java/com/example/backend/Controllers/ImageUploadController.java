@@ -35,11 +35,11 @@ public class ImageUploadController {
 	VisitorRepository visitorRepository;
 
 	@PostMapping("/upload")
-	public ResponseEntity<ImageModel> uplaodImage(@RequestParam("imageFile") MultipartFile file ,Long id) throws IOException {
-      
-		System.out.println("Original Image Byte Size - " + file.getBytes().length);
+	public ResponseEntity<ImageModel> uplaodImage(@RequestParam("imageFile") MultipartFile file, Long id)
+			throws IOException {
+
 		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
-				compressBytes(file.getBytes()), id );
+				compressBytes(file.getBytes()), id);
 
 		imageRepository.save(img);
 
@@ -49,17 +49,20 @@ public class ImageUploadController {
 	@GetMapping(path = { "/get/{idE}" })
 	public ImageModel getImage(@PathVariable Long idE) throws IOException {
 		final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(idE);
-		ImageModel img = new ImageModel(retrievedImage.get().getName() , retrievedImage.get().getType() ,decompressBytes(retrievedImage.get().getPicByte()),retrievedImage.get().getIdE());
+		ImageModel img = new ImageModel(retrievedImage.get().getName(), retrievedImage.get().getType(),
+				decompressBytes(retrievedImage.get().getPicByte()), retrievedImage.get().getIdE());
 		return img;
 	}
+
 	@GetMapping(path = { "/get/all" })
 	public List<ImageModel> getAllImages() throws IOException {
 		final List<ImageModel> retrievedImage = imageRepository.findAll();
-		final List<ImageModel> retrievedImages=new  ArrayList<>();
-		for(int i=0 ; i<retrievedImage.size();i++){
-		ImageModel img = new ImageModel(retrievedImage.get(i).getName() , retrievedImage.get(i).getType() ,decompressBytes(retrievedImage.get(i).getPicByte()),retrievedImage.get(i).getIdE());
-		retrievedImages.add(img);
-	}
+		final List<ImageModel> retrievedImages = new ArrayList<>();
+		for (int i = 0; i < retrievedImage.size(); i++) {
+			ImageModel img = new ImageModel(retrievedImage.get(i).getName(), retrievedImage.get(i).getType(),
+					decompressBytes(retrievedImage.get(i).getPicByte()), retrievedImage.get(i).getIdE());
+			retrievedImages.add(img);
+		}
 		return retrievedImages;
 	}
 
@@ -79,7 +82,6 @@ public class ImageUploadController {
 			outputStream.close();
 		} catch (IOException e) {
 		}
-		System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
 
 		return outputStream.toByteArray();
 	}

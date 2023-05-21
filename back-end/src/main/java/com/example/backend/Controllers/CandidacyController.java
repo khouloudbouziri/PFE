@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -58,7 +60,7 @@ public class CandidacyController {
     }
 
     @GetMapping("/offer/get")
-    public ResponseEntity <CandidacyHelper> getById(@RequestParam Long id_candidacy) {
+    public ResponseEntity<CandidacyHelper> getById(@RequestParam Long id_candidacy) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidacyById(id_candidacy));
     }
 
@@ -66,7 +68,7 @@ public class CandidacyController {
     public ResponseEntity<List<CandidacyHelper>> getIntershipOfferCandidacies(@RequestParam Long id_offer) {
         return ResponseEntity.ok(candidacyServiceImpl.getIntershipOfferCandidacies(id_offer));
     }
-    
+
     @GetMapping("/all")
     public ResponseEntity<List<CandidacyHelper>> getAll() {
         return ResponseEntity.ok(candidacyServiceImpl.getAll());
@@ -84,7 +86,13 @@ public class CandidacyController {
 
     @PutMapping("/candidacyState")
     public ResponseEntity<Optional<Candidacy>> changeCandidacyState(@RequestParam Long idCandidacy) {
-        System.out.println("ok4");
         return ResponseEntity.ok(candidacyServiceImpl.changeCandidacyState(idCandidacy));
     }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteCandidacy(@RequestParam Long idCandidacy) {
+        candidacyServiceImpl.deleteCandidacy(idCandidacy);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

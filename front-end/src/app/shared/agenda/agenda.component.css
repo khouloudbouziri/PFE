@@ -22,4 +22,16 @@
     max-height: 90%;
     
   }
+
+  .popup {
+    background-color: white;
+    width: 15cm;
+    height:13cm;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    max-height: 90%;
+    
+  }
   

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +47,7 @@ import { CVthequeComponent } from './cvtheque/cvtheque.component';
 import { CVcardComponent } from './cvcard/cvcard.component';
 import { StarComponent } from './star/star.component';
 
-
+import { ModifyIntershipOfferComponent } from './intershipOffer/modify-intership-offer/modify-intership-offer.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { StarComponent } from './star/star.component';
     CVcardComponent,
     StarComponent,
 
+    ModifyIntershipOfferComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,10 +98,8 @@ import { StarComponent } from './star/star.component';
     MatSnackBarModule,
     FullCalendarModule,
     MatStepperModule,
-   
-    
   ],
-  providers: [{ provide: MatStepperIntl }],
+  providers: [{ provide: MatStepperIntl }, DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

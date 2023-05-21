@@ -7,7 +7,7 @@
         <div
           class="w-96 shrink-0 px-8 py-3 rounded-2xl flex flex-col bg-gradient-to-b from-[#FFFFFF] relative shadow-md"
         >
-          <button>
+          <button (click)="deleteCandidacy(candidacie.candidacy.idCandidacy)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -51,9 +51,8 @@
           </div>
           <span class="mx-auto text-[#424A88] text-lg"
             >{{ candidacie.candidacy?.firstname }}
-            {{ candidacie.candidacy?.lastname }}<br/>
-            </span
-          >
+            {{ candidacie.candidacy?.lastname }}<br />
+          </span>
           <div class="flex mt-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"

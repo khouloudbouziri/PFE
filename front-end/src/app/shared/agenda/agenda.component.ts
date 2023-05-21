@@ -9,7 +9,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { Status } from 'src/app/models/status';
 import { AgendaService } from '../../services/Agenda/agenda.service';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
-import { SupervisorPageComponent } from 'src/app/pages/profiles/supervisor-page/supervisor-page.component';
+import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-agenda',
@@ -23,14 +24,19 @@ export class AgendaComponent {
   candidacies: any = [];
   candidaciesStatus: any = [];
   type: string = 'Entretien';
+  selectedEventId: any;
+  selectedEvent: any;
+  modifiedEvent: any;
+  showEventModal: boolean = false;
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     public agendaService: AgendaService,
     public candidacyService: CandidacyService,
-    //  public supervisor :SupervisorPageComponent,
-    private route: ActivatedRoute
+    private datePipe: DatePipe,
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {
     this.idE = this.route.snapshot.paramMap.get('id');
     console.log(this.idE);
@@ -63,7 +69,22 @@ export class AgendaComponent {
       this.getCandidaciesBySupervisor();
       this.getCandidaciesBySupervisorAndStatus();
     },
+    eventClick: (event) => {
+      this.openModal(event);
+      this.getEventById();
+    },
   };
+
+  openModal(event: any) {
+    this.selectedEventId = event.event._def.publicId;
+    console.log(this?.selectedEvent);
+    this.showEventModal = true;
+    console.log(this.selectedEventId);
+  }
+
+  closeModal() {
+    this.showEventModal = false;
+  }
 
   openPopup() {
     this.isPopupVisible = true;
@@ -77,6 +98,15 @@ export class AgendaComponent {
     this.frm.get('type')?.setValue(this.type);
   }
 
+  getEventById() {
+    this.agendaService
+      .getEventById(this.selectedEventId)
+      .subscribe((res: any) => {
+        this.selectedEvent = res;
+        console.log(this.selectedEvent);
+      });
+  }
+
   addEvent() {
     this.agendaService.addEvent(this.frm.value).subscribe({
       next: (res) => {
@@ -84,13 +114,12 @@ export class AgendaComponent {
         this.status = res;
         this.frm.reset();
         this.getEventsByIntern();
-        //this.getCandidaciesBySupervisor();
-        //this.getCandidaciesBySupervisorAndStatus();
       },
       error: (err) => {
         this.status.statusCode = 0;
         this.status.message = 'some error on the server side';
         console.log(err);
+        this.openSnackBar('Evenement non ajouté', 'Fermer');
       },
       complete: () => {
         this.status.statusCode = 0;
@@ -98,6 +127,7 @@ export class AgendaComponent {
       },
     });
   }
+
   getEventsByIntern() {
     this.events = this.agendaService.getEventsByIntern(this.idE);
     this.events.subscribe((res: any) => {
@@ -123,7 +153,6 @@ export class AgendaComponent {
             };
           });
           this.events = events;
-          console.log('le5ra' + this.events);
         });
       }
     });
@@ -148,6 +177,31 @@ export class AgendaComponent {
       });
   }
 
+  updateEvent() {
+    this.agendaService
+      .updateEvent(this.selectedEvent.id, this.frm.value)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.getEventsByIntern();
+      });
+  }
+
+  deleteEvent() {
+    this.agendaService
+      .deleteEvent(this.selectedEventId)
+      .subscribe((res: any) => {
+        this.getEventsByIntern();
+      });
+  }
+
+  formatDateTime(dateTime: string): string {
+    const formattedDateTime = this.datePipe.transform(
+      dateTime,
+      'yyyy-MM-ddTHH:mm'
+    );
+    return formattedDateTime || '';
+  }
+
   ngOnInit(): void {
     this.getEventsByIntern();
     this.frm = this.fb.group({
@@ -160,5 +214,9 @@ export class AgendaComponent {
 
       type: [this.type, Validators.required],
     });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000 });
   }
 }

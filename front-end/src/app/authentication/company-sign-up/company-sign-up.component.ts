@@ -5,6 +5,8 @@ import { CompanySignupServiceService } from 'src/app/services/Authentication/com
 
 import { validPattern } from 'src/app/helpers/patter-match.validor';
 import { MustMatch } from 'src/app/helpers/must-match.validator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-company-sign-up',
   templateUrl: './company-sign-up.component.html',
@@ -13,8 +15,9 @@ import { MustMatch } from 'src/app/helpers/must-match.validator';
 export class CompanySignUpComponent {
   constructor(
     private signupService: CompanySignupServiceService,
-
-    private fb: FormBuilder
+    private snackBar: MatSnackBar,
+    private fb: FormBuilder,
+    private router: Router
   ) {}
   frm!: FormGroup;
   status!: Status;
@@ -30,11 +33,13 @@ export class CompanySignUpComponent {
         console.log(res);
         this.status = res;
         this.frm.reset();
+        this.router.navigate(['./login']);
       },
       error: (err) => {
         this.status.statusCode = 0;
         this.status.message = 'some error on the server side';
         console.log(err);
+        this.openSnackBar('Entreprise existe déja', 'Fermer');
       },
       complete: () => {
         this.status.statusCode = 0;
@@ -42,6 +47,7 @@ export class CompanySignUpComponent {
       },
     });
   }
+
   ngOnInit(): void {
     const patternRegex = new RegExp(
       '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*[#$^+=!*()@%&]).{6,}$'
@@ -66,5 +72,9 @@ export class CompanySignUpComponent {
         validator: MustMatch('password', 'Confirmpassword'),
       }
     );
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000 });
   }
 }

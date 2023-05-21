@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/models/Role';
 import { Status } from 'src/app/models/status';
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     private signupService: SignupService,
     private fb: FormBuilder,
     private authService: AuthService,
+    private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
         console.log(err);
         this.status.statusCode = 0;
         this.status.message = 'some error on the server side';
+        this.openSnackBar('Vérifier vos données', 'Fermer');
       },
     });
   }
@@ -60,5 +63,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['bg-blue-500', 'text-white'],
+    });
+  }
 }

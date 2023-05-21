@@ -29,6 +29,12 @@ export class CandidacyService {
     );
   }
 
+  deleteCandidacy(idCandidacy: number): Observable<void> {
+    return this.http.delete<void>(
+      `${this.baseUrl}/auth/candidacy/delete?idCandidacy=${idCandidacy}`
+    );
+  }
+
   spontaneousCandidacy(model: Candidacy) {
     return this.http.post<Status>(
       this.baseUrl + '/auth/candidacy/spontaneousCandidacy',
@@ -58,7 +64,6 @@ export class CandidacyService {
         '/auth/candidacy/supervisorCandidacies/status/' +
         idSupervisor
     );
-    console.log('d5al');
   }
 
   public setSelectedCandidacy(candidacy: any): void {

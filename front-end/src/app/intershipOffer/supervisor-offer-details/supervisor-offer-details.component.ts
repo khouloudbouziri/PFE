@@ -10,8 +10,10 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 export class SupervisorOfferDetailsComponent {
   idOffer: any;
   offer: any = {};
+  offerInf: any = {};
   candidacies: any = [];
   candidacy: any;
+  showEventModal: boolean = false;
   @Output() selectedCandidacy = new EventEmitter();
 
   constructor(
@@ -27,7 +29,9 @@ export class SupervisorOfferDetailsComponent {
       .getIntershipOfferById(this.idOffer)
       .subscribe((res: any) => {
         this.offer = res;
-        console.log(this.offer)
+        this.offerInf = res.intershipOffre;
+        console.log(this.offer);
+        console.log(this.offerInf);
       });
   }
 
@@ -36,6 +40,14 @@ export class SupervisorOfferDetailsComponent {
       .getIntershipOfferCandidacies(this.idOffer)
       .subscribe((res: any) => {
         this.candidacies = res;
+      });
+  }
+
+  deleteIntershipOffer() {
+    this.intershipOfferService
+      .deleteIntershipById(this.idOffer)
+      .subscribe((res: any) => {
+        console.log('deleted');
       });
   }
 

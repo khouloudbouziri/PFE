@@ -23,6 +23,7 @@ import com.example.backend.entities.IntershipOffre;
 import com.example.backend.entities.IntershipOffreHelper;
 import com.example.backend.entities.Visitor;
 import com.example.backend.Services.IntershipOffreService;
+
 @Service
 public class CandidacyService implements CandidacyServiceImpl {
 
@@ -37,8 +38,6 @@ public class CandidacyService implements CandidacyServiceImpl {
     @Autowired
     ImageRepository imageRepository;
 
-   
-
     @Autowired
     public CandidacyService(CandidacyRepository candidacyRepository, VisitorRepository visitorRepository,
             IntershipOfferRepository intershipOfferRepository) {
@@ -52,6 +51,12 @@ public class CandidacyService implements CandidacyServiceImpl {
         candidacy.setIdIntershipOffer(id_intershipOffer);
         candidacy.setIdIntern(id_intern);
         candidacy.setStatus("En cours");
+
+        Optional<Candidacy> existingCandidacy = candidacyRepository.findByIdInternAndIdIntershipOffer(id_intern,
+                id_intershipOffer);
+        if (existingCandidacy.isPresent()) {
+            throw new RuntimeException("Le stagiaire a deja postule pour cet offre");
+        }
         Optional<IntershipOffre> intershipOffer = intershipOfferRepository.findById(id_intershipOffer);
         intershipOffer.ifPresent(i -> {
             i.setCandidacy_number(i.getCandidacy_number() + 1);
@@ -66,19 +71,26 @@ public class CandidacyService implements CandidacyServiceImpl {
 
     public List<IntershipOffreHelper> getInternCandidacy(Long id_intern) {
         List<Candidacy> allCandidacies = candidacyRepository.findAllByIdIntern(id_intern);
-          
+
         Optional<Visitor> intern = visitorRepository.findById(id_intern);
         List<IntershipOffreHelper> internCandidacies = new ArrayList<>();
         intern.ifPresent(i -> {
-            IntershipOffreHelper allIntershipOffers =new IntershipOffreHelper();
+            IntershipOffreHelper allIntershipOffers = new IntershipOffreHelper();
             for (Candidacy candidacy : allCandidacies) {
-                 allIntershipOffers = intershipOffreService.getIntershipOfferById(candidacy.getIdIntershipOffer());
+                allIntershipOffers = intershipOffreService.getIntershipOfferById(candidacy.getIdIntershipOffer());
+                // Optional<IntershipOffre> allIntershipOffers = intershipOfferRepository
+                // .findById(candidacy.getIdIntershipOffer());
+                // // allIntershipOffers.ifPresent(internCandidacies::add);
+                // allIntershipOffers.ifPresent(offer -> {
+                // if (candidacy.getStatus().equals("En cours")) {
+                // internCandidacies.add(offer);
+                // }
+                // });
             }
             internCandidacies.add(allIntershipOffers);
         });
-        System.out.println(internCandidacies);
         return internCandidacies;
-       
+
     }
 
     public List<CandidacyHelper> getIntershipOfferCandidacies(Long id_offer) {
@@ -87,21 +99,17 @@ public class CandidacyService implements CandidacyServiceImpl {
         for (Candidacy candidacy : candidacies) {
             CandidacyHelper candidacyHelper = new CandidacyHelper();
             candidacyHelper.setCandidacy(candidacy);
-            System.out.println(candidacyHelper.getCandidacy());
             final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
             if (retrievedImage.isPresent()) {
                 byte[] image = retrievedImage.get().getPicByte();
 
-                // System.out.println("loul" + image.getName());
                 // image.setPicByte(decompressBytes(image.getPicByte()));
                 candidacyHelper.setImage(decompressBytes(image));
-                System.out.println("setted");
             }
 
             else {
 
-                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
-                System.out.println(candidacyHelper.getImage());
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 4).get().getPicByte()));
             }
             listCandidat.add(candidacyHelper);
         }
@@ -139,7 +147,6 @@ public class CandidacyService implements CandidacyServiceImpl {
                     String m = "Accepted";
                     if ((offer.getId_intership_offre() == candidacy.getIdIntershipOffer()) && (s.equals(m))) {
                         candidacies.add(candidacy);
-                        System.out.println(candidacies);
 
                     }
                 }
@@ -148,36 +155,31 @@ public class CandidacyService implements CandidacyServiceImpl {
         return candidacies;
 
     }
+
     public List<CandidacyHelper> getAll() {
-       
+
         List<Candidacy> AllCandidacies = candidacyRepository.findAll();
         List<CandidacyHelper> candidacies = new ArrayList<>();
-      
+
         for (Candidacy candidacy : AllCandidacies) {
             CandidacyHelper candidacyHelper = new CandidacyHelper();
             candidacyHelper.setCandidacy(candidacy);
-            System.out.println(candidacyHelper.getCandidacy());
             final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
             if (retrievedImage.isPresent()) {
                 byte[] image = retrievedImage.get().getPicByte();
-                //  System.out.println("loul" + image.getName());
-                //  image.setPicByte(decompressBytes(image.getPicByte()));
+                // image.setPicByte(decompressBytes(image.getPicByte()));
                 candidacyHelper.setImage(decompressBytes(image));
-                System.out.println("setted");
             }
 
             else {
 
-                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
-                System.out.println(candidacyHelper.getImage());
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 4).get().getPicByte()));
             }
             candidacies.add(candidacyHelper);
         }
 
         return candidacies;
     }
-
-    
 
     public List<Visitor> getInterns(Long idIntershipOffer) {
         List<Candidacy> allCandidacies = candidacyRepository.findAll();
@@ -206,27 +208,36 @@ public class CandidacyService implements CandidacyServiceImpl {
     }
 
     public CandidacyHelper getCandidacyById(Long idC) {
-        List<CandidacyHelper> list= this.getAll();
-        CandidacyHelper i=new CandidacyHelper();
+        List<CandidacyHelper> list = this.getAll();
+        CandidacyHelper i = new CandidacyHelper();
         for (int index = 0; index < list.size(); index++) {
-            System.out.println(list.get(index).getCandidacy().getIdCandidacy() == idC);
-            System.out.println(list.get(index).getCandidacy().getIdCandidacy().longValue() +"hhhhhhhhhhhhh"+ idC.longValue());
+
             if (list.get(index).getCandidacy().getIdCandidacy().longValue() == idC.longValue()) {
-                System.out.println("hhhhhhhhhhhhhhhhhhhhhhh");
-                i=  list.get(index);
+                i = list.get(index);
             }
-             
+
         }
         return i;
-       
+
     }
 
     public void save(Candidacy c) {
         candidacyRepository.save(c);
     }
 
+    public void deleteCandidacy(Long idCandidacy) {
+        Optional<Candidacy> candidacy = candidacyRepository.findById(idCandidacy);
+        candidacy.ifPresent(c -> {
+            Optional<IntershipOffre> intershipOffre = intershipOfferRepository.findById(c.getIdIntershipOffer());
+            intershipOffre.ifPresent(i -> {
+                i.setCandidacy_number(i.getCandidacy_number() - 1);
+                intershipOfferRepository.save(i);
+            });
+        });
+        candidacyRepository.deleteById(idCandidacy);
+    }
+
     public Optional<Candidacy> changeCandidacyState(Long idCandidacy) {
-        System.out.println("ok5");
         Optional<Candidacy> candidacy = candidacyRepository.findById(idCandidacy);
         candidacy.ifPresent(c -> {
             c.setStatus("Accepted");

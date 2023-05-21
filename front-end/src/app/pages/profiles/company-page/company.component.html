@@ -4,7 +4,7 @@
   <section
     class="flex flex-col p-10 w-80 bg-gradient-to-b from-[#FFFFFF] rounded-2xl"
   >
-  <app-photo></app-photo>
+    <app-photo></app-photo>
 
     <div class="">
       <li class="flex items-center mt-10">
@@ -136,7 +136,7 @@
                 fill="rgba(66, 74, 136, 1)"
               ></path>
             </svg>
-            <span class="ml-3 pt-1">Ajouter un offre</span>
+            <span class="ml-3 pt-1">Ajouter une offre</span>
           </button>
         </li>
 
@@ -219,7 +219,7 @@
                 fill="rgba(66,74,136,1)"
               />
             </svg>
-            <span class="ml-3">Annonces</span>
+            <span class="ml-3">Offres</span>
           </button>
         </li>
       </ul>
@@ -271,10 +271,10 @@
         >
           Nos offres
         </h1>
-        <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
+        <app-supervisor-offer-card
+          [SupervisorIntershipOffers]="SupervisorIntershipOffers"
+        ></app-supervisor-offer-card>
       </div>
     </ng-container>
   </section>
-  
 </div>
-

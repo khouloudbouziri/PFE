@@ -6,6 +6,7 @@ import { Status } from 'src/app/models/status';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 import { VisitorService } from 'src/app/services/Visitor/visitor.service';
 import { TextSimilarityServiceService } from 'src/app/services/text-similarity-service.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-apply',
   templateUrl: './apply.component.html',
@@ -24,10 +25,17 @@ export class ApplyComponent {
     private fb: FormBuilder,
     private candidacyService: CandidacyService,
     private textSimilarityService: TextSimilarityServiceService,
-    private visitorService: VisitorService
-  ) {this.intern = {};
+    private visitorService: VisitorService,
+    private snackBar: MatSnackBar
+  ) {
+    this.intern = {};
     this.id_intership_offre = this.route.snapshot.paramMap.get('id');
   }
+
+  get f() {
+    return this.frm.controls;
+  }
+
   getInternById() {
     this.visitorService.getVisitorById(this.user).subscribe((res: any) => {
       this.intern = res;
@@ -45,7 +53,11 @@ export class ApplyComponent {
     this.status = { statusCode: 0, message: 'wait...' };
     if (this.offer) {
       this.candidacyService
-        .addCandidacy(this.frm.value, this.offer.id_intership_offre, this.user)
+        .addCandidacy(
+          this.frm.value,
+          this.offer.intershipOffre.id_intership_offre,
+          this.user.id
+        )
         .subscribe({
           next: (res) => {
             this.status = res;
@@ -54,7 +66,7 @@ export class ApplyComponent {
               .subscribe((candidacy) => {
                 this.textSimilarityService
                   .cosineSimilarity(
-                    this.offer.id_intership_offre,
+                    this.offer.intershipOffre.id_intership_offre,
                     res.idCandidacy
                   )
                   .subscribe((score) => {});
@@ -65,13 +77,17 @@ export class ApplyComponent {
           error: (err) => {
             this.status.statusCode = 0;
             this.status.message = 'some error on the server side';
+            this.openSnackBar(
+              'Vous avez déja postuler à cette offre',
+              'Fermer'
+            );
           },
           complete: () => {
             this.status.statusCode = 0;
             this.status.message = '';
           },
         });
-    } 
+    }
   }
 
   getAuthenticatedUser() {
@@ -79,7 +95,7 @@ export class ApplyComponent {
       const visitor = localStorage.getItem('visitor');
       if (visitor) {
         const visitorData = JSON.parse(visitor);
-        this.user = visitorData.visitor.id;
+        this.user = visitorData.visitor;
       }
     }
   }
@@ -87,24 +103,33 @@ export class ApplyComponent {
   ngOnInit(): void {
     this.getAuthenticatedUser();
     this.getIntershipOfferById();
-  
-  if (this.offer) {
-    this.frm = this.fb.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
-      phone_number: ['', Validators.required],
-      address: ['', Validators.required],
-      address_code: ['', Validators.required],
-      university: ['', Validators.required],
-      mention: ['', Validators.required],
-      university_department: ['', Validators.required],
-      level: ['', Validators.required],
-      skills: ['', Validators.required],
-      did_intership: ['', Validators.required],
-      linkedIn_url: ['', Validators.required],
-      idIntern: [this.user, Validators.required],
-      id_intershipOffer: [this.offer.id_intership_offre, Validators.required],
-    });
-  } 
-}}
+
+    if (this.offer) {
+      this.frm = this.fb.group({
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        email: ['', Validators.required],
+        phone_number: ['', Validators.required],
+        address: ['', Validators.required],
+        address_code: ['', Validators.required],
+        university: ['', Validators.required],
+        mention: ['', Validators.required],
+        university_department: ['', Validators.required],
+        level: ['', Validators.required],
+        skills: ['', Validators.required],
+        did_intership: ['', Validators.required],
+        linkedIn_url: ['', Validators.required],
+        idIntern: [this.user.id, Validators.required],
+        id_intershipOffer: [this.offer.id_intership_offre, Validators.required],
+      });
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, { duration: 2000 });
+  }
+
+  decode(byte: any): any {
+    if (byte) return 'data:image/jpg;base64,' + byte;
+  }
+}
