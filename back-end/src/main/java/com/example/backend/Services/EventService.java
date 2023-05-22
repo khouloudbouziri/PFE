@@ -73,13 +73,14 @@ public class EventService implements EventServiceImplementation {
         List<Event> internMeetings = new ArrayList<>();
         candidacy.ifPresent(c -> {
             for (Event event : allEvents) {
-                String type = (event.getType()).toString();
+                String type = (event.getType());
                 String m = "Reunion";
                 if ((event.getIdIntern().equals(c.getIdIntern())) && (type.equals(m))) {
                     internMeetings.add(event);
                 }
             }
         });
+        System.out.println(internMeetings);
         return internMeetings;
     }
 

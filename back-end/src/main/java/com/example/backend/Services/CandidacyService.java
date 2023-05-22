@@ -109,7 +109,7 @@ public class CandidacyService implements CandidacyServiceImpl {
 
             else {
 
-                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 4).get().getPicByte()));
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
             }
             listCandidat.add(candidacyHelper);
         }
@@ -173,7 +173,7 @@ public class CandidacyService implements CandidacyServiceImpl {
 
             else {
 
-                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 4).get().getPicByte()));
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
             }
             candidacies.add(candidacyHelper);
         }

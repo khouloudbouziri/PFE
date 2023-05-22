@@ -82,7 +82,7 @@ public class SupervisorService implements SupervisorServiceInterface {
                     }
                 } else {
 
-                    sh.setImage(decompressBytes(imageRepository.findById((long) 1).get().getPicByte()));
+                    sh.setImage(decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
                 }
 
                 listSup.add(sh);

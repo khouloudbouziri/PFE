@@ -48,6 +48,7 @@ import { CVcardComponent } from './cvcard/cvcard.component';
 import { StarComponent } from './star/star.component';
 
 import { ModifyIntershipOfferComponent } from './intershipOffer/modify-intership-offer/modify-intership-offer.component';
+import { CvDescriptionComponent } from './cv-description/cv-description.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { ModifyIntershipOfferComponent } from './intershipOffer/modify-intership
     StarComponent,
 
     ModifyIntershipOfferComponent,
+      CvDescriptionComponent,
   ],
   imports: [
     BrowserModule,

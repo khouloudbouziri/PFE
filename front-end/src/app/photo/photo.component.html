@@ -3,7 +3,7 @@
     <div *ngIf="showContent">
       <label
         for="file"
-        class="flex justifyCenter w-10 opacity-40 cursor-pointer flex items-center"
+        class="flex justifyCenter w-10 opacity-40 cursor-pointer items-center"
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path
@@ -22,10 +22,7 @@
     <div class="container row">
       <div class="flex justifyCenter">
         <div *ngIf="retrievedImage">
-          <img
-           
-            [src]="retrievedImage"
-          />
+          <img [src]="retrievedImage" />
         </div>
       </div>
     </div>

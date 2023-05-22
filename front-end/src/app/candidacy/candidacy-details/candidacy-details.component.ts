@@ -18,6 +18,7 @@ export class CandidacyDetailsComponent {
   isRed = true;
   showInternDeails = true;
   showInternFollowUp = false;
+  intermImg: any;
 
   constructor(
     private candidacyService: CandidacyService,
@@ -36,6 +37,7 @@ export class CandidacyDetailsComponent {
     this.candidacyService.getById(this.idCandidacy).subscribe((res: any) => {
       console.log(res);
       this.candidacy = res.candidacy;
+      this.intermImg = res.image;
       console.log(res);
       this.visitorService
         .getVisitorById(res.candidacy.idIntern)
@@ -43,7 +45,7 @@ export class CandidacyDetailsComponent {
           this.intern = intern;
           console.log(this.intern);
           this.idIntern = intern.id;
-          console.log(intern.id);
+          console.log(this.idIntern);
           this.candidacyService
             .getInternCandidacy(intern.id)
             .subscribe((candidacy1: any) => {
@@ -61,8 +63,13 @@ export class CandidacyDetailsComponent {
       .subscribe((res: any) => {
         console.log(res);
         this.mettings = res;
+        console.log(this.intern);
         console.log(this.mettings);
       });
+  }
+
+  decode(byte: any): any {
+    if (byte) return 'data:image/jpg;base64,' + byte;
   }
 
   ngOnInit() {

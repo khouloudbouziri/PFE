@@ -77,7 +77,7 @@ public class IntershipOffreService implements IntershipOffreServiceImpl {
 
                 else {
 
-                    iHelper.setImage(decompressBytes(imageRepository.findById((long) 1).get().getPicByte()));
+                    iHelper.setImage(decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
                 }
                 list.add(iHelper);
             }
@@ -201,7 +201,7 @@ public class IntershipOffreService implements IntershipOffreServiceImpl {
                             else {
 
                                 iHelper.setImage(
-                                        decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
+                                        decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
                             }
                         }
                     }

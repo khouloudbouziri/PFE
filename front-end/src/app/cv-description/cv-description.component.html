@@ -1,40 +1,17 @@
-<section class="p-10 flex-col">
+<section class="p-10 flex-col w-1/2 mx-auto bg-gradient-to-b from-[#FFFFFF]">
   <div class="flex pl-20">
-    <div class="relative rounded-full">
-      <svg height="150" width="150" class="mr-6">
-        <circle
-          cx="88"
-          cy="88"
-          r="45"
-          class="fill-transparent"
-          [attr.stroke-dasharray]="283"
-          [attr.stroke-dashoffset]="283 * (1 - candidacy.score)"
-          stroke-width="5"
-          [style.stroke]="
-            candidacy.score <= 0.5
-              ? 'red'
-              : candidacy.score <= 0.7
-              ? 'orange'
-              : 'green'
-          "
-        />
-      </svg>
-      <div
-        class="h-20 w-20 object-cover rounded-full absolute top-12 left-12 mx-auto"
-      >
-        <img
-          [src]="decode(intermImg)"
-          alt=""
-          class="h-20 w-20 object-cover rounded-full top-12 left-12 mx-auto"
-        />
-      </div>
-    </div>
-    <div class="flex flex-col justify-center ml-24">
+    <img
+      [src]="decode(candidacy.image)"
+      alt=""
+      class="h-20 w-20 object-cover rounded-full top-12 left-12 justify-start"
+    />
+    <div class="flex flex-col ml-40">
       <span class="text-lg mb-2 text-[#455A64]"
-        >{{ candidacy?.firstname }} {{ candidacy?.lastname }}</span
+        >{{ candidacy.candidacy.firstname }}
+        {{ candidacy.candidacy?.lastname }}</span
       >
       <span class="mb-2 text-[#455A64] opacity-70">{{
-        intern?.universityDept
+        candidacy.candidacy?.university_department
       }}</span>
       <span class="flex items-center text-[#455A64]">
         <svg
@@ -49,37 +26,13 @@
             fill="rgba(66,74,136,1)"
           ></path>
         </svg>
-        {{ candidacy?.address }}</span
+        {{ candidacy.candidacy?.address }}</span
       >
     </div>
   </div>
   <div class="border border-[#E5302D] opacity-10 mt-6 mx-auto"></div>
-  <div class="flex mt-4 ml-14 font-medium text-xl">
-    <button
-      id="myButton"
-      [ngClass]="{ 'text-[#E5302D]': isRed, 'text-[#424A88]': !isRed }"
-      (click)="
-        showInternFollowUp = false; showInternDeails = true; toggleColor()
-      "
-    >
-      Détails
-    </button>
-
-    <button
-      id="myButton"
-      [ngClass]="{ 'text-[#E5302D]': !isRed, 'text-[#424A88]': isRed }"
-      class="text-[#424A88] ml-16"
-      (click)="
-        showInternFollowUp = true;
-        showInternDeails = false;
-        toggleColor();
-        getInternMeetings()
-      "
-    >
-      Suivi
-    </button>
-  </div>
-  <section class="mt-8 px-24" *ngIf="showInternDeails">
+  <div class="flex mt-4 ml-14 font-medium text-xl"></div>
+  <section class="mt-8 px-24">
     <span class="text-[#424A88] opacity-70">informations personnels</span>
     <div class="flex">
       <ul class="mt-8 mr-16">
@@ -166,31 +119,26 @@
       </ul>
       <ul class="mt-8">
         <li class="flex">
-          {{ candidacy?.firstname }} {{ candidacy?.lastname }}
+          {{ candidacy.candidacy?.firstname }}
+          {{ candidacy.candidacy?.lastname }}
         </li>
         <li class="flex mt-8">
-          {{ intern?.email }}
+          {{ candidacy.candidacy?.email }}
         </li>
         <li class="flex mt-8">
-          {{ candidacy?.phone_number }}
+          {{ candidacy.candidacy?.phone_number }}
         </li>
         <li class="flex mt-8">
-          {{ intern?.university }}
+          {{ candidacy.candidacy?.university }}
         </li>
         <li class="flex mt-8">
-          {{ candidacy?.address }}
+          {{ candidacy.candidacy?.address }}
         </li>
       </ul>
     </div>
   </section>
-  <section class="mt-8" *ngIf="showInternDeails">
+  <section class="mt-8">
     <span class="text-[#424A88] opacity-70">Candidatures postulées</span>
-    <app-offer-card [intershipOffers]="intershipOffers"></app-offer-card>
-  </section>
-  <section *ngIf="showInternFollowUp">
-    <app-stepper
-      [idCandidacy]="idCandidacy"
-      [mettings]="mettings"
-    ></app-stepper>
+    <app-offer-card [intershipOffers]="candidacies"></app-offer-card>
   </section>
 </section>

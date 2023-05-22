@@ -40,5 +40,7 @@ export class StepperComponent {
     //this.candidacy.status = 'Accepted';
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.mettings);
+  }
 }

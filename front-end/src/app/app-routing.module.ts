@@ -25,6 +25,7 @@ import { FileComponent } from './file/file.component';
 import { SupervisorOfferDetailsComponent } from './intershipOffer/supervisor-offer-details/supervisor-offer-details.component';
 import { CVthequeComponent } from './cvtheque/cvtheque.component';
 import { ModifyIntershipOfferComponent } from './intershipOffer/modify-intership-offer/modify-intership-offer.component';
+import { CvDescriptionComponent } from './cv-description/cv-description.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -68,6 +69,7 @@ const routes: Routes = [
   { path: 'spontaneousCandidacy', component: ApplicationFormComponent },
 
   { path: 'apply/offer/:id', component: ApplyComponent },
+  { path: 'candidacy/:id', component: CvDescriptionComponent },
 
   { path: 'photo', component: PhotoComponent },
   { path: 'ml', component: TextSimilarityComponent },
