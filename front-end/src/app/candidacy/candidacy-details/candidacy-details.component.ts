@@ -15,10 +15,12 @@ export class CandidacyDetailsComponent {
   candidacy: any = {};
   mettings: any = [];
   intershipOffers: any = [];
-  isRed = true;
+
   showInternDeails = true;
   showInternFollowUp = false;
+  showEvaluation = false;
   intermImg: any;
+  
 
   constructor(
     private candidacyService: CandidacyService,
@@ -29,9 +31,29 @@ export class CandidacyDetailsComponent {
     console.log(this.idCandidacy);
   }
 
-  toggleColor() {
-    this.isRed = !this.isRed;
+ 
+  isDetailsActive: boolean = true;
+  isSuiviActive: boolean = false;
+  isEvaluationActive: boolean = false;
+  
+  activateDetails() {
+    this.isDetailsActive = true;
+    this.isSuiviActive = false;
+    this.isEvaluationActive = false;
   }
+  
+  activateSuivi() {
+    this.isDetailsActive = false;
+    this.isSuiviActive = true;
+    this.isEvaluationActive = false;
+  }
+  
+  activateEvaluation() {
+    this.isDetailsActive = false;
+    this.isSuiviActive = false;
+    this.isEvaluationActive = true;
+  }
+
 
   getCandidacyById() {
     this.candidacyService.getById(this.idCandidacy).subscribe((res: any) => {

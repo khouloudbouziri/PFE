@@ -18,7 +18,7 @@ export class StepperComponent {
   isLinear = false;
   Accepted!: boolean;
   candidacy!: Candidacy;
-
+  isPopupVisible = false;
   @Input() public idCandidacy: any;
   @Input() public mettings: any;
   @Input() public internMeetings: any;
@@ -37,7 +37,15 @@ export class StepperComponent {
       });
 
     this.Accepted = true;
-    //this.candidacy.status = 'Accepted';
+    
+  }
+  
+  
+  closePopup() {
+    this.isPopupVisible = false;
+  }
+  openPopUp(){
+    this.isPopupVisible = true;
   }
 
   ngOnInit() {

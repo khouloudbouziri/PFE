@@ -76,7 +76,22 @@
       >
       <mat-form-field appearance="fill">
         <mat-label *ngIf="Accepted">Stage achevé avec succés</mat-label>
+        <ng-template matStepLabel>
+        <button mat-button matStepperNext onclick="openPopUp()">Evaluer</button></ng-template
+        >
       </mat-form-field>
     </form>
   </mat-step>
 </mat-stepper>
+<div *ngIf="isPopupVisible" class="popup-overlay">
+  <div class="flex-col popup-container relative justify-between w-11/12">
+    <button
+    class="right-1 top-1 absolute"
+    (click)="closePopup()"
+  >
+  x
+          </button>
+    <app-star></app-star>
+    
+  </div>
+  </div>
