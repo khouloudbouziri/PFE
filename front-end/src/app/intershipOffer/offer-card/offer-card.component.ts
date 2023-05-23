@@ -23,6 +23,7 @@ export class OfferCardComponent {
   }
 
   addToFavorites(idIntershipOffer: number) {
+    console.log(idIntershipOffer);
     this.getAuthenticatedUser();
     this.intershipOfferService
       .addFavoriteOffer(this.idIntern, idIntershipOffer)
@@ -36,7 +37,12 @@ export class OfferCardComponent {
     if (byte) return 'data:image/jpg;base64,' + byte;
   }
 
-  ngOnInit(): void {      
-  }
+  // bouton = document.getElementById('btn');
+  // icone = document.getElementById('icon');
 
+  // bouton.addEventListener('click', function() {
+  //   icone.classList.toggle('colore');
+  // });
+
+  ngOnInit(): void {}
 }

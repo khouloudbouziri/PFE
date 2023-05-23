@@ -77,9 +77,10 @@ public class CandidacyService implements CandidacyServiceImpl {
         intern.ifPresent(i -> {
             IntershipOffreHelper allIntershipOffers = new IntershipOffreHelper();
             for (Candidacy candidacy : allCandidacies) {
-                allIntershipOffers = intershipOffreService.getIntershipOfferById(candidacy.getIdIntershipOffer());
-                // Optional<IntershipOffre> allIntershipOffers = intershipOfferRepository
-                // .findById(candidacy.getIdIntershipOffer());
+                if (candidacy.getStatus().equals("En cours")) {
+                    allIntershipOffers = intershipOffreService.getIntershipOfferById(candidacy.getIdIntershipOffer());
+                    internCandidacies.add(allIntershipOffers);
+                }
                 // // allIntershipOffers.ifPresent(internCandidacies::add);
                 // allIntershipOffers.ifPresent(offer -> {
                 // if (candidacy.getStatus().equals("En cours")) {
@@ -87,7 +88,7 @@ public class CandidacyService implements CandidacyServiceImpl {
                 // }
                 // });
             }
-            internCandidacies.add(allIntershipOffers);
+
         });
         return internCandidacies;
 

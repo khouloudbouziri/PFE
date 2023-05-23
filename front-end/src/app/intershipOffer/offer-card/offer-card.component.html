@@ -7,11 +7,13 @@
         <div class="flex items-center justify-between">
           <img [src]="decode(intershipOffer.image)" alt="" class="h-20" />
           <button
+            id="btn"
             (click)="
               addToFavorites(intershipOffer.intershipOffre?.id_intership_offre)
             "
           >
             <svg
+              id="icon"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               width="24"

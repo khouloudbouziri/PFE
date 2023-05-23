@@ -163,8 +163,14 @@ public class IntershipOffreService implements IntershipOffreServiceImpl {
                 i.setFavoriteOffers(new ArrayList<>());
             }
             offer.ifPresent(o -> {
-                i.getFavoriteOffers().add(i.getFavoriteOffers().size(), idIntershipOffer);
-                visitorRepository.save(i);
+                List<Long> favoriteOffers = intern.get().getFavoriteOffers();
+                if (!favoriteOffers.contains(idIntershipOffer)) {
+                    favoriteOffers.add(idIntershipOffer);
+                    intern.get().setFavoriteOffers(favoriteOffers);
+                    intershipOfferRepository.save(o);
+                    visitorRepository.save(intern.get());
+                }
+
             });
         }, () -> {
             throw new RuntimeException("Intern with ID " + idIntern + " not found");
@@ -175,44 +181,19 @@ public class IntershipOffreService implements IntershipOffreServiceImpl {
 
     public List<IntershipOffreHelper> getInternFavoriteOffers(Long idIntern) {
         Optional<Visitor> intern = visitorRepository.findById(idIntern);
-        List<IntershipOffreHelper> list = new ArrayList<>();
-        // List<IntershipOffre> allOffers = intershipOfferRepository.findAll();
-        List<IntershipOffre> favoriteOffers = new ArrayList<>();
-        List<Supervisor> supervisors = supervisorRepo.findAll();
-        for (Supervisor s : supervisors) {
-            Long V = s.getVisitor();
-            Long S = s.getId();
-            final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(V);
-            List<IntershipOffre> iso = intershipOfferRepository.findBySupervisor(S);
-            IntershipOffreHelper iHelper = new IntershipOffreHelper();
-            intern.ifPresent(i -> {
-                List<Long> internOffers = i.getFavoriteOffers();
-                for (Long offer : internOffers) {
-                    for (int index = 0; index < iso.size(); index++) {
-                        if (iso.get(index).getId_intership_offre() == offer) {
-                            // favoriteOffers.add(o);
-                            iHelper.setIntershipOffre(iso.get(index));
-
-                            if (retrievedImage.isPresent()) {
-                                byte[] image = retrievedImage.get().getPicByte();
-                                iHelper.setImage(decompressBytes(image));
-                            }
-
-                            else {
-
-                                iHelper.setImage(
-                                        decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
-                            }
-                        }
-                    }
+        List<IntershipOffreHelper> list = this.getAllIntershipOffers();
+        List<IntershipOffreHelper> favoriteOffers = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < intern.get().getFavoriteOffers().size(); j++) {
+                if (list.get(i).getIntershipOffre().getId_intership_offre() == intern.get().getFavoriteOffers()
+                        .get(j)) {
+                    favoriteOffers.add(list.get(i));
                 }
-                System.out.println(favoriteOffers);
-            });
+            }
 
-            list.add(iHelper);
         }
-
-        return list;
+        System.out.println(favoriteOffers);
+        return favoriteOffers;
     }
 
     public static byte[] decompressBytes(byte[] data) {
