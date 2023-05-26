@@ -65,7 +65,10 @@ const routes: Routes = [
     path: 'offerDetails',
     component: OfferDetailsComponent,
   },
+
   { path: 'offre/:id', component: DescriptionComponent },
+  { path: 'offreDetail/:id', component: DescriptionComponent },
+
   { path: 'spontaneousCandidacy', component: ApplicationFormComponent },
 
   { path: 'apply/offer/:id', component: ApplyComponent },

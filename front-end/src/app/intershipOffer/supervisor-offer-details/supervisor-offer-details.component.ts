@@ -36,9 +36,11 @@ export class SupervisorOfferDetailsComponent {
   }
 
   getIntershipOfferCandidacies() {
+    this.candidacies = [];
     this.candidacyService
       .getIntershipOfferCandidacies(this.idOffer)
       .subscribe((res: any) => {
+        console.log('response is', res);
         this.candidacies = res;
       });
   }

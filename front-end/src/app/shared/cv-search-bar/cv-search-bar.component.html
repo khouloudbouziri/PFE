@@ -1,0 +1,37 @@
+<form class="w-1/4 mx-auto">
+  <div class="flex items-inline rounded-full h-12 w-auto bg-white pr-1 my-6">
+    <div class="flex-col items-inline ml-6 my-4">
+      <select class="outline-none" name="" id="Specialité">
+        <option>informatique</option>
+        <option>finance</option>
+        <option>droit</option>
+      </select>
+    </div>
+    <div class="flex-col items-inline mr-2 my-4 text-black">
+      <p class="h-36 mx-6">|</p>
+    </div>
+    <div class="flex-col items-inline my-4">
+      <input
+        type="search"
+        (ngModelChange)="searchCandidacy(key.value)"
+        #key="ngModel"
+        ngModel
+        name="key"
+        id="searchName"
+        class="form-control mr-sm-2 outline-none"
+        placeholder="Search ..."
+        required
+      />
+    </div>
+    <div class="flex-col items-inline">
+      <button
+        type="button"
+        id="btnSubmit"
+        class="w-28 my-1 h-10 text-white bg-[#E73130] rounded-full"
+        (click)="sendSearchResults(); searchCandidacy(key.value)"
+      >
+        Chercher
+      </button>
+    </div>
+  </div>
+</form>

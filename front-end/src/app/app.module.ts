@@ -49,6 +49,7 @@ import { StarComponent } from './star/star.component';
 
 import { ModifyIntershipOfferComponent } from './intershipOffer/modify-intership-offer/modify-intership-offer.component';
 import { CvDescriptionComponent } from './cv-description/cv-description.component';
+import { CvSearchBarComponent } from './shared/cv-search-bar/cv-search-bar.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { CvDescriptionComponent } from './cv-description/cv-description.componen
 
     ModifyIntershipOfferComponent,
       CvDescriptionComponent,
+      CvSearchBarComponent,
   ],
   imports: [
     BrowserModule,

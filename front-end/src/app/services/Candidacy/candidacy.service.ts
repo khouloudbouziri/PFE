@@ -78,9 +78,19 @@ export class CandidacyService {
     const url = `${this.baseUrl}/auth/candidacy/candidacyState?idCandidacy=${idCandidacy}`;
     return this.http.put<Candidacy>(url, null);
   }
-  getCvtheque() {
+
+  public validateCandidacy(idCandidacy: number): Observable<Candidacy> {
+    const url = `${this.baseUrl}/auth/candidacy/validateCandidacy?idCandidacy=${idCandidacy}`;
+    return this.http.put<Candidacy>(url, null);
+  }
+
+  public getInternValidatedCandidacy(idIntern: number) {
     return this.http.get(
-      this.baseUrl + '/auth/candidacy/all' 
+      this.baseUrl + '/auth/candidacy/internValidatedCandidacies/' + idIntern
     );
+  }
+
+  getCvtheque() {
+    return this.http.get(this.baseUrl + '/auth/candidacy/all');
   }
 }

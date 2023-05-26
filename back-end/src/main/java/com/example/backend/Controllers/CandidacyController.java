@@ -84,6 +84,16 @@ public class CandidacyController {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidaciesBySupervisorAndStatus(idSupervisor));
     }
 
+    @GetMapping("/internValidatedCandidacies/{id}")
+    public ResponseEntity<Boolean> getInternValidatedCandidacy(@PathVariable("id") Long idIntern) {
+        return ResponseEntity.ok(candidacyServiceImpl.getInternValidatedCandidacy(idIntern));
+    }
+
+    @PutMapping("/validateCandidacy")
+    public ResponseEntity<Optional<Candidacy>> validateCandidacy(@RequestParam Long idCandidacy) {
+        return ResponseEntity.ok(candidacyServiceImpl.validateCandidacy(idCandidacy));
+    }
+
     @PutMapping("/candidacyState")
     public ResponseEntity<Optional<Candidacy>> changeCandidacyState(@RequestParam Long idCandidacy) {
         return ResponseEntity.ok(candidacyServiceImpl.changeCandidacyState(idCandidacy));

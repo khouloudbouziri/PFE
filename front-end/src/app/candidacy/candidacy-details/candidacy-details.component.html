@@ -56,41 +56,56 @@
   <div class="border border-[#E5302D] opacity-10 mt-6 mx-auto"></div>
   <div class="flex mt-4 ml-14 font-medium text-xl">
     <button
-  id="detailsButton"
-  [ngClass]="{ 'text-[#E5302D]': isDetailsActive, 'text-[#424A88]': !isDetailsActive }"
-  class="text-[#424A88] ml-16"
-  (click)="activateDetails();
-  showInternFollowUp = false;
-  showInternDeails = true; 
-  showEvaluation = false;"
->
-  Détails
-</button>
+      id="detailsButton"
+      [ngClass]="{
+        'text-[#E5302D]': isDetailsActive,
+        'text-[#424A88]': !isDetailsActive
+      }"
+      class="text-[#424A88] ml-16"
+      (click)="
+        activateDetails();
+        showInternFollowUp = false;
+        showInternDeails = true;
+        showEvaluation = false
+      "
+    >
+      Détails
+    </button>
 
-<button
-  id="suiviButton"
-  [ngClass]="{ 'text-[#E5302D]': isSuiviActive, 'text-[#424A88]': !isSuiviActive }"
-  class="text-[#424A88] ml-16"
-  (click)="activateSuivi();
-  showInternFollowUp = true;
-  showInternDeails = false;
-  showEvaluation = false;
-  getInternMeetings()"
->
-  Suivi
-</button>
+    <button
+      id="suiviButton"
+      [ngClass]="{
+        'text-[#E5302D]': isSuiviActive,
+        'text-[#424A88]': !isSuiviActive
+      }"
+      class="text-[#424A88] ml-16"
+      (click)="
+        activateSuivi();
+        showInternFollowUp = true;
+        showInternDeails = false;
+        showEvaluation = false;
+        getInternMeetings()
+      "
+    >
+      Suivi
+    </button>
 
-<button
-  id="evaluationButton"
-  [ngClass]="{ 'text-[#E5302D]': isEvaluationActive, 'text-[#424A88]': !isEvaluationActive }"
-  class="text-[#424A88] ml-16 text-lg"
-  (click)="activateEvaluation(); showInternFollowUp = false;
-  showInternDeails = false;
-  showEvaluation = true;"
->
-  Evaluation
-</button>
-
+    <button
+      id="evaluationButton"
+      [ngClass]="{
+        'text-[#E5302D]': isEvaluationActive,
+        'text-[#424A88]': !isEvaluationActive
+      }"
+      class="text-[#424A88] ml-16 text-lg"
+      (click)="
+        activateEvaluation();
+        showInternFollowUp = false;
+        showInternDeails = false;
+        showEvaluation = true
+      "
+    >
+      Evaluation
+    </button>
   </div>
   <section class="mt-8 px-24" *ngIf="showInternDeails">
     <span class="text-[#424A88] opacity-70">informations personnels</span>
@@ -207,8 +222,8 @@
     ></app-stepper>
   </section>
   <section *ngIf="showEvaluation">
-    <div class="m-auto ">
-    <app-star></app-star>
-  </div>
+    <div class="mt-48 ml-96">
+      <app-star></app-star>
+    </div>
   </section>
 </section>

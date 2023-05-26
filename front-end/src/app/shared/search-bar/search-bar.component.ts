@@ -13,34 +13,14 @@ import { IntershipOfferService } from 'src/app/services/IntershipOffer/intership
 })
 export class SearchBarComponent {
   @Output() public search = new EventEmitter();
-  public offers: IntershipOffer[] = [];
-  public candidacies: Candidacy[] = [];
+  public offers: any = [];
 
-  constructor(
-    private IntershipOfferService: IntershipOfferService,
-    private CandidacyService: CandidacyService
-  ) {}
+  constructor(private IntershipOfferService: IntershipOfferService) {}
 
   public getAllIntershipOffers(): void {
     this.IntershipOfferService.getAllIntershipOffers().subscribe(
       (res: any) => {
         this.offers = res;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
-  }
-
-  public getAllCandidacies(): void {
-    this.CandidacyService.getCvtheque().subscribe(
-      (res: any) => {
-        console.log(res);
-
-        for (let i = 0; i < res.length; i++) {
-          this.candidacies.push(res[i].candidacy);
-        }
-        console.log(this.candidacies);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -54,14 +34,20 @@ export class SearchBarComponent {
     console.log(this.offers);
     for (const offer of this.offers) {
       if (
-        offer.type.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        offer.required_profile.toLowerCase().indexOf(key.toLowerCase()) !==
+        offer.intershipOffre.type.toLowerCase().indexOf(key.toLowerCase()) !==
           -1 ||
-        offer.company.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        offer.technical_environement
+        offer.intershipOffre.required_profile
           .toLowerCase()
           .indexOf(key.toLowerCase()) !== -1 ||
-        offer.address.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        offer.intershipOffre.company
+          .toLowerCase()
+          .indexOf(key.toLowerCase()) !== -1 ||
+        offer.intershipOffre.technical_environement
+          .toLowerCase()
+          .indexOf(key.toLowerCase()) !== -1 ||
+        offer.intershipOffre.address
+          .toLowerCase()
+          .indexOf(key.toLowerCase()) !== -1
       ) {
         results.push(offer);
       }
@@ -72,34 +58,9 @@ export class SearchBarComponent {
     }
   }
 
-  public searchCandidacy(key: string): void {
-    console.log(key);
-    const results: Candidacy[] = [];
-    console.log(this.candidacies);
-    for (const cand of this.candidacies) {
-      if (
-        cand.address.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        cand.skills.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        cand.university_department.toLowerCase().indexOf(key.toLowerCase()) !==
-          -1 ||
-        cand.university.toLowerCase().indexOf(key.toLowerCase()) !== -1 ||
-        cand.level.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      ) {
-        results.push(cand);
-      }
-    }
-    this.candidacies = results;
-    if (results.length === 0 || !key) {
-      this.getAllCandidacies();
-    }
-  }
-
   public sendSearchResults() {
     this.search.emit(this.offers);
-    this.search.emit(this.candidacies);
   }
 
-  ngOnInit() {
-    this.getAllCandidacies();
-  }
+  ngOnInit() {}
 }

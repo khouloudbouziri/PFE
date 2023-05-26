@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  OnChanges,
+} from '@angular/core';
 import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
 
 @Component({
@@ -6,7 +13,7 @@ import { CandidacyService } from 'src/app/services/Candidacy/candidacy.service';
   templateUrl: './intern-card.component.html',
   styleUrls: ['./intern-card.component.css'],
 })
-export class InternCardComponent {
+export class InternCardComponent implements OnChanges {
   idCandidacy: any;
   showCandidacy = true;
   @Input() public candidacies: any = [];
@@ -15,11 +22,13 @@ export class InternCardComponent {
     showCandidacy: boolean;
   }>();
 
+  @Output() public deletedItem = new EventEmitter<any>();
+
   constructor(private candidacyService: CandidacyService) {}
 
   getCandidacy(id: number) {
     this.idCandidacy = id;
-    console.log("hhhhhhhhhhhhhhhhhhh"+this.idCandidacy);
+    console.log('hhhhhhhhhhhhhhhhhhh' + this.idCandidacy);
   }
 
   SelectedCandidacy(): void {
@@ -33,7 +42,12 @@ export class InternCardComponent {
     this.candidacyService.deleteCandidacy(idCandidacy).subscribe((res: any) => {
       console.log(res);
       this.candidacies;
+      this.deletedItem.emit(true);
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    // changes.prop contains the old and the new value...
   }
 
   public eventChild(idCandidacy: number, showCandidacy: boolean) {

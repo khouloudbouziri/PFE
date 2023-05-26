@@ -34,4 +34,9 @@ public interface CandidacyServiceImpl {
     public List<CandidacyHelper> getAll();
 
     public void deleteCandidacy(Long idCandidacy);
+
+    public boolean getInternValidatedCandidacy(Long idIntern);
+
+    public Optional<Candidacy> validateCandidacy(Long idCandidacy);
+
 }

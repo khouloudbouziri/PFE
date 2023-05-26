@@ -110,7 +110,7 @@ public class CandidacyService implements CandidacyServiceImpl {
 
             else {
 
-                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
             }
             listCandidat.add(candidacyHelper);
         }
@@ -174,7 +174,7 @@ public class CandidacyService implements CandidacyServiceImpl {
 
             else {
 
-                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 7).get().getPicByte()));
             }
             candidacies.add(candidacyHelper);
         }
@@ -245,6 +245,26 @@ public class CandidacyService implements CandidacyServiceImpl {
             candidacyRepository.save(c);
         });
         return candidacy;
+    }
+
+    public Optional<Candidacy> validateCandidacy(Long idCandidacy) {
+        Optional<Candidacy> candidacy = candidacyRepository.findById(idCandidacy);
+        candidacy.ifPresent(c -> {
+            c.setStatus("Validated");
+            candidacyRepository.save(c);
+        });
+        return candidacy;
+    }
+
+    public boolean getInternValidatedCandidacy(Long idIntern) {
+        List<Candidacy> candidacies = candidacyRepository.findAllByIdIntern(idIntern);
+        boolean status = false;
+        for (Candidacy candidacy : candidacies) {
+            if (candidacy.getStatus().equals("Validated")) {
+                status = true;
+            }
+        }
+        return status;
     }
 
     public static byte[] decompressBytes(byte[] data) {

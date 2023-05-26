@@ -1,8 +1,5 @@
-<app-search-bar (search)="candidacies = $event"></app-search-bar>
+<app-cv-search-bar (search)="candidacies = $event"></app-cv-search-bar>
 <div class="px-24 mt-32">
-  <h1 class="text-4xl font-extrabold text-[#424A88]">
-    CVthèque
-  </h1>
-<app-cvcard [candidacies]="candidacies"></app-cvcard>
-
+  <h1 class="text-4xl font-extrabold text-[#424A88]">CVthèque</h1>
+  <app-cvcard [candidacies]="candidacies"></app-cvcard>
 </div>

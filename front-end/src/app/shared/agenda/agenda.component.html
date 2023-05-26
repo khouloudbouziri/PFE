@@ -3,6 +3,7 @@
   [options]="calendarOptions"
   [events]="events"
   eventClick="openModal($event)"
+  [disable]="true"
 ></full-calendar>
 
 <div *ngIf="isPopupVisible" class="popup-overlay">

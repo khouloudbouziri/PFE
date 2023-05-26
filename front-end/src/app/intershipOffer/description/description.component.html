@@ -1,6 +1,6 @@
 <section
   *ngIf="offer"
-  class="flex flex-col mx-auto mt-32 p-20 w-3/4 bg-gradient-to-b from-[#FFFFFF] rounded-3xl"
+  class="flex flex-col mx-auto mt-32 p-20 w-3/4 bg-gradient-to-b from-[#FFFFFF] rounded-3xl shadow-[35px_35px_60px_-15px_rgba(0,0,0,0.3)]"
 >
   <div class="flex">
     <div class="flex items-center">
@@ -18,7 +18,7 @@
             fill="rgba(66,74,136,1)"
           ></path>
         </svg>
-        <span> &nbsp;{{ offer.intershipOffre.address }}</span>
+        <span> &nbsp;{{ offer.intershipOffre?.address }}</span>
       </div>
     </div>
     <div class="flex flex-col ml-64">
@@ -93,6 +93,7 @@
     <button>
       <div class="flex flex-col mt-10 ml-64">
         <svg
+          *ngIf="!showFavorite"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="24"
@@ -103,14 +104,26 @@
             fill="rgba(229,48,45,1)"
           ></path>
         </svg>
+        <svg
+          *ngIf="showFavorite"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M5 2H19C19.5523 2 20 2.44772 20 3V22.1433C20 22.4194 19.7761 22.6434 19.5 22.6434C19.4061 22.6434 19.314 22.6168 19.2344 22.5669L12 18.0313L4.76559 22.5669C4.53163 22.7136 4.22306 22.6429 4.07637 22.4089C4.02647 22.3293 4 22.2373 4 22.1433V3C4 2.44772 4.44772 2 5 2Z"
+            fill="rgba(231,49,48,1)"
+          ></path>
+        </svg>
       </div>
     </button>
   </div>
   <div class="mt-10">
     <p class="text-lg">
       <span class="text-xl font-semibold text-[#E5302D]"
-        >{{ offer.intershipOffre.company }} |</span
-      ><span>&nbsp;{{ offer.intershipOffre.type }}</span>
+        >{{ offer.intershipOffre?.company }} |</span
+      ><span>&nbsp;{{ offer.intershipOffre?.type }}</span>
     </p>
     <br />
     <h1 class="flex items-center">
@@ -127,7 +140,7 @@
       </svg>
       <span>&nbsp;sujet :</span>
     </h1>
-    <p class="text-lg">{{ offer.intershipOffre.topic }}</p>
+    <p class="text-lg">{{ offer.intershipOffre?.topic }}</p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -144,7 +157,9 @@
       <span>&nbsp;travil demandé :</span>
     </h1>
     <p class="mb-1 text-lg">vous serez amené à :</p>
-    <p class="my-2 text-lg">✓&nbsp; {{ offer.intershipOffre.required_work }}</p>
+    <p class="my-2 text-lg">
+      ✓&nbsp; {{ offer.intershipOffre?.required_work }}
+    </p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -162,7 +177,7 @@
     </h1>
 
     <p class="my-2 text-lg">
-      {{ offer.intershipOffre.technical_environement }}
+      {{ offer.intershipOffre?.technical_environement }}
     </p>
     <br />
     <h1 class="flex items-center">
@@ -179,7 +194,7 @@
       </svg>
       <span>&nbsp;Profil recherché :</span> <br />
     </h1>
-    <p class="my-2 text-lg">• {{ offer.intershipOffre.required_profile }}</p>
+    <p class="my-2 text-lg">• {{ offer.intershipOffre?.required_profile }}</p>
     <br />
     <h1 class="flex items-center">
       <svg
@@ -197,19 +212,19 @@
     </h1>
     <p class="text-lg">
       • <span class="font-semibold">Localisation du poste :</span>
-      {{ offer.intershipOffre.address }}
+      {{ offer.intershipOffre?.address }}
     </p>
     <p class="text-lg">
       • <span class="font-semibold">Rémunération :</span>
-      {{ offer.intershipOffre.renumerete }}
+      {{ offer.intershipOffre?.renumerete }}
     </p>
     <p class="text-lg">
       •<span class="font-semibold"> Télétravail :</span>
-      {{ offer.intershipOffre.working_from_home }}
+      {{ offer.intershipOffre.working_from_home == true ? "Oui" : "Non" }}
     </p>
     <p class="text-lg">
       •<span class="font-semibold"> Durée : </span
-      >{{ offer.intershipOffre.duration }} mois
+      >{{ offer.intershipOffre?.duration }} mois
     </p>
     <div class="flex flex-col mt-20 justify-center">
       <p class="mt-2 text-base flex justify-center">
@@ -237,16 +252,16 @@
     </div>
     <div class="flex justify-around items-center my-10">
       <button
-        *ngIf="user"
+        *ngIf="user && !isShow"
         type="submit"
         id="btnSubmit"
         class="w-40 h-10 bg-white text-[#E73130] font-semibold border-2 border-[#E73130] rounded-full"
-        routerLink="/apply/offer/{{ offer.intershipOffre.id_intership_offre }}"
+        routerLink="/apply/offer/{{ offer.intershipOffre?.id_intership_offre }}"
       >
         Candidater
       </button>
       <button
-        *ngIf="!user"
+        *ngIf="!user && !isShow"
         type="submit"
         id="btnSubmit"
         class="w-40 h-10 bg-white text-[#E73130] font-semibold border-2 border-[#E73130] rounded-full"

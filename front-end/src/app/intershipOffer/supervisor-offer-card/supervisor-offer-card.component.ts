@@ -18,6 +18,8 @@ export class SupervisorOfferCardComponent {
     showOfferDetails: boolean;
   }>();
 
+  @Output() public deletedItem = new EventEmitter<any>();
+
   constructor(
     private intershipOfferService: IntershipOfferService,
     private router: Router
@@ -42,6 +44,7 @@ export class SupervisorOfferCardComponent {
       .deleteIntershipById(intershipOfferId)
       .subscribe((res: any) => {
         console.log(res);
+        this.deletedItem.emit(true);
       });
   }
 

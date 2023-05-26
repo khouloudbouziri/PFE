@@ -30,17 +30,19 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
-        <button mat-button matStepperNext>Valider</button></ng-template
+        <button mat-button matStepperNext (click)="validateCandidacy()">
+          Valider
+        </button></ng-template
       >
       <mat-form-field appearance="fill">
-        <mat-label *ngIf="Accepted">Stage achevé avec succés</mat-label>
+        <mat-label *ngIf="Validated">Stage achevé avec succés</mat-label>
       </mat-form-field>
     </form>
   </mat-step>
 </mat-stepper>
 
 <mat-stepper
-  class="bg-transparent mt-8 w-1/3 flex justify-around ml-96 p-10"
+  class="bg-transparent mt-8 w-1/3 flex justify-around ml-64 p-10"
   orientation="vertical"
   [linear]="isLinear"
   *ngIf="internMeetings"
@@ -49,10 +51,10 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
-        <button mat-button matStepperNext disabled>Accepté</button></ng-template
+        <button mat-button matStepperNext>Accepté</button></ng-template
       >
       <mat-form-field appearance="fill">
-        <mat-label *ngIf="Accepted">Entretien bien passée</mat-label>
+        <mat-label *ngIf="internMeetings">Entretien bien passée</mat-label>
       </mat-form-field>
     </form>
   </mat-step>
@@ -72,26 +74,36 @@
   <mat-step [stepControl]="firstFormGroup">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
-        <button mat-button matStepperNext disabled>Validé</button></ng-template
+        <button
+          mat-button
+          matStepperNext
+          (click)="getInternValidatedCandidacy()"
+        >
+          Validé
+        </button></ng-template
       >
       <mat-form-field appearance="fill">
-        <mat-label *ngIf="Accepted">Stage achevé avec succés</mat-label>
-        <ng-template matStepLabel>
-        <button mat-button matStepperNext onclick="openPopUp()">Evaluer</button></ng-template
-        >
+        <mat-label *ngIf="internValidated">Stage achevé avec succés</mat-label>
+        <div *ngIf="internValidated">
+          <button
+            mat-button
+            matStepperNext
+            class="border border-[#424A88] bg-[#424A88] text-white mt-3 p-2 rounded-md"
+            (click)="openPopUp()"
+          >
+            Evaluer
+          </button>
+        </div>
       </mat-form-field>
     </form>
   </mat-step>
 </mat-stepper>
+
 <div *ngIf="isPopupVisible" class="popup-overlay">
   <div class="flex-col popup-container relative justify-between w-11/12">
-    <button
-    class="right-1 top-1 absolute"
-    (click)="closePopup()"
-  >
-  x
-          </button>
-    <app-star></app-star>
-    
+    <button class="right-1 top-1 absolute" (click)="closePopup()">x</button>
+    <div class="relative my-16">
+      <app-star></app-star>
+    </div>
   </div>
-  </div>
+</div>

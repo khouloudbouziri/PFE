@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
@@ -36,6 +36,7 @@ export class AgendaComponent {
     public candidacyService: CandidacyService,
     private datePipe: DatePipe,
     private route: ActivatedRoute,
+    private router: Router,
     private snackBar: MatSnackBar
   ) {
     this.idE = this.route.snapshot.paramMap.get('id');
@@ -65,9 +66,12 @@ export class AgendaComponent {
     },
     selectable: true,
     dateClick: () => {
-      this.openPopup();
-      this.getCandidaciesBySupervisor();
-      this.getCandidaciesBySupervisorAndStatus();
+      if (this.router.url.includes('intern-page')) {
+      } else {
+        this.openPopup();
+        this.getCandidaciesBySupervisor();
+        this.getCandidaciesBySupervisorAndStatus();
+      }
     },
     eventClick: (event) => {
       this.openModal(event);

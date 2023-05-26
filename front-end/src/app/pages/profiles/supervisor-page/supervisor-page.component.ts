@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AuthService } from 'src/app/services/Authentication/auth.service';
@@ -42,11 +42,9 @@ export class SupervisorPageComponent {
     this.showCandidacyDetails = false;
   }
 
-  public onSelectedCandidacy(event: {
-    idCandidacy: number;
-    showCandidacy: boolean;
-  }): void {
-    
+  public onSelectedCandidacy(event: any): void {
+    console.log(event);
+
     this.candidacy = event.idCandidacy;
     console.log(event?.idCandidacy);
     console.log(this.candidacy);
@@ -62,18 +60,19 @@ export class SupervisorPageComponent {
     private route: ActivatedRoute,
     private intershipService: IntershipOfferService,
     private agendaService: AgendaService,
-    private candidacyService: CandidacyService
+    private candidacyService: CandidacyService,
+    private router: Router
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
 
   getSupervisorIntershipOffers() {
+    this.SupervisorIntershipOffers = [];
     this.intershipService.getIntershipOffers(this.id).subscribe((res: any) => {
       this.SupervisorIntershipOffers = res;
     });
   }
 
- 
   // getCandidaciesBySupervisor() {
   //   this.candidacyService
   //     .getCandidaciesBySupervisor(this.id)
@@ -91,7 +90,13 @@ export class SupervisorPageComponent {
   //     console.log("candidaciesStatus"+this.candidaciesStatus);
   //   });
   // }
-  ngOnInit() {
-    
+  ngOnInit() {}
+
+  logout() {
+    this.authService.logout().subscribe({
+      next: (data) => {
+        this.router.navigate(['./login']);
+      },
+    });
   }
 }

@@ -126,6 +126,7 @@
   <app-intern-card
     [candidacies]="candidacies"
     (selectedCandidacy)="onSelectedCandidacy($event)"
+    (deletedItem)="getIntershipOfferCandidacies()"
     (click)="eventChild()"
   ></app-intern-card>
 </section>

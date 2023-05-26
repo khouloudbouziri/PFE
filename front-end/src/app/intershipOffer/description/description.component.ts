@@ -11,13 +11,18 @@ export class DescriptionComponent {
   offer: any = {};
   id_intership_offre: any;
   user: boolean = false;
+  favoriteOffers: any = [];
+  showFavorite: boolean = false;
 
+  isShow: boolean = false;
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private service: IntershipOfferService
   ) {
     this.id_intership_offre = this.route.snapshot.paramMap.get('id');
     console.log(this.id_intership_offre);
+    this.isShow = this.router.url.includes('offreDetail');
   }
 
   ngOnInit() {
@@ -34,6 +39,13 @@ export class DescriptionComponent {
       if (visitor) {
         const visitorData = JSON.parse(visitor);
         console.log(visitorData.visitor.id);
+        this.favoriteOffers = visitorData.visitor.favoriteOffers;
+      }
+      for (let i = 0; i < this.favoriteOffers.length; i++) {
+        console.log(this.id_intership_offre == this.favoriteOffers[i]);
+        if (this.id_intership_offre == this.favoriteOffers[i]) {
+          this.showFavorite = true;
+        }
       }
     }
   }

@@ -26,7 +26,8 @@ export class InternPageComponent {
     public intershipOfferService: IntershipOfferService,
     public agendaService: AgendaService,
     public stepperService: StepperService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.id = this.route.snapshot.paramMap.get('id');
   }
@@ -50,6 +51,14 @@ export class InternPageComponent {
     this.stepperService.getInterEvents(this.id).subscribe((res: any) => {
       this.internMeetings = res;
       console.log(this.internMeetings);
+    });
+  }
+
+  logout() {
+    this.authService.logout().subscribe({
+      next: (data) => {
+        this.router.navigate(['./login']);
+      },
     });
   }
 }
