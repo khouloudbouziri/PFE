@@ -3,6 +3,7 @@ import { IntershipOffer } from '../../models/IntershipOffer';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IntershipOfferService } from '../../services/IntershipOffer/intership-offer.service';
+import { isIdentifier } from '@angular/compiler';
 
 @Component({
   selector: 'app-offer-details',
@@ -17,7 +18,7 @@ export class OfferDetailsComponent implements OnInit {
     private router: Router,
     private service: IntershipOfferService
   ) {}
-
+  internId: any = localStorage.getItem('favoriteOffers');
   getAllIntershipOffers() {
     this.service.getAllIntershipOffers().subscribe((res: any) => {
       this.intershipOffers = res;
@@ -31,12 +32,16 @@ export class OfferDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.internId)
     this.test();
     this.getAllIntershipOffers();
   }
 
   candidater(id_intership_offre: bigint) {
     this.router.navigate(['/description', id_intership_offre]);
+  }
+  Fav(){
+    
   }
  
 }

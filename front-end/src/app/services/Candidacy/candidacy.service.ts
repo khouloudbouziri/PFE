@@ -89,8 +89,9 @@ export class CandidacyService {
       this.baseUrl + '/auth/candidacy/internValidatedCandidacies/' + idIntern
     );
   }
-
-  getCvtheque() {
-    return this.http.get(this.baseUrl + '/auth/candidacy/all');
+  getAllDest() {
+    return this.http.get(
+      this.baseUrl + '/auth/candidacy/allDist' 
+    );
   }
 }

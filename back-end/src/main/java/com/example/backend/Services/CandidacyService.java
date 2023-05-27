@@ -181,6 +181,30 @@ public class CandidacyService implements CandidacyServiceImpl {
 
         return candidacies;
     }
+    public List<CandidacyHelper> getAllDist() {
+
+        List<Candidacy> AllCandidacies = candidacyRepository.findAllDistinct();
+        List<CandidacyHelper> candidacies = new ArrayList<>();
+
+        for (Candidacy candidacy : AllCandidacies) {
+            CandidacyHelper candidacyHelper = new CandidacyHelper();
+            candidacyHelper.setCandidacy(candidacy);
+            final Optional<ImageModel> retrievedImage = imageRepository.findByIdE(candidacy.getIdIntern());
+            if (retrievedImage.isPresent()) {
+                byte[] image = retrievedImage.get().getPicByte();
+                // image.setPicByte(decompressBytes(image.getPicByte()));
+                candidacyHelper.setImage(decompressBytes(image));
+            }
+
+            else {
+
+                candidacyHelper.setImage(decompressBytes(imageRepository.findById((long) 77).get().getPicByte()));
+            }
+            candidacies.add(candidacyHelper);
+        }
+
+        return candidacies;
+    }
 
     public List<Visitor> getInterns(Long idIntershipOffer) {
         List<Candidacy> allCandidacies = candidacyRepository.findAll();

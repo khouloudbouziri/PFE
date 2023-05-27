@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend.Repositories.CandidacyRepository;
+import com.example.backend.Services.CandidacyService;
 import com.example.backend.ServicesImplement.CandidacyServiceImpl;
 import com.example.backend.entities.Candidacy;
 import com.example.backend.entities.CandidacyHelper;
@@ -32,6 +34,9 @@ public class CandidacyController {
 
     @Autowired
     private CandidacyServiceImpl candidacyServiceImpl;
+
+    @Autowired
+    private CandidacyRepository candidacyRepository;
 
     @Autowired
     public CandidacyController(CandidacyServiceImpl candidacyServiceImpl) {
@@ -82,6 +87,10 @@ public class CandidacyController {
     @GetMapping("/supervisorCandidacies/status/{id}")
     public ResponseEntity<List<Candidacy>> getCandidaciesBySupervisorAndStatus(@PathVariable("id") Long idSupervisor) {
         return ResponseEntity.ok(candidacyServiceImpl.getCandidaciesBySupervisorAndStatus(idSupervisor));
+    }
+    @GetMapping("/allDist")
+    public ResponseEntity<List<CandidacyHelper>> getAllDist() {
+        return ResponseEntity.ok(candidacyServiceImpl.getAllDist());
     }
 
     @GetMapping("/internValidatedCandidacies/{id}")

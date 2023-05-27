@@ -15,6 +15,7 @@ export class OfferCardComponent {
   idIntern: any;
   showFavoriteOffer: boolean = false;
   isIconClicked: boolean = false;
+  showfere8: boolean = true;
 
   constructor(private intershipOfferService: IntershipOfferService) {}
 
@@ -42,7 +43,16 @@ export class OfferCardComponent {
   //       });
   //   }
   // }
-
+  // abi(offerId: number){
+  // this.isIconClicked = true;
+  // this.showfere8 = false;
+  // console.log("Id de l'offre de stage :", offerId);
+  
+  // }
+  abi(offer: any) {
+    offer.isButtonClicked = !offer.isButtonClicked; // Inversez la valeur de isButtonClicked pour l'objet offer
+   offer.showfere8 = !offer.showfere8;
+  }
   getAuthenticatedUser() {
     if (localStorage.getItem('visitor')) {
       const visitor = localStorage.getItem('visitor');
@@ -72,9 +82,6 @@ export class OfferCardComponent {
     return false;
   }
 
-  onIconClick() {
-    this.isIconClicked = !this.isIconClicked;
-  }
 
   addToFavorites(idIntershipOffer: number) {
     console.log(idIntershipOffer);
@@ -97,8 +104,13 @@ export class OfferCardComponent {
   // bouton.addEventListener('click', function() {
   //   icone.classList.toggle('colore');
   // });
-
+g(){
+  this.intershipOffers.forEach((offer: any) => {
+    offer.isButtonClicked = false; // Ajoutez la propriété isButtonClicked à chaque objet intershipOffer
+  });
+  this.getAuthenticatedUser();
+}
   ngOnInit() {
-    this.getAuthenticatedUser();
+    this.g();
   }
 }

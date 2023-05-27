@@ -50,6 +50,7 @@ export class AgendaComponent {
   showContent1 = false;
   title!: string;
   message!: string;
+  document!:Document;
 
   get f() {
     return this.frm.controls;
@@ -189,7 +190,45 @@ export class AgendaComponent {
         this.getEventsByIntern();
       });
   }
-
+   toggle() {
+    const switchElement = document.getElementById("switch");
+    if (switchElement) {
+      const currentTransform = switchElement.style.transform;
+      if (currentTransform === "translateX(100%)") {
+        switchElement.style.transform = "translateX(0)";
+       
+      } else {
+        switchElement.style.transform = "translateX(100%)";
+       
+      }
+    }
+  }
+  toggleColor1(){
+    const buttonElement = document.getElementById("1");
+    const buttonElement1 = document.getElementById("2");
+    
+  if (buttonElement) {
+    buttonElement.style.color = "#424A88";
+   
+  }
+  if (buttonElement1) {
+    buttonElement1.style.color = "white";
+   
+  }
+  }
+  toggleColor2(){
+    const buttonElement = document.getElementById("1");
+    const buttonElement1 = document.getElementById("2");
+    
+  if (buttonElement) {
+    buttonElement.style.color = "white";
+   
+  }
+  if (buttonElement1) {
+    buttonElement1.style.color = "#424A88";
+   
+  }
+  }
   deleteEvent() {
     this.agendaService
       .deleteEvent(this.selectedEventId)

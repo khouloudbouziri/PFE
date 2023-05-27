@@ -33,6 +33,8 @@ public interface CandidacyServiceImpl {
 
     public List<CandidacyHelper> getAll();
 
+    public List<CandidacyHelper> getAllDist();
+
     public void deleteCandidacy(Long idCandidacy);
 
     public boolean getInternValidatedCandidacy(Long idIntern);

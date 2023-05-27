@@ -17,7 +17,7 @@ export class CVthequeComponent {
   ) {}
 
   getAllIntershipOffers() {
-    this.service.getCvtheque().subscribe((res: any) => {
+    this.service.getAllDest().subscribe((res: any) => {
       this.candidacies = res;
     });
   }

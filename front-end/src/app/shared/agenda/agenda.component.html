@@ -12,17 +12,19 @@
       class="flex mx-auto justify-between relative xl:w-4/5 lg:w-4/5 md:w-4/5 sm:w-11/12 bg-white border rounded-full border-[#424A88] m-8"
     >
       <div
+      id="switch"
         class="top-0 left-0 absolute w-1/2 h-full bg-[#424A88] rounded-full duration-500"
       ></div>
-      <button
+      <button id="1"
         class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-white"
-        (click)="this.showContent0 = true; this.showContent1 = false"
+        (click)="this.showContent0 = true; this.showContent1 = false;toggle();toggleColor2()"
       >
         Entretien
       </button>
       <button
+      id="2"
         class="w-1/2 p-4 outline-none rounded-full bg-transparent relative text-[#424A88]"
-        (click)="this.showContent0 = false; this.showContent1 = true"
+        (click)="this.showContent0 = false; this.showContent1 = true; toggle();toggleColor1()"
       >
         Réunion
       </button>
@@ -30,6 +32,8 @@
     <!-- Ajouter un entretien -->
     <form [formGroup]="frm" (ngSubmit)="addEvent()">
       <div *ngIf="showContent0">
+
+       
         <div class="flex flex-col mt-10 ml-3 relative">
           <input
             type="text"
@@ -136,6 +140,7 @@
     <!-- Ajouter une reunion -->
     <form [formGroup]="frm" (ngSubmit)="addEvent()">
       <div *ngIf="showContent1">
+      
         <div class="flex flex-col mt-10 ml-3 relative">
           <input
             type="text"

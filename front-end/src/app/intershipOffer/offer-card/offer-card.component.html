@@ -9,17 +9,14 @@
           <button
             id="btn"
             (click)="
-              addToFavorites(intershipOffer.intershipOffre?.id_intership_offre)
+              addToFavorites(intershipOffer.intershipOffre?.id_intership_offre) ; abi(intershipOffer);
             "
           >
             <svg
-              *ngIf="
-                !isOfferFavorite(
-                  intershipOffer.intershipOffre.id_intership_offre
-                )
-              "
-              (click)="isIconClicked = !isIconClicked"
-              [style.fill]="isIconClicked ? 'red' : 'none'"
+              *ngIf="!isOfferFavorite(
+                intershipOffer.intershipOffre.id_intership_offre
+              ) && intershipOffer.showfere8!=true"
+
               id="my-icon"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -36,7 +33,7 @@
               *ngIf="
                 isOfferFavorite(
                   intershipOffer.intershipOffre.id_intership_offre
-                )
+                )||intershipOffer.isButtonClicked == true
               "
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"

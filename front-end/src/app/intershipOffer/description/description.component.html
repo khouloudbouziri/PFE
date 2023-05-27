@@ -90,10 +90,12 @@
         </button>
       </div>
     </div>
-    <button>
+    <button
+    (click)=" isClicker=!isClicker;
+    ">
       <div class="flex flex-col mt-10 ml-64">
         <svg
-          *ngIf="!showFavorite"
+          *ngIf="!showFavorite && isClicker!=true"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="24"
@@ -105,7 +107,7 @@
           ></path>
         </svg>
         <svg
-          *ngIf="showFavorite"
+          *ngIf="showFavorite || isClicker==true"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           width="24"

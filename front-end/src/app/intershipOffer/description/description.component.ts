@@ -13,7 +13,7 @@ export class DescriptionComponent {
   user: boolean = false;
   favoriteOffers: any = [];
   showFavorite: boolean = false;
-
+  isClicker: boolean =false;
   isShow: boolean = false;
   constructor(
     private router: Router,

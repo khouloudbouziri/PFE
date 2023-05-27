@@ -14,7 +14,7 @@ export class CvSearchBarComponent {
   constructor(private CandidacyService: CandidacyService) {}
 
   public getAllCandidacies(): void {
-    this.CandidacyService.getCvtheque().subscribe(
+    this.CandidacyService.getAllDest().subscribe(
       (res: any) => {
         console.log(res);
 

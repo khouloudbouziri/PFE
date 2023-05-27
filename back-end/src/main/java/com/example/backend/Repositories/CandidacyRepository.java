@@ -23,4 +23,6 @@ public interface CandidacyRepository extends JpaRepository<Candidacy, Long> {
 
     Optional<Candidacy> findByIdInternAndIdIntershipOffer(Long idIntern, Long idIntershipOffer);
 
+    
+
 }
